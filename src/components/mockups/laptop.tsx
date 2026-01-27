@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import wallpaperImg from '../../../public/images/profile/tenor.gif';
+import wallpaperImg from '../../../public/images/profile/screen.gif';
 export function MacbookMockUp({
   className,
   children,
