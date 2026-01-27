@@ -7,7 +7,7 @@ import profileIcon from "../../../public/images/profile/pfp.jpeg"
 
 // Navigation links (subset of main navigation for header)
 const navLinks = [
-  { name: "Home", href: "/home" },
+  { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Blogs", href: "/blogs" },
 ]

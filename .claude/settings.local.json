@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:emilkowal.ski)"
+      "WebFetch(domain:emilkowal.ski)",
+      "Bash(curl:*)",
+      "Bash(npx next build:*)"
     ]
   }
 }

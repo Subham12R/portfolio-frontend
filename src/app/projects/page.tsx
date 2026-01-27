@@ -1,16 +1,18 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ExternalLink, Github, Play } from 'lucide-react'
-import { projects, getAllTags, siteConfig } from '@/data'
-import { techIcons, getTechIcon } from '@/data/tech-icons'
+import { siteConfig } from '@/data'
+import { getTechIcon } from '@/data/tech-icons'
+import { fetchProjects } from '@/lib/api/server'
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
   description: 'A collection of projects showcasing my work in web development.',
 }
 
-export default function ProjectsPage() {
-  const tags = getAllTags()
+export default async function ProjectsPage() {
+  const projects = await fetchProjects()
+  const tags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort()
 
   return (
     <main className="min-h-screen bg-black text-white">
