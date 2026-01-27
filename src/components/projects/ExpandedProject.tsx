@@ -1,4 +1,6 @@
-import { Project } from "@/data/project";
+import Image from "next/image"
+import { Project } from "@/data/project"
+import { getTechIcon } from "@/data/tech-icons"
 
 function ExpandedProject({ project }: { project: Project }) {
   return (
@@ -14,10 +16,12 @@ function ExpandedProject({ project }: { project: Project }) {
           />
         </div>
       ) : project.bannerImage ? (
-        <img
+        <Image
           src={project.bannerImage}
           alt={project.title}
-          className="rounded-lg border border-zinc-800"
+          width={800}
+          height={450}
+          className="rounded-lg border border-zinc-800 w-full"
         />
       ) : null}
 
@@ -36,19 +40,36 @@ function ExpandedProject({ project }: { project: Project }) {
         ))}
       </ul>
 
-      {/* TAGS */}
-      <div className="flex flex-wrap gap-2">
-        {project.tags.map(tag => (
-          <span
-            key={tag}
-            className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300"
-          >
-            {tag}
-          </span>
-        ))}
+      {/* TECH ICONS */}
+      <div className="flex flex-wrap gap-3">
+        {project.tags.map((tag) => {
+          const iconPath = getTechIcon(tag)
+          return iconPath ? (
+            <div
+              key={tag}
+              className="p-1.5 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20"
+              title={tag}
+            >
+              <Image
+                src={iconPath}
+                alt={tag}
+                width={20}
+                height={20}
+                className="rounded-md"
+              />
+            </div>
+          ) : (
+            <span
+              key={tag}
+              className="px-3 py-1.5 text-xs rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 text-zinc-300"
+            >
+              {tag}
+            </span>
+          )
+        })}
       </div>
     </div>
   )
 }
 
-export default ExpandedProject;
+export default ExpandedProject

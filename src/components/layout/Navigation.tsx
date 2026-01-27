@@ -1,35 +1,52 @@
+'use client'
+
 import Image from "next/image"
-import profileIcon from "../../../public/images/profile/pfp.jpg"
 import Link from "next/link"
+import { siteConfig } from "@/data"
+import profileIcon from "../../../public/images/profile/pfp.jpg"
+
+// Navigation links (subset of main navigation for header)
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "About", href: "#about" },
+]
 
 const Navigation = () => {
   return (
-    <div className="sticky top-0 flex justify-center z-50 items-center w-full ">
-        <nav className="bg-black/90  backdrop-blur-3xl shadow-md w-full max-w-4xl flex justify-between items-center ">
-            <div className="py-2 inline-flex items-end">
-                <Link href="#home">
-                <Image src={profileIcon} alt="Logo" width={40} height={40} className="m-2 rounded-xl outline-2 outline-blue-200/20 outline-offset-2 "/>
-                </Link>
-                {/* <span className="text-white font-medium text-2xl mb-2 tracking-tighter ">Subham12r</span> */}
-            </div>
-            <ul className="flex justify-center items-center p-2 space-x-4">
-                <li><a href="#home" className="text-white hover:text-amber-300 relative after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.5 after:bg-amber-300 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left
-                tracking-tigher font-semibold leading-0">
-                    Home</a>
-                </li>
-                <li><a href="#about" className="tracking-tigher font-semibold leading-0 text-white hover:text-amber-300 relative after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.5 after:bg-amber-300 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Work</a></li>
-                <li>
-                  <a
-                    href="#projects"
-                    className="tracking-tigher font-semibold leading-0 text-white hover:text-amber-300 relative after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.5 after:bg-amber-300 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left"
-                  >
-                    Projects
-                  </a>
-                </li>
-            </ul>
-        </nav>
+    <header className="sticky top-0 flex justify-center z-50 items-center w-full">
+      <nav className="bg-black/90 backdrop-blur-xl w-full max-w-4xl flex justify-between items-center px-4 lg:px-0">
 
-    </div>
+        {/* Logo */}
+        <div className="py-2 inline-flex items-center">
+          <Link href="#home" className="group">
+            <Image
+              src={profileIcon}
+              alt={siteConfig.name}
+              width={40}
+              height={40}
+              className="rounded-xl outline-2 outline-offset-2 outline-white/10 group-hover:outline-white/30 transition-all duration-200"
+            />
+          </Link>
+        </div>
+
+        {/* Navigation Links */}
+        <ul className="flex justify-center items-center gap-1 md:gap-6">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.href}
+                className="px-2 py-2 text-sm md:text-base font-medium text-white/70 hover:text-white relative after:absolute after:left-2 after:right-2 after:-bottom-0.5 after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left transition-colors duration-200"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+      </nav>
+    </header>
   )
 }
 
