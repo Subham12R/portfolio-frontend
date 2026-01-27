@@ -18,7 +18,7 @@ import { DownloadIcon } from '@/components/ui/download'
 import { siteConfig } from '@/data'
 
 import profileBanner from '../../../public/images/profile/tenor.gif'
-import profileIcon from '../../../public/images/profile/pfp.jpg'
+import profileIcon from '../../../public/images/profile/pfp.jpeg'
 
 function formatDate(date: string) {
   const d = new Date(date)
@@ -103,13 +103,13 @@ export const Hero = () => {
           {/* Hero Content */}
           <div className="flex flex-col justify-center items-start text-start mt-8">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full mb-8">
-              <div className="flex flex-col lg:flex-row items-start lg:items-end justify-center">
+              <div className="flex flex-col lg:flex-row items-start lg:items-end justify-center ">
                 <Image
                   src={profileIcon}
                   alt={name}
                   width={100}
-                  height={100}
-                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-white/40"
+                  height={80}
+                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-white/40 "
                   priority
                 />
                 <div>

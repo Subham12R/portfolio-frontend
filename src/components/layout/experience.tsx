@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from "react"
 import gsap from "gsap"
 import Image from "next/image"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Link, LinkIcon } from "lucide-react"
 import type { Experience } from "@/data/experience"
 import { getTechIcon } from "@/data/tech-icons"
 
@@ -88,16 +88,31 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
           </div>
         </div>
 
-        {/* TOGGLE BUTTON */}
-        <button
-          onClick={toggle}
-          className="p-2 rounded-lg transition hover:bg-white/5"
-          aria-label={open ? "Collapse details" : "Expand details"}
-        >
-          <div ref={iconRef}>
-            <ChevronDown size={18} className="text-white" />
-          </div>
-        </button>
+
+        <div className="flex items-center gap-1">
+          {experience.links?.company && (
+            <a
+              href={experience.links.company}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg transition hover:bg-white/5"
+              aria-label={`Visit ${experience.company} website`}
+            >
+              <LinkIcon size={18} className="text-white" />
+            </a>
+          )}
+
+          {/* TOGGLE BUTTON */}
+          <button
+            onClick={toggle}
+            className="p-2 rounded-lg transition hover:bg-white/5"
+            aria-label={open ? "Collapse details" : "Expand details"}
+          >
+            <div ref={iconRef}>
+              <ChevronDown size={18} className="text-white" />
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* EXPANDABLE CONTENT */}

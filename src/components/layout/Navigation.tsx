@@ -3,20 +3,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import { siteConfig } from "@/data"
-import profileIcon from "../../../public/images/profile/pfp.jpg"
+import profileIcon from "../../../public/images/profile/pfp.jpeg"
 
 // Navigation links (subset of main navigation for header)
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "About", href: "#about" },
+  { name: "Home", href: "/home" },
+  { name: "Projects", href: "/projects" },
+  { name: "Blogs", href: "/blogs" },
 ]
 
 const Navigation = () => {
   return (
     <header className="sticky top-0 flex justify-center z-50 items-center w-full">
-      <nav className="bg-black/90 backdrop-blur-xl w-full max-w-4xl flex justify-between items-center px-4 lg:px-0">
+      <nav className="bg-black/80 backdrop-blur-xl w-full max-w-4xl flex justify-between items-center px-4 lg:px-0">
 
         {/* Logo */}
         <div className="py-2 inline-flex items-center">
@@ -26,7 +25,7 @@ const Navigation = () => {
               alt={siteConfig.name}
               width={40}
               height={40}
-              className="rounded-xl outline-2 outline-offset-2 outline-white/10 group-hover:outline-white/30 transition-all duration-200"
+              className="rounded-xl outline-2 w-10 h-10 outline-offset-2 object-cover outline-white/10 group-hover:outline-white/30 transition-all duration-200"
             />
           </Link>
         </div>
@@ -37,7 +36,7 @@ const Navigation = () => {
             <li key={link.name}>
               <a
                 href={link.href}
-                className="px-2 py-2 text-sm md:text-base font-medium text-white/70 hover:text-white relative after:absolute after:left-2 after:right-2 after:-bottom-0.5 after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left transition-colors duration-200"
+                className="px-2 py-2 text-sm md:text-base font-medium text-white/70 hover:text-white relative after:absolute after:left-2 after:right-2 after:bottom-0 after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left transition-colors duration-200"
               >
                 {link.name}
               </a>

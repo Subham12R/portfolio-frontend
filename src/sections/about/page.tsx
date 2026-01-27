@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { siteConfig } from '@/data'
-import profileImg from '../../../public/images/profile/pfp.jpg'
+import profileImg from '../../../public/images/profile/pfp.jpeg'
 
 export const About = () => {
   const section = siteConfig.sections.about
