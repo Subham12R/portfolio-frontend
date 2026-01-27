@@ -105,6 +105,8 @@
 
 /* Register theme tokens as Tailwind theme values */
 @theme {
+  --default-font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
+
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
   --color-bg-tertiary: var(--color-bg-tertiary);
