@@ -44,7 +44,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   }
 
   return (
-    <div className="rounded-xl bg-bg-primary/70 backdrop-blur">
+    <div className="rounded-xl  backdrop-blur-3xl px-2 py-1 outline outline-1 outline-border-primary hover:outline-border-secondary transition-all duration-200">
       
       {/* HEADER */}
       <div
@@ -54,9 +54,9 @@ export default function ProjectCard({ project }: { project: Project }) {
   
         <div className="flex ">
         <div>
-            <span className="text-text-primary font-semibold text-sm">{project.numberId}</span>
+            <span className="text-text-primary/40 font-semibold text-sm ">{project.numberId}</span>
         </div>
-        <div className="ml-4 flex flex-col">
+        <div className=" flex flex-col">
                <h3 className="text-lg font-semibold text-text-primary">
             {project.title}
           </h3>

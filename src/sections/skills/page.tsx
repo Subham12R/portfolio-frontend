@@ -14,7 +14,7 @@ const Tech = () => {
 
   return (
     <section id={section.id} className="w-full flex justify-center items-center pb-10 px-4 lg:px-0">
-      <div className="max-w-4xl w-full flex flex-col bg-bg-primary h-full">
+      <div className="max-w-4xl w-full flex flex-col h-full">
 
         {/* Header */}
         <div className="flex items-start pt-16 pb-5 border-b border-border-accent mb-8">

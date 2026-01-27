@@ -87,7 +87,7 @@ export const Hero = () => {
 
   return (
     <section id="home" className="w-full flex justify-center items-center">
-      <div className="max-w-4xl w-full flex flex-col bg-bg-primary h-full">
+      <div className="max-w-4xl w-full flex flex-col h-full">
 
         {/* Banner */}
         <div className="max-h-[20vh] overflow-hidden flex justify-center flex-col items-center">

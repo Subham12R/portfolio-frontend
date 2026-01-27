@@ -10,7 +10,7 @@ export const About = () => {
   const { socials, email } = siteConfig
 
   return (
-    <section id={section.id} className='w-full flex justify-center items-center py-24 bg-bg-primary text-text-primary px-4 lg:px-0'>
+    <section id={section.id} className='w-full flex justify-center items-center py-24  text-text-primary px-4 lg:px-0'>
       <div className='max-w-4xl w-full'>
 
         {/* HEADER */}
