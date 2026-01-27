@@ -1,8 +1,10 @@
 import { ExperienceCard } from '@/components/layout/experience'
-import { experiences, siteConfig } from '@/data'
+import { siteConfig } from '@/data'
+import { fetchWorkExperiences } from '@/lib/api/server'
 
-const Work = () => {
+const Work = async () => {
   const section = siteConfig.sections.experience
+  const experiences = await fetchWorkExperiences()
 
   return (
     <section id={section.id} className='w-full flex justify-center items-center px-4 lg:px-0'>

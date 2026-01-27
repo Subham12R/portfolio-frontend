@@ -1,10 +1,12 @@
 import { MacbookMockUp } from '@/components/mockups/laptop'
 import ProjectCard from "@/components/projects/ProjectCard"
 import Link from 'next/link'
-import { projects, siteConfig } from '@/data'
+import { siteConfig } from '@/data'
+import { fetchProjects } from '@/lib/api/server'
 
-const ProjectsPage = () => {
+const ProjectsPage = async () => {
   const section = siteConfig.sections.projects
+  const projects = await fetchProjects()
 
   return (
     <section id={section.id} className='w-full flex justify-center items-center pb-20 px-4 lg:px-0'>

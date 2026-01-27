@@ -1,10 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ExternalLink } from "lucide-react"
-import { certificates, siteConfig } from "@/data"
+import { siteConfig } from "@/data"
+import { fetchCertificates } from "@/lib/api/server"
 
-const CertificatesPage = () => {
+const CertificatesPage = async () => {
   const section = siteConfig.sections.certificates
+  const certificates = await fetchCertificates()
 
   return (
     <section id={section.id} className="w-full flex justify-center items-center pb-20 px-4 lg:px-0">
