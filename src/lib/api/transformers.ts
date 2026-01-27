@@ -111,6 +111,9 @@ export function transformWorkExperience(
     logo: "/images/companies/default.png", // Backend doesn't store logos yet
     description: apiWork.description || "",
     techStack: apiWork.techStack || [],
+    links: {
+      company: apiWork.website || undefined,
+    },
   };
 }
 

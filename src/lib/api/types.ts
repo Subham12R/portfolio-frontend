@@ -22,6 +22,7 @@ export interface ApiWorkExperience {
   id: string;
   role: string;
   company: string;
+  website: string | null;
   location: string | null;
   startDate: string;
   endDate: string | null;
