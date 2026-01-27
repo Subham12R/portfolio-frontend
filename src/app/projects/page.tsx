@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, ExternalLink, Github, Play } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
 import { siteConfig } from '@/data'
 import { getTechIcon } from '@/data/tech-icons'
 import { fetchProjects } from '@/lib/api/server'
+import YouTubePlayer from '@/components/projects/YouTubePlayer'
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
@@ -49,25 +50,7 @@ export default async function ProjectsPage() {
               {(project.youtubeId || project.bannerImage) && (
                 <div className="mb-6 rounded-xl overflow-hidden border border-border-primary">
                   {project.youtubeId ? (
-                    <a
-                      href={`https://www.youtube.com/watch?v=${project.youtubeId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative block aspect-video bg-bg-elevated group/video"
-                    >
-                      <Image
-                        src={`https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`}
-                        alt={`${project.title} preview`}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover/video:scale-105"
-                      />
-                      {/* Play Button Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
-                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                          <Play size={28} className="text-black ml-1" fill="black" />
-                        </div>
-                      </div>
-                    </a>
+                    <YouTubePlayer youtubeId={project.youtubeId} title={project.title} />
                   ) : project.bannerImage ? (
                     <div className="relative aspect-video bg-bg-elevated">
                       <Image
