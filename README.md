@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Subham Karmakar — Portfolio
+
+A modern, animated portfolio website built with **Next.js 16**, **React 19**, and **TypeScript**. Features smooth scroll-driven animations, dark/light theming, and a clean component architecture.
+
+## Overview
+
+This is a personal portfolio showcasing my work, skills, and experience as a full-stack developer. It includes dedicated sections for projects, work experience, certifications, a blog, and a contact page with calendar scheduling.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Animations:** GSAP + ScrollTrigger, Framer Motion
+- **Smooth Scroll:** Lenis
+- **Theming:** next-themes (light/dark)
+- **UI:** shadcn/ui, Radix UI, Lucide icons
+- **Analytics:** Vercel Analytics
+
+## Sections
+
+| Section        | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| Hero           | Profile intro with rotating titles, socials, GitHub calendar |
+| Experience     | Work history with roles, responsibilities, and tech badges   |
+| Projects       | Featured project cards with expand animations and mockups    |
+| Skills         | Bento grid of tech across Frontend, Backend, DevOps & more   |
+| About          | Bio and external links                                       |
+| Certificates   | Certifications with issuer, dates, and credential links      |
+| Contact        | CTA with Cal.com scheduling integration                      |
+| Blog           | Static blog with slug-based routing and tags                 |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs at `http://localhost:3000` by default.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/            # Next.js routes (home, blog, projects)
+├── components/     # Reusable UI, layout, and animation components
+├── sections/       # Page sections (hero, projects, skills, etc.)
+├── data/           # Static content & site configuration
+├── lib/            # API clients, utilities, helpers
+└── hooks/          # Custom React hooks
+```
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for personal use.
