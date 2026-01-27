@@ -84,7 +84,7 @@ export const siteConfig = {
 
   // Resume/CV
   resume: {
-    path: "/resume.pdf",
+    path: "/Resume.pdf",
     filename: "Subham_Karmakar_Resume.pdf",
   },
 } as const;
