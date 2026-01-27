@@ -35,7 +35,7 @@ const ProjectsPage = async () => {
           </div>
           {/* Right: Laptop */}
           <div className='hidden md:flex justify-center items-center'>
-            <div className='flex-shrink-0 max-w-xs w-full scale-75'>
+            <div className='flex-shrink-0 max-w-xs w-full scale-75 drop-shadow-2xl'>
               <MacbookMockUp />
             </div>
           </div>

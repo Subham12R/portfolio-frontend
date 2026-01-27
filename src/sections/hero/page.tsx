@@ -111,8 +111,8 @@ export const Hero = () => {
                   src={profileIcon}
                   alt={name}
                   width={100}
-                  height={80}
-                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent"
+                  height={100}
+                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent h-24 w-24 object-cover"
                   priority
                 />
                 <div>
@@ -153,13 +153,13 @@ export const Hero = () => {
 
               {/* Location */}
               <SocialItem
-                icon={<MapPin className="text-amber-200" size={16} animateOnHover />}
+                icon={<MapPin className="text-amber-500" size={16} animateOnHover />}
                 text={location}
               />
 
               {/* Time */}
               <SocialItem
-                icon={<Clock9 className="text-white" size={16} animateOnHover />}
+                icon={<Clock9 className="text-zinc-900 dark:text-white" size={16} animateOnHover />}
                 text={localTime ? `${localTime} (Local)` : 'Loading...'}
               />
 
@@ -172,7 +172,7 @@ export const Hero = () => {
 
               {/* GitHub */}
               <SocialItem
-                icon={<GithubIcon className="text-blue-300" size={16} />}
+                icon={<GithubIcon className="text-blue-500" size={16} />}
                 text={socials.github.display}
                 href={socials.github.url}
               />
@@ -189,7 +189,7 @@ export const Hero = () => {
 
               {/* Twitter */}
               <SocialItem
-                icon={<TwitterIcon className="text-white" size={16} />}
+                icon={<TwitterIcon className="text-blue-400" size={16} />}
                 text={socials.twitter.display}
                 href={socials.twitter.url}
               />
@@ -215,7 +215,7 @@ export const Hero = () => {
               username={socials.github.username}
               blockSize={13}
               blockMargin={3}
-              fontSize={14}
+              fontSize={16}
               blockRadius={2}
               showWeekdayLabels={false}
               colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
