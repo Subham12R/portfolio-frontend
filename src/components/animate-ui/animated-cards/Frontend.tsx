@@ -6,11 +6,11 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { AnimatedBeam } from "@/components/ui/animated-beam"
 
-import reactIcon from "@/assets/icons/react.png"
-import nextIcon from "@/assets/icons/nextjs.jpeg"
-import jsIcon from "@/assets/icons/js.png"
-import tsIcon from "@/assets/icons/typescript.png"
-import tailwindIcon from "@/assets/icons/tailwindcss.jpeg"
+const reactIcon = "/icons/react.png"
+const nextIcon = "/icons/nextjs.jpeg"
+const jsIcon = "/icons/js.png"
+const tsIcon = "/icons/typescript.png"
+const tailwindIcon = "/icons/tailwindcss.jpeg"
 
 
 const Circle = forwardRef<

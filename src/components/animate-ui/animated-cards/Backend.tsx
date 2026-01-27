@@ -5,11 +5,12 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { AnimatedBeam } from "@/components/ui/animated-beam"
 
-import databaseIcon from "@/assets/icons/database.png"
-import nodejsIcon from "@/assets/icons/nodejs.png"
-import mongodbIcon from "@/assets/icons/mongodb.png"
-import supabaseIcon from "@/assets/icons/supabase.jpeg"
-import neonIcon from "@/assets/icons/neon.jpeg"
+const databaseIcon = "/icons/database.png"
+const nodejsIcon = "/icons/nodejs.png"
+const mongodbIcon = "/icons/mongodb.png"
+const postgresqlIcon = "/icons/postgresql.png"
+const supabaseIcon = "/icons/supabase.jpeg"
+const neonIcon = "/icons/neon.jpeg"
 
 
 const Circle = forwardRef<
@@ -49,7 +50,7 @@ export function Card1() {
     >
       <div className="flex w-full max-w-lg flex-col gap-10">
         <div className="flex justify-between">
-          <Circle ref={dbTop} src={databaseIcon} alt="Database" />
+          <Circle ref={dbTop} src={postgresqlIcon} alt="PostgreSQL" />
           <Circle ref={supabase} src={supabaseIcon} alt="Supabase" />
         </div>
 

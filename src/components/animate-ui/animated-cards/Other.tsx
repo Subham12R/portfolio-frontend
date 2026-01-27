@@ -2,9 +2,9 @@
 
 import Image from "next/image"
 
-import figmaIcon from "@/assets/icons/figma.png"
-import vscodeIcon from "@/assets/icons/vscode.jpeg"
-import jestIcon from "@/assets/icons/jest.jpeg"
+const figmaIcon = "/icons/figma.png"
+const vscodeIcon = "/icons/vscode.jpeg"
+const jestIcon = "/icons/jest.jpeg"
 
 export function OtherToolsCard() {
   return (

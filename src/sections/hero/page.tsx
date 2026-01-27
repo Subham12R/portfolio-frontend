@@ -15,7 +15,9 @@ import { TwitterIcon } from '@/components/ui/twitter'
 import { YoutubeIcon } from '@/components/ui/youtube'
 import { DiscordIcon } from '@/components/ui/discord'
 import { DownloadIcon } from '@/components/ui/download'
+import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
 import { siteConfig } from '@/data'
+import { useTheme } from 'next-themes'
 
 import profileBanner from '../../../public/images/profile/tenor.gif'
 import profileIcon from '../../../public/images/profile/pfp.jpeg'
@@ -33,6 +35,7 @@ export const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null)
 
   const { name, location, timezone, email, socials, titles, bio, resume } = siteConfig
+  const { resolvedTheme } = useTheme()
 
   // Dynamic time update
   useEffect(() => {
@@ -84,7 +87,7 @@ export const Hero = () => {
 
   return (
     <section id="home" className="w-full flex justify-center items-center">
-      <div className="max-w-4xl w-full flex flex-col bg-black h-full">
+      <div className="max-w-4xl w-full flex flex-col bg-bg-primary h-full">
 
         {/* Banner */}
         <div className="max-h-[20vh] overflow-hidden flex justify-center flex-col items-center">
@@ -98,7 +101,7 @@ export const Hero = () => {
           />
         </div>
 
-        <div className="w-full px-4 lg:px-0">
+        <div className="w-full px-4 lg:px-2">
 
           {/* Hero Content */}
           <div className="flex flex-col justify-center items-start text-start mt-8">
@@ -109,17 +112,17 @@ export const Hero = () => {
                   alt={name}
                   width={100}
                   height={80}
-                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-white/40 "
+                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent"
                   priority
                 />
                 <div>
                   <div className="h-6 overflow-hidden">
-                    <span ref={textRef} className="block text-zinc-300 font-medium">
+                    <span ref={textRef} className="block text-text-secondary font-medium">
                       {titles[0]}
                     </span>
                   </div>
                   <div className="inline-flex items-center gap-3">
-                    <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                    <h1 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
                       {name}
                     </h1>
                     <a
@@ -135,17 +138,17 @@ export const Hero = () => {
               </div>
             </div>
 
-            <p className="text-base md:text-lg text-gray-300 mb-8 max-w-3xl leading-relaxed">
+            <ScrollRevealText as="p" className="text-base md:text-lg mb-8 max-w-3xl leading-relaxed">
               {bio.long.split('scalable')[0]}
-              <strong className="text-white">scalable</strong>
+              <strong>scalable</strong>
               {bio.long.split('scalable')[1].split('architecture')[0]}
-              <strong className="text-white">architecture, thoughtful design, and real world impact</strong>.
+              <strong>architecture, thoughtful design, and real world impact</strong>.
               {bio.long.split('real world impact')[1]}
-            </p>
+            </ScrollRevealText>
           </div>
 
           {/* Social Links Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 px-4 py-4 border border-white/10 rounded-2xl shadow-[inset_0_4px_24px_0_rgba(255,255,255,0.04)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 px-4 py-4 border border-border-primary rounded-2xl shadow-(--skills-card-shadow)">
             <div className="flex flex-col justify-start space-y-4">
 
               {/* Location */}
@@ -207,7 +210,7 @@ export const Hero = () => {
           </div>
 
           {/* GitHub Calendar */}
-          <div className="w-full mb-12 px-5 py-5 rounded-2xl border border-white/10 bg-gradient-to-b from-neutral-900/80 to-black shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] text-white overflow-x-auto">
+          <div className="w-full mb-12 px-5 py-5 rounded-2xl border border-border-primary bg-linear-to-b from-bg-elevated/80 to-bg-primary shadow-(--skills-card-shadow) text-text-primary overflow-x-auto">
             <GitHubCalendar
               username={socials.github.username}
               blockSize={13}
@@ -215,7 +218,7 @@ export const Hero = () => {
               fontSize={14}
               blockRadius={2}
               showWeekdayLabels={false}
-              colorScheme="dark"
+              colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
               theme={{
                 dark: [
                   '#1f2937',
@@ -223,6 +226,13 @@ export const Hero = () => {
                   '#4b5563',
                   '#9ca3af',
                   '#e5e7eb',
+                ],
+                light: [
+                  '#ebedf0',
+                  '#9be9a8',
+                  '#40c463',
+                  '#30a14e',
+                  '#216e39',
                 ],
               }}
               renderBlock={(block, activity) =>
@@ -262,10 +272,10 @@ function SocialItem({
 }) {
   const content = (
     <>
-      <div className="bg-neutral-800 p-1.5 rounded-lg flex justify-center items-center border border-white/10">
+      <div className="bg-bg-badge p-1.5 rounded-lg flex justify-center items-center border border-border-primary">
         {icon}
       </div>
-      <span className={`text-gray-100 text-base font-medium ${href ? 'hover:underline' : ''}`}>
+      <span className={`text-text-primary text-base font-medium ${href ? 'hover:underline' : ''}`}>
         {text}
       </span>
     </>

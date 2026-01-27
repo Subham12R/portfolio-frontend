@@ -1,5 +1,5 @@
 // Tech icons mapping
-// Maps technology names to their icon paths in /src/assets/icons/
+// Maps technology names to their icon paths in /icons/
 
 export const techIcons: Record<string, string> = {
   // Frontend
@@ -16,7 +16,7 @@ export const techIcons: Record<string, string> = {
   // Backend
   "Node.js": "/icons/nodejs.png",
   "MongoDB": "/icons/mongodb.png",
-  "PostgreSQL": "/icons/database.png",
+  "PostgreSQL": "/icons/postgresql.png",
   "Supabase": "/icons/supabase.jpeg",
   "Neon": "/icons/neon.jpeg",
   "Database": "/icons/database.png",
@@ -43,6 +43,13 @@ export const techIcons: Record<string, string> = {
   "Udemy": "/icons/udemy.png",
   "HackerRank": "/icons/hackerrank.svg",
 
+  // Additional tools
+  "Better-Auth": "/icons/better-auth.png",
+  "React Router": "/icons/reactrouter.svg",
+  "Redux": "/icons/redux.png",
+  "Vite": "/icons/vite.svg",
+  "Zod": "/icons/zod.png",
+
   // Aliases
   "Canvas API": "/icons/html.png",
   "Algorithms": "/icons/js.png",
@@ -55,12 +62,26 @@ export const techIcons: Record<string, string> = {
   "Open Source": "/icons/github.png",
 };
 
-// Get icon path for a tech, returns undefined if not found
+// Normalize a tech name: lowercase, strip spaces, dots, and dashes
+function normalize(name: string): string {
+  return name.toLowerCase().replace(/[\s.\-_]/g, "");
+}
+
+// Build a normalized lookup map once for fast case-insensitive matching
+const normalizedMap = new Map<string, string>();
+for (const [key, value] of Object.entries(techIcons)) {
+  normalizedMap.set(normalize(key), value);
+}
+
+// Get icon path for a tech with case-insensitive fallback
 export function getTechIcon(tech: string): string | undefined {
-  return techIcons[tech];
+  // Exact match first
+  if (tech in techIcons) return techIcons[tech];
+  // Normalized fallback (handles "Javascript" → "JavaScript", "NodeJS" → "Node.js", etc.)
+  return normalizedMap.get(normalize(tech));
 }
 
 // Check if a tech has an icon
 export function hasTechIcon(tech: string): boolean {
-  return tech in techIcons;
+  return tech in techIcons || normalizedMap.has(normalize(tech));
 }

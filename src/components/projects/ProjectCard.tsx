@@ -44,7 +44,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   }
 
   return (
-    <div className="rounded-xl bg-black/70 backdrop-blur">
+    <div className="rounded-xl bg-bg-primary/70 backdrop-blur">
       
       {/* HEADER */}
       <div
@@ -54,19 +54,19 @@ export default function ProjectCard({ project }: { project: Project }) {
   
         <div className="flex ">
         <div>
-            <span className="text-white font-semibold text-sm">{project.numberId}</span>
+            <span className="text-text-primary font-semibold text-sm">{project.numberId}</span>
         </div>
         <div className="ml-4 flex flex-col">
-               <h3 className="text-lg font-semibold text-white">
+               <h3 className="text-lg font-semibold text-text-primary">
             {project.title}
           </h3>
-          <p className="text-sm text-zinc-400">{project.period}</p>
+          <p className="text-sm text-text-tertiary">{project.period}</p>
 
         </div>
        
         </div>
 
-        <div className="flex items-center gap-4 text-zinc-400">
+        <div className="flex items-center gap-4 text-text-tertiary">
           {project.links.live && (
             <a href={project.links.live} onClick={e => e.stopPropagation()}>
               <ExternalLink size={18} />

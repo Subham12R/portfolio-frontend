@@ -5,12 +5,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full flex justify-center items-center bg-black py-6 text-center text-sm text-zinc-500 px-4 lg:px-0">
-      <div className="w-full max-w-4xl border-t border-zinc-800 pt-2">
+    <footer className="w-full flex justify-center items-center bg-bg-primary py-6 text-center text-sm text-text-muted px-4 lg:px-0">
+      <div className="w-full max-w-4xl border-t border-border-primary pt-2">
 
 
         {/* Copyright */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-2 text-xs text-zinc-600">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-2 text-xs text-text-muted">
           <span>
             Designed & built by {siteConfig.name}
           </span>

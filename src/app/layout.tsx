@@ -1,19 +1,17 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import localFont from "next/font/local"
 import "./globals.css"
 import Navigation from "@/components/layout/Navigation"
 import Footer from "@/components/layout/footer"
 import { siteConfig } from "@/data"
 import { Analytics } from "@vercel/analytics/next"
+import { ThemeProvider } from "@/components/providers/ThemeProvider"
+import { SmoothScroll } from "@/components/providers/SmoothScroll"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const helvetica = localFont({
+  src: "../../public/fonts/Helvetica.ttf",
+  variable: "--font-helvetica",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -58,13 +56,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen`}
+        className={`${helvetica.variable} antialiased min-h-screen bg-bg-primary text-text-primary transition-colors duration-300`}
       >
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <SmoothScroll>
+            <Navigation />
+            <main>{children}</main>
+            <Footer />
+            <div
+              className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-bg-primary via-bg-primary/50 to-transparent"
+              aria-hidden="true"
+            />
+          </SmoothScroll>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

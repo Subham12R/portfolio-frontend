@@ -15,13 +15,13 @@ export default async function ProjectsPage() {
   const tags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort()
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
 
         {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors duration-200 mb-12"
+          className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors duration-200 mb-12"
         >
           <ArrowLeft size={16} />
           <span className="text-sm font-medium">Back to home</span>
@@ -29,10 +29,10 @@ export default async function ProjectsPage() {
 
         {/* Header */}
         <header className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-semibold text-text-primary mb-4">
             Projects
           </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl leading-relaxed">
+          <p className="text-lg text-text-tertiary max-w-2xl leading-relaxed">
             A collection of projects I&quot;ve built, from open source libraries to full-stack applications.
             Each one represents a problem I wanted to solve or an idea I wanted to explore.
           </p>
@@ -43,17 +43,17 @@ export default async function ProjectsPage() {
           {projects.map((project) => (
             <article
               key={project.id}
-              className="group p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-colors duration-200"
+              className="group p-6 rounded-2xl border border-border-primary hover:border-border-secondary transition-colors duration-200"
             >
               {/* Video/Banner Preview */}
               {(project.youtubeId || project.bannerImage) && (
-                <div className="mb-6 rounded-xl overflow-hidden border border-white/10">
+                <div className="mb-6 rounded-xl overflow-hidden border border-border-primary">
                   {project.youtubeId ? (
                     <a
                       href={`https://www.youtube.com/watch?v=${project.youtubeId}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative block aspect-video bg-zinc-900 group/video"
+                      className="relative block aspect-video bg-bg-elevated group/video"
                     >
                       <Image
                         src={`https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`}
@@ -69,7 +69,7 @@ export default async function ProjectsPage() {
                       </div>
                     </a>
                   ) : project.bannerImage ? (
-                    <div className="relative aspect-video bg-zinc-900">
+                    <div className="relative aspect-video bg-bg-elevated">
                       <Image
                         src={project.bannerImage}
                         alt={`${project.title} banner`}
@@ -85,7 +85,7 @@ export default async function ProjectsPage() {
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-mono text-zinc-500">
+                    <span className="text-sm font-mono text-text-muted">
                       {project.numberId}
                     </span>
                     {project.status && (
@@ -94,17 +94,17 @@ export default async function ProjectsPage() {
                           ? 'bg-green-500/10 text-green-400'
                           : project.status === 'in-progress'
                           ? 'bg-amber-500/10 text-amber-400'
-                          : 'bg-zinc-500/10 text-zinc-400'
+                          : 'bg-zinc-500/10 text-text-tertiary'
                       }`}>
                         {project.status === 'maintained' ? 'Actively Maintained' :
                          project.status === 'in-progress' ? 'In Progress' : 'Completed'}
                       </span>
                     )}
                   </div>
-                  <h2 className="text-2xl font-semibold text-white group-hover:text-zinc-300 transition-colors duration-200">
+                  <h2 className="text-2xl font-semibold text-text-primary group-hover:text-text-secondary transition-colors duration-200">
                     {project.title}
                   </h2>
-                  <p className="text-sm text-zinc-500 mt-1">{project.period}</p>
+                  <p className="text-sm text-text-muted mt-1">{project.period}</p>
                 </div>
 
                 {/* Links */}
@@ -114,7 +114,7 @@ export default async function ProjectsPage() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-zinc-500 hover:text-white transition-colors duration-200"
+                      className="p-2 text-text-muted hover:text-text-primary transition-colors duration-200"
                       aria-label="View live site"
                     >
                       <ExternalLink size={18} />
@@ -125,7 +125,7 @@ export default async function ProjectsPage() {
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-zinc-500 hover:text-white transition-colors duration-200"
+                      className="p-2 text-text-muted hover:text-text-primary transition-colors duration-200"
                       aria-label="View source code"
                     >
                       <Github size={18} />
@@ -135,20 +135,20 @@ export default async function ProjectsPage() {
               </div>
 
               {/* Description */}
-              <p className="text-zinc-300 leading-relaxed mb-4">
+              <p className="text-text-secondary leading-relaxed mb-4">
                 {project.description}
               </p>
 
               {/* Features */}
               <ul className="space-y-2 mb-6">
                 {project.features.slice(0, 3).map((feature, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-zinc-400">
-                    <span className="text-zinc-600 mt-1">•</span>
+                  <li key={index} className="flex items-start gap-2 text-sm text-text-tertiary">
+                    <span className="text-text-muted mt-1">•</span>
                     {feature}
                   </li>
                 ))}
                 {project.features.length > 3 && (
-                  <li className="text-sm text-zinc-500">
+                  <li className="text-sm text-text-muted">
                     +{project.features.length - 3} more features
                   </li>
                 )}
@@ -161,7 +161,7 @@ export default async function ProjectsPage() {
                   return iconPath ? (
                     <div
                       key={tag}
-                      className="p-1.5 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 hover:outline-white/40 transition-all duration-200"
+                      className="p-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary hover:outline-border-accent transition-all duration-200"
                       title={tag}
                     >
                       <Image
@@ -175,7 +175,7 @@ export default async function ProjectsPage() {
                   ) : (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1.5 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 text-zinc-400"
+                      className="text-xs font-bold tracking-tight px-3 py-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-tertiary"
                     >
                       {tag}
                     </span>
@@ -187,8 +187,8 @@ export default async function ProjectsPage() {
         </section>
 
         {/* All Technologies Section */}
-        <section className="mt-16 pt-8 border-t border-white/10">
-          <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">
+        <section className="mt-16 pt-8 border-t border-border-primary">
+          <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-6">
             Technologies Used
           </h2>
           <div className="flex flex-wrap items-center gap-4">
@@ -197,7 +197,7 @@ export default async function ProjectsPage() {
               return iconPath ? (
                 <div
                   key={tag}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 hover:outline-white/40 transition-all duration-200"
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary hover:outline-border-accent transition-all duration-200"
                   title={tag}
                 >
                   <Image
@@ -207,12 +207,12 @@ export default async function ProjectsPage() {
                     height={20}
                     className="rounded-sm"
                   />
-                  <span className="text-sm text-zinc-300">{tag}</span>
+                  <span className="text-sm text-text-secondary">{tag}</span>
                 </div>
               ) : (
                 <span
                   key={tag}
-                  className="text-sm px-3 py-2 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 text-zinc-300"
+                  className="text-sm font-bold tracking-tight px-3 py-2 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
                 >
                   {tag}
                 </span>

@@ -1,9 +1,11 @@
 'use client'
 import { useRef, useState, useEffect } from "react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import { ChevronDown, Link, LinkIcon } from "lucide-react"
 import type { Experience } from "@/data/experience"
+import { ScrollRevealText } from "@/components/ui/ScrollRevealText"
 import { getTechIcon } from "@/data/tech-icons"
 
 interface ExperienceCardProps {
@@ -42,6 +44,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
         opacity: 1,
         duration: 0.5,
         ease: "power2.out",
+        onComplete: () => ScrollTrigger.refresh(),
       })
       gsap.to(iconRef.current, {
         rotate: 180,
@@ -79,10 +82,10 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
             className={`w-12 h-12 rounded-xl outline-2 outline-offset-2 ${outlineColor}`}
           />
           <div>
-            <h2 className="text-lg font-semibold text-white">
+            <h2 className="text-lg font-semibold text-text-primary">
               {experience.role}
             </h2>
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-text-secondary">
               {experience.company} · {experience.period}
             </p>
           </div>
@@ -95,21 +98,21 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
               href={experience.links.company}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg transition hover:bg-white/5"
+              className="p-2 rounded-lg transition hover:bg-hover-tint"
               aria-label={`Visit ${experience.company} website`}
             >
-              <LinkIcon size={18} className="text-white" />
+              <LinkIcon size={18} className="text-text-primary" />
             </a>
           )}
 
           {/* TOGGLE BUTTON */}
           <button
             onClick={toggle}
-            className="p-2 rounded-lg transition hover:bg-white/5"
+            className="p-2 rounded-lg transition hover:bg-hover-tint"
             aria-label={open ? "Collapse details" : "Expand details"}
           >
             <div ref={iconRef}>
-              <ChevronDown size={18} className="text-white" />
+              <ChevronDown size={18} className="text-text-primary" />
             </div>
           </button>
         </div>
@@ -118,13 +121,13 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       {/* EXPANDABLE CONTENT */}
       <div ref={contentRef} className="overflow-hidden">
         <div className="pt-4 pb-1 px-1">
-          <p className="text-sm text-white/80 leading-relaxed mb-4 max-w-4xl">
+          <ScrollRevealText as="p" className="text-sm leading-relaxed mb-4 max-w-4xl">
             {experience.description}
-          </p>
+          </ScrollRevealText>
 
           {/* RESPONSIBILITIES (if available) */}
           {experience.responsibilities && experience.responsibilities.length > 0 && (
-            <ul className="text-sm text-white/70 leading-relaxed mb-4 space-y-1 list-disc list-inside">
+            <ul className="text-sm text-text-secondary leading-relaxed mb-4 space-y-1 list-disc list-inside">
               {experience.responsibilities.map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
@@ -138,7 +141,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
               return iconPath ? (
                 <div
                   key={tech}
-                  className="p-1.5 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20"
+                  className="p-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary"
                   title={tech}
                 >
                   <Image
@@ -152,7 +155,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
               ) : (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 text-xs font-medium rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 text-white/80"
+                  className="px-3 py-1.5 text-xs font-bold tracking-tight rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
                 >
                   {tech}
                 </span>

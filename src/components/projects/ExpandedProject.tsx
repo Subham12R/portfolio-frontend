@@ -8,7 +8,7 @@ function ExpandedProject({ project }: { project: Project }) {
 
       {/* BANNER / VIDEO */}
       {project.youtubeId ? (
-        <div className="aspect-video rounded-lg overflow-hidden border border-zinc-800">
+        <div className="aspect-video rounded-lg overflow-hidden border border-border-primary">
           <iframe
             src={`https://www.youtube.com/embed/${project.youtubeId}`}
             className="w-full h-full"
@@ -21,20 +21,20 @@ function ExpandedProject({ project }: { project: Project }) {
           alt={project.title}
           width={800}
           height={450}
-          className="rounded-lg border border-zinc-800 w-full"
+          className="rounded-lg border border-border-primary w-full"
         />
       ) : null}
 
       {/* DESCRIPTION */}
-      <p className="text-zinc-300 text-sm leading-relaxed">
+      <p className="text-text-secondary text-sm leading-relaxed">
         {project.description}
       </p>
 
       {/* FEATURES */}
-      <ul className="space-y-2 text-sm text-zinc-300">
+      <ul className="space-y-2 text-sm text-text-secondary">
         {project.features.map((f, i) => (
           <li key={i} className="flex gap-2">
-            <span className="text-zinc-500">•</span>
+            <span className="text-text-muted">•</span>
             {f}
           </li>
         ))}
@@ -47,7 +47,7 @@ function ExpandedProject({ project }: { project: Project }) {
           return iconPath ? (
             <div
               key={tag}
-              className="p-1.5 rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20"
+              className="p-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary"
               title={tag}
             >
               <Image
@@ -61,7 +61,7 @@ function ExpandedProject({ project }: { project: Project }) {
           ) : (
             <span
               key={tag}
-              className="px-3 py-1.5 text-xs rounded-xl bg-neutral-800 border border-white/10 outline-2 outline-offset-2 outline-white/20 text-zinc-300"
+              className="px-3 py-1.5 text-xs font-bold tracking-tight rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
             >
               {tag}
             </span>

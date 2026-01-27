@@ -1,14 +1,154 @@
 @import "tailwindcss";
 
-/* Base styles */
+/* Configure dark mode to use class strategy (for next-themes) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== THEME COLOR TOKENS ===== */
+
+/* Light theme (default when no .dark class) */
 :root {
-  background-color: black;
+  color-scheme: light;
+
+  /* Backgrounds */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #f1f3f5;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #f1f3f5;
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+  --color-bg-nav: rgba(255, 255, 255, 0.8);
+  --color-bg-badge: #e8eaed;
+
+  /* Text */
+  --color-text-primary: #111111;
+  --color-text-secondary: #4a5568;
+  --color-text-tertiary: #718096;
+  --color-text-muted: #a0aec0;
+  --color-text-inverse: #ffffff;
+
+  /* Borders */
+  --color-border-primary: #e2e8f0;
+  --color-border-secondary: #cbd5e0;
+  --color-border-accent: #a0aec0;
+
+  /* Accents */
+  --color-accent-amber: #f59e0b;
+  --color-accent-amber-light: rgba(245, 158, 11, 0.15);
+
+  /* Shadows */
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  --color-shadow-strong: rgba(0, 0, 0, 0.15);
+
+  /* Scrollbar */
+  --color-scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --color-scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+
+  /* Selection */
+  --color-selection-bg: rgba(251, 191, 36, 0.2);
+  --color-selection-text: #111111;
+
+  /* Skills card inset shadow */
+  --skills-card-shadow: inset 0 4px 24px 0 rgba(0, 0, 0, 0.04), inset 0 -4px 24px 0 rgba(0, 0, 0, 0.02);
+
+  /* Hover tint */
+  --color-hover-tint: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme */
+.dark {
   color-scheme: dark;
+
+  /* Backgrounds */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #171717;
+  --color-bg-card: #000000;
+  --color-bg-elevated: #171717;
+  --color-bg-overlay: rgba(0, 0, 0, 0.7);
+  --color-bg-nav: rgba(0, 0, 0, 0.8);
+  --color-bg-badge: #262626;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d4d4d8;
+  --color-text-tertiary: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-text-inverse: #000000;
+
+  /* Borders */
+  --color-border-primary: rgba(255, 255, 255, 0.1);
+  --color-border-secondary: rgba(255, 255, 255, 0.2);
+  --color-border-accent: rgba(255, 255, 255, 0.4);
+
+  /* Accents */
+  --color-accent-amber: #fbbf24;
+  --color-accent-amber-light: rgba(251, 191, 36, 0.3);
+
+  /* Shadows */
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-strong: rgba(0, 0, 0, 0.7);
+
+  /* Scrollbar */
+  --color-scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --color-scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
+
+  /* Selection */
+  --color-selection-bg: rgba(251, 191, 36, 0.3);
+  --color-selection-text: #ffffff;
+
+  /* Skills card inset shadow */
+  --skills-card-shadow: inset 0 4px 24px 0 rgba(255, 255, 255, 0.08), inset 0 -4px 24px 0 rgba(0, 0, 0, 0.6);
+
+  /* Hover tint */
+  --color-hover-tint: rgba(255, 255, 255, 0.05);
+}
+
+/* Register theme tokens as Tailwind theme values */
+@theme {
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-tertiary: var(--color-bg-tertiary);
+  --color-bg-card: var(--color-bg-card);
+  --color-bg-elevated: var(--color-bg-elevated);
+  --color-bg-overlay: var(--color-bg-overlay);
+  --color-bg-nav: var(--color-bg-nav);
+  --color-bg-badge: var(--color-bg-badge);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+
+  --color-border-primary: var(--color-border-primary);
+  --color-border-secondary: var(--color-border-secondary);
+  --color-border-accent: var(--color-border-accent);
+
+  --color-accent-amber: var(--color-accent-amber);
+  --color-accent-amber-light: var(--color-accent-amber-light);
+
+  --color-shadow: var(--color-shadow);
+  --color-shadow-strong: var(--color-shadow-strong);
+
+  --color-hover-tint: var(--color-hover-tint);
 }
 
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+}
+
+/* Body transition for theme changes */
+body {
+  font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Paragraphs use medium weight (not bold) */
+p {
+  font-weight: 500;
 }
 
 /* Better scroll margin for section anchors */
@@ -18,8 +158,8 @@ section[id] {
 
 /* Selection styling */
 ::selection {
-  background-color: rgba(251, 191, 36, 0.3);
-  color: white;
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-text);
 }
 
 /* Focus visible styling */
@@ -79,13 +219,13 @@ button {
 
 /* Prose styles for blog content */
 .prose-invert {
-  --tw-prose-body: rgb(212 212 216);
-  --tw-prose-headings: rgb(255 255 255);
-  --tw-prose-links: rgb(251 191 36);
-  --tw-prose-bold: rgb(255 255 255);
-  --tw-prose-code: rgb(255 255 255);
-  --tw-prose-quotes: rgb(161 161 170);
-  --tw-prose-quote-borders: rgb(63 63 70);
+  --tw-prose-body: var(--color-text-secondary);
+  --tw-prose-headings: var(--color-text-primary);
+  --tw-prose-links: var(--color-accent-amber);
+  --tw-prose-bold: var(--color-text-primary);
+  --tw-prose-code: var(--color-text-primary);
+  --tw-prose-quotes: var(--color-text-tertiary);
+  --tw-prose-quote-borders: var(--color-border-primary);
 }
 
 /* Scrollbar styling */
@@ -99,10 +239,10 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-scrollbar-thumb-hover);
 }
