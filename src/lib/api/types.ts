@@ -22,6 +22,7 @@ export interface ApiWorkExperience {
   id: string;
   role: string;
   company: string;
+  logoUrl: string | null;
   website: string | null;
   location: string | null;
   startDate: string;
@@ -39,6 +40,7 @@ export interface ApiCertificate {
   id: string;
   title: string;
   issuer: string;
+  logoUrl: string | null;
   issueDate: string | null;
   credentialUrl: string | null;
   certificateUrl: string | null;

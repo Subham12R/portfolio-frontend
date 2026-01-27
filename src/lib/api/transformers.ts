@@ -108,7 +108,7 @@ export function transformWorkExperience(
     endDate: apiWork.endDate || undefined,
     location: apiWork.location || undefined,
     type: "full-time", // Backend doesn't have type field yet, default to full-time
-    logo: "/images/companies/default.png", // Backend doesn't store logos yet
+    logo: apiWork.logoUrl || "/images/companies/default.png",
     description: apiWork.description || "",
     techStack: apiWork.techStack || [],
     links: {
@@ -129,7 +129,7 @@ export function transformCertificate(apiCert: ApiCertificate): Certificate {
     title: apiCert.title,
     issuer: apiCert.issuer,
     issueDate: apiCert.issueDate || undefined,
-    logo: apiCert.certificateUrl || "/certificates/default.png", // Use certificate URL as logo or default
+    logo: apiCert.logoUrl || "/certificates/default.png",
     credential: apiCert.credentialUrl || "#",
   };
 }
