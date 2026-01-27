@@ -26,7 +26,7 @@ function processNode(node: React.ReactNode, keyPrefix: string): React.ReactNode 
         <span
           key={`${keyPrefix}-${i}`}
           data-scroll-word=""
-          style={{ color: 'var(--color-text-tertiary)' }}
+          style={{ opacity: 0.4 }}
         >
           {segment}
         </span>
@@ -36,7 +36,7 @@ function processNode(node: React.ReactNode, keyPrefix: string): React.ReactNode 
 
   if (typeof node === 'number') {
     return (
-      <span key={keyPrefix} data-scroll-word="" style={{ color: 'var(--color-text-tertiary)' }}>
+      <span key={keyPrefix} data-scroll-word="" style={{ opacity: 0.4 }}>
         {String(node)}
       </span>
     )
@@ -83,9 +83,9 @@ export function ScrollRevealText({
 
       gsap.fromTo(
         words,
-        { color: 'var(--color-text-tertiary)' },
+        { opacity: 0.4 },
         {
-          color: 'var(--color-text-primary)',
+          opacity: 1,
           stagger,
           scrollTrigger: {
             trigger: containerRef.current,
