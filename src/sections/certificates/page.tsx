@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { siteConfig } from "@/data"
 import { fetchCertificates } from "@/lib/api/server"
@@ -52,7 +51,7 @@ const CertificatesPage = async () => {
 
               {/* Right: Credential Link */}
               <div className="shrink-0">
-                <Link
+                <a
                   href={cert.credential}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -60,7 +59,7 @@ const CertificatesPage = async () => {
                   aria-label={`View ${cert.title} credential`}
                 >
                   <ExternalLink size={18} />
-                </Link>
+                </a>
               </div>
             </div>
           ))}

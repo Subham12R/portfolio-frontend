@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      <article className="max-w-3xl mx-auto px-4 lg:px-0 py-16">
+      <article className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
 
         {/* Back Link */}
         <Link
@@ -83,17 +83,37 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </header>
 
-        {/* Content Placeholder */}
-        <div className="prose prose-invert prose-zinc max-w-none">
-          <div className="py-20 text-center border border-dashed border-border-secondary rounded-2xl">
-            <p className="text-text-muted mb-4">
-              Full blog content would go here.
-            </p>
-            <p className="text-sm text-text-muted">
-              This is a placeholder. Integrate MDX or a CMS for full content.
-            </p>
+        {/* Content */}
+        {post.content ? (
+          <div className="prose prose-invert prose-zinc max-w-none prose-headings:text-text-primary prose-p:text-text-secondary prose-strong:text-text-primary prose-li:text-text-secondary prose-em:text-text-tertiary">
+            {post.content.split('\n\n').map((block, index) => {
+              if (block.startsWith('## ')) {
+                return <h2 key={index} className="text-2xl font-semibold mt-10 mb-4">{block.replace('## ', '')}</h2>
+              }
+              if (block.startsWith('**') && block.endsWith('**')) {
+                return <p key={index} className="font-semibold text-text-primary">{block.replace(/\*\*/g, '')}</p>
+              }
+              if (block.startsWith('- ')) {
+                const items = block.split('\n').filter(line => line.startsWith('- '))
+                return (
+                  <ul key={index} className="list-disc pl-6 space-y-1 my-4">
+                    {items.map((item, i) => (
+                      <li key={i}>{item.replace('- ', '')}</li>
+                    ))}
+                  </ul>
+                )
+              }
+              if (block.startsWith('*') && block.endsWith('*') && !block.startsWith('**')) {
+                return <p key={index} className="italic text-text-tertiary">{block.replace(/^\*|\*$/g, '')}</p>
+              }
+              return <p key={index} className="my-4 leading-relaxed">{block}</p>
+            })}
           </div>
-        </div>
+        ) : (
+          <div className="py-20 text-center border border-dashed border-border-secondary rounded-2xl">
+            <p className="text-text-muted">Content coming soon.</p>
+          </div>
+        )}
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-border-primary">
@@ -106,15 +126,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span className="text-sm font-medium">All posts</span>
             </Link>
 
-            <a
-              href={siteConfig.socials.twitter.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors duration-200"
-            >
-              <span className="text-sm font-medium">Share on X</span>
-              <ArrowUpRight size={14} />
-            </a>
+            <span className="text-sm text-text-muted">© {new Date().getFullYear()} {siteConfig.name}</span>
           </div>
         </footer>
 

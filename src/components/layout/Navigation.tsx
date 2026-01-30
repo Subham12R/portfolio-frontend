@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle"
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
-  { name: "Blogs", href: "/blogs" },
+  { name: "Blog", href: "/blog" },
 ]
 
 const Navigation = () => {
@@ -35,12 +35,12 @@ const Navigation = () => {
         <ul className="flex justify-center items-center gap-1 md:gap-6">
           {navLinks.map((link) => (
             <li key={link.name}>
-              <a
+              <Link
                 href={link.href}
                 className="px-2 py-2 text-sm md:text-base font-medium text-text-secondary hover:text-text-primary relative after:absolute after:left-2 after:right-2 after:bottom-0 after:h-0.5 after:bg-text-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left transition-colors duration-200"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
