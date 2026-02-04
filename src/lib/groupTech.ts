@@ -1,7 +1,7 @@
 import { TechItem, TechCategory } from "@/data/tech.registry";
 
 export function groupTech(items: TechItem[]) {
-  const groups: Record<TechCategory, string[]> = {
+  const groups: Record<TechCategory, TechItem[]> = {
     frontend: [],
     backend: [],
     devops: [],
@@ -10,7 +10,7 @@ export function groupTech(items: TechItem[]) {
 
   items.forEach((item) => {
     const category = item.category ?? "other";
-    groups[category].push(item.name);
+    groups[category].push(item);
   });
 
   return groups;

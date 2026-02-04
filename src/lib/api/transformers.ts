@@ -130,7 +130,7 @@ export function transformCertificate(apiCert: ApiCertificate): Certificate {
     issuer: apiCert.issuer,
     issueDate: apiCert.issueDate || undefined,
     logo: apiCert.logoUrl || "/certificates/default.png",
-    credential: apiCert.credentialUrl || "#",
+    credential: apiCert.credentialUrl || apiCert.certificateUrl || "#",
   };
 }
 

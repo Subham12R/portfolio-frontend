@@ -107,6 +107,17 @@
 @theme {
   --default-font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
 
+  /* Remove all rounded corners */
+  --radius-none: 5px;
+  --radius-sm: 5px;
+  --radius: 5px;
+  --radius-md: 5px;
+  --radius-lg: 5px;
+  --radius-xl: 5px;
+  --radius-2xl: 5px;
+  --radius-3xl: 5px;
+  --radius-full: 5px;
+
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
   --color-bg-tertiary: var(--color-bg-tertiary);

@@ -72,8 +72,9 @@ export const siteConfig = {
     projects: { id: "projects", number: "02", title: "Projects" },
     skills: { id: "skills", number: "03", title: "Skills & Technologies" },
     about: { id: "about", number: "04", title: "About Me" },
-    certificates: { id: "certificates", number: "05", title: "Certifications" },
-    contact: { id: "contact", number: "06", title: "Contact" },
+    blog: { id: "blog", number: "05", title: "Blog" },
+    certificates: { id: "certificates", number: "06", title: "Certifications" },
+    contact: { id: "contact", number: "07", title: "Contact" },
   },
 
   // Cal.com configuration for scheduling

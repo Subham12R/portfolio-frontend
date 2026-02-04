@@ -6,8 +6,6 @@ import gsap from 'gsap'
 import { GitHubCalendar } from 'react-github-calendar'
 import { Tooltip } from 'react-tooltip'
 
-import { MapPin } from '@/components/animate-ui/icons/map-pin'
-import { Clock9 } from '@/components/animate-ui/icons/clock-9'
 import { MailCheckIcon } from '@/components/ui/mail-check'
 import { GithubIcon } from '@/components/ui/github'
 import { LinkedinIcon } from '@/components/ui/linkedin'
@@ -147,75 +145,45 @@ export const Hero = () => {
             </ScrollRevealText>
           </div>
 
-          {/* Social Links Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 px-4 py-4 border border-border-primary rounded-2xl shadow-(--skills-card-shadow)">
-            <div className="flex flex-col justify-start space-y-4">
-
-              {/* Location */}
-              <SocialItem
-                icon={<MapPin className="text-amber-500" size={16} animateOnHover />}
-                text={location}
-              />
-
-              {/* Time */}
-              <SocialItem
-                icon={<Clock9 className="text-zinc-900 dark:text-white" size={16} animateOnHover />}
-                text={localTime ? `${localTime} (Local)` : 'Loading...'}
-              />
-
-              {/* Email */}
-              <SocialItem
-                icon={<MailCheckIcon className="text-red-400" size={16} />}
-                text={email}
-                href={`mailto:${email}`}
-              />
-
-              {/* GitHub */}
-              <SocialItem
-                icon={<GithubIcon className="text-blue-500" size={16} />}
-                text={socials.github.display}
-                href={socials.github.url}
-              />
+          {/* Social Links */}
+          <div className="flex flex-col gap-4 mb-12">
+            {/* Location & Time - Plain text */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text-secondary">
+              <span>{location}</span>
+              <span>{localTime ? `${localTime} (Local)` : 'Loading...'}</span>
             </div>
 
-            <div className="flex flex-col justify-start space-y-4">
-
-              {/* LinkedIn */}
-              <SocialItem
-                icon={<LinkedinIcon className="text-blue-500" size={16} />}
-                text={socials.linkedin.display}
-                href={socials.linkedin.url}
-              />
-
-              {/* Twitter */}
-              <SocialItem
-                icon={<TwitterIcon className="text-blue-400" size={16} />}
-                text={socials.twitter.display}
-                href={socials.twitter.url}
-              />
-
-              {/* YouTube */}
-              <SocialItem
-                icon={<YoutubeIcon className="text-red-500" size={16} />}
-                text={socials.youtube.display}
-                href={socials.youtube.url}
-              />
-
-              {/* Discord */}
-              <SocialItem
-                icon={<DiscordIcon className="text-indigo-400" size={16} />}
-                text={socials.discord.display}
-              />
+            {/* Social Icons Row */}
+            <div className="flex flex-wrap items-center gap-5">
+              <a href={`mailto:${email}`} className="text-text-muted hover:text-red-400 transition-colors" title="Email">
+                <MailCheckIcon size={24} />
+              </a>
+              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text-primary transition-colors" title="GitHub">
+                <GithubIcon size={24} />
+              </a>
+              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-blue-500 transition-colors" title="LinkedIn">
+                <LinkedinIcon size={24} />
+              </a>
+              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-blue-400 transition-colors" title="Twitter">
+                <TwitterIcon size={24} />
+              </a>
+              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red-500 transition-colors" title="YouTube">
+                <YoutubeIcon size={24} />
+              </a>
+              <span className="text-text-muted hover:text-indigo-400 transition-colors cursor-default" title="Discord">
+                <DiscordIcon size={24} />
+              </span>
             </div>
           </div>
 
           {/* GitHub Calendar */}
-          <div className="w-full mb-12 px-5 py-5 rounded-2xl border border-border-primary bg-linear-to-b from-bg-elevated/80 to-bg-primary shadow-(--skills-card-shadow) text-text-primary overflow-x-auto">
+          <div className="w-full mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto">
             <GitHubCalendar
               username={socials.github.username}
-              blockSize={13}
-              blockMargin={3}
+              blockSize={14}
+              blockMargin={2}
               fontSize={16}
+              year={2026}
               blockRadius={2}
               showWeekdayLabels={false}
               colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
@@ -260,34 +228,3 @@ export const Hero = () => {
   )
 }
 
-// Reusable social item component
-function SocialItem({
-  icon,
-  text,
-  href,
-}: {
-  icon: React.ReactNode
-  text: string
-  href?: string
-}) {
-  const content = (
-    <>
-      <div className="bg-bg-badge p-1.5 rounded-lg flex justify-center items-center border border-border-primary">
-        {icon}
-      </div>
-      <span className={`text-text-primary text-base font-medium ${href ? 'hover:underline' : ''}`}>
-        {text}
-      </span>
-    </>
-  )
-
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3">
-        {content}
-      </a>
-    )
-  }
-
-  return <div className="inline-flex items-center gap-3">{content}</div>
-}

@@ -10,6 +10,7 @@ import { getTechIcon } from "@/data/tech-icons"
 
 interface ExperienceCardProps {
   experience: Experience
+  defaultExpanded?: boolean
 }
 
 // Logo outline color mapping
@@ -22,18 +23,28 @@ const logoColorMap: Record<string, string> = {
   white: "outline-white/40",
 }
 
-export function ExperienceCard({ experience }: ExperienceCardProps) {
-  const [open, setOpen] = useState(false)
+export function ExperienceCard({ experience, defaultExpanded = false }: ExperienceCardProps) {
+  const [open, setOpen] = useState(defaultExpanded)
   const contentRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!contentRef.current) return
-    gsap.set(contentRef.current, {
-      height: 0,
-      opacity: 0,
-    })
-  }, [])
+    if (!contentRef.current || !iconRef.current) return
+    if (defaultExpanded) {
+      gsap.set(contentRef.current, {
+        height: "auto",
+        opacity: 1,
+      })
+      gsap.set(iconRef.current, {
+        rotate: 180,
+      })
+    } else {
+      gsap.set(contentRef.current, {
+        height: 0,
+        opacity: 0,
+      })
+    }
+  }, [defaultExpanded])
 
   const toggle = () => {
     if (!contentRef.current || !iconRef.current) return
@@ -70,7 +81,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
   const outlineColor = logoColorMap[experience.logoColor || "white"] || "outline-white/40"
 
   return (
-    <div className="w-full rounded-2xl">
+    <div className="w-full rounded-2xl bg-bg-elevated/50 border border-border-primary shadow-(--skills-card-shadow) p-4">
       {/* HEADER */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">

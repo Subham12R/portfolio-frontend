@@ -1,13 +1,48 @@
 'use client'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
+// import { GalleryCard } from '@/components/ui/GalleryCard'
 import { siteConfig } from '@/data'
+// import { hackathonImages as hackathonGallery, photographyImages as photographyGallery } from '@/data/gallery'
+
+// const hackathonImages = hackathonGallery.map(img => img.src)
+// const photographyImages = photographyGallery.map(img => img.src)
 import profileImg from '../../../public/images/profile/pfp.jpeg'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export const About = () => {
   const section = siteConfig.sections.about
   const { socials, email } = siteConfig
+  const imageRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!imageRef.current || !containerRef.current) return
+
+    // Start from -10% and move to +10% for smooth parallax
+    gsap.fromTo(imageRef.current,
+      { yPercent: -10 },
+      {
+        yPercent: 10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    )
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
+  }, [])
 
   return (
     <section id={section.id} className='w-full flex justify-center items-center py-24  text-text-primary px-4 lg:px-0'>
@@ -25,16 +60,26 @@ export const About = () => {
         <div className='grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12'>
 
           {/* LEFT: Image Column */}
-          <div className='md:col-span-2 relative group'>
+          <div ref={containerRef} className='md:col-span-2 relative group'>
             <div className='relative w-full h-[350px] md:h-[450px] overflow-hidden rounded-xl border border-border-primary bg-bg-elevated'>
-              <Image
-                src={profileImg}
-                alt={siteConfig.name}
-                fill
-                className="object-cover transition-all duration-700 ease-out"
-                priority
+              {/* Parallax image container */}
+              <div ref={imageRef} className="absolute -inset-[10%] scale-100">
+                <Image
+                  src={profileImg}
+                  alt={siteConfig.name}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              {/* Noise overlay */}
+              <div
+                className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none z-10"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                }}
               />
-              <div className='absolute inset-0 ring-1 ring-inset ring-border-primary rounded-xl z-10' />
+              <div className='absolute inset-0 ring-1 ring-inset ring-border-primary rounded-xl z-20' />
             </div>
           </div>
 
@@ -88,6 +133,30 @@ export const About = () => {
 
           </div>
         </div>
+
+        {/* Gallery Cards - Commented out for now */}
+        {/*
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 pt-12">
+          <GalleryCard
+            title="Hackathon Diaries"
+            count={5}
+            description="Memories from hackathons, coding events, and tech meetups I've participated in."
+            buttonText="View all"
+            href="/hackathons"
+            icon="hackathon"
+            images={hackathonImages}
+          />
+          <GalleryCard
+            title="Photography"
+            count={24}
+            description="A collection of photos capturing moments, places, and perspectives I find interesting."
+            buttonText="View gallery"
+            href="/photography"
+            icon="photography"
+            images={photographyImages}
+          />
+        </div>
+        */}
 
       </div>
     </section>

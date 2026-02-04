@@ -12,7 +12,7 @@ export default function ContactCTA() {
 
   return (
     <section id={section.id} className="w-full flex flex-col justify-center items-center  py-20 px-4 lg:px-0 ">
-      <div className="flex flex-col justify-center items-center w-full max-w-4xl text-center bg-bg-elevated/50 py-12 px-6 rounded-2xl border border-border-primary shadow-(--skills-card-shadow)">
+      <div className="flex flex-col justify-center items-center w-full max-w-4xl text-center bg-bg-elevated py-12 px-6 rounded-3xl border border-border-primary">
 
         <ScrollRevealText as="h2" className="text-3xl md:text-4xl font-semibold mb-4" start="top 90%" end="top 70%">
           Let's work together

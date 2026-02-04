@@ -26,7 +26,7 @@ const CertificatesPage = async () => {
           {certificates.map((cert) => (
             <div
               key={cert.id}
-              className="flex items-center gap-4 p-2 rounded-xl border border-border-primary hover:border-border-secondary transition-colors duration-200"
+              className="flex items-center gap-4 px-2  rounded-xl border border-border-primary hover:border-border-secondary transition-colors duration-200"
             >
               {/* Left: Logo */}
               <div className="shrink-0">
@@ -50,7 +50,7 @@ const CertificatesPage = async () => {
               </div>
 
               {/* Right: Credential Link */}
-              <div className="shrink-0">
+              <div className="shrink-0 mr-2">
                 <a
                   href={cert.credential}
                   target="_blank"

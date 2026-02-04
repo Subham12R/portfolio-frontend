@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { siteConfig } from '@/data'
-import { getTechIcon } from '@/data/tech-icons'
 import { fetchProjects } from '@/lib/api/server'
-import YouTubePlayer from '@/components/projects/YouTubePlayer'
+import PlainProjectCard from '@/components/projects/PlainProjectCard'
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
@@ -13,7 +11,6 @@ export const metadata = {
 
 export default async function ProjectsPage() {
   const projects = await fetchProjects()
-  const tags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort()
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
@@ -33,175 +30,17 @@ export default async function ProjectsPage() {
           <h1 className="text-4xl md:text-5xl font-semibold text-text-primary mb-4">
             Projects
           </h1>
-          <p className="text-lg text-text-tertiary max-w-2xl leading-relaxed">
-            A collection of projects I&quot;ve built, from open source libraries to full-stack applications.
+          <p className="text-lg text-text-tertiary max-w-4xl leading-relaxed">
+            A collection of projects I&apos;ve built, from open source libraries to full-stack applications.
             Each one represents a problem I wanted to solve or an idea I wanted to explore.
           </p>
         </header>
 
         {/* Projects Grid */}
-        <section className="space-y-8">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <article
-              key={project.id}
-              className="group p-6 rounded-2xl border border-border-primary hover:border-border-secondary transition-colors duration-200"
-            >
-              {/* Video/Banner Preview */}
-              {(project.youtubeId || project.bannerImage) && (
-                <div className="mb-6 rounded-xl overflow-hidden border border-border-primary">
-                  {project.youtubeId ? (
-                    <YouTubePlayer youtubeId={project.youtubeId} title={project.title} />
-                  ) : project.bannerImage ? (
-                    <div className="relative aspect-video bg-bg-elevated">
-                      <Image
-                        src={project.bannerImage}
-                        alt={`${project.title} banner`}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  ) : null}
-                </div>
-              )}
-
-              {/* Header */}
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-mono text-text-muted">
-                      {project.numberId}
-                    </span>
-                    {project.status && (
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        project.status === 'maintained'
-                          ? 'bg-green-500/10 text-green-400'
-                          : project.status === 'in-progress'
-                          ? 'bg-amber-500/10 text-amber-400'
-                          : 'bg-zinc-500/10 text-text-tertiary'
-                      }`}>
-                        {project.status === 'maintained' ? 'Actively Maintained' :
-                         project.status === 'in-progress' ? 'In Progress' : 'Completed'}
-                      </span>
-                    )}
-                  </div>
-                  <h2 className="text-2xl font-semibold text-text-primary group-hover:text-text-secondary transition-colors duration-200">
-                    {project.title}
-                  </h2>
-                  <p className="text-sm text-text-muted mt-1">{project.period}</p>
-                </div>
-
-                {/* Links */}
-                <div className="flex items-center gap-3">
-                  {project.links.live && (
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-text-muted hover:text-text-primary transition-colors duration-200"
-                      aria-label="View live site"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  )}
-                  {project.links.github && (
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-text-muted hover:text-text-primary transition-colors duration-200"
-                      aria-label="View source code"
-                    >
-                      <Github size={18} />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Description */}
-              <p className="text-text-secondary leading-relaxed mb-4">
-                {project.description}
-              </p>
-
-              {/* Features */}
-              <ul className="space-y-2 mb-6">
-                {project.features.slice(0, 3).map((feature, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-text-tertiary">
-                    <span className="text-text-muted mt-1">•</span>
-                    {feature}
-                  </li>
-                ))}
-                {project.features.length > 3 && (
-                  <li className="text-sm text-text-muted">
-                    +{project.features.length - 3} more features
-                  </li>
-                )}
-              </ul>
-
-              {/* Tech Icons */}
-              <div className="flex flex-wrap items-center gap-4">
-                {project.tags.map((tag) => {
-                  const iconPath = getTechIcon(tag)
-                  return iconPath ? (
-                    <div
-                      key={tag}
-                      className="p-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary hover:outline-border-accent transition-all duration-200"
-                      title={tag}
-                    >
-                      <Image
-                        src={iconPath}
-                        alt={tag}
-                        width={24}
-                        height={24}
-                        className="rounded-md"
-                      />
-                    </div>
-                  ) : (
-                    <span
-                      key={tag}
-                      className="text-xs font-bold tracking-tight px-3 py-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-tertiary"
-                    >
-                      {tag}
-                    </span>
-                  )
-                })}
-              </div>
-            </article>
+            <PlainProjectCard key={project.id} project={project} />
           ))}
-        </section>
-
-        {/* All Technologies Section */}
-        <section className="mt-16 pt-8 border-t border-border-primary">
-          <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-6">
-            Technologies Used
-          </h2>
-          <div className="flex flex-wrap items-center gap-4">
-            {tags.map((tag) => {
-              const iconPath = getTechIcon(tag)
-              return iconPath ? (
-                <div
-                  key={tag}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary hover:outline-border-accent transition-all duration-200"
-                  title={tag}
-                >
-                  <Image
-                    src={iconPath}
-                    alt={tag}
-                    width={20}
-                    height={20}
-                    className="rounded-sm"
-                  />
-                  <span className="text-sm text-text-secondary">{tag}</span>
-                </div>
-              ) : (
-                <span
-                  key={tag}
-                  className="text-sm font-bold tracking-tight px-3 py-2 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
-                >
-                  {tag}
-                </span>
-              )
-            })}
-          </div>
         </section>
 
       </div>

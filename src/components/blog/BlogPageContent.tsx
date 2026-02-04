@@ -1,21 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
+import { BlogCard } from './BlogCard'
 import type { BlogPost } from '@/data/blog'
 
 interface BlogPageContentProps {
   posts: BlogPost[]
-}
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
 }
 
 export function BlogPageContent({ posts }: BlogPageContentProps) {
@@ -33,7 +25,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
         </Link>
 
         {/* Header */}
-        <header className="mb-16">
+        <header className="mb-12">
           <ScrollRevealText
             as="h1"
             className="text-4xl md:text-5xl font-semibold text-text-primary mb-4"
@@ -44,7 +36,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
           </ScrollRevealText>
           <ScrollRevealText
             as="p"
-            className="text-lg text-text-tertiary max-w-2xl leading-relaxed"
+            className="text-lg text-text-tertiary max-w-4xl leading-relaxed"
             start="top 85%"
             end="top 55%"
           >
@@ -52,49 +44,10 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
           </ScrollRevealText>
         </header>
 
-        {/* Posts List */}
-        <section className="space-y-1">
+        {/* Posts Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {posts.map((post) => (
-            <article key={post.id}>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="group block py-6 -mx-4 px-4 rounded-xl hover:bg-hover-tint transition-colors duration-200"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-8">
-                  <div className="flex-1">
-                    <h2 className="text-xl font-semibold text-text-primary group-hover:text-text-secondary transition-colors duration-200 mb-2">
-                      {post.title}
-                    </h2>
-                    <p className="text-text-tertiary leading-relaxed line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-sm text-text-muted shrink-0 md:text-right">
-                    <span>{post.readingTime}</span>
-                    <time dateTime={post.publishedAt}>
-                      {formatDate(post.publishedAt)}
-                    </time>
-                    <ArrowUpRight
-                      size={16}
-                      className="opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
-                    />
-                  </div>
-                </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-1 rounded-full bg-bg-badge text-text-tertiary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            </article>
+            <BlogCard key={post.id} post={post} />
           ))}
         </section>
 
