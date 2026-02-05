@@ -5,12 +5,7 @@ import { ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
-// import { GalleryCard } from '@/components/ui/GalleryCard'
 import { siteConfig } from '@/data'
-// import { hackathonImages as hackathonGallery, photographyImages as photographyGallery } from '@/data/gallery'
-
-// const hackathonImages = hackathonGallery.map(img => img.src)
-// const photographyImages = photographyGallery.map(img => img.src)
 import profileImg from '../../../public/images/profile/pfp.jpeg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -47,7 +42,6 @@ export const About = () => {
   return (
     <section id={section.id} className='w-full flex justify-center items-center py-24  text-text-primary px-4 lg:px-0'>
       <div className='max-w-4xl w-full'>
-
         {/* HEADER */}
         <div className='flex justify-start items-start pt-16 pb-5 border-b border-border-accent space-y-2 mb-8'>
           <span className='text-start text-text-secondary text-xl font-mono leading-tight'>

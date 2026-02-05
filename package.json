@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@vercel/analytics": "^1.6.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -25,6 +27,7 @@
     "react-github-calendar": "^5.0.4",
     "react-tooltip": "^5.30.0",
     "tailwind-merge": "^3.4.0",
+    "three": "^0.182.0",
     "vaul": "^1.1.2"
   },
   "devDependencies": {
