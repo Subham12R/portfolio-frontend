@@ -14,6 +14,7 @@ export interface ApiProject {
   featured: boolean;
   isPublished: boolean;
   orderIndex: number;
+  completedDate: string | null;
   createdAt: string;
   updatedAt: string;
 }

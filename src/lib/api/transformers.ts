@@ -30,14 +30,6 @@ function formatPeriod(startDate: string, endDate: string | null): string {
   return `${startStr} – ${endStr}`;
 }
 
-// Format date as MM.YYYY
-function formatProjectPeriod(createdAt: string): string {
-  const date = new Date(createdAt);
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${month}.${year}`;
-}
-
 // Extract YouTube video ID from URL
 function extractYoutubeId(url: string | null): string | undefined {
   if (!url) return undefined;
@@ -77,7 +69,7 @@ export function transformProject(
     id: apiProject.id,
     numberId: generateNumberId(index),
     title: apiProject.title,
-    period: formatProjectPeriod(apiProject.createdAt),
+    completedDate: apiProject.completedDate || null,
     description: apiProject.shortDescription,
     features,
     tags: apiProject.techStack || [],
