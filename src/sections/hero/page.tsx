@@ -30,10 +30,26 @@ function formatDate(date: string) {
 
 export const Hero = () => {
   const [localTime, setLocalTime] = useState<string>('')
+  const [blockSize, setBlockSize] = useState(16)
   const textRef = useRef<HTMLDivElement>(null)
 
   const { name, location, timezone, email, socials, titles, bio, resume } = siteConfig
   const { resolvedTheme } = useTheme()
+
+  // Dynamic block size based on screen width
+  useEffect(() => {
+    function updateBlockSize() {
+      const width = window.innerWidth
+      if (width < 480) setBlockSize(8)
+      else if (width < 640) setBlockSize(10)
+      else if (width < 768) setBlockSize(12)
+      else if (width < 1024) setBlockSize(14)
+      else setBlockSize(14)
+    }
+    updateBlockSize()
+    window.addEventListener('resize', updateBlockSize)
+    return () => window.removeEventListener('resize', updateBlockSize)
+  }, [])
 
   // Dynamic time update
   useEffect(() => {
@@ -110,7 +126,7 @@ export const Hero = () => {
                   alt={name}
                   width={100}
                   height={100}
-                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent h-24 w-24 object-cover"
+                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent h-20 w-20 object-cover"
                   priority
                 />
                 <div>
@@ -146,32 +162,38 @@ export const Hero = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-col gap-4 mb-12">
+          <div className="flex sm:flex-col lg:flex-row  gap-4 mb-12">
             {/* Location & Time - Plain text */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text-secondary">
-              <span>{location}</span>
-              <span>{localTime ? `${localTime} (Local)` : 'Loading...'}</span>
+            <div className="flex flex-wrap items-start gap-3 text-sm text-text-secondary justify-start flex-col ">
+              <span className='bg-zinc-200 w-full dark:bg-zinc-900 px-2 py-1 text-zinc-900 dark:text-white rounded outline-2 outline-zinc-900/10 dark:outline-white/20 outline-offset-2 '>{location}</span>
+              <span className='bg-zinc-200 w-full dark:bg-zinc-900 px-2 py-1 text-zinc-900 dark:text-white rounded outline-2 outline-zinc-900/10 dark:outline-white/20 outline-offset-2 '>{localTime ? `${localTime} (+5:30 GMT)` : 'Loading...'}</span>
             </div>
 
-            {/* Social Icons Row */}
-            <div className="flex flex-wrap items-center gap-5">
-              <a href={`mailto:${email}`} className="text-text-muted hover:text-red-400 transition-colors" title="Email">
-                <MailCheckIcon size={24} />
+            {/* Social Icons Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 bg-zinc-200 dark:bg-zinc-900 px-3 py-2 rounded outline-2 outline-zinc-900/10 dark:outline-white/20 outline-offset-2">
+              <a href={`mailto:${email}`} className="inline-flex items-center gap-2 hover:text-red-400 transition-colors" title="Email">
+                <MailCheckIcon size={20} />
+                <span className="text-sm">Email</span>
               </a>
-              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text-primary transition-colors" title="GitHub">
-                <GithubIcon size={24} />
+              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-text-primary transition-colors" title="GitHub">
+                <GithubIcon size={20} />
+                <span className="text-sm">GitHub</span>
               </a>
-              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-blue-500 transition-colors" title="LinkedIn">
-                <LinkedinIcon size={24} />
+              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blue-500 transition-colors" title="LinkedIn">
+                <LinkedinIcon size={20} />
+                <span className="text-sm">LinkedIn</span>
               </a>
-              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-blue-400 transition-colors" title="Twitter">
-                <TwitterIcon size={24} />
+              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blue-400 transition-colors" title="Twitter">
+                <TwitterIcon size={20} />
+                <span className="text-sm">Twitter</span>
               </a>
-              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red-500 transition-colors" title="YouTube">
-                <YoutubeIcon size={24} />
+              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-red-500 transition-colors" title="YouTube">
+                <YoutubeIcon size={20} />
+                <span className="text-sm">YouTube</span>
               </a>
-              <span className="text-text-muted hover:text-indigo-400 transition-colors cursor-default" title="Discord">
-                <DiscordIcon size={24} />
+              <span className="inline-flex items-center gap-2 hover:text-indigo-400 transition-colors cursor-default" title={socials.discord.display}>
+                <DiscordIcon size={20} />
+                <span className="text-sm">Discord</span>
               </span>
             </div>
           </div>
@@ -180,7 +202,7 @@ export const Hero = () => {
           <div className="w-full mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto">
             <GitHubCalendar
               username={socials.github.username}
-              blockSize={14}
+              blockSize={blockSize}
               blockMargin={2}
               fontSize={16}
               year={2026}

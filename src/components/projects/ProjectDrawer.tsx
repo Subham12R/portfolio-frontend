@@ -1,10 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { Drawer } from "vaul"
-import { X } from "lucide-react"
+import { X, Play } from "lucide-react"
 import type { Project } from "@/data/project"
 import { getTechIcon } from "@/data/tech-icons"
-import YouTubePlayer from "./YouTubePlayer"
 import Image from "next/image"
 
 interface ProjectDrawerProps {
@@ -14,10 +14,20 @@ interface ProjectDrawerProps {
 }
 
 export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
+  const [playing, setPlaying] = useState(false)
+
+  // Reset playing state when drawer closes
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setPlaying(false)
+      onClose()
+    }
+  }
+
   if (!project) return null
 
   return (
-    <Drawer.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Drawer.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/60 z-50" />
         <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 flex max-h-[94vh] flex-col rounded-t-[20px] bg-bg-primary border-t border-border-primary">
@@ -38,19 +48,35 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
             <div className="mx-auto max-w-4xl">
               {/* Video/Image Section */}
               <div className="mt-6 mb-10">
-                {project.youtubeId ? (
-                  <div className="w-full rounded-2xl overflow-hidden shadow-2xl">
-                    <YouTubePlayer youtubeId={project.youtubeId} title={project.title} />
+                {project.youtubeId && playing ? (
+                  <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={project.title}
+                    />
                   </div>
                 ) : project.bannerImage ? (
-                  <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-elevated shadow-2xl">
+                  <button
+                    onClick={() => project.youtubeId && setPlaying(true)}
+                    className={`relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-elevated shadow-2xl group/video ${project.youtubeId ? 'cursor-pointer' : 'cursor-default'}`}
+                  >
                     <Image
                       src={project.bannerImage}
                       alt={project.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 group-hover/video:scale-105"
                     />
-                  </div>
+                    {project.youtubeId && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
+                        <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center">
+                          <Play size={36} className="text-black ml-1" fill="black" />
+                        </div>
+                      </div>
+                    )}
+                  </button>
                 ) : (
                   <div className="w-full aspect-video rounded-2xl bg-bg-elevated flex items-center justify-center text-text-muted">
                     No preview available

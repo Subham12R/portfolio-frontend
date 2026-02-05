@@ -90,7 +90,7 @@ export function ExperienceCard({ experience, defaultExpanded = false }: Experien
             alt={experience.company}
             width={48}
             height={48}
-            className={`w-12 h-12 rounded-xl outline-2 outline-offset-2 ${outlineColor}`}
+            className={`w-12 h-12 rounded-xl outline-2 outline-offset-2 bg-white shadow ${outlineColor}`}
           />
           <div>
             <h2 className="text-lg font-semibold text-text-primary">

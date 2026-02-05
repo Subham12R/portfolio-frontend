@@ -10,10 +10,8 @@ export default function PlainProjectCard({ project }: { project: Project }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const category = project.tags[0] || "PROJECT"
 
-  // Get thumbnail - prefer YouTube thumbnail if available
-  const thumbnailUrl = project.youtubeId
-    ? `https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`
-    : project.bannerImage
+  // Get thumbnail - prefer bannerImage as primary
+  const thumbnailUrl = project.bannerImage
 
   return (
     <>
@@ -33,9 +31,9 @@ export default function PlainProjectCard({ project }: { project: Project }) {
               />
               {/* Play button overlay for videos */}
               {project.youtubeId && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                    <Play size={24} className="text-black ml-1" fill="black" />
+                <div className="absolute inset-0 rounded-full flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-2xl flex items-center justify-center shadow-lg">
+                    <Play size={24} className="text-white" fill="white" />
                   </div>
                 </div>
               )}

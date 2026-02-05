@@ -1,28 +1,47 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
+import { Play } from "lucide-react"
 import { Project } from "@/data/project"
 import { getTechIcon } from "@/data/tech-icons"
 
 function ExpandedProject({ project }: { project: Project }) {
+  const [playing, setPlaying] = useState(false)
+
   return (
     <div className="px-5 pb-6 space-y-6">
 
       {/* BANNER / VIDEO */}
-      {project.youtubeId ? (
+      {project.youtubeId && playing ? (
         <div className="aspect-video rounded-lg overflow-hidden border border-border-primary">
           <iframe
-            src={`https://www.youtube.com/embed/${project.youtubeId}`}
+            src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1`}
             className="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
         </div>
       ) : project.bannerImage ? (
-        <Image
-          src={project.bannerImage}
-          alt={project.title}
-          width={800}
-          height={450}
-          className="rounded-lg border border-border-primary w-full"
-        />
+        <button
+          onClick={() => project.youtubeId && setPlaying(true)}
+          className={`relative block w-full aspect-video rounded-lg overflow-hidden border border-border-primary group/video ${project.youtubeId ? 'cursor-pointer' : 'cursor-default'}`}
+        >
+          <Image
+            src={project.bannerImage}
+            alt={project.title}
+            width={800}
+            height={450}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover/video:scale-105"
+          />
+          {project.youtubeId && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
+              <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                <Play size={28} className="text-black ml-1" fill="black" />
+              </div>
+            </div>
+          )}
+        </button>
       ) : null}
 
       {/* DESCRIPTION */}
