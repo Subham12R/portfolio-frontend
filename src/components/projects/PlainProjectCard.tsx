@@ -80,7 +80,9 @@ export default function PlainProjectCard({ project }: { project: Project }) {
           {/* Date row with category */}
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-text-muted">
-              {project.period}
+              {project.completedDate
+                ? project.completedDate.split('-').reverse().join('.')
+                : 'Present'}
             </p>
             <span className="text-xs text-text-tertiary uppercase tracking-wider whitespace-nowrap">
               {category}

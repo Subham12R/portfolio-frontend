@@ -60,7 +60,11 @@ export default function ProjectCard({ project }: { project: Project }) {
                <h3 className="text-lg font-semibold text-text-primary">
             {project.title}
           </h3>
-          <p className="text-sm text-text-tertiary">{project.period}</p>
+          <p className="text-sm text-text-tertiary">
+              {project.completedDate
+                ? project.completedDate.split('-').reverse().join('.')
+                : 'Present'}
+            </p>
 
         </div>
        

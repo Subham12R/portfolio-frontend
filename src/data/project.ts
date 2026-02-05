@@ -4,7 +4,7 @@ export interface Project {
   id: string;
   numberId?: string;
   title: string;
-  period: string;
+  completedDate?: string | null;
   description: string;
   features: string[];
   tags: string[];
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     id: "react-wheel-picker",
     numberId: "01",
     title: "React Wheel Picker",
-    period: "05.2025 – Present",
+    completedDate: null,
     description:
       "iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support. Backed by Vercel OSS Program.",
     features: [
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     id: "devflow",
     numberId: "02",
     title: "DevFlow",
-    period: "03.2025 – 04.2025",
+    completedDate: "2025-04",
     description:
       "A modern developer portfolio and blog platform built with Next.js 14, featuring MDX support, dark mode, and a custom CMS for managing content.",
     features: [
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     id: "taskly",
     numberId: "03",
     title: "Taskly",
-    period: "01.2025 – 02.2025",
+    completedDate: "2025-02",
     description:
       "A collaborative task management application with real-time updates, team workspaces, and Kanban boards. Built with modern full-stack technologies.",
     features: [
@@ -114,7 +114,7 @@ export const projects: Project[] = [
     id: "codevis",
     numberId: "04",
     title: "CodeVis",
-    period: "11.2024 – 12.2024",
+    completedDate: "2024-12",
     description:
       "An interactive algorithm visualizer that helps developers understand complex algorithms through step-by-step animations and explanations.",
     features: [

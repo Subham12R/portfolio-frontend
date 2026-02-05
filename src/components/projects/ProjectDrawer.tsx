@@ -113,7 +113,11 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                   </Drawer.Title>
 
                   {/* Date */}
-                  <p className="text-sm text-text-muted mb-6">{project.period}</p>
+                  <p className="text-sm text-text-muted mb-6">
+                    {project.completedDate
+                      ? project.completedDate.split('-').reverse().join('.')
+                      : 'Present'}
+                  </p>
 
                   {/* Description */}
                   <Drawer.Description className="text-text-secondary leading-relaxed mb-8">
