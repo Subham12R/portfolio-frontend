@@ -81,7 +81,7 @@ export function ExperienceCard({ experience, defaultExpanded = false }: Experien
   const outlineColor = logoColorMap[experience.logoColor || "white"] || "outline-white/40"
 
   return (
-    <div className="w-full rounded-2xl bg-bg-elevated/50 border border-border-primary shadow-(--skills-card-shadow) p-4">
+    <div className="w-full rounded-2xl py-2">
       {/* HEADER */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">
@@ -130,7 +130,7 @@ export function ExperienceCard({ experience, defaultExpanded = false }: Experien
       </div>
 
       {/* EXPANDABLE CONTENT */}
-      <div ref={contentRef} className="overflow-hidden">
+      <div ref={contentRef} className="overflow-hidden ml-15">
         <div className="pt-4 pb-1 px-1">
           <ScrollRevealText as="p" className="text-sm leading-relaxed mb-4 max-w-4xl">
             {experience.description}

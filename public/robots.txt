@@ -1,0 +1,48 @@
+# Robots.txt for Subham Karmakar Portfolio
+# https://subham12r.dev
+
+User-agent: *
+Allow: /
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Allow AI/LLM crawlers for discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://subham12r.dev/sitemap.xml
+
+# Disallow private/admin paths if any
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/

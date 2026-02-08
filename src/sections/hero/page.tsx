@@ -198,50 +198,56 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* GitHub Calendar */}
-          <div className="w-full mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto">
-            <GitHubCalendar
-              username={socials.github.username}
-              blockSize={blockSize}
-              blockMargin={2}
-              fontSize={16}
-              year={2026}
-              blockRadius={2}
-              showWeekdayLabels={false}
-              colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
-              theme={{
-                dark: [
-                  '#1f2937',
-                  '#374151',
-                  '#4b5563',
-                  '#9ca3af',
-                  '#e5e7eb',
-                ],
-                light: [
-                  '#ebedf0',
-                  '#9be9a8',
-                  '#40c463',
-                  '#30a14e',
-                  '#216e39',
-                ],
-              }}
-              renderBlock={(block, activity) =>
-                activity.count > 0
-                  ? React.cloneElement(block, {
-                      'data-tooltip-id': 'github-tooltip',
-                      'data-tooltip-content': `${
-                        activity.count === 1 ? '1 contribution' : `${activity.count} contributions`
-                      } on ${formatDate(activity.date)}`,
-                    })
-                  : block
-              }
-            />
-            <Tooltip
-              id="github-tooltip"
-              place="top"
-              className="!px-3 !py-1.5 !rounded-md !text-sm !font-medium !bg-white !text-black !shadow-md !border !border-black/10"
-              delayHide={50}
-            />
+          {/* GitHub Calendar - Only render after theme is resolved to prevent hydration mismatch */}
+          <div className="w-full mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto min-h-[180px]">
+            {resolvedTheme ? (
+              <>
+                <GitHubCalendar
+                  username={socials.github.username}
+                  blockSize={blockSize}
+                  blockMargin={2}
+                  fontSize={16}
+                  year={2026}
+                  blockRadius={2}
+                  showWeekdayLabels={false}
+                  colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
+                  theme={{
+                    dark: [
+                      '#1f2937',
+                      '#374151',
+                      '#4b5563',
+                      '#9ca3af',
+                      '#e5e7eb',
+                    ],
+                    light: [
+                      '#ebedf0',
+                      '#9be9a8',
+                      '#40c463',
+                      '#30a14e',
+                      '#216e39',
+                    ],
+                  }}
+                  renderBlock={(block, activity) =>
+                    activity.count > 0
+                      ? React.cloneElement(block, {
+                          'data-tooltip-id': 'github-tooltip',
+                          'data-tooltip-content': `${
+                            activity.count === 1 ? '1 contribution' : `${activity.count} contributions`
+                          } on ${formatDate(activity.date)}`,
+                        })
+                      : block
+                  }
+                />
+                <Tooltip
+                  id="github-tooltip"
+                  place="top"
+                  className="!px-3 !py-1.5 !rounded-md !text-sm !font-medium !bg-white !text-black !shadow-md !border !border-black/10"
+                  delayHide={50}
+                />
+              </>
+            ) : (
+              <div className="h-[148px] animate-pulse bg-bg-elevated rounded" />
+            )}
           </div>
 
         </div>

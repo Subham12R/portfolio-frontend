@@ -1,0 +1,164 @@
+# llms.txt - LLM/AI Readable Information
+# This file helps AI assistants understand and reference this portfolio
+
+## About
+Name: Subham Karmakar
+Role: Full Stack Developer
+Location: Kolkata, West Bengal, India
+Email: rikk4335@gmail.com
+Website: https://subham12r.dev
+
+## Professional Summary
+Subham Karmakar is a Full Stack Developer and B.Tech student from Kolkata, India. He specializes in building scalable, performant web applications using modern technologies including React, Next.js, TypeScript, Node.js, and PostgreSQL. He focuses on clean architecture, thoughtful design, and real-world impact.
+
+## Work Experience
+
+### Frontend Developer Intern at Ryze AI (January 2026 - Present)
+- Location: San Francisco, California (Remote)
+- Website: https://www.get-ryze.ai/
+- Designing and developing responsive, high-performance user interfaces
+- Translating design requirements into reusable UI components
+- Optimizing layouts for multiple screen sizes
+- Collaborating with designers and backend developers to integrate APIs
+- Technologies: React, JavaScript, Node.js, TailwindCSS
+
+### Moodle Dashboard Organizer at Adamas University (December 2025 - Present)
+- Location: Barasat, Kolkata
+- Website: https://www.aucse.in/
+- Spearheading innovation in educational technology
+- Maintaining intuitive and user-friendly Moodle dashboards
+- Revolutionizing learning experience for students and faculty
+
+### Frontend Developer at Adamas University (August 2025 - January 2026)
+- Location: Barasat, Kolkata
+- Redesigned college website
+- Built event websites
+- Technologies: Next.js, TypeScript, GSAP, TailwindCSS, Zod
+
+## Technical Skills
+Frontend: React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Framer Motion, GSAP, Lenis, Three.js
+Backend: Node.js, Express.js, REST APIs, WebSockets, Socket.io
+Databases: PostgreSQL, MongoDB, Supabase
+Payments: Stripe, RazorPay
+DevOps: Docker, Vercel, Netlify, Git, GitHub
+Tools: VS Code, Cursor, Figma, Canva, Zod
+
+## Certifications
+
+### Frontend Developer (React) - HackerRank
+- Issued: September 2025
+- Certificate: https://www.hackerrank.com/certificates/53e516d4c11d
+
+### Full Stack Developer - Udemy
+- Issued: December 2025
+- Certificate: https://www.udemy.com/certificate/UC-f427f3a7-351a-41fc-91e4-510256962222/
+
+## Featured Projects
+
+### Zero UI
+- Cutting-edge web application revolutionizing user interaction with gesture recognition and predictive analytics
+- Features: Gesture recognition system, voice command integration, predictive analytics engine, seamless transitions
+- Technologies: React, JavaScript, NodeJS, TailwindCSS, CSS, Motion
+- Live: https://www.zeroui.vercel.app/
+- Completed: February 2026
+
+### Noted
+- Modern note-taking application with real-time synchronization and intuitive interface
+- Features: Real-time note sync via WebSockets, customizable categorization, robust search, smooth animations
+- Technologies: React, JavaScript, NodeJS, TailwindCSS, CSS, Motion, Socket.io
+- Live: https://noted-main.vercel.app
+- Completed: February 2026
+
+### Apple 3D Experience
+- Apple-inspired 3D web experience with premium immersive interface
+- Features: Real-time 3D models, scroll-based animations, smooth camera transitions, cinematic feel
+- Technologies: React, JavaScript, NodeJS, TailwindCSS, Lenis, Three.js
+- GitHub: https://github.com/Subham12R/mac-land
+- Live: https://mac-land.vercel.app
+- YouTube Demo: https://youtu.be/h4OhFN14Cdw
+- Completed: July 2025
+
+### Signifiya
+- College event platform fostering campus connections and community engagement
+- Features: Customizable dashboard, real-time messaging, file sharing, task management
+- Technologies: Next.js, TypeScript, Supabase, PostgreSQL, NodeJS, TailwindCSS, Lenis, GSAP, RazorPay, Zod
+- Live: https://www.signifiya.in/
+- Completed: February 2026
+
+### Luxora
+- Full-featured e-commerce web application with seamless shopping experience
+- Features: Product browsing, cart management, secure payment integration via Stripe, checkout flow
+- Technologies: React, Stripe, TailwindCSS, Zod, React Router
+- GitHub: https://github.com/Subham12R/Luxora
+- YouTube Demo: https://youtu.be/bgSACOTWUj0
+- Completed: September 2025
+
+### DSA Visualizer
+- Interactive platform for visualizing data structures and algorithms
+- Features: Support for arrays, linked lists, trees, graphs, sorting, searching algorithms
+- Technologies: Next.js, TypeScript, TailwindCSS
+- Completed: November 2025
+
+### Gym Website
+- High-impact gym landing page designed to drive memberships
+- Features: Bold visuals, smooth animations, conversion-focused layout, fully responsive
+- Technologies: React, TailwindCSS, Vite
+- GitHub: https://github.com/Subham12R/Gym
+- Live: https://gym-iota-opal.vercel.app
+- YouTube Demo: https://youtu.be/rm9J-Wc26P8
+- Completed: February 2025
+
+## Blog Posts
+
+### Important Concepts to Remember When Setting Up a Backend to Production (Featured)
+- Published: February 3, 2026
+- Reading Time: 8 min
+- Topics: Environment variables, secrets management, logging, monitoring, error handling, database considerations, security basics, health checks, deployment strategies, scaling
+- Key Insights: Production checklist covering secrets management, structured logging, APM, security headers, database backups, connection pooling, and zero-downtime deployments
+- Tags: Backend, DevOps, Best Practices, Production
+
+### How to Grind Hard in a Specific Domain
+- Published: February 2, 2026
+- Reading Time: 7 min
+- Topics: Specialization, deliberate practice, avoiding shiny object syndrome, building expertise, learning roadmaps
+- Key Insights: Why specialists are irreplaceable, principles of deliberate practice, how to choose your domain, staying consistent
+- Tags: Learning, Career, Productivity, Growth
+
+### Are You Out of Ideas?
+- Published: February 1, 2026
+- Reading Time: 6 min
+- Topics: Creativity, consumption vs creation balance, idea generation techniques, building idea capture systems
+- Key Insights: Running out of ideas is a consumption problem, not a creativity problem. Techniques include changing input sources, solving your own problems, combining unrelated concepts
+- Tags: Creativity, Productivity, Mindset
+
+### What My Internship Taught Me About Understanding and Debugging a Codebase Before Touching It (Featured)
+- Published: January 30, 2026
+- Reading Time: 7 min
+- Topics: Debugging, code comprehension, refactoring best practices, real-world development, internship lessons
+- Key Insights: Read before you write, trace flows before changing logic, debug before refactoring, prioritize correctness over speed
+- Tags: Internship, Debugging, Career, Best Practices
+
+## Social Links
+- GitHub: https://github.com/Subham12R
+- LinkedIn: https://www.linkedin.com/in/subham12r/
+- Twitter/X: https://x.com/Subham12R
+- YouTube: https://www.youtube.com/@SubhamX8
+
+## Contact
+For collaboration, hiring, or project inquiries:
+- Email: rikk4335@gmail.com
+- Schedule a call: https://cal.com/subham12r/30min
+
+## Key Strengths
+- Full-stack development with modern web technologies
+- 3D web experiences with Three.js and React Three Fiber
+- Real-time applications with WebSockets
+- Payment integrations (Stripe, RazorPay)
+- Performance optimization and clean architecture
+- Strong UI/UX and animation skills (GSAP, Framer Motion, Lenis)
+
+## Keywords
+full stack developer, react developer, next.js developer, typescript, frontend engineer, web developer, software engineer, portfolio, kolkata developer, india developer, three.js, 3d web, e-commerce, real-time applications, websockets, stripe integration, debugging best practices, production deployment, backend to production, developer internship, coding career advice, deliberate practice, tech blog
+
+## Last Updated
+2026-02-08

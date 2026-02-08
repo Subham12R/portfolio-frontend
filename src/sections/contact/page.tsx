@@ -43,6 +43,15 @@ export default function ContactCTA() {
         <ContactModal open={open} onClose={() => setOpen(false)} />
 
       </div>
+
+      <ScrollRevealText
+        as="div"
+        className="max-w-2xl w-full mt-12 text-center text-sm text-text-muted pt-6"
+        start="top 95%"
+        end="top 75%"
+      >
+        This portfolio is built and developed by <span className="text-text-secondary">{siteConfig.name}</span>. I have taken inspirations from various other developers and designers. If you like the design and want to build something similar, feel free to check out the source code which is open-sourced on <a href="https://github.com/Subham12R/portfolio-frontend" className="underline hover:text-zinc-900 dark:hover:text-white">GitHub</a>.
+      </ScrollRevealText>
     </section>
   )
 }
