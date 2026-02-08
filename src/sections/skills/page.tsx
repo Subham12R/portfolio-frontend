@@ -23,10 +23,12 @@ const Tech = () => {
 
         {/* Header */}
 
-
+        <h1 className="text-3xl  mb-4 tracking-tighter font-bold">
+          Tech Stack - That helps me get the stuff done.
+        </h1>
         {/* Tech Stack Dock */}
-        <div className="flex justify-center items-center pt-16 pb-8 w-full overflow-visible">
-          <div className="relative flex items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-md bg-bg-elevated/80 border border-border-primary backdrop-blur-md">
+        <div className="flex justify-center items-center pb-2 w-full overflow-visible">
+          <div className="relative flex items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-md bg-bg-elevated/80 border border-border-primary backdrop-blur-md w-full">
             {allTech.map((item, index) => {
               const isHovered = hoveredIndex === index;
               const isNeighbor = hoveredIndex !== null && Math.abs(hoveredIndex - index) === 1;

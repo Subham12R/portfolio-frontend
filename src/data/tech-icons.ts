@@ -16,7 +16,7 @@ export const techIcons: Record<string, string> = {
   // Backend
   "Node.js": "/icons/nodejs.png",
   "MongoDB": "/icons/mongodb.png",
-  "PostgreSQL": "/icons/postgresql.png",
+  "PostgreSQL": "/icons/postgresql.svg",
   "Supabase": "/icons/supabase.jpeg",
   "Neon": "/icons/neon.jpeg",
   "Database": "/icons/database.png",

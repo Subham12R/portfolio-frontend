@@ -10,7 +10,7 @@ import cssIcon from "@/assets/icons/css.png";
 import tailwindIcon from "@/assets/icons/tailwindcss.jpeg";
 import nodejsIcon from "@/assets/icons/nodejs.png";
 import mongodbIcon from "@/assets/icons/mongodb.png";
-import databaseIcon from "@/assets/icons/database.png";
+import postgreIcon from "@/assets/icons/postgresql.svg";
 import supabaseIcon from "@/assets/icons/supabase.jpeg";
 import neonIcon from "@/assets/icons/neon.jpeg";
 import dockerIcon from "@/assets/icons/docker.jpeg";
@@ -44,7 +44,7 @@ export const techRegistry: TechItem[] = [
 
   // Backend
   { name: "Node.js", category: "backend", icon: nodejsIcon },
-  { name: "PostgreSQL", category: "backend", icon: databaseIcon },
+  { name: "PostgreSQL", category: "backend", icon: postgreIcon },
   { name: "Supabase", category: "backend", icon: supabaseIcon },
   { name: "Neon", category: "backend", icon: neonIcon },
 
@@ -53,4 +53,6 @@ export const techRegistry: TechItem[] = [
   { name: "Vercel", category: "devops", icon: vercelIcon },
 
   // Everything else (no category = auto Other)
+  { name: "GitHub", icon: githubIcon },
+  { name: "VS Code", icon: vscodeIcon },
 ];
