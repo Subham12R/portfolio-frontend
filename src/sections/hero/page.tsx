@@ -31,10 +31,14 @@ function formatDate(date: string) {
 export const Hero = () => {
   const [localTime, setLocalTime] = useState<string>('')
   const [blockSize, setBlockSize] = useState(16)
+  const [mounted, setMounted] = useState(false)
   const textRef = useRef<HTMLDivElement>(null)
 
   const { name, location, timezone, email, socials, titles, bio, resume } = siteConfig
   const { resolvedTheme } = useTheme()
+
+  // Prevent hydration mismatch by waiting for mount
+  useEffect(() => setMounted(true), [])
 
   // Dynamic block size based on screen width
   useEffect(() => {
@@ -198,9 +202,9 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* GitHub Calendar - Only render after theme is resolved to prevent hydration mismatch */}
+          {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
           <div className="w-full mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto min-h-[180px]">
-            {resolvedTheme ? (
+            {mounted && resolvedTheme ? (
               <>
                 <GitHubCalendar
                   username={socials.github.username}
