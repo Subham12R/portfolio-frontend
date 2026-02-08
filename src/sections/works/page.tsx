@@ -17,12 +17,13 @@ const Work = async () => {
           <h1 className='text-4xl font-semibold text-text-primary text-start'>{section.title}.</h1>
         </div>
 
-        <div className='flex flex-col gap-6 pb-16'>
+        <div className='flex flex-col gap-4 pb-16'>
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={experience.id}
               experience={experience}
               defaultExpanded={index === 0}
+              isLast={index === experiences.length - 1}
             />
           ))}
         </div>

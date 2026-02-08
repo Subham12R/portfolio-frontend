@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import { SmoothScroll } from "@/components/providers/SmoothScroll"
 import { Neko } from "@/components/ui/Neko"
 import { ScrollToTop } from "@/components/ui/ScrollToTop"
+import { PageTransition } from "@/components/ui/PageTransition"
 
 const helvetica = localFont({
   src: "../../public/fonts/Helvetica.ttf",
@@ -63,6 +64,7 @@ export default function RootLayout({
         className={`${helvetica.variable} antialiased min-h-screen bg-bg-primary text-text-primary transition-colors duration-300`}
       >
         <ThemeProvider>
+          <PageTransition />
           <SmoothScroll>
             <Navigation />
             <main>{children}</main>

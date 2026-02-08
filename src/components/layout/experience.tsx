@@ -11,6 +11,7 @@ import { getTechIcon } from "@/data/tech-icons"
 interface ExperienceCardProps {
   experience: Experience
   defaultExpanded?: boolean
+  isLast?: boolean
 }
 
 // Logo outline color mapping
@@ -23,7 +24,7 @@ const logoColorMap: Record<string, string> = {
   white: "outline-white/40",
 }
 
-export function ExperienceCard({ experience, defaultExpanded = false }: ExperienceCardProps) {
+export function ExperienceCard({ experience, defaultExpanded = false, isLast = false }: ExperienceCardProps) {
   const [open, setOpen] = useState(defaultExpanded)
   const contentRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<HTMLDivElement>(null)
@@ -81,17 +82,24 @@ export function ExperienceCard({ experience, defaultExpanded = false }: Experien
   const outlineColor = logoColorMap[experience.logoColor || "white"] || "outline-white/40"
 
   return (
-    <div className="w-full rounded-2xl py-2">
+    <div className="w-full rounded-2xl py-2 relative">
+      {/* Timeline line */}
+      {!isLast && (
+        <div className="absolute left-6 top-16 bottom-0 w-px bg-border-primary -translate-x-1/2" />
+      )}
+
       {/* HEADER */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Image
-            src={experience.logo}
-            alt={experience.company}
-            width={48}
-            height={48}
-            className={`w-12 h-12 rounded-xl outline-2 outline-offset-2 bg-white shadow ${outlineColor}`}
-          />
+          <div className="relative z-10">
+            <Image
+              src={experience.logo}
+              alt={experience.company}
+              width={48}
+              height={48}
+              className={`w-12 h-12 rounded-xl outline-2 outline-offset-2 bg-white shadow ${outlineColor}`}
+            />
+          </div>
           <div>
             <h2 className="text-lg font-semibold text-text-primary">
               {experience.role}
