@@ -12,19 +12,7 @@ const Footer = () => {
         {/* Main Row - DMCA left, Links right */}
         <div className="flex justify-between items-center mb-4">
           {/* DMCA Badge - Left */}
-          <a
-            href="//www.dmca.com/Protection/Status.aspx?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
-            title="DMCA.com Protection Status"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="opacity-50 hover:opacity-100 transition-opacity duration-200"
-          >
-            <img
-              src="https://images.dmca.com/Badges/dmca_protected_6_120.png?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
-              alt="DMCA.com Protection Status"
-              className="h-5 w-auto"
-            />
-          </a>
+  <a href="//www.dmca.com/Protection/Status.aspx?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120t.png?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
 
           {/* Links - Right */}
           <div className="flex items-center gap-4 md:gap-6 text-sm text-text-secondary">
