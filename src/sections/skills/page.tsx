@@ -13,7 +13,7 @@ const Tech = () => {
   const allTech = [
     ...tech.frontend,
     ...tech.backend,
-    ...tech.meops,
+    ...tech.devops,
     ...tech.other,
   ];
 
