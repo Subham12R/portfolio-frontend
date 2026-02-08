@@ -6,7 +6,7 @@ Name: Subham Karmakar
 Role: Full Stack Developer
 Location: Kolkata, West Bengal, India
 Email: rikk4335@gmail.com
-Website: https://subham12r.dev
+Website: https://subham12r.me
 
 ## Professional Summary
 Subham Karmakar is a Full Stack Developer and B.Tech student from Kolkata, India. He specializes in building scalable, performant web applications using modern technologies including React, Next.js, TypeScript, Node.js, and PostgreSQL. He focuses on clean architecture, thoughtful design, and real-world impact.

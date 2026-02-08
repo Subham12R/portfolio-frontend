@@ -2,7 +2,7 @@
 
 A modern, performant portfolio website built with Next.js 16, React 19, and TailwindCSS. Features smooth animations, dark/light theme support, and optimized for both SEO and LLM discoverability.
 
-**Live Site:** [subham12r.dev](https://subham12r.dev)
+**Live Site:** [subham12r.me](https://subham12r.me)
 
 ## Tech Stack
 

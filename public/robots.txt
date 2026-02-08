@@ -1,5 +1,5 @@
 # Robots.txt for Subham Karmakar Portfolio
-# https://subham12r.dev
+# https://subham12r.me
 
 User-agent: *
 Allow: /
@@ -40,7 +40,7 @@ User-agent: Amazonbot
 Allow: /
 
 # Sitemap location
-Sitemap: https://subham12r.dev/sitemap.xml
+Sitemap: https://subham12r.me/sitemap.xml
 
 # Disallow private/admin paths if any
 Disallow: /api/
