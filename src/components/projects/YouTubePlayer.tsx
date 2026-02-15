@@ -11,9 +11,10 @@ export default function YouTubePlayer({ youtubeId, title }: { youtubeId: string;
     return (
       <div className="aspect-video">
         <iframe
-          src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
+          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
           className="w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
           title={title}
         />
