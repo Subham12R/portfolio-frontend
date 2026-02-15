@@ -18,7 +18,7 @@ import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
 import { siteConfig } from '@/data'
 import { useTheme } from 'next-themes'
 
-import profileBanner from '../../../public/images/profile/tenor.gif'
+import profileBanner from '../../../public/images/profile/banner.gif'
 import profileIcon from '../../../public/images/profile/pfp.jpeg'
 
 function formatDate(date: string) {
@@ -109,7 +109,7 @@ export const Hero = () => {
       <div className="max-w-4xl w-full flex flex-col h-full">
 
         {/* Banner */}
-        <div className="max-h-[20vh] overflow-hidden flex justify-center flex-col items-center">
+        <div className="max-h-full  overflow-hidden flex justify-center flex-col items-center">
           <Image
             src={profileBanner}
             alt="Banner"
@@ -131,7 +131,7 @@ export const Hero = () => {
                   alt={name}
                   width={100}
                   height={100}
-                  className="rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent h-20 w-20 object-cover"
+                  className="relative z-20 -mt-10 md:-mt-20 rounded-xl mb-4 md:mb-0 md:mr-4 outline-2 outline-offset-2 outline-border-accent h-20 w-20 object-cover"
                   priority
                 />
                 <div>
