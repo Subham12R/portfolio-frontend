@@ -1,11 +1,21 @@
 import { GalleryGrid } from '@/components/gallery/GalleryGrid'
-import { photographyImages } from '@/data/gallery'
+import { photographyImages, siteConfig } from '@/data'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata = {
   title: 'Photography',
   description: 'Personal photography collection',
+  alternates: {
+    canonical: '/photography',
+  },
+  openGraph: {
+    title: `Photography | ${siteConfig.name}`,
+    description: 'Personal photography collection',
+    url: `${siteConfig.url}/photography`,
+    type: 'website',
+    images: ['/icon.png'],
+  },
 }
 
 export default function PhotographyPage() {

@@ -4,6 +4,7 @@
 export const siteConfig = {
   name: "Subham Karmakar",
   title: "Subham12r",
+  url: "https://subham12r.me",
   role: "Full Stack Developer",
   description: "Full Stack Developer Portfolio",
   location: "Kolkata, West Bengal, India",

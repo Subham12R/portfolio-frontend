@@ -18,11 +18,15 @@ const helvetica = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.name} | ${siteConfig.role}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "Full Stack Developer",
     "Frontend Developer",
@@ -37,19 +41,36 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: siteConfig.url,
     title: `${siteConfig.name} | ${siteConfig.role}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: "/icon.png",
+        width: 512,
+        height: 512,
+        alt: `${siteConfig.name} portfolio`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | ${siteConfig.role}`,
     description: siteConfig.description,
     creator: `@${siteConfig.socials.twitter.username}`,
+    images: ["/icon.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 }
 

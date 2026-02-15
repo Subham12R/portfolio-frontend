@@ -1,4 +1,5 @@
-# Subham Karmakar - Portfolio
+# Subham Karmakar | Full Stack Developer | Adamas University
+    
 
 A modern, performant portfolio website built with Next.js 16, React 19, and TailwindCSS. Features smooth animations, dark/light theme support, and optimized for both SEO and LLM discoverability.
 

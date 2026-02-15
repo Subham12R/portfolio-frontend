@@ -1,11 +1,21 @@
 import { GalleryGrid } from '@/components/gallery/GalleryGrid'
-import { hackathonImages } from '@/data/gallery'
+import { hackathonImages, siteConfig } from '@/data'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata = {
   title: 'Hackathons',
   description: 'Photos from hackathons and coding events',
+  alternates: {
+    canonical: '/hackathons',
+  },
+  openGraph: {
+    title: `Hackathons | ${siteConfig.name}`,
+    description: 'Photos from hackathons and coding events',
+    url: `${siteConfig.url}/hackathons`,
+    type: 'website',
+    images: ['/icon.png'],
+  },
 }
 
 export default function HackathonsPage() {

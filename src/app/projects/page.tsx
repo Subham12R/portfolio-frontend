@@ -7,6 +7,22 @@ import PlainProjectCard from '@/components/projects/PlainProjectCard'
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
   description: 'A collection of projects showcasing my work in web development.',
+  alternates: {
+    canonical: '/projects',
+  },
+  openGraph: {
+    title: `Projects | ${siteConfig.name}`,
+    description: 'A collection of projects showcasing my work in web development.',
+    url: `${siteConfig.url}/projects`,
+    type: 'website',
+    images: ['/icon.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Projects | ${siteConfig.name}`,
+    description: 'A collection of projects showcasing my work in web development.',
+    images: ['/icon.png'],
+  },
 }
 
 export default async function ProjectsPage() {

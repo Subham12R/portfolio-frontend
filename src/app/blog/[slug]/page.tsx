@@ -28,6 +28,23 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   return {
     title: `${post.title} | ${siteConfig.title}`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: `${post.title} | ${siteConfig.name}`,
+      description: post.excerpt,
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      type: "article",
+      publishedTime: post.publishedAt,
+      images: [post.coverImage || "/icon.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | ${siteConfig.name}`,
+      description: post.excerpt,
+      images: [post.coverImage || "/icon.png"],
+    },
   }
 }
 
