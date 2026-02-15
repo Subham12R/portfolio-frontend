@@ -7,6 +7,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
 import { siteConfig } from '@/data'
 import profileImg from '../../../public/images/profile/pfp.jpeg'
+import Expericence from '@/components/cards/experience'
+import Hobbies from '@/components/cards/hobbies'
+import Achievements from '@/components/cards/achievements'
+import Activities from '@/components/cards/activities'
+import { GithubIcon } from '@/components/ui/github'
+import { LinkedinIcon } from '@/components/ui/linkedin'
+import { MailCheckIcon } from '@/components/ui/mail-check'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,6 +22,7 @@ export const About = () => {
   const { socials, email } = siteConfig
   const imageRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!imageRef.current || !containerRef.current) return
@@ -33,6 +41,32 @@ export const About = () => {
         },
       }
     )
+
+    if (statsRef.current) {
+      const statItems = statsRef.current.querySelectorAll("[data-about-item]")
+
+      if (statItems.length) {
+        gsap.fromTo(
+          statItems,
+          { opacity: 0, y: 36, scale: 0.98, filter: "blur(8px)" },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.85,
+            ease: "power3.out",
+            stagger: 0.16,
+            scrollTrigger: {
+              trigger: statsRef.current,
+              start: "top 82%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          }
+        )
+      }
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill())
@@ -60,7 +94,7 @@ export const About = () => {
               <div ref={imageRef} className="absolute -inset-[10%] scale-100">
                 <Image
                   src={profileImg}
-                  alt={siteConfig.name}
+                  alt={`${siteConfig.name} profile`}
                   fill
                   className="object-cover"
                   priority
@@ -101,8 +135,8 @@ export const About = () => {
                   rel="noopener noreferrer"
                   className='group flex items-center space-x-1 text-text-muted hover:text-text-primary transition-colors duration-200'
                 >
-                  <span>Github</span>
-                  <ArrowUpRight size={14} className='group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-200' />
+                  <GithubIcon size={24} className='text-text-muted group-hover:text-text-primary transition-colors duration-200' />
+     
                 </a>
 
                 <a
@@ -111,16 +145,14 @@ export const About = () => {
                   rel="noopener noreferrer"
                   className='group flex items-center space-x-1 text-text-muted hover:text-blue-400 transition-colors duration-200'
                 >
-                  <span>LinkedIn</span>
-                  <ArrowUpRight size={14} className='group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-200' />
+                  <LinkedinIcon size={24} className='text-text-muted group-hover:text-blue-400 transition-colors duration-200' />
                 </a>
 
                 <a
                   href={`mailto:${email}`}
                   className='group flex items-center space-x-1 text-text-muted hover:text-red-400 transition-colors duration-200'
                 >
-                  <span>Email</span>
-                  <ArrowUpRight size={14} className='group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-200' />
+                 <MailCheckIcon size={24} className='text-text-muted group-hover:text-red-400 transition-colors duration-200' />
                 </a>
               </div>
             </div>
@@ -151,6 +183,17 @@ export const About = () => {
           />
         </div>
         */}
+        {/**Stats Card **/}
+        <div ref={statsRef} className='pt-10 w-full'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full'>
+            <Expericence />
+            <Hobbies />
+          </div>
+          <div className='grid grid-cols-1 gap-4 pt-4 w-full'>
+            <Achievements />
+            <Activities />
+          </div>
+        </div>
 
       </div>
     </section>

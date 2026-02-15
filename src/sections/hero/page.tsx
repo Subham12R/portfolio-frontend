@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { GitHubCalendar } from 'react-github-calendar'
 import { Tooltip } from 'react-tooltip'
+import { Clock3, MapPin } from 'lucide-react'
 
 import { MailCheckIcon } from '@/components/ui/mail-check'
 import { GithubIcon } from '@/components/ui/github'
@@ -166,36 +167,42 @@ export const Hero = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex sm:flex-col lg:flex-row  gap-4 mb-12">
-            {/* Location & Time - Plain text */}
-            <div className="flex flex-wrap items-start gap-3 text-sm text-text-secondary justify-start flex-col ">
-              <span className='bg-zinc-200 w-full dark:bg-zinc-900 px-2 py-1 text-zinc-900 dark:text-white rounded outline-2 outline-zinc-900/10 dark:outline-white/20 outline-offset-2 '>{location}</span>
-              <span className='bg-zinc-200 w-full dark:bg-zinc-900 px-2 py-1 text-zinc-900 dark:text-white rounded outline-2 outline-zinc-900/10 dark:outline-white/20 outline-offset-2 '>{localTime ? `${localTime} (+5:30 GMT)` : 'Loading...'}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-[0.5fr_1fr] gap-2 lg:gap-1 mb-10 w-full">
+            {/* Location & Time */}
+            <div className="grid grid-rows-2 gap-2 w-full">
+              <span className='inline-flex items-center gap-2 h-9 w-full text-text-primary'>
+                <MapPin size={20} className="shrink-0" />
+                <span>{location}</span>
+              </span>
+              <span className='inline-flex items-center gap-2 h-9 w-full text-text-primary'>
+                <Clock3 size={20} className=" shrink-0" />
+                <span>{localTime ? `${localTime} (+5:30 GMT)` : 'Loading...'}</span>
+              </span>
             </div>
 
             {/* Social Icons Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 bg-zinc-200 dark:bg-zinc-900 px-3 py-2 rounded outline-2 outline-zinc-900/10 dark:outline-white/20 outline-offset-2">
-              <a href={`mailto:${email}`} className="inline-flex items-center gap-2 hover:text-red-400 transition-colors" title="Email">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-1 gap-y-1 w-full">
+              <a href={`mailto:${email}`} className="inline-flex items-center gap-2 h-9 hover:text-red-400 transition-colors" title="Email">
                 <MailCheckIcon size={20} />
                 <span className="text-sm">Email</span>
               </a>
-              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-text-primary transition-colors" title="GitHub">
+              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-9 hover:text-text-primary transition-colors" title="GitHub">
                 <GithubIcon size={20} />
                 <span className="text-sm">GitHub</span>
               </a>
-              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blue-500 transition-colors" title="LinkedIn">
+              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-9 hover:text-blue-500 transition-colors" title="LinkedIn">
                 <LinkedinIcon size={20} />
                 <span className="text-sm">LinkedIn</span>
               </a>
-              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-blue-400 transition-colors" title="Twitter">
+              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-9 hover:text-blue-400 transition-colors" title="Twitter">
                 <TwitterIcon size={20} />
                 <span className="text-sm">Twitter</span>
               </a>
-              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-red-500 transition-colors" title="YouTube">
+              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-9 hover:text-red-500 transition-colors" title="YouTube">
                 <YoutubeIcon size={20} />
                 <span className="text-sm">YouTube</span>
               </a>
-              <span className="inline-flex items-center gap-2 hover:text-indigo-400 transition-colors cursor-default" title={socials.discord.display}>
+              <span className="inline-flex items-center gap-2 h-9 hover:text-indigo-400 transition-colors cursor-default" title={socials.discord.display}>
                 <DiscordIcon size={20} />
                 <span className="text-sm">Discord</span>
               </span>
@@ -203,7 +210,7 @@ export const Hero = () => {
           </div>
 
           {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
-          <div className="w-full mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto min-h-[180px]">
+          <div className="w-full  mb-12 px-4 py-2 rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto min-h-[180px]">
             {mounted && resolvedTheme ? (
               <>
                 <GitHubCalendar
@@ -250,7 +257,31 @@ export const Hero = () => {
                 />
               </>
             ) : (
-              <div className="h-[148px] animate-pulse bg-bg-elevated rounded" />
+              <div className="py-4 space-y-3 animate-pulse">
+                {/* Month labels skeleton */}
+                <div className="flex gap-3 px-2 mb-2">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-3 w-8 bg-bg-elevated rounded"
+                    />
+                  ))}
+                </div>
+
+                {/* Calendar grid skeleton */}
+                <div className="flex gap-1">
+                  {Array.from({ length: 53 }).map((_, week) => (
+                    <div key={week} className="flex flex-col gap-1">
+                      {Array.from({ length: 7 }).map((_, day) => (
+                        <div
+                          key={day}
+                          className="w-[10px] h-[10px] bg-bg-elevated rounded"
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
 

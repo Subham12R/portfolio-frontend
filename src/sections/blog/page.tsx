@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { siteConfig } from '@/data'
-import { BlogCard } from '@/components/blog/BlogCard'
+import { AnimatedBlogGrid } from '@/components/blog/AnimatedBlogGrid'
 import { getPostsSorted } from '@/data/blog'
 
 const BlogSection = () => {
@@ -22,11 +22,7 @@ const BlogSection = () => {
         </div>
 
         {/* Blog Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {posts.map(post => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+        <AnimatedBlogGrid posts={posts} />
 
         {/* View All Link */}
         <div className="mt-12 flex items-center justify-center">

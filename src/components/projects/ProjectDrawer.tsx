@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Drawer } from "vaul"
 import { X, Play } from "lucide-react"
 import type { Project } from "@/data/project"
@@ -15,6 +15,16 @@ interface ProjectDrawerProps {
 
 export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
   const [playing, setPlaying] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const handleWheelCapture = (event: React.WheelEvent<HTMLDivElement>) => {
+    const container = scrollRef.current
+    if (!container) return
+
+    // Keep wheel scrolling bound to the drawer content instead of bubbling to drag handlers.
+    event.stopPropagation()
+    container.scrollTop += event.deltaY
+  }
 
   // Reset playing state when drawer closes
   const handleOpenChange = (open: boolean) => {
@@ -27,10 +37,10 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
   if (!project) return null
 
   return (
-    <Drawer.Root open={isOpen} onOpenChange={handleOpenChange}>
+    <Drawer.Root open={isOpen} onOpenChange={handleOpenChange} modal>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/60 z-50" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 flex max-h-[94vh] flex-col rounded-t-[20px] bg-bg-primary border-t border-border-primary">
+        <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 flex max-h-[94vh] min-h-0 flex-col rounded-t-[20px] bg-bg-primary border-t border-border-primary">
           {/* Handle + Close button */}
           <div className="relative flex items-center justify-center mt-4">
             <div className="h-1.5 w-12 shrink-0 rounded-full bg-border-secondary" />
@@ -44,7 +54,12 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
           </div>
 
           {/* Scrollable content */}
-          <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-16" data-vaul-no-drag>
+          <div
+            ref={scrollRef}
+            className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-16 touch-pan-y"
+            data-vaul-no-drag
+            onWheelCapture={handleWheelCapture}
+          >
             <div className="mx-auto max-w-4xl">
               {/* Video/Image Section */}
               <div className="mt-6 mb-10">

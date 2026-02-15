@@ -24,7 +24,7 @@ export function BlogCard({ post }: BlogCardProps) {
   const remainingCount = post.tags.length - maxVisibleTags
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group block">
+    <Link href={`/blog/${post.slug}`} className="group block h-full">
       <article className="h-full rounded-2xl border border-border-primary bg-bg-elevated/50 overflow-hidden hover:border-border-secondary transition-colors duration-200">
         {/* Cover Image */}
         <div className="relative aspect-[16/10] bg-bg-card overflow-hidden">

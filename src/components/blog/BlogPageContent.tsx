@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
-import { BlogCard } from './BlogCard'
+import { AnimatedBlogGrid } from './AnimatedBlogGrid'
 import type { BlogPost } from '@/data/blog'
 
 interface BlogPageContentProps {
@@ -45,11 +45,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
         </header>
 
         {/* Posts Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {posts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </section>
+        <AnimatedBlogGrid posts={posts} />
 
         {posts.length === 0 && (
           <div className="text-center py-20">

@@ -1,4 +1,4 @@
-import PlainProjectCard from "@/components/projects/PlainProjectCard"
+import AnimatedProjectGrid from "@/components/projects/AnimatedProjectGrid"
 import Link from 'next/link'
 import { siteConfig } from '@/data'
 import { fetchProjects } from '@/lib/api/server'
@@ -21,11 +21,7 @@ const ProjectsPage = async () => {
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
-          {displayProjects.map(project => (
-            <PlainProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        <AnimatedProjectGrid projects={displayProjects} />
 
         {/* View All Link */}
         <div className='mt-12 flex items-center justify-center'>
