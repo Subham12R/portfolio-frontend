@@ -1,5 +1,6 @@
 import { GalleryGrid } from '@/components/gallery/GalleryGrid'
-import { hackathonImages, siteConfig } from '@/data'
+import { hackathonImages } from '@/data/gallery'
+import { siteConfig } from '@/data'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
