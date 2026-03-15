@@ -721,11 +721,14 @@ export default function DevPresence() {
   const shouldShowDeepIdle = isStrongIdle && !hasLiveSignal && !isSocketConnected
   const isStaleStatus = status?.stale === true || (typeof status?.ageMs === "number" && status.ageMs > 120_000)
   const shouldShowOffline = isStaleStatus && !hasLiveSignal
-  const offlineLastActive =
+  const lastActiveMs =
     parseTimestamp(status?.lastSeen) ||
     parseTimestamp(status?.receivedAt) ||
     parseTimestamp(status?.timestamp)
-  const offlineTooltip = shouldShowOffline ? formatLastActiveTooltip(offlineLastActive, now) : undefined
+  const idleTooltip =
+    !isCoding && typeof lastActiveMs === "number"
+      ? formatLastActiveTooltip(lastActiveMs, now)
+      : undefined
   const idleText = shouldShowOffline
     ? "Offline"
     : shouldShowDeepIdle
@@ -739,14 +742,16 @@ export default function DevPresence() {
       alt={editorIcon.alt}
       width={20}
       height={20}
-      className="rounded-sm"
+      className="shrink-0 rounded-sm"
     />
   ) : (
-    getIdleIcon(localHour)
+    <span className="flex size-5 shrink-0 items-center justify-center [&>svg]:size-[14px]">
+      {getIdleIcon(localHour)}
+    </span>
   )
 
   return (
-    <div className="inline-flex items-end gap-2 text-sm text-text-secondary">
+    <div className="inline-flex items-center gap-2 text-sm text-text-secondary">
       {icon}
       {isCoding ? (
         <span>
@@ -772,7 +777,10 @@ export default function DevPresence() {
           )}
         </span>
       ) : (
-        <span title={offlineTooltip} className={shouldShowOffline ? "cursor-help" : undefined}>
+        <span
+          title={idleTooltip}
+          className={idleTooltip ? "cursor-help" : undefined}
+        >
           {idleText}
         </span>
       )}
