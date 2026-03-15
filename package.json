@@ -26,6 +26,7 @@
     "react-dom": "19.2.3",
     "react-github-calendar": "^5.0.4",
     "react-tooltip": "^5.30.0",
+    "socket.io-client": "^4.8.3",
     "tailwind-merge": "^3.4.0",
     "three": "^0.182.0",
     "vaul": "^1.1.2"

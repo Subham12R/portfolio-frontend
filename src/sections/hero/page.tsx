@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { GitHubCalendar } from "react-github-calendar";
 import { Tooltip } from "react-tooltip";
-import { Clock3, Map, MapPin, XCircle } from "lucide-react";
+import { Map, MapPin, XCircle } from "lucide-react";
 
 import { MailCheckIcon } from "@/components/ui/mail-check";
 import { GithubIcon } from "@/components/ui/github";
@@ -21,6 +21,9 @@ import { useTheme } from "next-themes";
 import profileBanner from "../../../public/images/profile/banner.gif";
 import profileIcon from "../../../public/images/profile/pfp.jpeg";
 import { XIcon } from "@/components/ui/x";
+import DevPresence from "@/components/ui/DevPresence";
+import SpotifyNowPlaying from "@/components/ui/SpotifyNowPlaying";
+import TotalCodingTime from "@/components/ui/TotalCodingTime";
 
 function formatDate(date: string) {
   const d = new Date(date);
@@ -44,8 +47,11 @@ export const Hero = () => {
     siteConfig;
   const { resolvedTheme } = useTheme();
 
-  // Prevent hydration mismatch by waiting for mount
-  useEffect(() => setMounted(true), []);
+  // Prevent hydration mismatch by waiting for first animation frame on client
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   // Dynamic block size based on screen width
   useEffect(() => {
@@ -128,14 +134,14 @@ export const Hero = () => {
         <div className="w-full py-5">
           {/* Hero Content */}
           <div className="flex flex-col justify-center items-start text-start mt-8">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full mb-8">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full ml-1 mb-8">
               <div className="flex flex-col lg:flex-row items-start lg:items-end justify-center ">
                 <Image
                   src={profileIcon}
                   alt={name}
                   width={100}
                   height={100}
-                  className="relative z-20 -mt-10 md:-mt-20 mb-4 md:mb-0 md:mr-4 h-20 w-20 aspect-square overflow-hidden object-cover border-2  rounded-[9999px]"
+                  className="relative z-20 -mt-10 md:-mt-20 mb-4 md:mb-0 md:mr-4 h-20 w-20 aspect-square overflow-hidden object-cover border-2  rounded-xl outline-2 outline-offset-2 outline-border-primary"
                   priority
                 />
                 <div>
@@ -181,6 +187,14 @@ export const Hero = () => {
                 <span>{location}</span>
               </span>
             </ScrollRevealText>
+
+            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto]">
+              <div className="min-w-0 rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:rounded-r-none">
+                <DevPresence />
+              </div>
+              <SpotifyNowPlaying className="min-w-0 w-full rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:w-auto md:max-w-[520px] " />
+              
+            </div>
           </div>
 
           {/* Social Links */}

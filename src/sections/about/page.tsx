@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
@@ -14,6 +13,9 @@ import Activities from "@/components/cards/activities";
 import { GithubIcon } from "@/components/ui/github";
 import { LinkedinIcon } from "@/components/ui/linkedin";
 import { MailCheckIcon } from "@/components/ui/mail-check";
+import { TwitterIcon } from "@/components/ui/twitter";
+import { YoutubeIcon } from "@/components/ui/youtube";
+import { DiscordIcon } from "@/components/ui/discord";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,7 +122,7 @@ export const About = () => {
           <div className="md:col-span-3 flex flex-col justify-start items-start space-y-6">
             <div className="text-lg md:text-xl leading-relaxed">
               <ScrollRevealText as="p" className="mb-6">
-                I'm {siteConfig.name}, a B.Tech student and developer from{" "}
+                I&apos;m {siteConfig.name}, a B.Tech student and developer from{" "}
                 {siteConfig.location.split(",")[0]}.
               </ScrollRevealText>
               <ScrollRevealText as="p" className="mb-6">
@@ -129,7 +131,7 @@ export const About = () => {
                 and developer tooling.
               </ScrollRevealText>
               <ScrollRevealText as="p">
-                I enjoy turning ideas into practical solutions—whether it's
+                I enjoy turning ideas into practical solutions—whether it&apos;s
                 experimenting with visual tools, solving algorithmic problems,
                 or contributing to larger technical projects.
               </ScrollRevealText>
@@ -137,7 +139,7 @@ export const About = () => {
 
             {/* Links Section */}
             <div className="pt-6 mt-2">
-              <div className="flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm tracking-wider uppercase">
+              <div className="flex flex-wrap gap-x-2 gap-y-3 font-mono text-sm tracking-wider uppercase">
                 <a
                   href={socials.github.url}
                   target="_blank"
@@ -161,6 +163,40 @@ export const About = () => {
                     className="text-text-muted group-hover:text-blue-400 transition-colors duration-200"
                   />
                 </a>
+
+                <a
+                  href={socials.twitter.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center space-x-1 text-text-muted hover:text-blue-400 transition-colors duration-200"
+                >
+                  <TwitterIcon
+                    size={24}
+                    className="text-text-muted group-hover:text-blue-400 transition-colors duration-200"
+                  />
+                </a>
+
+                <a
+                  href={socials.youtube.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center space-x-1 text-text-muted hover:text-red-400 transition-colors duration-200"
+                >
+                  <YoutubeIcon
+                    size={24}
+                    className="text-text-muted group-hover:text-red-400 transition-colors duration-200"
+                  />
+                </a>
+
+                <span
+                  title={socials.discord.display}
+                  className="group flex items-center space-x-1 text-text-muted hover:text-indigo-400 transition-colors duration-200"
+                >
+                  <DiscordIcon
+                    size={24}
+                    className="text-text-muted group-hover:text-indigo-400 transition-colors duration-200"
+                  />
+                </span>
 
                 <a
                   href={`mailto:${email}`}
