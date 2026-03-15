@@ -3,8 +3,11 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { io } from "socket.io-client"
+import { Tooltip } from "react-tooltip"
 import { Coffee, Dumbbell, Moon, Tv } from "lucide-react"
 import { siteConfig } from "@/data/site.config"
+
+const IDLE_TOOLTIP_ID = "devpresence-idle-tooltip"
 
 const DEVSTATS_API = "https://devstats-zruar.ondigitalocean.app"
 const LOCAL_AGENT_API = "http://127.0.0.1:7337/status"
@@ -777,12 +780,22 @@ export default function DevPresence() {
           )}
         </span>
       ) : (
-        <span
-          title={idleTooltip}
-          className={idleTooltip ? "cursor-help" : undefined}
-        >
-          {idleText}
-        </span>
+        <>
+          <span
+            data-tooltip-id={idleTooltip ? IDLE_TOOLTIP_ID : undefined}
+            data-tooltip-content={idleTooltip ?? undefined}
+            className={idleTooltip ? "cursor-help" : undefined}
+          >
+            {idleText}
+          </span>
+          {idleTooltip && (
+            <Tooltip
+              id={IDLE_TOOLTIP_ID}
+              place="top"
+              className="max-w-xs! rounded-md! px-3! py-2! text-sm! font-medium!"
+            />
+          )}
+        </>
       )}
     </div>
   )
