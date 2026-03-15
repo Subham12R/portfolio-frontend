@@ -242,12 +242,12 @@ export default function SpotifyNowPlaying({
           target="_blank"
           rel="noopener noreferrer"
           className="min-w-0 flex-1 whitespace-nowrap hover:underline"
-          title={nowPlaying.track}
+          title={nowPlaying.track || undefined}
         >
           {content}
         </a>
       ) : (
-        <div className="min-w-0 flex-1 whitespace-nowrap" title={nowPlaying.track}>
+        <div className="min-w-0 flex-1 whitespace-nowrap" title={nowPlaying.track || undefined}>
           {content}
         </div>
       )}
