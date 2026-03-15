@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
+import { useEffect } from "react";
 
 type ContactModalProps = {
-  open: boolean
-  onClose: () => void
-}
+  open: boolean;
+  onClose: () => void;
+};
 
 export default function ContactModal({ open, onClose }: ContactModalProps) {
   // Prevent background scroll
   useEffect(() => {
-    if (open) document.body.style.overflow = "hidden"
-    else document.body.style.overflow = ""
+    if (open) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [open])
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
-  if (!open) return null
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -28,7 +28,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative z-50 w-full max-w-3xl rounded-2xl border border-border-primary bg-bg-elevated shadow-2xl shadow-shadow-strong">
+      <div className="relative z-50 w-full max-w-4xl rounded-2xl border border-border-primary bg-bg-elevated shadow-2xl shadow-shadow-strong">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-primary px-6 py-4">
           <h2 className="text-lg font-semibold text-text-primary">
@@ -54,5 +54,5 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

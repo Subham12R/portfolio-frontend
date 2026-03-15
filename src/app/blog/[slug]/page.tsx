@@ -1,28 +1,28 @@
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
-import { getPostBySlug, blogPosts, siteConfig } from '@/data'
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { getPostBySlug, blogPosts, siteConfig } from "@/data";
 
 interface BlogPostPageProps {
   params: Promise<{
-    slug: string
-  }>
+    slug: string;
+  }>;
 }
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const { slug } = await params
-  const post = getPostBySlug(slug)
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return {
-      title: 'Post Not Found',
-    }
+      title: "Post Not Found",
+    };
   }
 
   return {
@@ -45,21 +45,20 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       description: post.excerpt,
       images: [post.coverImage || "/icon.png"],
     },
-  }
+  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params
-  const post = getPostBySlug(slug)
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <article className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
-
         {/* Back Link */}
         <Link
           href="/blog"
@@ -103,27 +102,49 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Content */}
         {post.content ? (
           <div className="prose prose-invert prose-zinc max-w-none prose-headings:text-text-primary prose-p:text-text-secondary prose-strong:text-text-primary prose-li:text-text-secondary prose-em:text-text-tertiary">
-            {post.content.split('\n\n').map((block, index) => {
-              if (block.startsWith('## ')) {
-                return <h2 key={index} className="text-2xl font-semibold mt-10 mb-4">{block.replace('## ', '')}</h2>
+            {post.content.split("\n\n").map((block, index) => {
+              if (block.startsWith("## ")) {
+                return (
+                  <h2 key={index} className="text-2xl font-semibold mt-10 mb-4">
+                    {block.replace("## ", "")}
+                  </h2>
+                );
               }
-              if (block.startsWith('**') && block.endsWith('**')) {
-                return <p key={index} className="font-semibold text-text-primary">{block.replace(/\*\*/g, '')}</p>
+              if (block.startsWith("**") && block.endsWith("**")) {
+                return (
+                  <p key={index} className="font-semibold text-text-primary">
+                    {block.replace(/\*\*/g, "")}
+                  </p>
+                );
               }
-              if (block.startsWith('- ')) {
-                const items = block.split('\n').filter(line => line.startsWith('- '))
+              if (block.startsWith("- ")) {
+                const items = block
+                  .split("\n")
+                  .filter((line) => line.startsWith("- "));
                 return (
                   <ul key={index} className="list-disc pl-6 space-y-1 my-4">
                     {items.map((item, i) => (
-                      <li key={i}>{item.replace('- ', '')}</li>
+                      <li key={i}>{item.replace("- ", "")}</li>
                     ))}
                   </ul>
-                )
+                );
               }
-              if (block.startsWith('*') && block.endsWith('*') && !block.startsWith('**')) {
-                return <p key={index} className="italic text-text-tertiary">{block.replace(/^\*|\*$/g, '')}</p>
+              if (
+                block.startsWith("*") &&
+                block.endsWith("*") &&
+                !block.startsWith("**")
+              ) {
+                return (
+                  <p key={index} className="italic text-text-tertiary">
+                    {block.replace(/^\*|\*$/g, "")}
+                  </p>
+                );
               }
-              return <p key={index} className="my-4 leading-relaxed">{block}</p>
+              return (
+                <p key={index} className="my-4 leading-relaxed">
+                  {block}
+                </p>
+              );
             })}
           </div>
         ) : (
@@ -143,20 +164,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span className="text-sm font-medium">All posts</span>
             </Link>
 
-            <span className="text-sm text-text-muted">© {new Date().getFullYear()} {siteConfig.name}</span>
+            <span className="text-sm text-text-muted">
+              © {new Date().getFullYear()} {siteConfig.name}
+            </span>
           </div>
         </footer>
-
       </article>
     </main>
-  )
+  );
 }
 
 function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 }

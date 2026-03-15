@@ -1,26 +1,38 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import ContactModal from "@/components/layout/contactmodal"
-import { ScrollRevealText } from "@/components/ui/ScrollRevealText"
-import { siteConfig } from "@/data"
-import { ArrowRight } from "lucide-react"
+import { useState } from "react";
+import ContactModal from "@/components/layout/contactmodal";
+import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
+import { siteConfig } from "@/data";
+import { ArrowRight } from "lucide-react";
 
 export default function ContactCTA() {
-  const [open, setOpen] = useState(false)
-  const section = siteConfig.sections.contact
+  const [open, setOpen] = useState(false);
+  const section = siteConfig.sections.contact;
 
   return (
-    <section id={section.id} className="w-full flex flex-col justify-center items-center  py-20 px-4 lg:px-0 ">
+    <section
+      id={section.id}
+      className="w-full flex flex-col justify-center items-center  py-20 px-4 lg:px-0 "
+    >
       <div className="flex flex-col justify-center items-center w-full max-w-4xl text-center bg-bg-elevated py-12 px-6 rounded-3xl border border-border-primary">
-
-        <ScrollRevealText as="h2" className="text-3xl md:text-4xl font-semibold mb-4" start="top 90%" end="top 70%">
+        <ScrollRevealText
+          as="h2"
+          className="text-3xl md:text-4xl font-semibold mb-4"
+          start="top 90%"
+          end="top 70%"
+        >
           Let's work together
         </ScrollRevealText>
 
-        <ScrollRevealText as="p" className="mb-8 max-w-lg text-center leading-relaxed" start="top 85%" end="top 65%">
-          Have a project in mind or want to discuss opportunities?
-          I'm always open to new conversations and collaborations.
+        <ScrollRevealText
+          as="p"
+          className="mb-8 max-w-lg text-center leading-relaxed"
+          start="top 85%"
+          end="top 65%"
+        >
+          Have a project in mind or want to discuss opportunities? I'm always
+          open to new conversations and collaborations.
         </ScrollRevealText>
 
         <div className="flex flex-col sm:flex-row gap-4">
@@ -29,7 +41,10 @@ export default function ContactCTA() {
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-text-primary text-text-inverse px-6 py-3 font-medium hover:opacity-90 transition-all duration-200"
           >
             Schedule a Call
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
+            <ArrowRight
+              size={16}
+              className="group-hover:translate-x-1 transition-transform duration-200"
+            />
           </button>
 
           <a
@@ -41,7 +56,6 @@ export default function ContactCTA() {
         </div>
 
         <ContactModal open={open} onClose={() => setOpen(false)} />
-
       </div>
 
       <ScrollRevealText
@@ -50,8 +64,19 @@ export default function ContactCTA() {
         start="top 95%"
         end="top 75%"
       >
-        This portfolio is built and developed by <span className="text-text-secondary">{siteConfig.name}</span>. I have taken inspirations from various other developers and designers. If you like the design and want to build something similar, feel free to check out the source code which is open-sourced on <a href="https://github.com/Subham12R/portfolio-frontend" className="underline hover:text-zinc-900 dark:hover:text-white">GitHub</a>.
+        This portfolio is built and developed by{" "}
+        <span className="text-text-secondary">{siteConfig.name}</span>. I have
+        taken inspirations from various other developers and designers. If you
+        like the design and want to build something similar, feel free to check
+        out the source code which is open-sourced on{" "}
+        <a
+          href="https://github.com/Subham12R/portfolio-frontend"
+          className="underline hover:text-zinc-900 dark:hover:text-white"
+        >
+          GitHub
+        </a>
+        .
       </ScrollRevealText>
     </section>
-  )
+  );
 }

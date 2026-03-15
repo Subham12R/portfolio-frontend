@@ -1,19 +1,30 @@
-import Link from 'next/link'
-import { siteConfig } from '@/data'
+import Link from "next/link";
+import { siteConfig } from "@/data";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
-  const { socials } = siteConfig
+  const currentYear = new Date().getFullYear();
+  const { socials } = siteConfig;
 
   return (
     <footer className="w-full flex justify-center items-center bg-bg-primary pb-12 pt-8 px-4 lg:px-0">
       <div className="w-full max-w-4xl pt-8 pb-2 px-4">
-
         {/* Main Row - DMCA left, Links right */}
         <div className="flex justify-between items-center mb-2">
           {/* DMCA Badge - Left */}
-  <a href="//www.dmca.com/Protection/Status.aspx?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca" title="DMCA.com Protection Status" className="dmca-badge size-14 flex justify-center items-center"> <img src ="https://images.dmca.com/Badges/dmca_protected_13_120.png?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
-
+          <a
+            href="//www.dmca.com/Protection/Status.aspx?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
+            title="DMCA.com Protection Status"
+            className="dmca-badge size-14 flex justify-center items-center"
+          >
+            {" "}
+            <img
+              src="https://images.dmca.com/Badges/dmca_protected_13_120.png?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
+              alt="DMCA.com Protection Status"
+            />
+          </a>{" "}
+          <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js">
+            {" "}
+          </script>
           {/* Links - Right */}
           <div className="flex items-center gap-4 md:gap-6 text-sm text-text-secondary">
             <Link
@@ -52,16 +63,15 @@ const Footer = () => {
         {/* Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-1 md:gap-2 text-sm text-text-muted border-t border-border-primary pt-4">
           <span>
-            Designed & built by{' '}
+            Designed & built by{" "}
             <span className="text-text-secondary">{siteConfig.name}</span>
           </span>
           <span className="hidden md:inline text-border-primary">·</span>
           <span>&copy; {currentYear} All rights reserved</span>
         </div>
-
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

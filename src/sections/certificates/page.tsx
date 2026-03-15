@@ -1,16 +1,18 @@
-import Image from "next/image"
-import { ExternalLink } from "lucide-react"
-import { siteConfig } from "@/data"
-import { fetchCertificates } from "@/lib/api/server"
+import Image from "next/image";
+import { ExternalLink } from "lucide-react";
+import { siteConfig } from "@/data";
+import { fetchCertificates } from "@/lib/api/server";
 
 const CertificatesPage = async () => {
-  const section = siteConfig.sections.certificates
-  const certificates = await fetchCertificates()
+  const section = siteConfig.sections.certificates;
+  const certificates = await fetchCertificates();
 
   return (
-    <section id={section.id} className="w-full flex justify-center items-center pb-20 px-4 lg:px-0">
+    <section
+      id={section.id}
+      className="w-full flex justify-center items-center pb-20 px-4 lg:px-0"
+    >
       <div className="max-w-4xl w-full flex flex-col  h-full">
-
         {/* HEADER */}
         <div className="flex justify-start items-start pt-16 pb-5 border-b border-border-accent mb-8">
           <span className="text-text-secondary text-xl font-mono leading-tight">
@@ -64,10 +66,9 @@ const CertificatesPage = async () => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default CertificatesPage
+export default CertificatesPage;

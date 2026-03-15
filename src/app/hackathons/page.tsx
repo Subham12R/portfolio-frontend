@@ -1,23 +1,23 @@
-import { GalleryGrid } from '@/components/gallery/GalleryGrid'
-import { hackathonImages } from '@/data/gallery'
-import { siteConfig } from '@/data'
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { GalleryGrid } from "@/components/gallery/GalleryGrid";
+import { hackathonImages } from "@/data/gallery";
+import { siteConfig } from "@/data";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export const metadata = {
-  title: 'Hackathons',
-  description: 'Photos from hackathons and coding events',
+  title: "Hackathons",
+  description: "Photos from hackathons and coding events",
   alternates: {
-    canonical: '/hackathons',
+    canonical: "/hackathons",
   },
   openGraph: {
     title: `Hackathons | ${siteConfig.name}`,
-    description: 'Photos from hackathons and coding events',
+    description: "Photos from hackathons and coding events",
     url: `${siteConfig.url}/hackathons`,
-    type: 'website',
-    images: ['/icon.png'],
+    type: "website",
+    images: ["/icon.png"],
   },
-}
+};
 
 export default function HackathonsPage() {
   return (
@@ -46,5 +46,5 @@ export default function HackathonsPage() {
         <GalleryGrid images={hackathonImages} />
       </div>
     </section>
-  )
+  );
 }

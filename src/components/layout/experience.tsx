@@ -1,17 +1,17 @@
-'use client'
-import { useRef, useState, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import Image from "next/image"
-import { ChevronDown, Link, LinkIcon } from "lucide-react"
-import type { Experience } from "@/data/experience"
-import { ScrollRevealText } from "@/components/ui/ScrollRevealText"
-import { getTechIcon } from "@/data/tech-icons"
+"use client";
+import { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import { ChevronDown, Link, LinkIcon } from "lucide-react";
+import type { Experience } from "@/data/experience";
+import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
+import { getTechIcon } from "@/data/tech-icons";
 
 interface ExperienceCardProps {
-  experience: Experience
-  defaultExpanded?: boolean
-  isLast?: boolean
+  experience: Experience;
+  defaultExpanded?: boolean;
+  isLast?: boolean;
 }
 
 // Logo outline color mapping
@@ -22,33 +22,37 @@ const logoColorMap: Record<string, string> = {
   purple: "outline-purple-500/40",
   red: "outline-red-500/40",
   white: "outline-white/40",
-}
+};
 
-export function ExperienceCard({ experience, defaultExpanded = false, isLast = false }: ExperienceCardProps) {
-  const [open, setOpen] = useState(defaultExpanded)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const iconRef = useRef<HTMLDivElement>(null)
+export function ExperienceCard({
+  experience,
+  defaultExpanded = false,
+  isLast = false,
+}: ExperienceCardProps) {
+  const [open, setOpen] = useState(defaultExpanded);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!contentRef.current || !iconRef.current) return
+    if (!contentRef.current || !iconRef.current) return;
     if (defaultExpanded) {
       gsap.set(contentRef.current, {
         height: "auto",
         opacity: 1,
-      })
+      });
       gsap.set(iconRef.current, {
         rotate: 180,
-      })
+      });
     } else {
       gsap.set(contentRef.current, {
         height: 0,
         opacity: 0,
-      })
+      });
     }
-  }, [defaultExpanded])
+  }, [defaultExpanded]);
 
   const toggle = () => {
-    if (!contentRef.current || !iconRef.current) return
+    if (!contentRef.current || !iconRef.current) return;
 
     if (!open) {
       gsap.to(contentRef.current, {
@@ -57,29 +61,30 @@ export function ExperienceCard({ experience, defaultExpanded = false, isLast = f
         duration: 0.5,
         ease: "power2.out",
         onComplete: () => ScrollTrigger.refresh(),
-      })
+      });
       gsap.to(iconRef.current, {
         rotate: 180,
         duration: 0.4,
         ease: "power2.out",
-      })
+      });
     } else {
       gsap.to(contentRef.current, {
         height: 0,
         opacity: 0,
         duration: 0.4,
         ease: "power2.inOut",
-      })
+      });
       gsap.to(iconRef.current, {
         rotate: 0,
         duration: 0.3,
         ease: "power2.inOut",
-      })
+      });
     }
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
-  const outlineColor = logoColorMap[experience.logoColor || "white"] || "outline-white/40"
+  const outlineColor =
+    logoColorMap[experience.logoColor || "white"] || "outline-white/40";
 
   return (
     <div className="w-full rounded-2xl py-2 relative">
@@ -110,7 +115,6 @@ export function ExperienceCard({ experience, defaultExpanded = false, isLast = f
           </div>
         </div>
 
-
         <div className="flex items-center gap-1">
           {experience.links?.company && (
             <a
@@ -140,23 +144,27 @@ export function ExperienceCard({ experience, defaultExpanded = false, isLast = f
       {/* EXPANDABLE CONTENT */}
       <div ref={contentRef} className="overflow-hidden ml-15">
         <div className="pt-4 pb-1 px-1">
-          <ScrollRevealText as="p" className="text-sm leading-relaxed mb-4 max-w-4xl">
+          <ScrollRevealText
+            as="p"
+            className="text-sm leading-relaxed mb-4 max-w-4xl"
+          >
             {experience.description}
           </ScrollRevealText>
 
           {/* RESPONSIBILITIES (if available) */}
-          {experience.responsibilities && experience.responsibilities.length > 0 && (
-            <ul className="text-sm text-text-secondary leading-relaxed mb-4 space-y-1 list-disc list-inside">
-              {experience.responsibilities.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          )}
+          {experience.responsibilities &&
+            experience.responsibilities.length > 0 && (
+              <ul className="text-sm text-text-secondary leading-relaxed mb-4 space-y-1 list-disc list-inside">
+                {experience.responsibilities.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            )}
 
           {/* TECH STACK - Icons */}
           <div className="flex flex-wrap gap-3 p-1 -m-1">
             {experience.techStack.map((tech) => {
-              const iconPath = getTechIcon(tech)
+              const iconPath = getTechIcon(tech);
               return iconPath ? (
                 <div
                   key={tech}
@@ -178,11 +186,11 @@ export function ExperienceCard({ experience, defaultExpanded = false, isLast = f
                 >
                   {tech}
                 </span>
-              )
+              );
             })}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

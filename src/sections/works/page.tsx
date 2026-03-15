@@ -1,23 +1,28 @@
-import { ExperienceCard } from '@/components/layout/experience'
-import { siteConfig } from '@/data'
-import { fetchWorkExperiences } from '@/lib/api/server'
+import { ExperienceCard } from "@/components/layout/experience";
+import { siteConfig } from "@/data";
+import { fetchWorkExperiences } from "@/lib/api/server";
 
 const Work = async () => {
-  const section = siteConfig.sections.experience
-  const experiences = await fetchWorkExperiences()
+  const section = siteConfig.sections.experience;
+  const experiences = await fetchWorkExperiences();
 
   return (
-    <section id={section.id} className='w-full flex justify-center items-center px-4 lg:px-0'>
-      <div className='max-w-4xl w-full flex flex-col  h-full'>
+    <section
+      id={section.id}
+      className="w-full flex justify-center items-center px-4 lg:px-0"
+    >
+      <div className="max-w-4xl w-full flex flex-col  h-full">
         {/* SECTION HEADER */}
-        <div className='flex justify-start items-start pt-16 pb-5 border-b border-border-accent space-y-2 mb-8'>
-          <span className='text-start text-text-secondary text-xl font-mono leading-tight'>
+        <div className="flex justify-start items-start pt-16 pb-5 border-b border-border-accent space-y-2 mb-8">
+          <span className="text-start text-text-secondary text-xl font-mono leading-tight">
             {section.number}
           </span>
-          <h1 className='text-4xl font-semibold text-text-primary text-start'>{section.title}.</h1>
+          <h1 className="text-4xl font-semibold text-text-primary text-start">
+            {section.title}.
+          </h1>
         </div>
 
-        <div className='flex flex-col gap-4 pb-16'>
+        <div className="flex flex-col gap-4 pb-16">
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={experience.id}
@@ -29,7 +34,7 @@ const Work = async () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Work
+export default Work;

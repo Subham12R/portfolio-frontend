@@ -18,9 +18,11 @@ const Tech = () => {
   ];
 
   return (
-    <section id={section.id} className="w-full flex justify-center items-center pb-10 px-4 lg:px-0 overflow-hidden">
+    <section
+      id={section.id}
+      className="w-full flex justify-center items-center pb-10 px-4 lg:px-0 overflow-hidden"
+    >
       <div className="max-w-4xl w-full flex flex-col h-full">
-
         {/* Header */}
 
         <h1 className="text-3xl  mb-4 tracking-tighter font-bold">
@@ -31,7 +33,8 @@ const Tech = () => {
           <div className="relative flex items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-md bg-bg-elevated/80 border border-border-primary backdrop-blur-md w-full">
             {allTech.map((item, index) => {
               const isHovered = hoveredIndex === index;
-              const isNeighbor = hoveredIndex !== null && Math.abs(hoveredIndex - index) === 1;
+              const isNeighbor =
+                hoveredIndex !== null && Math.abs(hoveredIndex - index) === 1;
 
               return (
                 <div
@@ -43,7 +46,9 @@ const Tech = () => {
                   {/* Tooltip */}
                   <div
                     className={`absolute -top-15 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap transition-all duration-200 ${
-                      isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+                      isHovered
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-2 pointer-events-none"
                     }`}
                   >
                     {item.name}
@@ -55,8 +60,8 @@ const Tech = () => {
                       isHovered
                         ? "-translate-y-4 scale-125"
                         : isNeighbor
-                        ? "-translate-y-1 scale-110"
-                        : "scale-100"
+                          ? "-translate-y-1 scale-110"
+                          : "scale-100"
                     }`}
                   >
                     <Image
@@ -71,7 +76,6 @@ const Tech = () => {
             })}
           </div>
         </div>
-
       </div>
     </section>
   );

@@ -1,40 +1,44 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import { Drawer } from "vaul"
-import { X, Play } from "lucide-react"
-import type { Project } from "@/data/project"
-import { getTechIcon } from "@/data/tech-icons"
-import Image from "next/image"
+import { useRef, useState } from "react";
+import { Drawer } from "vaul";
+import { X, Play } from "lucide-react";
+import type { Project } from "@/data/project";
+import { getTechIcon } from "@/data/tech-icons";
+import Image from "next/image";
 
 interface ProjectDrawerProps {
-  project: Project | null
-  isOpen: boolean
-  onClose: () => void
+  project: Project | null;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
-  const [playing, setPlaying] = useState(false)
-  const scrollRef = useRef<HTMLDivElement>(null)
+export default function ProjectDrawer({
+  project,
+  isOpen,
+  onClose,
+}: ProjectDrawerProps) {
+  const [playing, setPlaying] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleWheelCapture = (event: React.WheelEvent<HTMLDivElement>) => {
-    const container = scrollRef.current
-    if (!container) return
+    const container = scrollRef.current;
+    if (!container) return;
 
     // Keep wheel scrolling bound to the drawer content instead of bubbling to drag handlers.
-    event.stopPropagation()
-    container.scrollTop += event.deltaY
-  }
+    event.stopPropagation();
+    container.scrollTop += event.deltaY;
+  };
 
   // Reset playing state when drawer closes
   const handleOpenChange = (open: boolean) => {
     if (!open) {
-      setPlaying(false)
-      onClose()
+      setPlaying(false);
+      onClose();
     }
-  }
+  };
 
-  if (!project) return null
+  if (!project) return null;
 
   return (
     <Drawer.Root open={isOpen} onOpenChange={handleOpenChange} modal>
@@ -77,7 +81,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                 ) : project.bannerImage ? (
                   <button
                     onClick={() => project.youtubeId && setPlaying(true)}
-                    className={`relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-elevated shadow-2xl group/video ${project.youtubeId ? 'cursor-pointer' : 'cursor-default'}`}
+                    className={`relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-elevated shadow-2xl group/video ${project.youtubeId ? "cursor-pointer" : "cursor-default"}`}
                   >
                     <Image
                       src={project.bannerImage}
@@ -88,7 +92,11 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                     {project.youtubeId && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
                         <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center">
-                          <Play size={36} className="text-black ml-1" fill="black" />
+                          <Play
+                            size={36}
+                            className="text-black ml-1"
+                            fill="black"
+                          />
                         </div>
                       </div>
                     )}
@@ -110,15 +118,20 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                       {project.numberId}
                     </span>
                     {project.status && (
-                      <span className={`text-xs px-3 py-1 rounded-full border ${
-                        project.status === "maintained"
-                          ? "border-green-500/30 text-green-400"
+                      <span
+                        className={`text-xs px-3 py-1 rounded-full border ${
+                          project.status === "maintained"
+                            ? "border-green-500/30 text-green-400"
+                            : project.status === "in-progress"
+                              ? "border-amber-500/30 text-amber-400"
+                              : "border-border-secondary text-text-tertiary"
+                        }`}
+                      >
+                        {project.status === "maintained"
+                          ? "Actively Maintained"
                           : project.status === "in-progress"
-                          ? "border-amber-500/30 text-amber-400"
-                          : "border-border-secondary text-text-tertiary"
-                      }`}>
-                        {project.status === "maintained" ? "Actively Maintained" :
-                         project.status === "in-progress" ? "In Progress" : "Completed"}
+                            ? "In Progress"
+                            : "Completed"}
                       </span>
                     )}
                   </div>
@@ -131,8 +144,8 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                   {/* Date */}
                   <p className="text-sm text-text-muted mb-6">
                     {project.completedDate
-                      ? project.completedDate.split('-').reverse().join('.')
-                      : 'Present'}
+                      ? project.completedDate.split("-").reverse().join(".")
+                      : "Present"}
                   </p>
 
                   {/* Description */}
@@ -143,12 +156,9 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                   {/* Tech Stack */}
                   <div className="flex flex-wrap items-center gap-4">
                     {project.tags.map((tag) => {
-                      const iconPath = getTechIcon(tag)
+                      const iconPath = getTechIcon(tag);
                       return (
-                        <div
-                          key={tag}
-                          className="group/icon relative"
-                        >
+                        <div key={tag} className="group/icon relative">
                           {iconPath ? (
                             <Image
                               src={iconPath}
@@ -167,7 +177,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                             {tag}
                           </div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
@@ -179,7 +189,10 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                   </h3>
                   <ul className="space-y-3">
                     {project.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3 text-text-secondary leading-relaxed">
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 text-text-secondary leading-relaxed"
+                      >
                         <span className="text-text-muted mt-1">•</span>
                         {feature}
                       </li>
@@ -192,5 +205,5 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
         </Drawer.Content>
       </Drawer.Portal>
     </Drawer.Root>
-  )
+  );
 }

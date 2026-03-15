@@ -1,20 +1,19 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import { ScrollRevealText } from '@/components/ui/ScrollRevealText'
-import { AnimatedBlogGrid } from './AnimatedBlogGrid'
-import type { BlogPost } from '@/data/blog'
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
+import { AnimatedBlogGrid } from "./AnimatedBlogGrid";
+import type { BlogPost } from "@/data/blog";
 
 interface BlogPageContentProps {
-  posts: BlogPost[]
+  posts: BlogPost[];
 }
 
 export function BlogPageContent({ posts }: BlogPageContentProps) {
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
-
         {/* Back Link */}
         <Link
           href="/"
@@ -40,7 +39,8 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
             start="top 85%"
             end="top 55%"
           >
-            Thoughts on software development, design patterns, and the craft of building things that work well.
+            Thoughts on software development, design patterns, and the craft of
+            building things that work well.
           </ScrollRevealText>
         </header>
 
@@ -52,8 +52,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
             <p className="text-text-muted">No posts yet. Check back soon.</p>
           </div>
         )}
-
       </div>
     </main>
-  )
+  );
 }

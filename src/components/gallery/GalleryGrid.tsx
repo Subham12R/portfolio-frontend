@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { X } from 'lucide-react'
-import type { GalleryImage } from '@/data/gallery'
+import { useState } from "react";
+import Image from "next/image";
+import { X } from "lucide-react";
+import type { GalleryImage } from "@/data/gallery";
 
 interface GalleryGridProps {
-  images: GalleryImage[]
+  images: GalleryImage[];
 }
 
 export function GalleryGrid({ images }: GalleryGridProps) {
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   return (
     <>
@@ -60,5 +60,5 @@ export function GalleryGrid({ images }: GalleryGridProps) {
         </div>
       )}
     </>
-  )
+  );
 }

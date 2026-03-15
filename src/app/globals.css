@@ -11,7 +11,7 @@
 
   /* Backgrounds */
   --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f9fa;
+  --color-bg-secondary: #ffffff;
   --color-bg-tertiary: #f1f3f5;
   --color-bg-card: #ffffff;
   --color-bg-elevated: #f1f3f5;
@@ -50,7 +50,9 @@
   --color-selection-text: #111111;
 
   /* Skills card inset shadow */
-  --skills-card-shadow: inset 0 4px 24px 0 rgba(0, 0, 0, 0.04), inset 0 -4px 24px 0 rgba(0, 0, 0, 0.02);
+  --skills-card-shadow:
+    inset 0 4px 24px 0 rgba(0, 0, 0, 0.04),
+    inset 0 -4px 24px 0 rgba(0, 0, 0, 0.02);
 
   /* Hover tint */
   --color-hover-tint: rgba(0, 0, 0, 0.05);
@@ -61,7 +63,7 @@
   color-scheme: dark;
 
   /* Backgrounds */
-  --color-bg-primary: #000000;
+  --color-bg-primary: #0e0e0e;
   --color-bg-secondary: #0a0a0a;
   --color-bg-tertiary: #171717;
   --color-bg-card: #000000;
@@ -101,7 +103,9 @@
   --color-selection-text: #ffffff;
 
   /* Skills card inset shadow */
-  --skills-card-shadow: inset 0 4px 24px 0 rgba(255, 255, 255, 0.08), inset 0 -4px 24px 0 rgba(0, 0, 0, 0.6);
+  --skills-card-shadow:
+    inset 0 4px 24px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -4px 24px 0 rgba(0, 0, 0, 0.6);
 
   /* Hover tint */
   --color-hover-tint: rgba(255, 255, 255, 0.05);
@@ -121,6 +125,7 @@
   --radius-2xl: 5px;
   --radius-3xl: 5px;
   --radius-full: 5px;
+
 
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
@@ -160,7 +165,9 @@ body {
   font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Paragraphs use medium weight (not bold) */
@@ -188,7 +195,11 @@ section[id] {
 /* Smooth transitions for interactive elements */
 a,
 button {
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 /* Tech positioning utilities */
@@ -218,8 +229,12 @@ button {
 
 /* Scroll animation */
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-scroll {

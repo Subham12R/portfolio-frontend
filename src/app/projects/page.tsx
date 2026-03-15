@@ -1,37 +1,39 @@
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import { siteConfig } from '@/data'
-import { fetchProjects } from '@/lib/api/server'
-import PlainProjectCard from '@/components/projects/PlainProjectCard'
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { siteConfig } from "@/data";
+import { fetchProjects } from "@/lib/api/server";
+import PlainProjectCard from "@/components/projects/PlainProjectCard";
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
-  description: 'A collection of projects showcasing my work in web development.',
+  description:
+    "A collection of projects showcasing my work in web development.",
   alternates: {
-    canonical: '/projects',
+    canonical: "/projects",
   },
   openGraph: {
     title: `Projects | ${siteConfig.name}`,
-    description: 'A collection of projects showcasing my work in web development.',
+    description:
+      "A collection of projects showcasing my work in web development.",
     url: `${siteConfig.url}/projects`,
-    type: 'website',
-    images: ['/icon.png'],
+    type: "website",
+    images: ["/icon.png"],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: `Projects | ${siteConfig.name}`,
-    description: 'A collection of projects showcasing my work in web development.',
-    images: ['/icon.png'],
+    description:
+      "A collection of projects showcasing my work in web development.",
+    images: ["/icon.png"],
   },
-}
+};
 
 export default async function ProjectsPage() {
-  const projects = await fetchProjects()
+  const projects = await fetchProjects();
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
-
         {/* Back Link */}
         <Link
           href="/"
@@ -47,8 +49,9 @@ export default async function ProjectsPage() {
             Projects
           </h1>
           <p className="text-lg text-text-tertiary max-w-4xl leading-relaxed">
-            A collection of projects I&apos;ve built, from open source libraries to full-stack applications.
-            Each one represents a problem I wanted to solve or an idea I wanted to explore.
+            A collection of projects I&apos;ve built, from open source libraries
+            to full-stack applications. Each one represents a problem I wanted
+            to solve or an idea I wanted to explore.
           </p>
         </header>
 
@@ -58,8 +61,7 @@ export default async function ProjectsPage() {
             <PlainProjectCard key={project.id} project={project} />
           ))}
         </section>
-
       </div>
     </main>
-  )
+  );
 }
