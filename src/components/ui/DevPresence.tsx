@@ -680,7 +680,7 @@ export default function DevPresence() {
   const isExplicitIdle = /\b(idle|away|offline|afk)\b/.test(statusText)
   const isExplicitCoding = /\b(active|coding|online)\b/.test(statusText)
   const hasReliableLastSeen = typeof lastSeen === "number"
-  const idleFor = hasReliableLastSeen ? now - lastSeen : null
+  const idleFor = hasReliableLastSeen && typeof now === "number" ? now - lastSeen : null
   const seenRecently = idleFor !== null ? idleFor < 300_000 : false
   const hasAgentActiveDuration = typeof payloadDurationMs === "number" && payloadDurationMs > 0
   const hasLiveSignal =
