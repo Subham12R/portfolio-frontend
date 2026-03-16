@@ -3,10 +3,12 @@
 import { Clock3 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+const DEVSTATS_API =
+  process.env.NEXT_PUBLIC_DEVSTATS_API_URL || "https://devstats-zruar.ondigitalocean.app";
 const STATUS_SOURCES = [
-  "http://127.0.0.1:7337/status",
-  "https://devstats-zruar.ondigitalocean.app/status",
-];
+  `${DEVSTATS_API}/status`,
+  process.env.NEXT_PUBLIC_DEVSTATS_LOCAL_AGENT_URL,
+].filter((source): source is string => Boolean(source));
 
 type PresencePayload = {
   status?: string;

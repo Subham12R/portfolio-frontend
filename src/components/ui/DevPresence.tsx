@@ -8,9 +8,12 @@ import { Coffee, Dumbbell, Moon, Tv } from "lucide-react"
 import { siteConfig } from "@/data/site.config"
 
 const IDLE_TOOLTIP_ID = "devpresence-idle-tooltip"
+const RECENT_LIVE_SIGNAL_MS = 75_000
 
-const DEVSTATS_API = "https://devstats-zruar.ondigitalocean.app"
-const LOCAL_AGENT_API = "http://127.0.0.1:7337/status"
+const DEVSTATS_API =
+  process.env.NEXT_PUBLIC_DEVSTATS_API_URL || "https://devstats-zruar.ondigitalocean.app"
+const DEVSTATS_STATUS_API = `${DEVSTATS_API}/status`
+const LOCAL_AGENT_API = process.env.NEXT_PUBLIC_DEVSTATS_LOCAL_AGENT_URL
 const socket = io(DEVSTATS_API, { autoConnect: false })
 
 type PresenceStatus = {
@@ -493,12 +496,13 @@ export default function DevPresence() {
   const [status, setStatus] = useState<PresenceStatus | null>(null)
   const [now, setNow] = useState<number | null>(null)
   const [isSocketConnected, setIsSocketConnected] = useState(false)
-  const [hasSeenActivityEvent, setHasSeenActivityEvent] = useState(false)
+  const [lastLiveSignalAt, setLastLiveSignalAt] = useState<number | null>(null)
   const [localSessionStart, setLocalSessionStart] = useState<number | null>(null)
   const latestStatusRef = useRef<PresenceStatus | null>(null)
+  const lastLiveSignalRef = useRef<number | null>(null)
 
   useEffect(() => {
-    const isLikelyLivePayload = (data: PresenceStatus, currentTime: number) => {
+    const getPresenceState = (data: PresenceStatus, currentTime: number) => {
       const text = data.status?.toLowerCase() || ""
       const explicitIdle = /\b(idle|away|offline|afk)\b/.test(text)
       const explicitLive = /\b(active|coding|online)\b/.test(text)
@@ -507,9 +511,17 @@ export default function DevPresence() {
         parseTimestamp(data.lastSeen) ||
         parseTimestamp(data.receivedAt) ||
         parseTimestamp(data.timestamp)
-      const seenRecently = typeof seenAt === "number" ? currentTime - seenAt < 120_000 : false
+      const seenRecently = typeof seenAt === "number" ? currentTime - seenAt < 300_000 : false
 
-      return !explicitIdle && (explicitLive || Boolean(data.isActive) || Boolean(durationMs) || seenRecently)
+      if (explicitIdle) return "idle"
+      if (explicitLive || Boolean(data.isActive) || Boolean(durationMs) || seenRecently) {
+        return "coding"
+      }
+      return "unknown"
+    }
+
+    const isLikelyLivePayload = (data: PresenceStatus, currentTime: number) => {
+      return getPresenceState(data, currentTime) === "coding"
     }
 
     const shouldFallbackToLocalAgent = (data: PresenceStatus) => {
@@ -519,6 +531,8 @@ export default function DevPresence() {
     }
 
     const fetchLocalAgentStatus = async (): Promise<PresenceStatus | null> => {
+      if (!LOCAL_AGENT_API) return null
+
       try {
         const res = await fetch(LOCAL_AGENT_API, { cache: "no-store" })
         if (!res.ok) return null
@@ -542,6 +556,24 @@ export default function DevPresence() {
         Boolean(getStatusDurationMs(data))
 
       return !Boolean(data.isActive) && !hasInlineDetails && !hasProject && !hasEditor && !hasTiming
+    }
+
+    const shouldIgnoreWeakPollUpdate = (data: PresenceStatus, currentTime: number) => {
+      if (!isWeakPayload(data) || !latestStatusRef.current) return false
+
+      const current = latestStatusRef.current
+      const currentIsWeak = isWeakPayload(current)
+      const nextState = getPresenceState(data, currentTime)
+      const currentState = getPresenceState(current, currentTime)
+      const hasRecentLiveSignal =
+        typeof lastLiveSignalRef.current === "number" &&
+        currentTime - lastLiveSignalRef.current < RECENT_LIVE_SIGNAL_MS
+
+      if (nextState === "idle" && hasRecentLiveSignal) {
+        return true
+      }
+
+      return !currentIsWeak && currentState === nextState
     }
 
     const isReliablyIdle = (data: PresenceStatus, currentTime: number) => {
@@ -579,7 +611,7 @@ export default function DevPresence() {
 
     const applyIncomingStatus = (data: PresenceStatus, source: "poll" | "socket") => {
       const currentTime = Date.now()
-      if (source === "poll" && isWeakPayload(data) && latestStatusRef.current) {
+      if (source === "poll" && shouldIgnoreWeakPollUpdate(data, currentTime)) {
         return
       }
 
@@ -587,6 +619,8 @@ export default function DevPresence() {
       setStatus(data)
 
       if (shouldTreatAsCoding(data, currentTime)) {
+        lastLiveSignalRef.current = currentTime
+        setLastLiveSignalAt(currentTime)
         const payloadStart = getPayloadStart(data, currentTime)
         setLocalSessionStart((prev) => {
           if (typeof payloadStart === "number") {
@@ -608,23 +642,21 @@ export default function DevPresence() {
       try {
         const currentTime = Date.now()
         const localData = await fetchLocalAgentStatus()
-        if (localData && isLikelyLivePayload(localData, currentTime)) {
-          applyIncomingStatus(localData, "poll")
-          return
-        }
-
-        const res = await fetch(`${DEVSTATS_API}/status`)
+        const res = await fetch(DEVSTATS_STATUS_API, { cache: "no-store" })
         if (!res.ok) {
           if (localData) applyIncomingStatus(localData, "poll")
           return
         }
         const data = (await res.json()) as PresenceStatus
-        if (shouldFallbackToLocalAgent(data)) {
-          if (localData) {
-            applyIncomingStatus(localData, "poll")
-            return
-          }
+        if (
+          localData &&
+          isLikelyLivePayload(localData, currentTime) &&
+          shouldFallbackToLocalAgent(data)
+        ) {
+          applyIncomingStatus(localData, "poll")
+          return
         }
+
         applyIncomingStatus(data, "poll")
       } catch {
         const localData = await fetchLocalAgentStatus()
@@ -638,7 +670,6 @@ export default function DevPresence() {
     const poll = setInterval(loadStatus, 15_000)
 
     const onActivity = (data: PresenceStatus) => {
-      setHasSeenActivityEvent(true)
       applyIncomingStatus(data, "socket")
     }
     const onStatus = (data: PresenceStatus) => applyIncomingStatus(data, "socket")
@@ -685,19 +716,21 @@ export default function DevPresence() {
   const hasReliableLastSeen = typeof lastSeen === "number"
   const idleFor = hasReliableLastSeen && typeof now === "number" ? now - lastSeen : null
   const seenRecently = idleFor !== null ? idleFor < 300_000 : false
+  const hasRecentLiveSignal =
+    typeof lastLiveSignalAt === "number" && now - lastLiveSignalAt < RECENT_LIVE_SIGNAL_MS
   const hasAgentActiveDuration = typeof payloadDurationMs === "number" && payloadDurationMs > 0
   const hasLiveSignal =
     isExplicitCoding ||
     Boolean(status?.isActive) ||
     seenRecently ||
-    hasSeenActivityEvent ||
+    hasRecentLiveSignal ||
     hasAgentActiveDuration
   const isStrongIdle =
     isExplicitIdle && idleFor !== null && idleFor > 120_000 && !hasAgentActiveDuration
   const isCoding =
     !isStrongIdle &&
     (hasLiveSignal ||
-      (isSocketConnected && (hasRealProject || !hasReliableLastSeen)))
+      (!isExplicitIdle && isSocketConnected && (hasRealProject || !hasReliableLastSeen)))
   const hasFileContext =
     (typeof status?.filePath === "string" && status.filePath.trim().length > 0) ||
     (typeof status?.file === "string" && status.file.trim().length > 0) ||
