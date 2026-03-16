@@ -131,7 +131,7 @@ export const Hero = () => {
           />
         </div>
 
-        <div className="w-full py-5">
+        <div className="w-full py-5 px-2 md:px-0">
           {/* Hero Content */}
           <div className="flex flex-col justify-center items-start text-start mt-8">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full ml-1 mb-8">
