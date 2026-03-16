@@ -83,7 +83,6 @@ export default function TotalCodingTime({
   className?: string;
 }) {
   const [totalMs, setTotalMs] = useState<number | null>(null);
-  const [isActive, setIsActive] = useState(false);
 
   const lastLiveTotalRef = useRef<number | null>(null);
   const frozenOfflineTotalRef = useRef<number | null>(null);
@@ -104,7 +103,6 @@ export default function TotalCodingTime({
         }
         frozenOfflineTotalRef.current = null;
 
-        setIsActive(true);
         setTotalMs(lastLiveTotalRef.current ?? fetchedTotalMs);
         return;
       }
@@ -114,7 +112,6 @@ export default function TotalCodingTime({
           lastLiveTotalRef.current ?? fetchedTotalMs ?? null;
       }
 
-      setIsActive(false);
       setTotalMs(frozenOfflineTotalRef.current);
     }
 

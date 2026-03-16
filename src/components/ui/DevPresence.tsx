@@ -717,7 +717,9 @@ export default function DevPresence() {
   const idleFor = hasReliableLastSeen && typeof now === "number" ? now - lastSeen : null
   const seenRecently = idleFor !== null ? idleFor < 300_000 : false
   const hasRecentLiveSignal =
-    typeof lastLiveSignalAt === "number" && now - lastLiveSignalAt < RECENT_LIVE_SIGNAL_MS
+    typeof now === "number" &&
+    typeof lastLiveSignalAt === "number" &&
+    now - lastLiveSignalAt < RECENT_LIVE_SIGNAL_MS
   const hasAgentActiveDuration = typeof payloadDurationMs === "number" && payloadDurationMs > 0
   const hasLiveSignal =
     isExplicitCoding ||
