@@ -243,6 +243,13 @@ export const Hero = () => {
               >
                 <DiscordIcon size={24} />
               </span>
+              <a
+                href={`mailto:${email}`}
+                className="inline-flex items-center gap-2 h-9 hover:text-red-400 transition-colors p-2 "
+                title={email}
+              >
+                <MailCheckIcon size={24} />
+              </a>
             </div>
           </div>
 

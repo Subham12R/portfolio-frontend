@@ -17,7 +17,7 @@ const navLinks = [
 const Navigation = () => {
   return (
     <header className="sticky top-0 flex justify-center z-50 items-center w-full">
-      <nav className="bg-bg-nav/50 backdrop-blur-sm w-full max-w-4xl flex justify-between items-center ">
+      <nav className="bg-bg-nav/50 backdrop-blur-sm w-full max-w-4xl flex justify-between items-center px-2 md:px-0">
         {/* Logo + Navigation Links - Left side */}
         <div className="flex items-center gap-4 md:gap-6 ml-0.2">
           <div className="py-2 inline-flex items-center">
