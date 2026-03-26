@@ -9,12 +9,12 @@ export const siteConfig = {
   description: "Full Stack Developer Portfolio",
   location: "Kolkata, West Bengal, India",
   timezone: "Asia/Kolkata",
-  email: "rikk4335@gmail.com",
+  email: "dev@subham12r.me",
 
   // Bio and introduction
   bio: {
     short: "I'm a full-stack developer who enjoys turning complex problems into simple, elegant solutions.",
-    long: `I'm a full-stack developer who enjoys turning complex problems into simple, elegant solutions. I focus on building scalable, performant web applications with clean architecture, thoughtful design, and real world impact. From idea to production, I care about writing code that's maintainable, meaningful, and built to last.`,
+    long: `I'm a full-stack developer who enjoys turning complex problems into simple, elegant solutions. I focus on building scalable, performant web applications with clean architecture, thoughtful design, and real world impact. From idea to production, I care about writing code that's maintainable, meaningful, and built to last`,
     about: `I'm Subham Karmakar, a B.Tech student and developer from Kolkata. I build full-stack applications with modern web technologies, while constantly exploring areas like databases, system design, and developer tooling. I enjoy turning ideas into practical solutions—whether it's experimenting with visual tools, solving algorithmic problems, or contributing to larger technical projects.`
   },
 
