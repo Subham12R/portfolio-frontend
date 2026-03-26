@@ -22,6 +22,21 @@ export default function Achievements() {
                     </div>
                 </div>
 
+
+                <div data-about-item className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2">
+                    <div className="flex justify-between items-center w-full">
+                        <h3 className="tracking-tighter">Top 5 in Daksh 2026 - Heritage India University</h3>
+                        <p className="text-sm text-text-muted">Top 5 out of 30 Teams - 2026</p>
+                    </div>
+
+                    <div className="pl-2 border-l flex flex-col gap-1 w-full">
+                        <span className="tracking-tighter text-sm">
+                            Built and presented Kryptos a full stack AI powered WEB3 for checking scam wallets and transactions in the blockchain.
+                        </span>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     )
