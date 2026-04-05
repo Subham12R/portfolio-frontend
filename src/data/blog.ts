@@ -241,7 +241,7 @@ I learned this one before anything went wrong, thankfully. But I've seen repos w
 
 ## You Can't Debug What You Can't See
 
-After my first deployment disaster, logging became something I took seriously. Not `console.log("here")` scattered around — structured logs with context. What request triggered it, what user, what time, what the state of things was when it failed.
+After my first deployment disaster, logging became something I took seriously. Not \`console.log("here")\` scattered around — structured logs with context. What request triggered it, what user, what time, what the state of things was when it failed.
 
 In development you can stare at your screen and watch things happen. In production you're not there. The logs are your eyes. If they're empty or unstructured, you're blind.
 
