@@ -5,6 +5,7 @@ import Navigation from "@/components/layout/Navigation"
 import Footer from "@/components/layout/footer"
 import { siteConfig } from "@/data"
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import { SmoothScroll } from "@/components/providers/SmoothScroll"
 import { Neko } from "@/components/ui/Neko"
@@ -97,6 +98,7 @@ export default function RootLayout({
           </SmoothScroll>
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
         <Neko />
         <ScrollToTop />
       </body>
