@@ -1,4 +1,4 @@
-import { getPostsSorted, siteConfig } from '@/data'
+import { getPostsSorted, getMediumPostsSorted, siteConfig } from '@/data'
 import { BlogPageContent } from '@/components/blog/BlogPageContent'
 
 export const metadata = {
@@ -24,6 +24,7 @@ export const metadata = {
 
 export default function BlogPage() {
   const posts = getPostsSorted()
+  const mediumPosts = getMediumPostsSorted().slice(2) // Show remaining Medium posts
 
-  return <BlogPageContent posts={posts} />
+  return <BlogPageContent posts={posts} mediumPosts={mediumPosts} />
 }

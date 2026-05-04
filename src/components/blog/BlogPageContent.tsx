@@ -4,13 +4,15 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { AnimatedBlogGrid } from "./AnimatedBlogGrid";
-import type { BlogPost } from "@/data/blog";
+import { MediumBlogCard } from "./MediumBlogCard";
+import type { BlogPost, MediumPost } from "@/data/blog";
 
 interface BlogPageContentProps {
   posts: BlogPost[];
+  mediumPosts?: MediumPost[];
 }
 
-export function BlogPageContent({ posts }: BlogPageContentProps) {
+export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
@@ -45,11 +47,25 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
         </header>
 
         {/* Posts Grid */}
-        <AnimatedBlogGrid posts={posts} />
+        {posts.length > 0 && <AnimatedBlogGrid posts={posts} />}
 
         {posts.length === 0 && (
           <div className="text-center py-20">
             <p className="text-text-muted">No posts yet. Check back soon.</p>
+          </div>
+        )}
+
+        {/* Featured on Medium */}
+        {mediumPosts && mediumPosts.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-lg font-semibold text-text-secondary mb-4">
+              Featured on Medium
+            </h2>
+            <div className="flex flex-col gap-3">
+              {mediumPosts.map((post) => (
+                <MediumBlogCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
         )}
       </div>

@@ -14,11 +14,29 @@ export interface BlogPost {
   featured?: boolean;
 }
 
+export interface MediumPost {
+  id: string;
+  title: string;
+  url: string;
+  publishedAt: string;
+}
+
+export const mediumPosts: MediumPost[] = [
+  {
+    id: "medium-post-1",
+    title:
+      "From Managed Platform to VPS: How I Went From Deploying to Understanding",
+    url: "https://medium.com/@rikk4335/from-managed-platform-to-vps-how-i-went-from-deploying-to-understanding-652523ec694c",
+    publishedAt: "2026-05-02",
+  },
+];
+
 export const blogPosts: BlogPost[] = [
   {
     id: "internship-debugging-lessons",
     slug: "internship-debugging-lessons",
-    title: "What My Internship Taught Me About Understanding and Debugging a Codebase Before Touching It",
+    title:
+      "What My Internship Taught Me About Understanding and Debugging a Codebase Before Touching It",
     excerpt:
       "In a real-world codebase, understanding and debugging matter far more than writing new code. This internship completely changed how I approach existing systems.",
     coverImage: "/images/blog/blog1.jpg",
@@ -211,7 +229,8 @@ Pick your thing. Actually commit to it. Let the rest wait.`,
   {
     id: "backend-to-production-concepts",
     slug: "backend-to-production-concepts",
-    title: "Important Concepts to Remember When Setting Up a Backend to Production",
+    title:
+      "Important Concepts to Remember When Setting Up a Backend to Production",
     excerpt:
       "Moving from development to production is where things get real. Here's a practical checklist of concepts every developer should consider before deploying their backend.",
     coverImage: "/images/blog/blog4.jpg",
@@ -296,7 +315,7 @@ Deploying manually by SSHing into a server and running commands is how you intro
 The checklist version of this exists everywhere. What I actually want you to take away is this: production is a different discipline than development. The code is the easy part. What keeps a backend running reliably — observable, secure, recoverable — is a separate set of concerns that you have to think about intentionally.
 
 Build it like someone else is going to be on call for it at 3am. Someday that person might be you.`,
-  }
+  },
 ];
 
 // Helper to get featured posts
@@ -307,7 +326,8 @@ export function getFeaturedPosts(): BlogPost[] {
 // Helper to get posts sorted by date
 export function getPostsSorted(): BlogPost[] {
   return [...blogPosts].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 }
 
@@ -323,4 +343,12 @@ export function getAllBlogTags(): string[] {
     post.tags.forEach((tag) => tags.add(tag));
   });
   return Array.from(tags).sort();
+}
+
+// Helper to get Medium posts sorted by date
+export function getMediumPostsSorted(): MediumPost[] {
+  return [...mediumPosts].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
 }

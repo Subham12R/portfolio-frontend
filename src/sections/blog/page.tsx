@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { siteConfig } from "@/data";
 import { AnimatedBlogGrid } from "@/components/blog/AnimatedBlogGrid";
-import { getPostsSorted } from "@/data/blog";
+import { MediumBlogCard } from "@/components/blog/MediumBlogCard";
+import { getPostsSorted, getMediumPostsSorted } from "@/data/blog";
 
 const BlogSection = () => {
   const section = siteConfig.sections.blog;
   const posts = getPostsSorted().slice(0, 4); // Show max 4 posts
+  const mediumPosts = getMediumPostsSorted().slice(0, 2); // Show 2 featured Medium posts
 
-  if (posts.length === 0) return null;
+  if (posts.length === 0 && mediumPosts.length === 0) return null;
 
   return (
     <section
@@ -26,7 +28,21 @@ const BlogSection = () => {
         </div>
 
         {/* Blog Cards Grid */}
-        <AnimatedBlogGrid posts={posts} />
+        {posts.length > 0 && <AnimatedBlogGrid posts={posts} />}
+
+        {/* Featured on Medium */}
+        {mediumPosts.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-lg font-semibold text-text-secondary mb-4">
+              Featured on Medium
+            </h2>
+            <div className="flex flex-col gap-3">
+              {mediumPosts.map((post) => (
+                <MediumBlogCard key={post.id} post={post} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* View All Link */}
         <div className="mt-12 flex items-center justify-center">

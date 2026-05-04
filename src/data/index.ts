@@ -30,12 +30,14 @@ export type { TechItem, TechCategory } from "./tech.registry";
 // Blog posts data
 export {
   blogPosts,
+  mediumPosts,
   getFeaturedPosts,
   getPostsSorted,
   getPostBySlug,
   getAllBlogTags,
+  getMediumPostsSorted,
 } from "./blog";
-export type { BlogPost } from "./blog";
+export type { BlogPost, MediumPost } from "./blog";
 
 // Tech icons
 export { techIcons, getTechIcon, hasTechIcon } from "./tech-icons";
