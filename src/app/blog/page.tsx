@@ -24,7 +24,7 @@ export const metadata = {
 
 export default function BlogPage() {
   const posts = getPostsSorted()
-  const mediumPosts = getMediumPostsSorted().slice(2) // Show remaining Medium posts
+  const mediumPosts = getMediumPostsSorted() // Show all Medium posts
 
   return <BlogPageContent posts={posts} mediumPosts={mediumPosts} />
 }
