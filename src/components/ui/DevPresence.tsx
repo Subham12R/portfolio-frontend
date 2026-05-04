@@ -377,7 +377,7 @@ function getProjectDetails(status: PresenceStatus | null): {
       .filter(Boolean)
       .filter(
         (part) =>
-          !/^(visual studio code|vs code|vscode|cursor|code)$/i.test(part),
+          !/^(visual studio code|vs code|vscode|cursor|code|zed})$/i.test(part),
       );
 
     const likelyProject =
@@ -473,6 +473,10 @@ function getEditorIcon(editorName: string | null): {
 
   if (normalized.includes("cursor")) {
     return { src: "/icons/cursor.webp", alt: "Cursor" };
+  }
+
+  if (normalized.includes("zed")) {
+    return { src: "/icons/zed.png", alt: "Zed" };
   }
 
   if (
