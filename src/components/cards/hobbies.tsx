@@ -8,7 +8,7 @@ export default function Hobbies() {
                 <h1 className="tracking-tighter text-lg font-bold">Hobbies</h1>
             </div>
             <div className="flex flex-1 flex-col gap-2">
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
                 <div className="flex justify-between items-center w-full">
                     <h3 className="tracking-tighter">Gaming</h3>
                     <p className="text-sm text-text-muted">Competitive + Casual</p>
@@ -22,7 +22,7 @@ export default function Hobbies() {
                 </div>
             </div>
 
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
                 <div className="flex justify-between items-center w-full">
                     <h3 className="tracking-tighter">Photography</h3>
                     <p className="text-sm text-text-muted">Street + Nature</p>
@@ -36,7 +36,7 @@ export default function Hobbies() {
                 </div>
             </div>
 
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
                 <div className="flex justify-between items-center w-full">
                     <h3 className="tracking-tighter">Designing & Drawing</h3>
                     <p className="text-sm text-text-muted">UI + Sketching</p>
@@ -50,7 +50,7 @@ export default function Hobbies() {
                 </div>
             </div>
 
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">
                 <div className="flex justify-between items-center w-full">
                     <h3 className="tracking-tighter">Gym</h3>
                     <p className="text-sm text-text-muted">Strength + Discipline</p>

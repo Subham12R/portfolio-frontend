@@ -28,7 +28,7 @@ const Navigation = () => {
                 alt={siteConfig.name}
                 width={40}
                 height={40}
-                className="w-10 h-10 aspect-square object-cover rounded-[9999px] transition-all duration-200"
+                className="w-10 h-10 aspect-square object-cover rounded-lg transition-all duration-200"
               />
             </Link>
           </div>

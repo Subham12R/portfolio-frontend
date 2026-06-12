@@ -8,7 +8,7 @@ export default function Experience() {
                 <h1 className="tracking-tighter text-lg font-bold">Education</h1>
             </div>
             <div className="flex flex-1 flex-col gap-2">
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2" >
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2" >
                 <div className="flex justify-between items-center w-full">
                        <h3 className="tracking-tighter">Adamas University</h3>
                        
@@ -24,7 +24,7 @@ export default function Experience() {
                 </div>
             </div>
 
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2" >
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2" >
                 <div className="flex justify-between items-center w-full">
                        <h3 className="tracking-tighter">Holy Angels' School - ISC</h3>
                         <p className="text-sm text-text-muted">2020 - 2024</p>
@@ -39,7 +39,7 @@ export default function Experience() {
                 </div>
             </div>
 
-            <div data-about-item className="rounded-full bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2" >
+            <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2" >
                 <div className="flex justify-between items-center w-full">
                        <h3 className="tracking-tighter">Holy Angels' School - ICSE</h3>
                         <p className="text-sm text-text-muted">2008 - 2020</p>

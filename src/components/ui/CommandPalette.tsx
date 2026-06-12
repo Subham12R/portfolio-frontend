@@ -24,9 +24,14 @@ import {
   Trophy,
   ArrowUp,
   Command,
+  Globe,
+  ExternalLink,
+  Download,
+  Send,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import gsap from "gsap";
+import { siteConfig } from "@/data/site.config";
 
 interface CommandItem {
   id: string;
@@ -82,11 +87,20 @@ export function CommandPalette() {
     {
       id: "share",
       label: "Share Page",
-      description: "Copy the current page URL",
+      description: "Share the current page URL",
       icon: <Share2 size={16} className="text-text-secondary" />,
       shortcut: "Shift+S",
-      action: () => {
-        navigator.clipboard.writeText(window.location.href);
+      action: async () => {
+        const url = window.location.href;
+        if (navigator.share) {
+          try {
+            await navigator.share({ url });
+            return;
+          } catch {
+            // user cancelled or API failed — fall through to clipboard
+          }
+        }
+        navigator.clipboard.writeText(url);
       },
       section: "actions",
     },
@@ -134,6 +148,38 @@ export function CommandPalette() {
       icon: <ArrowUp size={16} className="text-text-secondary" />,
       shortcut: "Ctrl+U",
       action: () => window.scrollTo({ top: 0, behavior: "smooth" }),
+      section: "actions",
+    },
+    {
+      id: "github",
+      label: "Visit GitHub",
+      description: "Open GitHub profile in a new tab",
+      icon: <Globe size={16} className="text-text-secondary" />,
+      action: () => window.open(siteConfig.socials.github.url, "_blank"),
+      section: "actions",
+    },
+    {
+      id: "linkedin",
+      label: "Visit LinkedIn",
+      description: "Open LinkedIn profile in a new tab",
+      icon: <ExternalLink size={16} className="text-text-secondary" />,
+      action: () => window.open(siteConfig.socials.linkedin.url, "_blank"),
+      section: "actions",
+    },
+    {
+      id: "resume",
+      label: "Download Resume",
+      description: "Download the latest resume PDF",
+      icon: <Download size={16} className="text-text-secondary" />,
+      action: () => window.open(siteConfig.resume.path, "_blank"),
+      section: "actions",
+    },
+    {
+      id: "mail",
+      label: "Send Mail",
+      description: `Send an email to ${siteConfig.email}`,
+      icon: <Send size={16} className="text-text-secondary" />,
+      action: () => window.open(`mailto:${siteConfig.email}`, "_blank"),
       section: "actions",
     },
     {

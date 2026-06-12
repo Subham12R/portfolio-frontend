@@ -9,7 +9,7 @@ export default function Achievements() {
             </div>
 
             <div className="flex flex-1 flex-col gap-2">
-                <div data-about-item className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2">
+                <div data-about-item className="rounded-xl bg-bg-elevated flex justify-start flex-col items-start px-2 py-2">
                     <div className="flex justify-between items-center w-full">
                         <h3 className="tracking-tighter">SIH Internals Hackathon Finalist</h3>
                         <p className="text-sm text-text-muted">Top 10 out of 150 Teams - 2025</p>
@@ -23,7 +23,7 @@ export default function Achievements() {
                 </div>
 
 
-                <div data-about-item className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2">
+                <div data-about-item className="rounded-xl bg-bg-elevated flex justify-start flex-col items-start px-2 py-2">
                     <div className="flex justify-between items-center w-full">
                         <h3 className="tracking-tighter">Top 5 in Daksh 2026 - Heritage India University</h3>
                         <p className="text-sm text-text-muted">Top 5 out of 30 Teams - 2026</p>

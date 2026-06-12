@@ -15,8 +15,8 @@ export default function Home() {
       <Work />
       <ProjectsPage />
       <About />
-      <BlogSection />
       <CertificatesPage />
+      <BlogSection />
       <ContactCTA />
     </>
   );

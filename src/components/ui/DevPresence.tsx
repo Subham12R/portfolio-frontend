@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { Tooltip } from "react-tooltip";
+import { TooltipGlass } from "@/components/ui/tooltip";
 import { Coffee, Dumbbell, Moon, Tv } from "lucide-react";
 import { siteConfig } from "@/data/site.config";
 
@@ -902,10 +902,9 @@ export default function DevPresence() {
             {idleText}
           </span>
           {idleTooltip && (
-            <Tooltip
+            <TooltipGlass
               id={IDLE_TOOLTIP_ID}
               place="top"
-              className="max-w-xs! rounded-md! px-3! py-2! text-sm! font-medium!"
             />
           )}
         </>

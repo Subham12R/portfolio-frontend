@@ -14,7 +14,7 @@ export default function Activities() {
       <div className="flex flex-1 flex-col gap-2">
         <div
           data-about-item
-          className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2"
+          className="rounded-xl bg-bg-elevated flex justify-start flex-col items-start px-2 py-2"
         >
           <div className="flex justify-between items-center w-full">
             <h3 className="tracking-tighter">
@@ -36,7 +36,7 @@ export default function Activities() {
 
         <div
           data-about-item
-          className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2"
+          className="rounded-xl bg-bg-elevated flex justify-start flex-col items-start px-2 py-2"
         >
           <div className="flex justify-between items-center w-full">
             <h3 className="tracking-tighter">ACM x Adamas - Lead Developer</h3>

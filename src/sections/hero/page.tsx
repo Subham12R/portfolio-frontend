@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { GitHubCalendar } from "react-github-calendar";
-import { Tooltip } from "react-tooltip";
+import { TooltipGlass } from "@/components/ui/tooltip";
 import { Map, MapPin, XCircle } from "lucide-react";
 
 import { MailCheckIcon } from "@/components/ui/mail-check";
@@ -295,10 +295,9 @@ export const Hero = () => {
                       : block
                   }
                 />
-                <Tooltip
+                <TooltipGlass
                   id="github-tooltip"
                   place="top"
-                  className="!px-3 !py-1.5 !rounded-md !text-sm !font-medium !bg-white !text-black !shadow-md !border !border-black/10"
                   delayHide={50}
                 />
               </>
