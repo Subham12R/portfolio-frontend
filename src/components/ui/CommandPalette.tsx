@@ -541,7 +541,6 @@ export function CommandPalette() {
                 className="pointer-events-auto w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh]"
                 style={{ opacity: 0 }}
                 onWheel={(e) => e.stopPropagation()}
-                onTouchMove={(e) => e.stopPropagation()}
               >
                 {/* Search Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border-primary/30 bg-bg-elevated/40">
@@ -566,7 +565,7 @@ export function CommandPalette() {
                 {/* Results */}
                 <div
                   ref={listRef}
-                  className="flex-1 overflow-y-auto overscroll-contain py-2 hide-scrollbar"
+                  className="flex-1 overflow-y-auto overscroll-contain py-2 hide-scrollbar touch-pan-y"
                   onWheel={(e) => e.stopPropagation()}
                 >
                   {orderedItems.length === 0 ? (
