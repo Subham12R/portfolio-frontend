@@ -544,6 +544,7 @@ export function CommandPalette() {
                 style={{ opacity: 0 }}
                 onWheel={(e) => e.stopPropagation()}
                 onClick={(e) => e.stopPropagation()}
+                data-lenis-prevent-touch
               >
                 {/* Search Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border-primary/30 bg-bg-elevated/40">
