@@ -88,20 +88,16 @@ export default function SpotifyNowPlaying({
         if (!res.ok) {
           if (!cancelled) {
             stopPreview();
-            setNowPlaying({
+            setNowPlaying((prev) => ({
+              ...prev,
               isPlaying: false,
-              track: null,
-              artist: null,
-              url: null,
-              previewUrl: null,
-              imageUrl: null,
-            });
+            }));
           }
           return;
         }
 
         const data = (await res.json()) as SpotifyNowPlayingResponse;
-        if (!data.isPlaying || !data.track) {
+        if (!data.track) {
           if (!cancelled) {
             stopPreview();
             setNowPlaying({
@@ -125,7 +121,7 @@ export default function SpotifyNowPlaying({
             stopPreview();
           }
           setNowPlaying({
-            isPlaying: true,
+            isPlaying: Boolean(data.isPlaying),
             track: data.track,
             artist: data.artist || null,
             url: data.url || null,
@@ -136,14 +132,10 @@ export default function SpotifyNowPlaying({
       } catch {
         if (!cancelled) {
           stopPreview();
-          setNowPlaying({
+          setNowPlaying((prev) => ({
+            ...prev,
             isPlaying: false,
-            track: null,
-            artist: null,
-            url: null,
-            previewUrl: null,
-            imageUrl: null,
-          });
+          }));
         }
       }
     }
@@ -195,10 +187,16 @@ export default function SpotifyNowPlaying({
     }
   };
 
+  const hasTrack = Boolean(nowPlaying.track);
   const isOnline = Boolean(nowPlaying.isPlaying && nowPlaying.track);
   const content = isOnline ? (
     <span className="min-w-0 whitespace-nowrap">
       <span className="text-text-tertiary">Now playing:</span>{" "}
+      <span className="text-text-secondary">{nowPlaying.track}</span>
+    </span>
+  ) : hasTrack ? (
+    <span className="min-w-0 whitespace-nowrap">
+      <span className="text-text-tertiary">Last played:</span>{" "}
       <span className="text-text-secondary">{nowPlaying.track}</span>
     </span>
   ) : (
@@ -211,7 +209,7 @@ export default function SpotifyNowPlaying({
     <div
       className={`flex h-full max-w-full items-center gap-2 overflow-x-auto overflow-y-hidden text-sm leading-none ${className}`.trim()}
     >
-      {isOnline && nowPlaying.imageUrl ? (
+      {hasTrack && nowPlaying.imageUrl ? (
         <Image
           src={nowPlaying.imageUrl}
           alt={nowPlaying.track || "Album cover"}
@@ -236,7 +234,7 @@ export default function SpotifyNowPlaying({
           {isPreviewPlaying ? "||" : ">"}
         </button>
       ) : null}
-      {isOnline && nowPlaying.url ? (
+      {hasTrack && nowPlaying.url ? (
         <a
           href={nowPlaying.url}
           target="_blank"

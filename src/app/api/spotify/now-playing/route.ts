@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
+const RECENTLY_PLAYED_ENDPOINT = "https://api.spotify.com/v1/me/player/recently-played?limit=1";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -25,6 +26,20 @@ type SpotifyTrackResponse = {
       images?: Array<{ url?: string }>;
     };
   } | null;
+};
+
+type SpotifyRecentlyPlayedResponse = {
+  items?: Array<{
+    track?: {
+      name?: string;
+      artists?: Array<{ name?: string }>;
+      external_urls?: { spotify?: string };
+      preview_url?: string | null;
+      album?: {
+        images?: Array<{ url?: string }>;
+      };
+    };
+  }>;
 };
 
 function getEnv(name: string): string | null {
@@ -65,6 +80,24 @@ async function getAccessToken(): Promise<string | null> {
   return data.access_token || null;
 }
 
+function extractTrack(item: {
+  name?: string;
+  artists?: Array<{ name?: string }>;
+  external_urls?: { spotify?: string };
+  preview_url?: string | null;
+  album?: { images?: Array<{ url?: string }> };
+} | null | undefined) {
+  if (!item) return null;
+  const track = item.name || null;
+  const artist =
+    item.artists?.map((entry) => entry.name).filter((name): name is string => Boolean(name)).join(", ") ||
+    null;
+  const url = item.external_urls?.spotify || null;
+  const previewUrl = item.preview_url || null;
+  const imageUrl = item.album?.images?.find((img) => typeof img.url === "string" && img.url)?.url || null;
+  return { track, artist, url, previewUrl, imageUrl };
+}
+
 export async function GET() {
   try {
     const accessToken = await getAccessToken();
@@ -75,41 +108,47 @@ export async function GET() {
       );
     }
 
-    const response = await fetch(NOW_PLAYING_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+    // Try currently playing first
+    const nowResponse = await fetch(NOW_PLAYING_ENDPOINT, {
+      headers: { Authorization: `Bearer ${accessToken}` },
       cache: "no-store",
     });
 
-    if (response.status === 204 || !response.ok) {
-      return NextResponse.json(
-        { isPlaying: false, track: null, artist: null, url: null, previewUrl: null, imageUrl: null },
-        { headers: NO_STORE_HEADERS }
-      );
+    if (nowResponse.ok && nowResponse.status !== 204) {
+      const data = (await nowResponse.json()) as SpotifyTrackResponse;
+      const item = data.item;
+      const isPlaying = Boolean(data.is_playing && item?.name);
+      if (isPlaying && item) {
+        const track = extractTrack(item);
+        if (track && track.track) {
+          return NextResponse.json(
+            { isPlaying: true, ...track },
+            { headers: NO_STORE_HEADERS }
+          );
+        }
+      }
     }
 
-    const data = (await response.json()) as SpotifyTrackResponse;
-    const item = data.item;
-    const isPlaying = Boolean(data.is_playing && item?.name);
+    // Fallback to recently played
+    const recentResponse = await fetch(RECENTLY_PLAYED_ENDPOINT, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      cache: "no-store",
+    });
 
-    if (!isPlaying || !item) {
-      return NextResponse.json(
-        { isPlaying: false, track: null, artist: null, url: null, previewUrl: null, imageUrl: null },
-        { headers: NO_STORE_HEADERS }
-      );
+    if (recentResponse.ok) {
+      const data = (await recentResponse.json()) as SpotifyRecentlyPlayedResponse;
+      const item = data.items?.[0]?.track;
+      const track = extractTrack(item);
+      if (track && track.track) {
+        return NextResponse.json(
+          { isPlaying: false, ...track },
+          { headers: NO_STORE_HEADERS }
+        );
+      }
     }
-
-    const track = item.name || null;
-    const artist =
-      item.artists?.map((entry) => entry.name).filter((name): name is string => Boolean(name)).join(", ") ||
-      null;
-    const url = item.external_urls?.spotify || null;
-    const previewUrl = item.preview_url || null;
-    const imageUrl = item.album?.images?.find((img) => typeof img.url === "string" && img.url)?.url || null;
 
     return NextResponse.json(
-      { isPlaying: true, track, artist, url, previewUrl, imageUrl },
+      { isPlaying: false, track: null, artist: null, url: null, previewUrl: null, imageUrl: null },
       { headers: NO_STORE_HEADERS }
     );
   } catch {

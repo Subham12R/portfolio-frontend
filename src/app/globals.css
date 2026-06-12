@@ -115,16 +115,16 @@
 @theme {
   --default-font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
 
-  /* Remove all rounded corners */
-  --radius-none: 5px;
-  --radius-sm: 5px;
-  --radius: 5px;
-  --radius-md: 5px;
-  --radius-lg: 5px;
-  --radius-xl: 5px;
-  --radius-2xl: 5px;
-  --radius-3xl: 5px;
-  --radius-full: 5px;
+  /* Slightly rounded corners */
+  --radius-none: 0px;
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-full: 9999px;
 
 
   --color-bg-primary: var(--color-bg-primary);
@@ -301,4 +301,13 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-scrollbar-thumb-hover);
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -6,6 +6,7 @@ import { siteConfig } from "@/data";
 import profileIcon from "../../../public/images/profile/pfp.jpeg";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { GitHubStarButton } from "@/components/ui/GitHubStarButton";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 // Navigation links (subset of main navigation for header)
 const navLinks = [
@@ -49,6 +50,7 @@ const Navigation = () => {
         {/* Controls - Right side */}
         <div className="flex items-center gap-1">
           <GitHubStarButton repo="Subham12R/portfolio-frontend" />
+          <CommandPalette />
           <ThemeToggle />
         </div>
       </nav>
