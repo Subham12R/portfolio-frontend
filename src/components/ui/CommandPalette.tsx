@@ -32,6 +32,7 @@ import {
 import { useTheme } from "next-themes";
 import gsap from "gsap";
 import { siteConfig } from "@/data/site.config";
+import { useLenis } from "@/components/providers/SmoothScroll";
 
 interface CommandItem {
   id: string;
@@ -54,6 +55,7 @@ export function CommandPalette() {
   const backdropRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme, setTheme } = useTheme();
+  const { lenis } = useLenis();
 
   // Load recent from localStorage
   useEffect(() => {
@@ -315,14 +317,15 @@ export function CommandPalette() {
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-      // Preserve scroll position visually
       document.documentElement.style.scrollBehavior = "auto";
+      lenis?.stop();
     } else {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
       document.documentElement.style.scrollBehavior = "";
       window.scrollTo(0, scrollYRef.current);
+      lenis?.start();
     }
     return () => {
       document.documentElement.style.overflow = "";
@@ -330,6 +333,7 @@ export function CommandPalette() {
       document.body.style.paddingRight = "";
       document.documentElement.style.scrollBehavior = "";
       window.scrollTo(0, scrollYRef.current);
+      lenis?.start();
     };
   }, [open]);
 
