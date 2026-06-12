@@ -520,27 +520,30 @@ export function CommandPalette() {
       {mounted &&
         typeof document !== "undefined" &&
         createPortal(
-          <div className="fixed inset-0 z-[9999]" aria-hidden="true">
+          <div className="fixed inset-0 z-[9999]">
             {/* Full-page backdrop blur + noise */}
             <div
               ref={backdropRef}
-              className="absolute inset-0 bg-bg-primary/40 pointer-events-auto"
+              className="absolute inset-0 bg-bg-primary/40"
               style={{
                 backdropFilter: "blur(5px) saturate(180%)",
                 WebkitBackdropFilter: "blur(80px) saturate(180%)",
                 filter: "brightness(0.92)",
                 opacity: 0,
               }}
-              onClick={() => setOpen(false)}
             />
 
             {/* Modal */}
-            <div className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4 pointer-events-none">
+            <div
+              className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4"
+              onClick={() => setOpen(false)}
+            >
               <div
                 ref={modalRef}
-                className="pointer-events-auto w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh]"
+                className="w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh]"
                 style={{ opacity: 0 }}
                 onWheel={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
               >
                 {/* Search Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border-primary/30 bg-bg-elevated/40">
@@ -565,7 +568,7 @@ export function CommandPalette() {
                 {/* Results */}
                 <div
                   ref={listRef}
-                  className="flex-1 overflow-y-auto overscroll-contain py-2 hide-scrollbar touch-pan-y"
+                  className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-2 hide-scrollbar touch-pan-y"
                   onWheel={(e) => e.stopPropagation()}
                 >
                   {orderedItems.length === 0 ? (
