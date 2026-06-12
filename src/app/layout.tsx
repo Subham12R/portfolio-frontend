@@ -11,6 +11,7 @@ import { Neko } from "@/components/ui/Neko"
 import { ScrollToTop } from "@/components/ui/ScrollToTop"
 import { JsonLd } from "@/components/ui/JsonLd"
 import { PageTransition } from "@/components/ui/PageTransition"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const helvetica = localFont({
   src: "../../public/fonts/Helvetica.ttf",
@@ -104,6 +105,7 @@ export default function RootLayout({
           </SmoothScroll>
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
         <Neko />
         <ScrollToTop />
       </body>
