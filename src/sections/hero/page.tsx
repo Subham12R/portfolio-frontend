@@ -190,7 +190,7 @@ export const Hero = () => {
             </ScrollRevealText>
 
             <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto]">
-              <div className="min-w-0 rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:rounded-r-none">
+              <div className="min-w-0 rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center ">
                 <DevPresence />
               </div>
               <SpotifyNowPlaying className="min-w-0 w-full rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:w-auto md:max-w-[520px] " />
