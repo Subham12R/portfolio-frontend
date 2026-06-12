@@ -23,7 +23,6 @@ import framerIcon from "@/assets/icons/framer.jpeg";
 import vscodeIcon from "@/assets/icons/vscode.jpeg";
 import wordpressIcon from "@/assets/icons/wordpress.jpeg";
 import stripeIcon from "@/assets/icons/stripe.jpeg";
-
 export type TechCategory = "frontend" | "backend" | "devops" | "other";
 
 export interface TechItem {
