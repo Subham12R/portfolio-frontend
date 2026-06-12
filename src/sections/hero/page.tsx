@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { GitHubCalendar } from "react-github-calendar";
+import { GithubCalendar } from "@/components/ui/github-calendar";
 import { TooltipGlass } from "@/components/ui/tooltip";
 import { Map, MapPin, XCircle } from "lucide-react";
 
@@ -254,52 +254,10 @@ export const Hero = () => {
           </div>
 
           {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
-          <div className="w-full  mb-12 px-4 py-2  rounded-xl border border-border-primary bg-bg-elevated/30 text-text-primary overflow-x-auto min-h-[180px]">
+          <div className="w-full pb-10 ">
             {mounted && resolvedTheme ? (
               <>
-                <GitHubCalendar
-                  username={socials.github.username}
-                  blockSize={blockSize}
-                  blockMargin={2}
-                  fontSize={14}
-                  year={2026}
-                  blockRadius={2}
-                  showWeekdayLabels={false}
-                  colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
-                  theme={{
-                    dark: [
-                      "#1f2937",
-                      "#374151",
-                      "#4b5563",
-                      "#9ca3af",
-                      "#e5e7eb",
-                    ],
-                    light: [
-                      "#ebedf0",
-                      "#9be9a8",
-                      "#40c463",
-                      "#30a14e",
-                      "#216e39",
-                    ],
-                  }}
-                  renderBlock={(block, activity) =>
-                    activity.count > 0
-                      ? React.cloneElement(block, {
-                          "data-tooltip-id": "github-tooltip",
-                          "data-tooltip-content": `${
-                            activity.count === 1
-                              ? "1 contribution"
-                              : `${activity.count} contributions`
-                          } on ${formatDate(activity.date)}`,
-                        })
-                      : block
-                  }
-                />
-                <TooltipGlass
-                  id="github-tooltip"
-                  place="top"
-                  delayHide={50}
-                />
+                <GithubCalendar username="Subham12R" colorSchema="gray"/>
               </>
             ) : (
               <div className="py-4 space-y-3 animate-pulse">
