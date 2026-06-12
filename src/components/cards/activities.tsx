@@ -17,29 +17,12 @@ export default function Activities() {
           className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2"
         >
           <div className="flex justify-between items-center w-full">
-            <h3 className="tracking-tighter">0Day - Vice Lead </h3>
-            <p className="text-sm text-text-muted">
-              Web3 College Tech Community
-            </p>
-          </div>
-
-          <div className="pl-2 border-l flex flex-col gap-1 w-full">
-            <span className="tracking-tighter text-sm">
-              Helping students with full-stack development projects and concepts
-              and mentoring them in building scalable applications.
-            </span>
-          </div>
-        </div>
-
-        <div
-          data-about-item
-          className="rounded-full bg-bg-elevated flex justify-start flex-col items-start px-2 py-2"
-        >
-          <div className="flex justify-between items-center w-full">
             <h3 className="tracking-tighter">
-              CyCoders - Core Member & Full Stack Developer
+              CYCODERS - Tech Lead & Core Team Member
             </h3>
-            <p className="text-sm text-text-muted">CyCoders Tech Community</p>
+            <a href="https://cycoders.in" target="_blank" rel="noopener noreferrer" className="text-sm text-text-muted">
+              CYCODERS Tech Community
+            </a>
           </div>
 
           <div className="pl-2 border-l flex flex-col gap-1 w-full">
@@ -57,9 +40,9 @@ export default function Activities() {
         >
           <div className="flex justify-between items-center w-full">
             <h3 className="tracking-tighter">ACM x Adamas - Lead Developer</h3>
-            <p className="text-sm text-text-muted">
+            <a href="https://acm-web-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-text-muted">
               ACM x Adamas Student Chapter
-            </p>
+            </a>
           </div>
 
           <div className="pl-2 border-l flex flex-col gap-1 w-full">
