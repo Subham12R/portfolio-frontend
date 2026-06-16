@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "ik.imagekit.io",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.microlink.io",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -18,7 +18,7 @@ const CertificatesPage = async () => {
           <span className="text-text-secondary text-xl font-mono leading-tight">
             {section.number}
           </span>
-          <h1 className="text-4xl font-semibold text-text-primary">
+          <h1 className="text-4xl font-medium text-text-primary">
             {section.title}.
           </h1>
         </div>
@@ -28,10 +28,10 @@ const CertificatesPage = async () => {
           {certificates.map((cert) => (
             <div
               key={cert.id}
-              className="flex items-center gap-4 px-2  rounded-xl border border-border-primary hover:border-border-secondary transition-colors duration-200"
+              className="flex items-center gap-4 px-2  rounded-md border-2 border-border-primary hover:border-border-secondary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] transition-colors duration-200"
             >
               {/* Left: Logo */}
-              <div className="shrink-0">
+              <div className="shrink-0 border-2 border-border-primary rounded-md overflow-hidden w-12 h-12 flex items-center justify-center">
                 <Image
                   src={cert.logo}
                   alt={cert.issuer}
@@ -43,7 +43,7 @@ const CertificatesPage = async () => {
 
               {/* Middle: Text */}
               <div className="flex flex-col flex-1 min-w-0">
-                <h3 className="text-text-primary font-semibold truncate">
+                <h3 className="text-text-primary font-medium truncate">
                   {cert.title}
                 </h3>
                 <span className="text-text-tertiary text-sm">

@@ -165,9 +165,21 @@ body {
   font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
+  line-height: 1.75;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-playfair), serif;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
 }
 
 /* Paragraphs use medium weight (not bold) */

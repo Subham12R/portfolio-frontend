@@ -19,6 +19,12 @@ const helvetica = localFont({
   display: "swap",
 })
 
+const playfair = localFont({
+  src: "../../public/fonts/PlayfairDisplay.ttf",
+  variable: "--font-playfair",
+  display: "swap",
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -89,7 +95,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${helvetica.variable} antialiased min-h-screen bg-bg-primary text-text-primary transition-colors duration-300`}
+        className={`${helvetica.variable} ${playfair.variable} antialiased min-h-screen bg-bg-primary text-text-primary transition-colors duration-300`}
       >
         <JsonLd />
         <ThemeProvider>

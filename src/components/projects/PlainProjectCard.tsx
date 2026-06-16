@@ -49,7 +49,7 @@ export default function PlainProjectCard({ project }: { project: Project }) {
         <div className="space-y-1">
           {/* Title row with icons */}
           <div className="flex items-center justify-between gap-4">
-            <h3 className="text-xl font-semibold text-text-primary group-hover:text-text-secondary transition-colors">
+            <h3 className="text-xl font-medium text-text-primary group-hover:text-text-secondary transition-colors">
               {project.title}
             </h3>
             <div className="flex items-center gap-3">

@@ -1,44 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import ContactModal from "@/components/layout/contactmodal";
+import { useEffect } from "react";
+import { getCalApi } from "@calcom/embed-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { siteConfig } from "@/data";
 import { ArrowRight } from "lucide-react";
 
 export default function ContactCTA() {
-  const [open, setOpen] = useState(false);
   const section = siteConfig.sections.contact;
+
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: "15min" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
 
   return (
     <section
       id={section.id}
-      className="w-full flex flex-col justify-center items-center  py-20 px-4 lg:px-0 "
+      className="w-full max-w-4xl mx-auto flex flex-col justify-center items-center   "
     >
-      <div className="flex flex-col justify-center items-center w-full max-w-4xl text-center bg-bg-elevated py-12 px-6 rounded-3xl border border-border-primary">
-        <ScrollRevealText
-          as="h2"
-          className="text-3xl md:text-4xl font-semibold mb-4"
-          start="top 90%"
-          end="top 70%"
-        >
-          Let's work together
-        </ScrollRevealText>
+      <div className="flex flex-row items-center justify-center gap-6 flex-wrap">
+        <h1 className="text-3xl md:text-4xl font-semibold text-text-primary font-playfair text-center">
+          Let's work together and create something amazing.
+        </h1>
 
-        <ScrollRevealText
-          as="p"
-          className="mb-8 max-w-lg text-center leading-relaxed"
-          start="top 85%"
-          end="top 65%"
-        >
-          Have a project in mind or want to discuss opportunities? I'm always
-          open to new conversations and collaborations.
-        </ScrollRevealText>
-
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col items-center justify-center gap-4">
           <button
-            onClick={() => setOpen(true)}
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-text-primary text-text-inverse px-6 py-3 font-medium hover:opacity-90 transition-all duration-200"
+            data-cal-namespace="15min"
+            data-cal-link="subham12r/15min"
+            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+            className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-md bg-text-primary text-text-inverse px-4 py-1 font-medium hover:opacity-90 transition-all duration-200 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary hover:border-border-secondary"
           >
             Schedule a Call
             <ArrowRight
@@ -46,16 +39,7 @@ export default function ContactCTA() {
               className="group-hover:translate-x-1 transition-transform duration-200"
             />
           </button>
-
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border-secondary px-6 py-3 text-text-primary font-medium hover:bg-hover-tint hover:border-border-accent transition-all duration-200"
-          >
-            Send an Email
-          </a>
         </div>
-
-        <ContactModal open={open} onClose={() => setOpen(false)} />
       </div>
 
       <ScrollRevealText

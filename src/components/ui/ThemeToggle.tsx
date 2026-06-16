@@ -27,7 +27,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="relative w-9 h-9 flex items-center justify-center rounded-lg bg-bg-badge border border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
+      className="relative w-9 h-9 flex items-center justify-center rounded-md bg-bg-badge/10 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
       <Sun

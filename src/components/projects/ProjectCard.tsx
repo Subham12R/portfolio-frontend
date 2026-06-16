@@ -57,7 +57,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             <span className="text-text-primary/40 font-semibold text-sm ">{project.numberId}</span>
         </div>
         <div className=" flex flex-col">
-               <h3 className="text-lg font-semibold text-text-primary">
+               <h3 className="text-lg font-medium text-text-primary">
             {project.title}
           </h3>
           <p className="text-sm text-text-tertiary">

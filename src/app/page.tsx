@@ -14,7 +14,7 @@ export default function Home() {
       <Tech />
       <Work />
       <ProjectsPage />
-      <About />
+      {/* <About /> */}
       <CertificatesPage />
       <BlogSection />
       <ContactCTA />

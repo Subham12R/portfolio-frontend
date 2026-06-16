@@ -7,20 +7,24 @@ import { GithubCalendar } from "@/components/ui/github-calendar";
 import { TooltipGlass } from "@/components/ui/tooltip";
 import { Map, MapPin, XCircle } from "lucide-react";
 
-import { MailCheckIcon } from "@/components/ui/mail-check";
-import { GithubIcon } from "@/components/ui/github";
-import { LinkedinIcon } from "@/components/ui/linkedin";
-import { TwitterIcon } from "@/components/ui/twitter";
-import { YoutubeIcon } from "@/components/ui/youtube";
-import { DiscordIcon } from "@/components/ui/discord";
 import { DownloadIcon } from "@/components/ui/download";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  GithubIcon,
+  Linkedin02Icon,
+  NewTwitterIcon,
+  YoutubeIcon,
+  MediumIcon,
+  Mail01Icon,
+  CallIcon,
+  DiscordIcon,
+} from "@hugeicons/core-free-icons";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { siteConfig } from "@/data";
 import { useTheme } from "next-themes";
 
 import profileBanner from "../../../public/images/profile/banner.gif";
 import profileIcon from "../../../public/images/profile/pfp.jpeg";
-import { XIcon } from "@/components/ui/x";
 import DevPresence from "@/components/ui/DevPresence";
 import SpotifyNowPlaying from "@/components/ui/SpotifyNowPlaying";
 import TotalCodingTime from "@/components/ui/TotalCodingTime";
@@ -134,7 +138,7 @@ export const Hero = () => {
 
         <div className="w-full py-5 px-2 md:px-0">
           {/* Hero Content */}
-          <div className="flex flex-col justify-center items-start text-start mt-8">
+          <div className="flex flex-col justify-center items-end text-start mt-8">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full ml-1 mb-8">
               <div className="flex flex-col lg:flex-row items-start lg:items-end justify-center ">
                 <Image
@@ -155,17 +159,20 @@ export const Hero = () => {
                     </span>
                   </div>
                   <div className="inline-flex items-center gap-3">
-                    <h1 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
+                    <h1 className="text-3xl md:text-4xl  font-medium tracking-tighter ">
                       {name}
                     </h1>
                     <a
                       href={resume.path}
                       download={resume.filename}
-                      className="bg-blue-600 p-1.5 rounded-lg flex justify-center items-center border border-blue-400/20 hover:bg-blue-500 active:scale-95 transition-all duration-150"
+                      className="group bg-blue-600 p-1.5 rounded-lg inline-flex justify-center items-center border border-blue-400/20 hover:bg-blue-500 active:scale-95 transition-all duration-200"
                       title="Download Resume"
                       onClick={handlePlay}
                     >
                       <DownloadIcon className="text-white" size={16} />
+                      <span className="text-white text-sm font-medium overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 transition-all duration-200">
+                        Resume
+                      </span>
                     </a>
                   </div>
                 </div>
@@ -174,7 +181,7 @@ export const Hero = () => {
 
             <ScrollRevealText
               as="p"
-              className="text-base md:text-lg mb-8 max-w-4xl leading-relaxed"
+              className="text-base md:text-lg mb-8 max-w-4xl leading-loose"
             >
               {bio.long.split("scalable")[0]}
               <strong>scalable</strong>
@@ -188,73 +195,53 @@ export const Hero = () => {
                 <span>{location}</span>
               </span>
             </ScrollRevealText>
+          {/* Social Links */}
+          <div className="flex flex-wrap items-center gap-3 mb-10">
+            {/* Social icon bar */}
+            <div className="inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
+              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
+                <HugeiconsIcon icon={GithubIcon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">GitHub</span>
+              </a>
+              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200">
+                <HugeiconsIcon icon={Linkedin02Icon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">LinkedIn</span>
+              </a>
+              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+                <HugeiconsIcon icon={NewTwitterIcon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">X</span>
+              </a>
+              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200">
+                <HugeiconsIcon icon={YoutubeIcon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">YouTube</span>
+              </a>
+              <a href="https://medium.com/@subham12r" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+                <HugeiconsIcon icon={MediumIcon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Medium</span>
+              </a>
+              <span className="group inline-flex items-center p-2.5 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default">
+                <HugeiconsIcon icon={DiscordIcon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Discord</span>
+              </span>
+              <a href={`mailto:${email}`} className="group inline-flex items-center p-2.5 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md">
+                <HugeiconsIcon icon={Mail01Icon} size={20} />
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Mail</span>
+              </a>
+            </div>
 
-            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto]">
-              <div className="min-w-0 rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center ">
+          </div>
+
+            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="min-w-0 flex rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 items-center shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] ">
                 <DevPresence />
               </div>
-              <SpotifyNowPlaying className="min-w-0 w-full rounded-md border border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:w-auto md:max-w-[520px] " />
+              <SpotifyNowPlaying className="min-w-0 w-full rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:w-auto md:max-w-[520px]  shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]" />
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className=" gap-2 lg:gap-1 mb-10 w-full text-zinc-400">
-            {/* Social Icons Grid */}
-            <div className="flex flex-wrap  w-full">
-              <a
-                href={socials.github.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 hover:text-text-primary transition-colors p-2  "
-                title="GitHub"
-              >
-                <GithubIcon size={24} />
-              </a>
-              <a
-                href={socials.linkedin.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 hover:text-blue-500 transition-colors p-2 "
-                title="LinkedIn"
-              >
-                <LinkedinIcon size={24} />
-              </a>
-              <a
-                href={socials.twitter.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 hover:text-blue-400 transition-colors p-2 "
-                title="Twitter"
-              >
-                <TwitterIcon size={24} />
-              </a>
-              <a
-                href={socials.youtube.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 h-9 hover:text-red-500 transition-colors p-2 "
-                title="YouTube"
-              >
-                <YoutubeIcon size={24} />
-              </a>
-              <span
-                className="inline-flex items-center gap-2 h-9 hover:text-indigo-400 transition-colors cursor-default p-2 "
-                title={socials.discord.display}
-              >
-                <DiscordIcon size={24} />
-              </span>
-              <a
-                href={`mailto:${email}`}
-                className="inline-flex items-center gap-2 h-9 hover:text-red-400 transition-colors p-2 "
-                title={email}
-              >
-                <MailCheckIcon size={24} />
-              </a>
-            </div>
-          </div>
-
+       
           {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
-          <div className="w-full pb-10 ">
+          <div className="w-full p-4 rounded-md bg-accent border-2 border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
             {mounted && resolvedTheme ? (
               <>
                 <GithubCalendar username="Subham12R" colorSchema="gray"/>

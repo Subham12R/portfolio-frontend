@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
@@ -13,6 +14,8 @@ interface BlogPageContentProps {
 }
 
 export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
+  const [hoveredMediumId, setHoveredMediumId] = useState<string | null>(null);
+
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
@@ -58,12 +61,17 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
         {/* Featured on Medium */}
         {mediumPosts && mediumPosts.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-lg font-semibold text-text-secondary mb-4">
+            <h2 className="text-lg font-medium text-text-secondary mb-4">
               Featured on Medium
             </h2>
             <div className="flex flex-col gap-3">
               {mediumPosts.map((post) => (
-                <MediumBlogCard key={post.id} post={post} />
+                <MediumBlogCard
+                  key={post.id}
+                  post={post}
+                  isBlurred={hoveredMediumId !== null && hoveredMediumId !== post.id}
+                  onHoverChange={(h) => setHoveredMediumId(h ? post.id : null)}
+                />
               ))}
             </div>
           </div>

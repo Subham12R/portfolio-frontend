@@ -84,7 +84,7 @@ export function GalleryCard({
 
           {/* Title + Count */}
           <div className="flex items-baseline gap-3 mb-3">
-            <h3 className="text-xl font-bold text-text-primary">{title}</h3>
+            <h3 className="text-xl font-medium text-text-primary">{title}</h3>
             <span className="text-base text-text-muted">{count}</span>
           </div>
 

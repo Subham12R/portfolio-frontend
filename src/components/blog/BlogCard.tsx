@@ -1,91 +1,108 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { Calendar, ArrowRight } from 'lucide-react'
-import type { BlogPost } from '@/data/blog'
+import { useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Calendar, ArrowRight } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import type { BlogPost } from "@/data/blog";
 
-interface BlogCardProps {
-  post: BlogPost
-}
+const IMG_W = 280;
+const IMG_H = 160;
 
 function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
-export function BlogCard({ post }: BlogCardProps) {
-  const maxVisibleTags = 3
-  const visibleTags = post.tags.slice(0, maxVisibleTags)
-  const remainingCount = post.tags.length - maxVisibleTags
+interface BlogCardProps {
+  post: BlogPost;
+  isBlurred?: boolean;
+  onHoverChange?: (hovered: boolean) => void;
+}
+
+export function BlogCard({ post, isBlurred, onHoverChange }: BlogCardProps) {
+  const [hovered, setHovered] = useState(false);
+  const [placement, setPlacement] = useState<"below" | "above">("below");
+  const rowRef = useRef<HTMLElement>(null);
+
+  const rawX = useMotionValue(0);
+  const x = useSpring(rawX, { stiffness: 200, damping: 22 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!rowRef.current) return;
+    const rect = rowRef.current.getBoundingClientRect();
+    const clamped = Math.max(0, Math.min(rect.width - IMG_W, e.clientX - rect.left - IMG_W / 2));
+    rawX.set(clamped);
+  };
+
+  const href = `/blog/${post.slug}`;
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <article className="h-full rounded-2xl border border-border-primary bg-bg-elevated/50 overflow-hidden hover:border-border-secondary transition-colors duration-200">
-        {/* Cover Image */}
-        <div className="relative aspect-[16/10] bg-bg-card overflow-hidden">
-          {post.coverImage ? (
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-text-muted">
-              <span className="text-4xl font-bold opacity-20">
-                {post.title.charAt(0)}
-              </span>
-            </div>
-          )}
+    <article
+      ref={rowRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => {
+        if (rowRef.current) {
+          const rect = rowRef.current.getBoundingClientRect();
+          setPlacement(window.innerHeight - rect.bottom >= IMG_H + 8 ? "below" : "above");
+        }
+        setHovered(true);
+        onHoverChange?.(true);
+      }}
+      onMouseLeave={() => { setHovered(false); onHoverChange?.(false); }}
+      style={{ zIndex: hovered ? 30 : 0 }}
+      className={`group relative flex items-start justify-between gap-6 py-6 border-b border-border-primary last:border-0 transition-[filter,opacity] duration-300 ${isBlurred ? "opacity-40 blur-sm" : ""}`}
+    >
+      {/* Mouse-tracking banner — anchored below the border line */}
+      {post.coverImage && (
+        <motion.div
+          className={`absolute ${placement === "below" ? "top-full" : "bottom-full"} pointer-events-none z-50 rounded-xl overflow-hidden shadow-2xl`}
+          style={{ x, width: IMG_W, height: IMG_H }}
+          animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.92, y: hovered ? 0 : placement === "below" ? 6 : -6 }}
+          transition={{ duration: 0.18 }}
+        >
+          <Image src={post.coverImage} alt={post.title} fill className="object-cover" />
+        </motion.div>
+      )}
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {post.tags.slice(0, 3).map((tag) => (
+            <span key={tag} className="text-xs px-2 py-0.5 rounded border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary text-text-muted">
+              {tag}
+            </span>
+          ))}
         </div>
 
-        {/* Content */}
-        <div className="p-5">
-          {/* Title */}
-          <h3 className="text-xl font-semibold text-text-primary mb-2 line-clamp-2 group-hover:text-text-secondary transition-colors">
+        <Link href={href}>
+          <h3 className="text-lg font-medium text-text-primary group-hover:text-text-secondary transition-colors duration-200 leading-snug mb-1.5">
             {post.title}
           </h3>
+        </Link>
 
-          {/* Excerpt */}
-          <p className="text-text-muted text-sm leading-relaxed mb-4 line-clamp-2">
-            {post.excerpt}
-          </p>
+        <p className="text-sm text-text-muted leading-relaxed line-clamp-2 mb-3">
+          {post.excerpt}
+        </p>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-5">
-            {visibleTags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-3 py-1.5 rounded-full border border-border-primary text-text-secondary"
-              >
-                {tag}
-              </span>
-            ))}
-            {remainingCount > 0 && (
-              <span className="text-xs px-3 py-1.5 rounded-full border border-border-primary text-text-muted">
-                +{remainingCount} more
-              </span>
-            )}
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between pt-4 border-t border-border-primary">
-            <div className="flex items-center gap-2 text-text-muted text-sm">
-              <Calendar size={14} />
-              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-            </div>
-            <span className="flex items-center gap-2 text-text-secondary text-sm font-medium group-hover:text-text-primary transition-colors">
-              Read More
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </span>
-          </div>
+        <div className="flex items-center gap-1.5 text-xs text-text-muted">
+          <Calendar size={12} />
+          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
         </div>
-      </article>
-    </Link>
-  )
+      </div>
+
+      <Link
+        href={href}
+        className="shrink-0 inline-flex items-center gap-1.5 text-sm text-text-muted group-hover:text-text-primary transition-colors duration-200 pt-1"
+      >
+        Read more
+        <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+      </Link>
+    </article>
+  );
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import type { BlogPost } from "@/data/blog"
@@ -15,6 +15,7 @@ interface AnimatedBlogGridProps {
 
 export function AnimatedBlogGrid({ posts, className }: AnimatedBlogGridProps) {
   const gridRef = useRef<HTMLDivElement>(null)
+  const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   useEffect(() => {
     if (!gridRef.current) return
@@ -67,10 +68,14 @@ export function AnimatedBlogGrid({ posts, className }: AnimatedBlogGridProps) {
   }, [])
 
   return (
-    <div ref={gridRef} className={className ?? "grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6"}>
+    <div ref={gridRef} className={className ?? ""}>
       {posts.map((post) => (
         <div key={post.id} data-blog-item className="h-full">
-          <BlogCard post={post} />
+          <BlogCard
+            post={post}
+            isBlurred={hoveredId !== null && hoveredId !== post.id}
+            onHoverChange={(h) => setHoveredId(h ? post.id : null)}
+          />
         </div>
       ))}
     </div>

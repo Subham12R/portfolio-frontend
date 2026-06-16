@@ -38,7 +38,7 @@ const Navigation = () => {
               <li key={link.name}>
                 <Link
                   href={link.href}
-                  className="px-2 py-2 text-sm md:text-base font-medium text-text-secondary hover:text-text-primary relative after:absolute after:left-2 after:right-2 after:bottom-0 after:h-0.5 after:bg-text-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left transition-colors duration-200"
+                  className="px-3 py-1.5 text-sm md:text-base font-medium text-text-secondary hover:text-text-primary rounded-md hover:bg-hover-tint transition-colors duration-200"
                 >
                   {link.name}
                 </Link>

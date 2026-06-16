@@ -84,7 +84,7 @@ export function GitHubStarButton({ repo }: GitHubStarButtonProps) {
 
   // Placeholder while mounting to prevent hydration mismatch
   if (!mounted) {
-    return <div className="h-9 w-16 rounded-lg bg-bg-badge" />
+    return <div className="h-9 w-16 rounded-md bg-bg-badge/10 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary" />
   }
 
   return (
@@ -92,7 +92,7 @@ export function GitHubStarButton({ repo }: GitHubStarButtonProps) {
       href={`https://github.com/${repo}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 h-9 px-2.5 rounded-lg bg-bg-badge border border-border-primary hover:border-border-secondary transition-colors duration-200"
+      className="inline-flex items-center gap-1 h-9 px-2 rounded-md bg-bg-badge/10 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary hover:border-border-secondary transition-colors duration-200"
       title="Star on GitHub"
     >
       <GithubIcon size={16} className={isDark ? 'text-zinc-400' : 'text-zinc-600'} />

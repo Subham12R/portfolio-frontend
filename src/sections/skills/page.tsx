@@ -25,12 +25,12 @@ const Tech = () => {
       <div className="max-w-4xl w-full flex flex-col h-full">
         {/* Header */}
 
-        <h1 className="text-3xl  mb-4 tracking-tighter font-bold">
+        <h1 className="text-3xl  mb-4 tracking-tighter font-medium">
           Tech Stack - That helps me get the stuff done.
         </h1>
         {/* Tech Stack Dock */}
-        <div className="flex justify-center items-center pb-2 w-full overflow-visible">
-          <div className="relative flex items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-md bg-bg-elevated/80 border border-border-primary backdrop-blur-md w-full">
+        <div className="flex justify-center items-center pb-2 w-full overflow-visible ">
+          <div className="relative flex items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-md  border-2 border-border-primary backdrop-blur-md w-full shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
             {allTech.map((item, index) => {
               const isHovered = hoveredIndex === index;
               const isNeighbor =

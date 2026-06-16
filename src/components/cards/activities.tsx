@@ -8,7 +8,7 @@ export default function Activities() {
         className="w-full px-2 backdrop-blur-3xl rounded-md inline-flex items-center gap-2 mb-4"
       >
         <CalendarIcon size={20} className="mb-1" />
-        <h1 className="tracking-tighter text-lg font-bold">Activities</h1>
+        <h1 className="tracking-tighter text-lg font-medium">Activities</h1>
       </div>
 
       <div className="flex flex-1 flex-col gap-2">

@@ -28,6 +28,7 @@ import {
   ExternalLink,
   Download,
   Send,
+  Cat,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import gsap from "gsap";
@@ -50,6 +51,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [recentCommands, setRecentCommands] = useState<string[]>([]);
+  const [nekoEnabled, setNekoEnabled] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -57,16 +59,19 @@ export function CommandPalette() {
   const { resolvedTheme, setTheme } = useTheme();
   const { lenis } = useLenis();
 
-  // Load recent from localStorage
+  // Load recent + neko state from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem("cmd-recent");
-      if (saved) {
-        setRecentCommands(JSON.parse(saved));
-      }
+      if (saved) setRecentCommands(JSON.parse(saved));
     } catch {
       // ignore
     }
+    setNekoEnabled(localStorage.getItem("neko-enabled") === "true");
+
+    const onNekoToggle = () => setNekoEnabled((prev) => !prev);
+    window.addEventListener("neko-toggle", onNekoToggle);
+    return () => window.removeEventListener("neko-toggle", onNekoToggle);
   }, []);
 
   const saveRecent = useCallback(
@@ -182,6 +187,14 @@ export function CommandPalette() {
       description: `Send an email to ${siteConfig.email}`,
       icon: <Send size={16} className="text-text-secondary" />,
       action: () => window.open(`mailto:${siteConfig.email}`, "_blank"),
+      section: "actions",
+    },
+    {
+      id: "neko",
+      label: nekoEnabled ? "Disable Neko" : "Enable Neko",
+      description: "Toggle the neko cat cursor follower",
+      icon: <Cat size={16} className="text-text-secondary" />,
+      action: () => window.dispatchEvent(new Event("neko-toggle")),
       section: "actions",
     },
     {
@@ -493,15 +506,15 @@ export function CommandPalette() {
       {/* Trigger Button */}
       <button
         onClick={() => setOpen(true)}
-        className="hidden md:flex items-center gap-2 h-9 px-2.5 rounded-lg bg-bg-badge border border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
+        className="hidden md:flex items-center gap-2 h-9 px-2.5 rounded-md bg-bg-badge/10 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
         aria-label="Open command palette"
       >
         <Search size={14} className="text-text-muted" />
-        <div className="flex items-center gap-1">
-          <span className="px-1.5 py-0.5 text-[10px] font-medium text-text-muted bg-bg-elevated border border-border-primary rounded">
+        <div className="flex items-center gap-0.5">
+          <span className="px-1 py-0.5 text-[10px] font-medium text-text-muted bg-bg-elevated border border-border-primary rounded">
             Ctrl
           </span>
-          <span className="px-1.5 py-0.5 text-[10px] font-medium text-text-muted bg-bg-elevated border border-border-primary rounded">
+          <span className="px-1 py-0.5 text-[10px] font-medium text-text-muted bg-bg-elevated border border-border-primary rounded">
             K
           </span>
         </div>
@@ -510,7 +523,7 @@ export function CommandPalette() {
       {/* Mobile trigger */}
       <button
         onClick={() => setOpen(true)}
-        className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-bg-badge border border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
+        className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-bg-badge/10 border border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
         aria-label="Open command palette"
       >
         <Search size={16} className="text-text-muted" />

@@ -5,7 +5,7 @@ export default function Hobbies() {
         <div className="h-full w-full flex flex-col">
             <div data-about-item className=" w-full px-2 backdrop-blur-3xl rounded-md inline-flex items-center gap-2 mb-4">
                 <ToyBrickIcon size={20} className=" mb-1" />
-                <h1 className="tracking-tighter text-lg font-bold">Hobbies</h1>
+                <h1 className="tracking-tighter text-lg font-medium">Hobbies</h1>
             </div>
             <div className="flex flex-1 flex-col gap-2">
             <div data-about-item className="rounded-xl bg-bg-elevated flex-1 flex justify-start flex-col items-start px-2 py-2">

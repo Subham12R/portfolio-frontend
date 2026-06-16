@@ -23,6 +23,9 @@ import framerIcon from "@/assets/icons/framer.jpeg";
 import vscodeIcon from "@/assets/icons/vscode.jpeg";
 import wordpressIcon from "@/assets/icons/wordpress.jpeg";
 import stripeIcon from "@/assets/icons/stripe.jpeg";
+import fastapiIcon from "@/assets/icons/fastapi.webp";
+import pythonIcon from "@/assets/icons/python.png";
+import n8nIcon from "@/assets/icons/n8n.png";
 export type TechCategory = "frontend" | "backend" | "devops" | "other";
 
 export interface TechItem {
@@ -35,23 +38,27 @@ export const techRegistry: TechItem[] = [
   // Frontend
   { name: "JavaScript", category: "frontend", icon: jsIcon },
   { name: "TypeScript", category: "frontend", icon: tsIcon },
-  { name: "React", category: "frontend", icon: reactIcon },
   { name: "Next.js", category: "frontend", icon: nextjsIcon },
-  { name: "HTML", category: "frontend", icon: htmlIcon },
-  { name: "CSS", category: "frontend", icon: cssIcon },
+
+  // { name: "HTML", category: "frontend", icon: htmlIcon },
+  // { name: "CSS", category: "frontend", icon: cssIcon },
   { name: "Tailwind CSS", category: "frontend", icon: tailwindIcon },
 
   // Backend
+  { name: "Python", category: "backend", icon: pythonIcon },
   { name: "Node.js", category: "backend", icon: nodejsIcon },
   { name: "PostgreSQL", category: "backend", icon: postgreIcon },
-  { name: "Supabase", category: "backend", icon: supabaseIcon },
   { name: "Neon", category: "backend", icon: neonIcon },
-
+  { name: "MongoDB", category: "backend", icon: mongodbIcon },
+  { name: "FastAPI", category: "backend", icon: fastapiIcon },
+  
+  
   // DevOps
   { name: "Docker", category: "devops", icon: dockerIcon },
   { name: "Vercel", category: "devops", icon: vercelIcon },
-
+  
   // Everything else (no category = auto Other)
   { name: "GitHub", icon: githubIcon },
   { name: "VS Code", icon: vscodeIcon },
+  { name: "N8N", category: "other", icon: n8nIcon },
 ];

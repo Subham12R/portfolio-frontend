@@ -3,10 +3,9 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { ChevronDown, Link, LinkIcon } from "lucide-react";
+import { ChevronDown, LinkIcon } from "lucide-react";
 import type { Experience } from "@/data/experience";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
-import { getTechIcon } from "@/data/tech-icons";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -106,7 +105,7 @@ export function ExperienceCard({
             />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-text-primary">
+            <h2 className="text-lg font-medium text-text-primary">
               {experience.role}
             </h2>
             <p className="text-sm text-text-secondary">
@@ -161,33 +160,16 @@ export function ExperienceCard({
               </ul>
             )}
 
-          {/* TECH STACK - Icons */}
-          <div className="flex flex-wrap gap-3 p-1 -m-1">
-            {experience.techStack.map((tech) => {
-              const iconPath = getTechIcon(tech);
-              return iconPath ? (
-                <div
-                  key={tech}
-                  className="p-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary"
-                  title={tech}
-                >
-                  <Image
-                    src={iconPath}
-                    alt={tech}
-                    width={20}
-                    height={20}
-                    className="rounded-md"
-                  />
-                </div>
-              ) : (
-                <span
-                  key={tech}
-                  className="px-3 py-1.5 text-xs font-bold tracking-tight rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
-                >
-                  {tech}
-                </span>
-              );
-            })}
+          {/* TECH STACK - Text only */}
+          <div className="flex flex-wrap gap-2">
+            {experience.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 text-xs font-medium rounded-md bg-bg-badge/10 border border-border-primary text-text-secondary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
         </div>
       </div>

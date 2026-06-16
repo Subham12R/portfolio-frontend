@@ -67,7 +67,7 @@ function ExpandedProject({ project }: { project: Project }) {
           return iconPath ? (
             <div
               key={tag}
-              className="p-1.5 rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary"
+              className="p-1.5 rounded-xl bg-bg-badge/10 border border-border-primary outline-2 outline-offset-2 outline-border-secondary"
               title={tag}
             >
               <Image
@@ -81,7 +81,7 @@ function ExpandedProject({ project }: { project: Project }) {
           ) : (
             <span
               key={tag}
-              className="px-3 py-1.5 text-xs font-bold tracking-tight rounded-xl bg-bg-badge border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
+              className="px-3 py-1.5 text-xs font-bold tracking-tight rounded-xl bg-bg-badge/10 border border-border-primary outline-2 outline-offset-2 outline-border-secondary text-text-secondary"
             >
               {tag}
             </span>

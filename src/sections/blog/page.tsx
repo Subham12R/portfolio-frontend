@@ -3,6 +3,8 @@ import { siteConfig } from "@/data";
 import { AnimatedBlogGrid } from "@/components/blog/AnimatedBlogGrid";
 import { MediumBlogCard } from "@/components/blog/MediumBlogCard";
 import { getPostsSorted, getMediumPostsSorted } from "@/data/blog";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { LicenseDraftIcon } from "@hugeicons/core-free-icons";
 
 const BlogSection = () => {
   const section = siteConfig.sections.blog;
@@ -22,7 +24,7 @@ const BlogSection = () => {
           <span className="text-start text-text-secondary text-xl font-mono leading-tight">
             {section.number}
           </span>
-          <h1 className="text-4xl font-semibold text-text-primary text-start">
+          <h1 className="text-4xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
         </div>
@@ -33,7 +35,7 @@ const BlogSection = () => {
         {/* Featured on Medium */}
         {mediumPosts.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-lg font-semibold text-text-secondary mb-4">
+            <h2 className="text-lg font-medium text-text-secondary mb-4">
               Featured on Medium
             </h2>
             <div className="flex flex-col gap-3">
@@ -48,8 +50,9 @@ const BlogSection = () => {
         <div className="mt-12 flex items-center justify-center">
           <Link
             href="/blog"
-            className="text-text-secondary rounded-3xl border border-border-secondary hover:bg-hover-tint hover:border-border-accent px-6 py-2.5 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-md border-2 border-border-primary bg-bg-elevated/30 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-hover-tint hover:border-border-accent shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] transition-all duration-200"
           >
+            <HugeiconsIcon icon={LicenseDraftIcon} size={16} />
             View All Posts
           </Link>
         </div>

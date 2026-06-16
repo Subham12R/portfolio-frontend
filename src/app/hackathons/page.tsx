@@ -34,7 +34,7 @@ export default function HackathonsPage() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-semibold text-text-primary mb-2">
+          <h1 className="text-4xl font-medium text-text-primary mb-2">
             Hackathons
           </h1>
           <p className="text-text-secondary">

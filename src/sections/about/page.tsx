@@ -87,38 +87,16 @@ export const About = () => {
           <span className="text-start text-text-secondary text-xl font-mono leading-tight">
             {section.number}
           </span>
-          <h1 className="text-4xl font-semibold text-text-primary text-start">
+          <h1 className="text-4xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
         </div>
 
         {/* SPLIT LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
-          {/* LEFT: Image Column */}
-          <div ref={containerRef} className="md:col-span-2 relative group">
-            <div className="relative w-full h-[350px] md:h-[450px] overflow-hidden rounded-xl border border-border-primary bg-bg-elevated">
-              {/* Parallax image container */}
-              <div ref={imageRef} className="absolute -inset-[10%] scale-100">
-                <Image
-                  src={profileImg}
-                  alt={`${siteConfig.name} profile`}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              {/* Noise overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none z-10"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                }}
-              />
-              <div className="absolute inset-0 ring-1 ring-inset ring-border-primary rounded-xl z-20" />
-            </div>
-          </div>
+        <div className="gap-8 md:gap-12">
 
-          {/* RIGHT: Text & Links Column */}
+
+
           <div className="md:col-span-3 flex flex-col justify-start items-start space-y-6">
             <div className="text-lg md:text-xl leading-relaxed">
               <ScrollRevealText as="p" className="mb-6">

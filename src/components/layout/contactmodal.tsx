@@ -37,10 +37,10 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative z-50 w-full max-w-4xl rounded-2xl border border-border-primary bg-bg-elevated shadow-2xl shadow-shadow-strong">
+      <div className="relative z-50 w-full max-w-4xl rounded-md border border-border-primary bg-bg-elevated shadow-2xl shadow-shadow-strong">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-primary px-6 py-4">
-          <h2 className="text-lg font-semibold text-text-primary">
+          <h2 className="text-lg font-medium text-text-primary">
             Schedule a Call
           </h2>
           <button
@@ -53,11 +53,11 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         </div>
 
         {/* Body */}
-        <div className="h-[70vh] w-full">
+        <div className="h-[70vh] w-full ">
           <iframe
-            src="https://cal.com/subham12r"
-            className="h-full w-full rounded-b-2xl"
-            frameBorder="0"
+            src="https://cal.com/subham12r/15min"
+            className="h-full w-full rounded-b-md p-4"
+            frameBorder="1"
             allow="camera; microphone; fullscreen; autoplay"
           />
         </div>

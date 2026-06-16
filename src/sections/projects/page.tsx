@@ -2,6 +2,8 @@ import AnimatedProjectGrid from "@/components/projects/AnimatedProjectGrid";
 import Link from "next/link";
 import { siteConfig } from "@/data";
 import { fetchProjects } from "@/lib/api/server";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { NanoTechnologyIcon } from "@hugeicons/core-free-icons";
 
 const ProjectsPage = async () => {
   const section = siteConfig.sections.projects;
@@ -19,7 +21,7 @@ const ProjectsPage = async () => {
           <span className="text-start text-text-secondary text-xl font-mono leading-tight">
             {section.number}
           </span>
-          <h1 className="text-4xl font-semibold text-text-primary text-start">
+          <h1 className="text-4xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
         </div>
@@ -31,8 +33,9 @@ const ProjectsPage = async () => {
         <div className="mt-12 flex items-center justify-center">
           <Link
             href="/projects"
-            className="text-text-secondary rounded-3xl border border-border-secondary hover:bg-hover-tint hover:border-border-accent px-6 py-2.5 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-md border-2 border-border-primary bg-bg-elevated/30 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-hover-tint hover:border-border-accent shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] transition-all duration-200"
           >
+            <HugeiconsIcon icon={NanoTechnologyIcon} size={16} />
             View All Projects
           </Link>
         </div>

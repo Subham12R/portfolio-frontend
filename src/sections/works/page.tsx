@@ -17,7 +17,7 @@ const Work = async () => {
           <span className="text-start text-text-secondary text-xl font-mono leading-tight">
             {section.number}
           </span>
-          <h1 className="text-4xl font-semibold text-text-primary text-start">
+          <h1 className="text-4xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
         </div>

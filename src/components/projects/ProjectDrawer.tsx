@@ -119,7 +119,7 @@ export default function ProjectDrawer({
                     </span>
                     {project.status && (
                       <span
-                        className={`text-xs px-3 py-1 rounded-full border ${
+                        className={`text-xs px-3 py-1 rounded-md border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] ${
                           project.status === "maintained"
                             ? "border-green-500/30 text-green-400"
                             : project.status === "in-progress"
