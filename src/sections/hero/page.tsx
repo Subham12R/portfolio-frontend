@@ -148,7 +148,7 @@ export const Hero = () => {
                   alt={name}
                   width={100}
                   height={100}
-                  className="relative z-20 mb-4 md:mb-0  h-20 w-20 aspect-square overflow-hidden object-cover border-2  rounded-xl outline-2 outline-offset-2 outline-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
+                  className="relative z-20  h-20 w-20 aspect-square overflow-hidden object-cover border-2  rounded-xl outline-2 outline-offset-2 outline-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
                   priority
                 />
                 <div>
@@ -160,7 +160,7 @@ export const Hero = () => {
                       {titles[0]}
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-3  mb-2">
+                  <div className="inline-flex items-center gap-2  ">
                     <h1 className="text-2xl md:text-4xl  font-medium tracking-tighter ">
                       {name}
                     </h1>

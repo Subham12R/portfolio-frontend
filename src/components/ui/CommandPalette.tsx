@@ -317,32 +317,61 @@ export function CommandPalette() {
     }
   }, [query]);
 
-  // Lock body scroll when opened — compensate scrollbar width to prevent layout shift
+  // Bulletproof scroll lock: works on Safari, Chrome, iOS
   const scrollYRef = useRef(0);
   useEffect(() => {
-    if (open) {
-      scrollYRef.current = window.scrollY;
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.documentElement.style.scrollBehavior = "auto";
-      lenis?.stop();
-    } else {
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.documentElement.style.scrollBehavior = "";
-      window.scrollTo(0, scrollYRef.current);
-      lenis?.start();
-    }
+    if (!open) return;
+
+    scrollYRef.current = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+
+    const originalHtmlOverflow = html.style.overflow;
+    const originalBodyOverflow = body.style.overflow;
+    const originalBodyPosition = body.style.position;
+    const originalBodyTop = body.style.top;
+    const originalBodyWidth = body.style.width;
+    const originalBodyTouchAction = body.style.touchAction;
+    const originalBodyOverscroll = body.style.overscrollBehavior;
+    const originalHtmlTouchAction = html.style.touchAction;
+    const originalHtmlOverscroll = html.style.overscrollBehavior;
+    const originalHtmlScrollBehavior = html.style.scrollBehavior;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollYRef.current}px`;
+    body.style.width = "100%";
+    body.style.touchAction = "none";
+    body.style.overscrollBehavior = "none";
+    html.style.touchAction = "none";
+    html.style.overscrollBehavior = "none";
+    html.style.scrollBehavior = "auto";
+
+    lenis?.stop();
+
+    const preventTouch = (e: TouchEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-cmd-list]")) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("touchmove", preventTouch, { passive: false });
+
     return () => {
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.documentElement.style.scrollBehavior = "";
+      html.style.overflow = originalHtmlOverflow;
+      body.style.overflow = originalBodyOverflow;
+      body.style.position = originalBodyPosition;
+      body.style.top = originalBodyTop;
+      body.style.width = originalBodyWidth;
+      body.style.touchAction = originalBodyTouchAction;
+      body.style.overscrollBehavior = originalBodyOverscroll;
+      html.style.touchAction = originalHtmlTouchAction;
+      html.style.overscrollBehavior = originalHtmlOverscroll;
+      html.style.scrollBehavior = originalHtmlScrollBehavior;
       window.scrollTo(0, scrollYRef.current);
       lenis?.start();
+      document.removeEventListener("touchmove", preventTouch);
     };
   }, [open]);
 
@@ -542,31 +571,30 @@ export function CommandPalette() {
       {mounted &&
         typeof document !== "undefined" &&
         createPortal(
-          <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
-            {/* Full-page backdrop blur + noise */}
+          <div className="fixed inset-0 z-[9999] flex items-start justify-center pt-[20vh] px-4">
+            {/* Backdrop — clickable */}
             <div
               ref={backdropRef}
-              className="absolute inset-0 bg-bg-primary/40 pointer-events-none"
+              className="absolute inset-0 bg-bg-primary/40 pointer-events-auto"
               style={{
                 backdropFilter: "blur(5px) saturate(180%)",
                 WebkitBackdropFilter: "blur(80px) saturate(180%)",
                 filter: "brightness(0.92)",
                 opacity: 0,
               }}
-            />
+              onClick={() => setOpen(false)}
+              onPointerDown={() => setOpen(false)}
+            ></div>
 
             {/* Modal */}
             <div
-              className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4"
-              onClick={() => setOpen(false)}
+              ref={modalRef}
+              className="relative w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh] pointer-events-auto"
+              style={{ opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              onPointerDown={(e) => e.stopPropagation()}
+              data-lenis-prevent
             >
-              <div
-                ref={modalRef}
-                className="w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh] pointer-events-auto"
-                style={{ opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-                data-lenis-prevent
-              >
                 {/* Search Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border-primary/30 bg-bg-elevated/40">
                   <Search size={18} className="text-text-muted shrink-0" />
@@ -590,8 +618,10 @@ export function CommandPalette() {
                 {/* Results */}
                 <div
                   ref={listRef}
-                  className="min-h-0 flex-1 overflow-y-auto py-2 hide-scrollbar touch-pan-y"
+                  className="min-h-0 flex-1 overflow-y-auto py-2 hide-scrollbar touch-pan-y overscroll-contain"
+                  data-cmd-list
                   data-lenis-prevent
+                  style={{ WebkitOverflowScrolling: "touch" }}
                 >
                   {orderedItems.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-8 text-text-muted">
@@ -671,7 +701,6 @@ export function CommandPalette() {
                   </div>
                 </div>
               </div>
-            </div>
           </div>,
           document.body
         )}
