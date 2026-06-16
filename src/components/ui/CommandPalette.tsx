@@ -67,7 +67,8 @@ export function CommandPalette() {
     } catch {
       // ignore
     }
-    setNekoEnabled(localStorage.getItem("neko-enabled") === "true");
+    const storedNeko = localStorage.getItem("neko-enabled");
+    setNekoEnabled(storedNeko === null ? true : storedNeko === "true");
 
     const onNekoToggle = () => setNekoEnabled((prev) => !prev);
     window.addEventListener("neko-toggle", onNekoToggle);
@@ -463,8 +464,7 @@ export function CommandPalette() {
     setOpen(false);
   };
 
-  const renderItem = (item: CommandItem, index: number) => {
-    const isSelected = orderedItems[index]?.id === item.id;
+  const renderItem = (item: CommandItem) => {
     const actualIndex = orderedItems.findIndex((o) => o.id === item.id);
     return (
       <button
@@ -599,10 +599,7 @@ export function CommandPalette() {
                             Recent
                           </div>
                           {recentItems.map((item, i) =>
-                            renderItem(
-                              item,
-                              orderedItems.findIndex((o) => o.id === item.id)
-                            )
+                            renderItem(item)
                           )}
                         </div>
                       )}
@@ -616,10 +613,7 @@ export function CommandPalette() {
                             </div>
                           )}
                           {actionItems.map((item, i) =>
-                            renderItem(
-                              item,
-                              orderedItems.findIndex((o) => o.id === item.id)
-                            )
+                            renderItem(item)
                           )}
                         </div>
                       )}
@@ -631,10 +625,7 @@ export function CommandPalette() {
                             Recent
                           </div>
                           {recentNavItems.map((item, i) =>
-                            renderItem(
-                              item,
-                              orderedItems.findIndex((o) => o.id === item.id)
-                            )
+                            renderItem(item)
                           )}
                         </div>
                       )}
@@ -648,10 +639,7 @@ export function CommandPalette() {
                             </div>
                           )}
                           {navItems.map((item, i) =>
-                            renderItem(
-                              item,
-                              orderedItems.findIndex((o) => o.id === item.id)
-                            )
+                            renderItem(item)
                           )}
                         </div>
                       )}

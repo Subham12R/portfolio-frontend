@@ -8,7 +8,8 @@ export function Neko() {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    setEnabled(localStorage.getItem("neko-enabled") === "true");
+    const stored = localStorage.getItem("neko-enabled");
+    setEnabled(stored === null ? true : stored === "true");
 
     const toggle = () => {
       setEnabled((prev) => {
