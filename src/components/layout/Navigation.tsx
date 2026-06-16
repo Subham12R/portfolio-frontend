@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/data";
-import profileIcon from "../../../public/images/profile/pfp.jpeg";
+import profileIcon from "../../../public/images/profile/icon.png";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { GitHubStarButton } from "@/components/ui/GitHubStarButton";
 import { CommandPalette } from "@/components/ui/CommandPalette";
