@@ -43,10 +43,12 @@ export const Hero = () => {
   const [mounted, setMounted] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
   const handlePlay = () => {
-    const audio = new Audio("/click.wav");
-    audio.play();
+    if (typeof window !== "undefined") {
+      const audio = new Audio("/click.wav");
+      audio.play();
+    }
   };
-
+  
   const { name, location, timezone, email, socials, titles, bio, resume } =
     siteConfig;
   const { resolvedTheme } = useTheme();

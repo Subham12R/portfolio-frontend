@@ -51,7 +51,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [recentCommands, setRecentCommands] = useState<string[]>([]);
-  const [nekoEnabled, setNekoEnabled] = useState(false);
+  const [nekoMascotMode, setNekoMascotMode] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -67,12 +67,14 @@ export function CommandPalette() {
     } catch {
       // ignore
     }
-    const storedNeko = localStorage.getItem("neko-enabled");
-    setNekoEnabled(storedNeko === null ? true : storedNeko === "true");
+    const storedMascot = localStorage.getItem("neko-mascot");
+    setNekoMascotMode(storedMascot === "true");
 
-    const onNekoToggle = () => setNekoEnabled((prev) => !prev);
-    window.addEventListener("neko-toggle", onNekoToggle);
-    return () => window.removeEventListener("neko-toggle", onNekoToggle);
+    const onMascotToggle = () => setNekoMascotMode((prev) => !prev);
+    window.addEventListener("neko-sprite-toggle", onMascotToggle);
+    return () => {
+      window.removeEventListener("neko-sprite-toggle", onMascotToggle);
+    };
   }, []);
 
   const saveRecent = useCallback(
@@ -190,12 +192,13 @@ export function CommandPalette() {
       action: () => window.open(`mailto:${siteConfig.email}`, "_blank"),
       section: "actions",
     },
+
     {
-      id: "neko",
-      label: nekoEnabled ? "Disable Neko" : "Enable Neko",
-      description: "Toggle the neko cat cursor follower",
+      id: "neko-mascot",
+      label: nekoMascotMode ? "Switch to Neko" : "Switch to Mascot",
+      description: "Toggle between default neko and custom mascot sprites",
       icon: <Cat size={16} className="text-text-secondary" />,
-      action: () => window.dispatchEvent(new Event("neko-toggle")),
+      action: () => window.dispatchEvent(new Event("neko-sprite-toggle")),
       section: "actions",
     },
     {
