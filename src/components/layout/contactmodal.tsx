@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLenis } from "@/components/providers/SmoothScroll";
 
 type ContactModalProps = {
   open: boolean;
@@ -8,15 +9,20 @@ type ContactModalProps = {
 };
 
 export default function ContactModal({ open, onClose }: ContactModalProps) {
+  const { lenis } = useLenis();
+
   // Prevent background scroll
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      lenis?.stop();
     } else {
       document.body.style.overflow = "";
+      lenis?.start();
     }
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
     };
   }, [open]);
 

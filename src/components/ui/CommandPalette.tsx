@@ -33,6 +33,7 @@ import {
 import { useTheme } from "next-themes";
 import gsap from "gsap";
 import { siteConfig } from "@/data/site.config";
+import { useLenis } from "@/components/providers/SmoothScroll";
 
 interface CommandItem {
   id: string;
@@ -55,6 +56,7 @@ export function CommandPalette() {
   const backdropRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme, setTheme } = useTheme();
+  const { lenis } = useLenis();
 
   // Load recent + neko state from localStorage
   useEffect(() => {
@@ -346,6 +348,8 @@ export function CommandPalette() {
     html.style.overscrollBehavior = "none";
     html.style.scrollBehavior = "auto";
 
+    lenis?.stop();
+
     const preventTouch = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
       if (!target.closest("[data-cmd-list]")) {
@@ -366,6 +370,7 @@ export function CommandPalette() {
       html.style.overscrollBehavior = originalHtmlOverscroll;
       html.style.scrollBehavior = originalHtmlScrollBehavior;
       window.scrollTo(0, scrollYRef.current);
+      lenis?.start();
       document.removeEventListener("touchmove", preventTouch);
     };
   }, [open]);
@@ -588,6 +593,7 @@ export function CommandPalette() {
               style={{ opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
+              data-lenis-prevent
             >
                 {/* Search Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border-primary/30 bg-bg-elevated/40">
@@ -614,6 +620,7 @@ export function CommandPalette() {
                   ref={listRef}
                   className="min-h-0 flex-1 overflow-y-auto py-2 hide-scrollbar touch-pan-y overscroll-contain"
                   data-cmd-list
+                  data-lenis-prevent
                   style={{ WebkitOverflowScrolling: "touch" }}
                 >
                   {orderedItems.length === 0 ? (
