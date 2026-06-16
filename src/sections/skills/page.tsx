@@ -45,7 +45,7 @@ const Tech = () => {
                 >
                   {/* Tooltip */}
                   <div
-                    className={`absolute -top-15 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap transition-all duration-200 ${
+                    className={`absolute z-50 -top-15 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap transition-all duration-200 ${
                       isHovered
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 translate-y-2 pointer-events-none"

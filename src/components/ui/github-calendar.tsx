@@ -111,6 +111,27 @@ export function GithubCalendar({
     const [hoveredDate, setHoveredDate] = React.useState<string | null>(null)
     const [hoveredCount, setHoveredCount] = React.useState<number | null>(null)
     const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 })
+    const [tooltipPos, setTooltipPos] = React.useState({ x: 0, y: 0 })
+    const tooltipRef = React.useRef<HTMLDivElement>(null)
+
+    React.useLayoutEffect(() => {
+        if (!hoveredDate || !tooltipRef.current) return
+        const tooltipRect = tooltipRef.current.getBoundingClientRect()
+        const vw = window.innerWidth
+
+        const halfW = tooltipRect.width / 2
+        let x = mousePos.x
+        let y = mousePos.y - 40
+
+        // Clamp horizontal: keep fully inside viewport
+        if (x + halfW > vw - 8) x = vw - halfW - 8
+        if (x - halfW < 8) x = halfW + 8
+
+        // Clamp vertical: if going above viewport, show below instead
+        if (y < 8) y = mousePos.y + 20
+
+        setTooltipPos({ x, y })
+    }, [hoveredDate, mousePos])
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -155,7 +176,7 @@ export function GithubCalendar({
     return (
         <div className={cn("w-max max-w-full flex flex-col gap-4", className)}>
             {showTotal && (
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-1">
                     <div className="flex items-center gap-2">
                         <svg height="16" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" className="fill-current text-muted-foreground">
                             <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
@@ -169,8 +190,12 @@ export function GithubCalendar({
             )}
 
             <div
-                className="relative flex flex-nowrap gap-[3px] w-max max-w-full"
+                className="relative flex flex-nowrap gap-[4px] lg:gap-[2px] w-max max-w-full overflow-x-auto lg:overflow-visible"
                 onMouseLeave={() => {
+                    setHoveredDate(null)
+                    setHoveredCount(null)
+                }}
+                onClick={() => {
                     setHoveredDate(null)
                     setHoveredCount(null)
                 }}
@@ -179,14 +204,15 @@ export function GithubCalendar({
                 <AnimatePresence>
                     {hoveredDate && (
                         <motion.div
+                            ref={tooltipRef}
                             initial={{ opacity: 0, y: 10, scale: 0.9 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 5, scale: 0.9 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
+                            className="fixed z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
                             style={{
-                                left: mousePos.x,
-                                top: mousePos.y - 40,
+                                left: tooltipPos.x,
+                                top: tooltipPos.y,
                                 transform: "translateX(-50%)"
                             }}
                         >
@@ -197,7 +223,7 @@ export function GithubCalendar({
                 </AnimatePresence>
 
                 {weeks.map((week, weekIndex) => (
-                    <div key={weekIndex} className="flex flex-col gap-[3px] w-[14px]">
+                    <div key={weekIndex} className="flex flex-col gap-[4px] sm:gap-[3px] w-[18px] sm:w-[14px] flex-shrink-0">
                         {week.map((day, dayIndex) => {
                             const isGlowing = variant === "city-lights" && day.contributionCount > 0;
                             const isMinimal = variant === "minimal";
@@ -218,14 +244,23 @@ export function GithubCalendar({
                                         setHoveredDate(day.date)
                                         setHoveredCount(day.contributionCount)
                                         const rect = e.currentTarget.getBoundingClientRect()
-                                        const parentRect = e.currentTarget.offsetParent!.getBoundingClientRect()
-                                        setMousePos({
-                                            x: rect.left - parentRect.left + rect.width / 2,
-                                            y: rect.top - parentRect.top
-                                        })
+                                        const x = rect.left + rect.width / 2
+                                        const y = rect.top
+                                        setMousePos({ x, y })
+                                        setTooltipPos({ x, y: y - 40 })
+                                    }}
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setHoveredDate(day.date)
+                                        setHoveredCount(day.contributionCount)
+                                        const rect = e.currentTarget.getBoundingClientRect()
+                                        const x = rect.left + rect.width / 2
+                                        const y = rect.top
+                                        setMousePos({ x, y })
+                                        setTooltipPos({ x, y: y - 40 })
                                     }}
                                     className={cn(
-                                        "w-full aspect-square transition-colors duration-200",
+                                        "w-full aspect-square flex-shrink-0 transition-colors duration-200",
                                         getLevelClass(day.contributionLevel, colorSchema),
                                         isGlowing && "z-10",
                                         shapeClass,

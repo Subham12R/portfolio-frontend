@@ -138,21 +138,21 @@ export const Hero = () => {
           />
         </div>
 
-        <div className="w-full py-5 px-2 md:px-0">
+        <div className="w-full py-5 px-2 ">
           {/* Hero Content */}
-          <div className="flex flex-col justify-center items-end text-start mt-8">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full ml-1 mb-8">
-              <div className="flex flex-col lg:flex-row items-start lg:items-end justify-center ">
+          <div className="flex flex-col justify-center items-end text-start mt-8 ">
+            <div className="flex flex-col md:flex-row md:justify-between items-start w-full mb-8  px-2 lg:px-0 ">
+              <div className="flex flex-row items-end justify-center gap-4">
                 <Image
                   src={profileIcon}
                   alt={name}
                   width={100}
                   height={100}
-                  className="relative z-20 -mt-10 md:-mt-20 mb-4 md:mb-0 md:mr-4 h-20 w-20 aspect-square overflow-hidden object-cover border-2  rounded-xl outline-2 outline-offset-2 outline-border-primary"
+                  className="relative z-20 mb-4 md:mb-0  h-20 w-20 aspect-square overflow-hidden object-cover border-2  rounded-xl outline-2 outline-offset-2 outline-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
                   priority
                 />
                 <div>
-                  <div className="h-6 overflow-hidden">
+                  <div className="h-6 overflow-hidden ">
                     <span
                       ref={textRef}
                       className="block text-text-secondary font-medium"
@@ -160,8 +160,8 @@ export const Hero = () => {
                       {titles[0]}
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-3">
-                    <h1 className="text-3xl md:text-4xl  font-medium tracking-tighter ">
+                  <div className="inline-flex items-center gap-3  mb-2">
+                    <h1 className="text-2xl md:text-4xl  font-medium tracking-tighter ">
                       {name}
                     </h1>
                     <a
@@ -183,7 +183,7 @@ export const Hero = () => {
 
             <ScrollRevealText
               as="p"
-              className="text-base md:text-lg mb-8 max-w-4xl leading-loose"
+              className="text-base md:text-lg mb-8 max-w-4xl leading-loose px-2 lg:px-0"
             >
               {bio.long.split("scalable")[0]}
               <strong>scalable</strong>
@@ -198,7 +198,7 @@ export const Hero = () => {
               </span>
             </ScrollRevealText>
           {/* Social Links */}
-          <div className="flex flex-wrap items-center gap-3 mb-10">
+          <div className="flex flex-wrap items-center gap-3 mb-10 px-2 lg:px-0">
             {/* Social icon bar */}
             <div className="inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
               <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
@@ -233,7 +233,7 @@ export const Hero = () => {
 
           </div>
 
-            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2 px-2 lg:px-0">
               <div className="min-w-0 flex rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 items-center shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] ">
                 <DevPresence />
               </div>
@@ -241,7 +241,8 @@ export const Hero = () => {
             </div>
           </div>
 
-       
+       <div className="px-2 lg:px-0">
+
           {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
           <div className="w-full p-4 rounded-md bg-accent border-2 border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
             {mounted && resolvedTheme ? (
@@ -258,13 +259,13 @@ export const Hero = () => {
                 </div>
 
                 {/* Calendar grid skeleton */}
-                <div className="flex gap-1">
+                <div className="flex gap-[4px] sm:gap-[3px] overflow-x-auto">
                   {Array.from({ length: 53 }).map((_, week) => (
-                    <div key={week} className="flex flex-col gap-1">
+                    <div key={week} className="flex flex-col gap-[4px] sm:gap-[3px] flex-shrink-0">
                       {Array.from({ length: 7 }).map((_, day) => (
                         <div
                           key={day}
-                          className="w-[10px] h-[10px] bg-bg-elevated rounded"
+                          className="w-[18px] h-[18px] sm:w-[14px] sm:h-[14px] bg-bg-elevated rounded flex-shrink-0"
                         />
                       ))}
                     </div>
@@ -272,6 +273,7 @@ export const Hero = () => {
                 </div>
               </div>
             )}
+          </div>
           </div>
         </div>
       </div>
