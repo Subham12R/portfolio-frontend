@@ -557,7 +557,7 @@ export function CommandPalette() {
 
             {/* Modal */}
             <div
-              className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4 pointer-events-none"
+              className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4"
               onClick={() => setOpen(false)}
             >
               <div
