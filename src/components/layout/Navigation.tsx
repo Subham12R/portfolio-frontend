@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/data";
-import profileIcon from "../../../public/images/profile/icon.png";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { GitHubStarButton } from "@/components/ui/GitHubStarButton";
 import { CommandPalette } from "@/components/ui/CommandPalette";
@@ -23,8 +21,8 @@ const Navigation = () => {
         <div className="flex items-center gap-4 md:gap-6 ml-0.2">
           <div className=" px-2 py-2 inline-flex items-center">
             <Link href="#home" className="group relative">
-              <Image
-                src={profileIcon}
+              <img
+                src="/images/profile/icon.png"
                 alt={siteConfig.name}
                 width={40}
                 height={40}

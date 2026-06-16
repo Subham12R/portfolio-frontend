@@ -1,20 +1,9 @@
-/**
- * Neko.js - Bundled version (In-house)
- * Copyright (C) 2025 Louis Abraham
- *
- * Based on Neko98 by David Harvey (1998)
- * Original Neko by Masayuki Koba
- *
- * Licensed under GPL v3 (see LICENSE.md)
- *
- * NOTE: To customize sprites, replace the `NEKO_SPRITES` array below
- * or call `neko.setSprites(yourCustomSprites)` after initialization.
- */
-
 (function() {
     "use strict";
 
-    // Embedded sprite data (base64-encoded)
+    // Access GSAP from global scope (loaded by Next.js app)
+    const gsap = window.gsap || (typeof gsap !== "undefined" ? gsap : null);
+
     const NEKO_SPRITES = [
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABIklEQVR4nO1WSQ7EMAiDUf//ZeYwoguYLdVIPdSnqklsB0gI0QsMeQJntKAiQuPLG7ILRUQkIUTjqfinMMCI4KcBzUUcpYFsV0oQCTgEBi9TdFwNMB27bakYka455Vc9l4LISCYAB6xBK6zYAtI0b0akg5CvKkLMxpgv+p9hIx/COUsfTmv7s6CF01pKQZT7QU3siIoQ4pxjFWPmy/fUzCT87YvoZKbkn6SAu1XeFW9PMtjDcI6IMWd5BfwjorUidLdZMSZZb1g6BQTqYdghbxkISaMGldXEtAZaJwEczVu9oN2ikZEKlQERkfSBkTWmam1l4BJudNtlhsDa+6dg+CRrIe0FaDdTVBGLIiAqnIkreSZiOBxZtHKyZfh0L+a/eA6+YR662bT+YjsAAAAASUVORK5CYII=",
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA40lEQVR4nO1XyxLDIAiUTv7/l+mhsfUBsogZM233ZkZ2F2SIUpoHN2uaIUGDWrHEXH8iEqlMfq9rboU7wpcRmPeBCpfiUrb527mHk1C1iIGu5Kv2wgauAnJW5rmr5EA/QAYERyNBl8b2CiA9QG1m1hoVhzacqEogVeTqQcSasEj6MRM2oCqCo9jUGUVVWRORqwLC1BS1hk04I57jmtGsYvskNA14s88oqxAyMDuE0NiRgW4AzcAaSPfvgZ83EOqDVfeBlDb+C0Qj74V+SYV5D6eBknjJw+T2Tfj9BqKAX0B/aHgCdIBeOO78F8UAAAAASUVORK5CYII=",
@@ -50,112 +39,29 @@
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA10lEQVR4nO2UUQ7EIAhEYbP3vzL7wxo6IqKpadIwSWNKlXmClahUKpVKpbMSfYb6nDQXCb1vARg5zJ1vABAYrx919zoOgb6bpi05M4cGsJYxmK2AkPYUdnYZMYawHmhH5JljQmbuTLQSrrldo/Oa7wwgZZ7VH9L6nvwNU3oKoJUwAkhdJBmZ0nftW66AOUjEzO2JzKONrN4DHYw18mKBuRARb50BWwUbw7gHg1Dbh9CDsKbYptH85XugSxD03wOC98lqzRElngFZQ4TJAqShLEdi3q73y/QDzYaO9US4bAEAAAAASUVORK5CYII="
     ];
 
-    // Mascot sprite paths (custom sprites in public/sprites/mascot/)
-    const MASCOT_SPRITES = [
-        "/sprites/mascot/0.png",   // 0  AWAKE
-        "/sprites/mascot/1.png",   // 1  U_MOVE_1
-        "/sprites/mascot/2.png",   // 2  U_MOVE_2
-        "/sprites/mascot/3.png",   // 3  UR_MOVE_1
-        "/sprites/mascot/4.png",   // 4  UR_MOVE_2
-        "/sprites/mascot/5.png",   // 5  R_MOVE_1
-        "/sprites/mascot/6.png",   // 6  R_MOVE_2
-        "/sprites/mascot/7.png",   // 7  DR_MOVE_1
-        "/sprites/mascot/8.png",   // 8  DR_MOVE_2
-        "/sprites/mascot/9.png",   // 9  D_MOVE_1
-        "/sprites/mascot/10.png",  // 10 D_MOVE_2
-        "/sprites/mascot/11.png",  // 11 DL_MOVE_1
-        "/sprites/mascot/12.png",  // 12 DL_MOVE_2
-        "/sprites/mascot/13.png",  // 13 L_MOVE_1
-        "/sprites/mascot/14.png",  // 14 L_MOVE_2
-        "/sprites/mascot/15.png",  // 15 UL_MOVE_1
-        "/sprites/mascot/16.png",  // 16 UL_MOVE_2
-        "/sprites/mascot/17.png",  // 17 U_CLAW_1
-        "/sprites/mascot/18.png",  // 18 U_CLAW_2
-        "/sprites/mascot/19.png",  // 19 R_CLAW_1
-        "/sprites/mascot/20.png",  // 20 R_CLAW_2
-        "/sprites/mascot/13.png",  // 21 L_CLAW_1   ← reuse L_MOVE_1
-        "/sprites/mascot/14.png",  // 22 L_CLAW_2   ← reuse L_MOVE_2
-        "/sprites/mascot/17.png",  // 23 D_CLAW_1   ← reuse U_CLAW_1
-        "/sprites/mascot/18.png",  // 24 D_CLAW_2   ← reuse U_CLAW_2
-        "/sprites/mascot/0.png",   // 25 WASH       ← reuse AWAKE
-        "/sprites/mascot/19.png",  // 26 SCRATCH_1  ← reuse R_CLAW_1
-        "/sprites/mascot/20.png",  // 27 SCRATCH_2  ← reuse R_CLAW_2
-        "/sprites/mascot/20.png",   // 28 STOP       ← reuse AWAKE
-        "/sprites/mascot/20.png",   // 29 YAWN       ← reuse AWAKE
-        "/sprites/mascot/29.png",   // 30 SLEEP_1    ← reuse D_MOVE_1
-        "/sprites/mascot/20.png",  // 31 SLEEP_2    ← reuse D_MOVE_2
-    ];
-
-    // Track current sprite mode
-    let mascotMode = false;
-
-    // Sprite sizes
-    const NEKO_SIZE = 32;
-    const MASCOT_SIZE = 64;
-    let currentSpriteSize = NEKO_SIZE;
-
-    function updateSpriteSize() {
-        const size = mascotMode ? MASCOT_SIZE : NEKO_SIZE;
-        currentSpriteSize = size;
-        if (window.neko && window.neko.element) {
-            window.neko.element.style.width = size + "px";
-            window.neko.element.style.height = size + "px";
-        }
-    }
-
-    // Animation states (matching original Neko.h enum)
     const NekoState = {
-        STOP: 0,
-        WASH: 1,
-        SCRATCH: 2,
-        YAWN: 3,
-        SLEEP: 4,
-        AWAKE: 5,
-        U_MOVE: 6,   // Up
-        D_MOVE: 7,   // Down
-        L_MOVE: 8,   // Left
-        R_MOVE: 9,   // Right
-        UL_MOVE: 10, // Up-Left
-        UR_MOVE: 11, // Up-Right
-        DL_MOVE: 12, // Down-Left
-        DR_MOVE: 13, // Down-Right
-        U_CLAW: 14,  // Clawing upward (at top boundary)
-        D_CLAW: 15,  // Clawing downward (at bottom boundary)
-        L_CLAW: 16,  // Clawing left (at left boundary)
-        R_CLAW: 17,  // Clawing right (at right boundary)
+        STOP: 0, WASH: 1, SCRATCH: 2, YAWN: 3, SLEEP: 4, AWAKE: 5,
+        U_MOVE: 6, D_MOVE: 7, L_MOVE: 8, R_MOVE: 9,
+        UL_MOVE: 10, UR_MOVE: 11, DL_MOVE: 12, DR_MOVE: 13,
+        U_CLAW: 14, D_CLAW: 15, L_CLAW: 16, R_CLAW: 17
     };
 
-    // Behavior modes (matching original Action enum)
     const BehaviorMode = {
-        CHASE_MOUSE: 0,
-        RUN_AWAY_FROM_MOUSE: 1,
-        RUN_AROUND_RANDOMLY: 2,
-        PACE_AROUND_SCREEN: 3,
-        RUN_AROUND: 4,
+        CHASE_MOUSE: 0, RUN_AWAY_FROM_MOUSE: 1,
+        RUN_AROUND_RANDOMLY: 2, PACE_AROUND_SCREEN: 3, RUN_AROUND: 4
     };
 
-    // Animation timing constants (in frames)
-    const STOP_TIME = 4;
-    const WASH_TIME = 10;
-    const SCRATCH_TIME = 4;
-    const YAWN_TIME = 3;
-    const AWAKE_TIME = 3;
-    const CLAW_TIME = 10;
+    const SPRITE_SIZE = 32;
 
     class Neko {
         constructor(options = {}) {
-            // Configuration
             this.fps = options.fps || 120;
             this.speed = options.speed || 24;
             this.behaviorMode = options.behaviorMode || BehaviorMode.CHASE_MOUSE;
             this.idleThreshold = options.idleThreshold || 6;
-
-            // State
             this.state = NekoState.STOP;
             this.tickCount = 0;
             this.stateCount = 0;
-
-            // Position
             this.x = options.startX || 0;
             this.y = options.startY || 0;
             this.logicX = this.x;
@@ -168,114 +74,56 @@
             this.oldTargetY = this.y;
             this.moveDX = 0;
             this.moveDY = 0;
-
-            // Bounds
-            this.boundsWidth = document.documentElement.clientWidth - currentSpriteSize;
-            this.boundsHeight = window.innerHeight - currentSpriteSize;
-
-            // Mouse tracking
+            this.boundsWidth = document.documentElement.clientWidth - SPRITE_SIZE;
+            this.boundsHeight = window.innerHeight - SPRITE_SIZE;
             this.mouseX = null;
             this.mouseY = null;
             this.hasMouseMoved = false;
-
-            // DOM element
             this.element = null;
             this.spriteImages = [];
             this.allowBehaviorChange = options.allowBehaviorChange !== false;
-
-            // Animation lookup table
             this.animationTable = [
-                [28, 28], // STOP
-                [25, 28], // WASH
-                [26, 27], // SCRATCH
-                [29, 29], // YAWN
-                [30, 31], // SLEEP
-                [0, 0],   // AWAKE
-                [1, 2],   // U_MOVE
-                [9, 10],  // D_MOVE
-                [13, 14], // L_MOVE
-                [5, 6],   // R_MOVE
-                [15, 16], // UL_MOVE
-                [3, 4],   // UR_MOVE
-                [11, 12], // DL_MOVE
-                [7, 8],   // DR_MOVE
-                [17, 18], // U_CLAW
-                [23, 24], // D_CLAW
-                [21, 22], // L_CLAW
-                [19, 20], // R_CLAW
+                [28,28],[25,28],[26,27],[29,29],[30,31],[0,0],
+                [1,2],[9,10],[13,14],[5,6],[15,16],[3,4],
+                [11,12],[7,8],[17,18],[23,24],[21,22],[19,20]
             ];
-
-            // Additional state for behaviors
             this.cornerIndex = 0;
-            this.ballX = 0;
-            this.ballY = 0;
-            this.ballVX = 0;
-            this.ballVY = 0;
-
+            this.ballX = 0; this.ballY = 0;
+            this.ballVX = 0; this.ballVY = 0;
             this.init();
         }
 
         init() {
-            // Create the neko element
             this.element = document.createElement("div");
             this.element.className = "neko";
             this.element.style.cssText = `
-                position: fixed;
-                width: ${currentSpriteSize}px;
-                height: ${currentSpriteSize}px;
-                image-rendering: pixelated;
-                pointer-events: ${this.allowBehaviorChange ? "auto" : "none"};
-                cursor: ${this.allowBehaviorChange ? "pointer" : "default"};
-                z-index: 999999;
-                left: ${this.x}px;
-                top: ${this.y}px;
-                margin: 0;
-                padding: 0;
-                border: none;
-                background: transparent;
-                overflow: visible;
-                box-sizing: border-box;
-                user-select: none;
-                -webkit-user-select: none;
+                position:fixed;width:${SPRITE_SIZE}px;height:${SPRITE_SIZE}px;
+                image-rendering:pixelated;pointer-events:${this.allowBehaviorChange?"auto":"none"};
+                cursor:${this.allowBehaviorChange?"pointer":"default"};                z-index:999;
+                left:${this.x}px;top:${this.y}px;margin:0;padding:0;border:none;
+                background:transparent;overflow:visible;box-sizing:border-box;
+                user-select:none;-webkit-user-select:none;
             `;
-
             const img = document.createElement("img");
             img.style.cssText = `
-                width: 100%;
-                height: 100%;
-                background: transparent;
-                border: none;
-                margin: 0;
-                padding: 0;
-                max-width: none;
-                max-height: none;
-                display: block;
-                box-sizing: border-box;
-                user-select: none;
-                -webkit-user-select: none;
-                -webkit-user-drag: none;
-                pointer-events: none;
+                width:100%;height:100%;background:transparent;border:none;
+                margin:0;padding:0;max-width:none;max-height:none;display:block;
+                box-sizing:border-box;user-select:none;-webkit-user-select:none;
+                -webkit-user-drag:none;pointer-events:none;
             `;
             this.element.appendChild(img);
-            this.imgElement = img; // Cache for performance
-
+            this.imgElement = img;
+            this._currentFrameIndex = -1;
             document.body.appendChild(this.element);
 
-            // Click to cycle through behaviors, double-click to sleep
             if (this.allowBehaviorChange) {
                 this._clickTimeout = null;
                 this.element.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
+                    e.stopPropagation(); e.preventDefault();
                     if (this._clickTimeout) {
                         clearTimeout(this._clickTimeout);
                         this._clickTimeout = null;
-                        // Double-click: toggle sleep
-                        if (this.state === NekoState.SLEEP) {
-                            this.setState(NekoState.AWAKE);
-                        } else {
-                            this.setState(NekoState.SLEEP);
-                        }
+                        this.setState(this.state === NekoState.SLEEP ? NekoState.AWAKE : NekoState.SLEEP);
                     } else {
                         this._clickTimeout = setTimeout(() => {
                             this._clickTimeout = null;
@@ -286,75 +134,57 @@
                 });
             }
 
-            // Track mouse position - use pointermove for better responsiveness
             this._onPointerMove = (e) => {
-                this.mouseX = e.clientX;
-                this.mouseY = e.clientY;
-                this.hasMouseMoved = true;
+                this.mouseX = e.clientX; this.mouseY = e.clientY; this.hasMouseMoved = true;
             };
             document.addEventListener("pointermove", this._onPointerMove, { passive: true });
 
-            // Update bounds on resize - debounced for performance
-            this._resizeTimeout = null;
+            let resizeTimeout;
             this._onResize = () => {
-                clearTimeout(this._resizeTimeout);
-                this._resizeTimeout = setTimeout(() => {
-                    this.boundsWidth = document.documentElement.clientWidth - currentSpriteSize;
-                    this.boundsHeight = window.innerHeight - currentSpriteSize;
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    this.boundsWidth = document.documentElement.clientWidth - SPRITE_SIZE;
+                    this.boundsHeight = window.innerHeight - SPRITE_SIZE;
                 }, 100);
             };
             window.addEventListener("resize", this._onResize, { passive: true });
 
-            // Random starting position
             this.x = Math.random() * this.boundsWidth;
             this.y = Math.random() * this.boundsHeight;
-            this.logicX = this.x;
-            this.logicY = this.y;
-            this.prevLogicX = this.x;
-            this.prevLogicY = this.y;
-            this.targetX = this.x + currentSpriteSize / 2;
-            this.targetY = this.y + currentSpriteSize - 1;
-            this.oldTargetX = this.targetX;
-            this.oldTargetY = this.targetY;
+            this.logicX = this.x; this.logicY = this.y;
+            this.prevLogicX = this.x; this.prevLogicY = this.y;
+            this.targetX = this.x + SPRITE_SIZE / 2;
+            this.targetY = this.y + SPRITE_SIZE - 1;
+            this.oldTargetX = this.targetX; this.oldTargetY = this.targetY;
             this.updatePosition();
-
             this.running = false;
-            this.intervalId = null;
         }
 
         start() {
             if (this.running) return;
             this.running = true;
             this.lastFrameTime = performance.now();
-
             const loop = (now) => {
                 if (!this.running) return;
-                const delta = now - this.lastFrameTime;
+                this.update(now - this.lastFrameTime);
                 this.lastFrameTime = now;
-                this.update(delta);
                 requestAnimationFrame(loop);
             };
             requestAnimationFrame(loop);
         }
 
-        stop() {
-            this.running = false;
-        }
+        stop() { this.running = false; }
 
-        setSprites(sprites) {
-            this.spriteImages = sprites;
-            this.updateSprite();
-        }
+        setSprites(sprites) { this.spriteImages = sprites; this.updateSprite(); }
 
         updateSprite() {
-            if (this.spriteImages.length === 0 || !this.imgElement) return;
+            if (!this.spriteImages.length || !this.imgElement) return;
             const frameIndex = this.state === NekoState.SLEEP
                 ? this.animationTable[this.state][(this.tickCount >> 2) & 0x1]
                 : this.animationTable[this.state][this.tickCount & 0x1];
-            if (this.spriteImages[frameIndex]) {
+            if (frameIndex !== this._currentFrameIndex && this.spriteImages[frameIndex]) {
+                this._currentFrameIndex = frameIndex;
                 this.imgElement.src = this.spriteImages[frameIndex];
-                this.imgElement.style.transform = mascotMode ? "scale(1.5)" : "scale(1)";
-                this.imgElement.style.transformOrigin = "center center";
             }
         }
 
@@ -363,20 +193,61 @@
             this.element.style.top = Math.round(this.y) + "px";
         }
 
+        // GSAP animations for realism
+        animateSleep() {
+            if (!gsap) return;
+            gsap.killTweensOf(this.element);
+            gsap.to(this.element, {
+                y: "-=3",
+                duration: 1.5,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: -1
+            });
+        }
+
+        animateWake() {
+            if (!gsap) return;
+            gsap.killTweensOf(this.element);
+            gsap.fromTo(this.element,
+                { scale: 0.8, y: "+=5" },
+                { scale: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" }
+            );
+        }
+
+        animateScratch() {
+            if (!gsap) return;
+            gsap.killTweensOf(this.element);
+            gsap.to(this.element, {
+                x: "+=2",
+                duration: 0.05,
+                ease: "none",
+                yoyo: true,
+                repeat: 5,
+                onComplete: () => gsap.set(this.element, { x: 0 })
+            });
+        }
+
+        animateStop() {
+            if (!gsap) return;
+            gsap.killTweensOf(this.element);
+            gsap.to(this.element, {
+                scaleY: 0.9,
+                duration: 0.3,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: 1
+            });
+        }
+
         update(deltaMs) {
             if (this.tickAccumulator === undefined) this.tickAccumulator = 0;
-            const originalTickMs = 200; // 5 FPS = 200ms per tick
-            this.tickAccumulator += (deltaMs || 16) / originalTickMs;
-
-            // Process all accumulated ticks
+            this.tickAccumulator += (deltaMs || 16) / 200;
             while (this.tickAccumulator >= 1) {
                 this.tickAccumulator -= 1;
-                this.prevLogicX = this.logicX;
-                this.prevLogicY = this.logicY;
+                this.prevLogicX = this.logicX; this.prevLogicY = this.logicY;
                 this.processOriginalTick();
             }
-
-            // Interpolate for smooth rendering
             const t = this.tickAccumulator;
             this.x = this.prevLogicX + (this.logicX - this.prevLogicX) * t;
             this.y = this.prevLogicY + (this.logicY - this.prevLogicY) * t;
@@ -384,94 +255,59 @@
         }
 
         processOriginalTick() {
-            this.tickCount++;
-            if (this.tickCount >= 9999) this.tickCount = 0;
-            if (this.tickCount % 2 === 0) {
-                this.stateCount++;
-            }
-
-            // When sleeping, stay frozen - don't run behavior
+            this.tickCount++; if (this.tickCount >= 9999) this.tickCount = 0;
+            if (this.tickCount % 2 === 0) this.stateCount++;
             if (this.state !== NekoState.SLEEP) {
                 switch (this.behaviorMode) {
-                    case BehaviorMode.CHASE_MOUSE:
-                        this.chaseMouse();
-                        break;
-                    case BehaviorMode.RUN_AWAY_FROM_MOUSE:
-                        this.runAwayFromMouse();
-                        break;
-                    case BehaviorMode.RUN_AROUND_RANDOMLY:
-                        this.runRandomly();
-                        break;
-                    case BehaviorMode.PACE_AROUND_SCREEN:
-                        this.paceAroundScreen();
-                        break;
-                    case BehaviorMode.RUN_AROUND:
-                        this.runAround();
-                        break;
+                    case BehaviorMode.CHASE_MOUSE: this.chaseMouse(); break;
+                    case BehaviorMode.RUN_AWAY_FROM_MOUSE: this.runAwayFromMouse(); break;
+                    case BehaviorMode.RUN_AROUND_RANDOMLY: this.runRandomly(); break;
+                    case BehaviorMode.PACE_AROUND_SCREEN: this.paceAroundScreen(); break;
+                    case BehaviorMode.RUN_AROUND: this.runAround(); break;
                 }
             }
-
             this.updateSprite();
         }
 
         chaseMouse() {
-            if (!this.hasMouseMoved) {
-                this.runTowards(this.logicX + currentSpriteSize / 2, this.logicY + currentSpriteSize - 1);
-                return;
-            }
+            if (!this.hasMouseMoved) { this.runTowards(this.logicX + SPRITE_SIZE/2, this.logicY + SPRITE_SIZE - 1); return; }
             this.runTowards(this.mouseX, this.mouseY);
         }
 
         runAwayFromMouse() {
-            if (!this.hasMouseMoved) {
-                this.runTowards(this.logicX + currentSpriteSize / 2, this.logicY + currentSpriteSize - 1);
-                return;
-            }
+            if (!this.hasMouseMoved) { this.runTowards(this.logicX + SPRITE_SIZE/2, this.logicY + SPRITE_SIZE - 1); return; }
             const dwLimit = this.idleThreshold * 16;
-            const xdiff = this.logicX + currentSpriteSize / 2 - this.mouseX;
-            const ydiff = this.logicY + currentSpriteSize / 2 - this.mouseY;
-
+            const xdiff = this.logicX + SPRITE_SIZE/2 - this.mouseX;
+            const ydiff = this.logicY + SPRITE_SIZE/2 - this.mouseY;
             if (Math.abs(xdiff) < dwLimit && Math.abs(ydiff) < dwLimit) {
-                const dLength = Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+                const dLength = Math.sqrt(xdiff*xdiff + ydiff*ydiff);
                 let targetX, targetY;
                 if (dLength !== 0) {
-                    targetX = this.logicX + (xdiff / dLength) * dwLimit;
-                    targetY = this.logicY + (ydiff / dLength) * dwLimit;
-                } else {
-                    targetX = targetY = 32;
-                }
+                    targetX = this.logicX + (xdiff/dLength) * dwLimit;
+                    targetY = this.logicY + (ydiff/dLength) * dwLimit;
+                } else { targetX = targetY = 32; }
                 this.runTowards(targetX, targetY);
-                if (this.state === NekoState.AWAKE) {
-                    this.calcDirection(targetX - this.logicX, targetY - this.logicY);
-                }
-            } else {
-                this.runTowards(this.targetX, this.targetY);
-            }
+                if (this.state === NekoState.AWAKE) this.calcDirection(targetX - this.logicX, targetY - this.logicY);
+            } else { this.runTowards(this.targetX, this.targetY); }
         }
 
         runRandomly() {
-            if (this.state === NekoState.SLEEP) {
-                this.actionCount = (this.actionCount || 0) + 1;
-            }
+            if (this.state === NekoState.SLEEP) this.actionCount = (this.actionCount || 0) + 1;
             if ((this.actionCount || 0) > this.idleThreshold * 10) {
                 this.actionCount = 0;
                 this.targetX = Math.random() * this.boundsWidth;
                 this.targetY = Math.random() * this.boundsHeight;
                 this.runTowards(this.targetX, this.targetY);
-            } else {
-                this.runTowards(this.targetX, this.targetY);
-            }
+            } else { this.runTowards(this.targetX, this.targetY); }
         }
 
         paceAroundScreen() {
-            if (this.lastMoveDX === 0 && this.lastMoveDY === 0) {
-                this.cornerIndex = ((this.cornerIndex || 0) + 1) % 4;
-            }
+            if (this.lastMoveDX === 0 && this.lastMoveDY === 0) this.cornerIndex = ((this.cornerIndex || 0) + 1) % 4;
             const corners = [
-                [currentSpriteSize + currentSpriteSize / 2, currentSpriteSize + currentSpriteSize - 1],
-                [currentSpriteSize + currentSpriteSize / 2, this.boundsHeight - currentSpriteSize + currentSpriteSize - 1],
-                [this.boundsWidth - currentSpriteSize + currentSpriteSize / 2, this.boundsHeight - currentSpriteSize + currentSpriteSize - 1],
-                [this.boundsWidth - currentSpriteSize + currentSpriteSize / 2, currentSpriteSize + currentSpriteSize - 1],
+                [SPRITE_SIZE + SPRITE_SIZE/2, SPRITE_SIZE + SPRITE_SIZE - 1],
+                [SPRITE_SIZE + SPRITE_SIZE/2, this.boundsHeight - SPRITE_SIZE + SPRITE_SIZE - 1],
+                [this.boundsWidth - SPRITE_SIZE + SPRITE_SIZE/2, this.boundsHeight - SPRITE_SIZE + SPRITE_SIZE - 1],
+                [this.boundsWidth - SPRITE_SIZE + SPRITE_SIZE/2, SPRITE_SIZE + SPRITE_SIZE - 1]
             ];
             const target = corners[this.cornerIndex || 0];
             this.runTowards(target[0], target[1]);
@@ -485,324 +321,139 @@
                 this.ballVX = (Math.random() < 0.5 ? 1 : -1) * (this.speed / 2) + 1;
                 this.ballVY = (Math.random() < 0.5 ? 1 : -1) * (this.speed / 2) + 1;
             }
-            this.ballX += this.ballVX;
-            this.ballY += this.ballVY;
-
-            if (this.ballX < dwBoundingBox) {
-                if (this.ballX > 0) this.ballVX++;
-                else this.ballVX = -this.ballVX;
-            } else if (this.ballX > this.boundsWidth - dwBoundingBox) {
-                if (this.ballX < this.boundsWidth) this.ballVX--;
-                else this.ballVX = -this.ballVX;
-            }
-
-            if (this.ballY < dwBoundingBox) {
-                if (this.ballY > 0) this.ballVY++;
-                else this.ballVY = -this.ballVY;
-            } else if (this.ballY > this.boundsHeight - dwBoundingBox) {
-                if (this.ballY < this.boundsHeight) this.ballVY--;
-                else this.ballVY = -this.ballVY;
-            }
-
+            this.ballX += this.ballVX; this.ballY += this.ballVY;
+            if (this.ballX < dwBoundingBox) { if (this.ballX > 0) this.ballVX++; else this.ballVX = -this.ballVX; }
+            else if (this.ballX > this.boundsWidth - dwBoundingBox) { if (this.ballX < this.boundsWidth) this.ballVX--; else this.ballVX = -this.ballVX; }
+            if (this.ballY < dwBoundingBox) { if (this.ballY > 0) this.ballVY++; else this.ballVY = -this.ballVY; }
+            else if (this.ballY > this.boundsHeight - dwBoundingBox) { if (this.ballY < this.boundsHeight) this.ballVY--; else this.ballVY = -this.ballVY; }
             this.runTowards(this.ballX, this.ballY);
         }
 
         setState(newState) {
-            this.tickCount = 0;
-            this.stateCount = 0;
-            this.state = newState;
+            this.tickCount = 0; this.stateCount = 0; this.state = newState;
+            // Trigger GSAP animations on state change
+            switch (newState) {
+                case NekoState.SLEEP: this.animateSleep(); break;
+                case NekoState.AWAKE: this.animateWake(); break;
+                case NekoState.SCRATCH: this.animateScratch(); break;
+                case NekoState.STOP: this.animateStop(); break;
+            }
         }
 
         runTowards(targetX, targetY) {
-            this.oldTargetX = this.targetX;
-            this.oldTargetY = this.targetY;
-            this.targetX = targetX;
-            this.targetY = targetY;
-
-            const dx = targetX - this.logicX - currentSpriteSize / 2;
-            const dy = targetY - this.logicY - currentSpriteSize + 1;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
+            this.oldTargetX = this.targetX; this.oldTargetY = this.targetY;
+            this.targetX = targetX; this.targetY = targetY;
+            const dx = targetX - this.logicX - SPRITE_SIZE/2;
+            const dy = targetY - this.logicY - SPRITE_SIZE + 1;
+            const distance = Math.sqrt(dx*dx + dy*dy);
             if (distance !== 0) {
-                if (distance <= this.speed) {
-                    this.moveDX = Math.trunc(dx);
-                    this.moveDY = Math.trunc(dy);
-                } else {
-                    this.moveDX = Math.trunc((this.speed * dx) / distance);
-                    this.moveDY = Math.trunc((this.speed * dy) / distance);
-                }
-            } else {
-                this.moveDX = 0;
-                this.moveDY = 0;
-            }
-
-            this.lastMoveDX = this.moveDX;
-            this.lastMoveDY = this.moveDY;
-
-            const moveStart = !(
-                this.oldTargetX >= this.targetX - this.idleThreshold &&
-                this.oldTargetX <= this.targetX + this.idleThreshold &&
-                this.oldTargetY >= this.targetY - this.idleThreshold &&
-                this.oldTargetY <= this.targetY + this.idleThreshold
-            );
-
+                if (distance <= this.speed) { this.moveDX = Math.trunc(dx); this.moveDY = Math.trunc(dy); }
+                else { this.moveDX = Math.trunc((this.speed*dx)/distance); this.moveDY = Math.trunc((this.speed*dy)/distance); }
+            } else { this.moveDX = 0; this.moveDY = 0; }
+            this.lastMoveDX = this.moveDX; this.lastMoveDY = this.moveDY;
+            const moveStart = !(this.oldTargetX >= this.targetX - this.idleThreshold && this.oldTargetX <= this.targetX + this.idleThreshold &&
+                this.oldTargetY >= this.targetY - this.idleThreshold && this.oldTargetY <= this.targetY + this.idleThreshold);
             switch (this.state) {
                 case NekoState.STOP:
-                    if (moveStart) {
-                        this.setState(NekoState.AWAKE);
-                    } else if (this.stateCount >= STOP_TIME) {
-                        if (this.moveDX < 0 && this.logicX <= 0) {
-                            this.setState(NekoState.L_CLAW);
-                        } else if (this.moveDX > 0 && this.logicX >= this.boundsWidth) {
-                            this.setState(NekoState.R_CLAW);
-                        } else if (this.moveDY < 0 && this.logicY <= 0) {
-                            this.setState(NekoState.U_CLAW);
-                        } else if (this.moveDY > 0 && this.logicY >= this.boundsHeight) {
-                            this.setState(NekoState.D_CLAW);
-                        } else {
-                            this.setState(NekoState.WASH);
-                        }
+                    if (moveStart) this.setState(NekoState.AWAKE);
+                    else if (this.stateCount >= 4) {
+                        if (this.moveDX < 0 && this.logicX <= 0) this.setState(NekoState.L_CLAW);
+                        else if (this.moveDX > 0 && this.logicX >= this.boundsWidth) this.setState(NekoState.R_CLAW);
+                        else if (this.moveDY < 0 && this.logicY <= 0) this.setState(NekoState.U_CLAW);
+                        else if (this.moveDY > 0 && this.logicY >= this.boundsHeight) this.setState(NekoState.D_CLAW);
+                        else this.setState(NekoState.WASH);
                     }
                     break;
-
                 case NekoState.WASH:
-                    if (moveStart) {
-                        this.setState(NekoState.AWAKE);
-                    } else if (this.stateCount >= WASH_TIME) {
-                        this.setState(NekoState.SCRATCH);
-                    }
+                    if (moveStart) this.setState(NekoState.AWAKE);
+                    else if (this.stateCount >= 10) this.setState(NekoState.SCRATCH);
                     break;
-
                 case NekoState.SCRATCH:
-                    if (moveStart) {
-                        this.setState(NekoState.AWAKE);
-                    } else if (this.stateCount >= SCRATCH_TIME) {
-                        this.setState(NekoState.YAWN);
-                    }
+                    if (moveStart) this.setState(NekoState.AWAKE);
+                    else if (this.stateCount >= 4) this.setState(NekoState.YAWN);
                     break;
-
                 case NekoState.YAWN:
-                    if (moveStart) {
-                        this.setState(NekoState.AWAKE);
-                    } else if (this.stateCount >= YAWN_TIME) {
-                        this.setState(NekoState.SLEEP);
-                    }
+                    if (moveStart) this.setState(NekoState.AWAKE);
+                    else if (this.stateCount >= 3) this.setState(NekoState.SLEEP);
                     break;
-
                 case NekoState.SLEEP:
-                    if (moveStart) {
-                        this.setState(NekoState.AWAKE);
-                    }
+                    if (moveStart) this.setState(NekoState.AWAKE);
                     break;
-
                 case NekoState.AWAKE:
-                    if (this.stateCount >= AWAKE_TIME + Math.floor(Math.random() * 20)) {
-                        this.calcDirection(this.moveDX, this.moveDY);
-                    }
+                    if (this.stateCount >= 3 + Math.floor(Math.random()*20)) this.calcDirection(this.moveDX, this.moveDY);
                     break;
-
-                case NekoState.U_MOVE:
-                case NekoState.D_MOVE:
-                case NekoState.L_MOVE:
-                case NekoState.R_MOVE:
-                case NekoState.UL_MOVE:
-                case NekoState.UR_MOVE:
-                case NekoState.DL_MOVE:
-                case NekoState.DR_MOVE:
-                    let newX = this.logicX + this.moveDX;
-                    let newY = this.logicY + this.moveDY;
+                case NekoState.U_MOVE: case NekoState.D_MOVE: case NekoState.L_MOVE: case NekoState.R_MOVE:
+                case NekoState.UL_MOVE: case NekoState.UR_MOVE: case NekoState.DL_MOVE: case NekoState.DR_MOVE:
+                    let newX = this.logicX + this.moveDX; let newY = this.logicY + this.moveDY;
                     const wasOutside = newX <= 0 || newX >= this.boundsWidth || newY <= 0 || newY >= this.boundsHeight;
                     this.calcDirection(this.moveDX, this.moveDY);
-                    newX = Math.max(0, Math.min(this.boundsWidth, newX));
-                    newY = Math.max(0, Math.min(this.boundsHeight, newY));
-                    const notMoved = newX === this.logicX && newY === this.logicY;
-                    if (wasOutside && notMoved) {
-                        this.setState(NekoState.STOP);
-                    } else {
-                        this.logicX = newX;
-                        this.logicY = newY;
-                    }
+                    newX = Math.max(0, Math.min(this.boundsWidth, newX)); newY = Math.max(0, Math.min(this.boundsHeight, newY));
+                    if (wasOutside && newX === this.logicX && newY === this.logicY) this.setState(NekoState.STOP);
+                    else { this.logicX = newX; this.logicY = newY; }
                     break;
-
-                case NekoState.U_CLAW:
-                case NekoState.D_CLAW:
-                case NekoState.L_CLAW:
-                case NekoState.R_CLAW:
-                    if (moveStart) {
-                        this.setState(NekoState.AWAKE);
-                    } else if (this.stateCount >= CLAW_TIME) {
-                        this.setState(NekoState.SCRATCH);
-                    }
+                case NekoState.U_CLAW: case NekoState.D_CLAW: case NekoState.L_CLAW: case NekoState.R_CLAW:
+                    if (moveStart) this.setState(NekoState.AWAKE);
+                    else if (this.stateCount >= 10) this.setState(NekoState.SCRATCH);
                     break;
-
-                default:
-                    this.setState(NekoState.STOP);
-                    break;
+                default: this.setState(NekoState.STOP); break;
             }
         }
 
         calcDirection(dx, dy) {
             let newState;
-            if (dx === 0 && dy === 0) {
-                newState = NekoState.STOP;
-            } else {
-                const largeX = dx;
-                const largeY = -dy;
-                const length = Math.sqrt(largeX * largeX + largeY * largeY);
-                const sinTheta = largeY / length;
-                const sinPiPer8 = 0.3826834323651;
-                const sinPiPer8Times3 = 0.9238795325113;
-
+            if (dx === 0 && dy === 0) { newState = NekoState.STOP; }
+            else {
+                const largeX = dx; const largeY = -dy; const length = Math.sqrt(largeX*largeX + largeY*largeY);
+                const sinTheta = largeY / length; const sinPiPer8 = 0.3826834323651; const sinPiPer8Times3 = 0.9238795325113;
                 if (dx > 0) {
-                    if (sinTheta > sinPiPer8Times3) {
-                        newState = NekoState.U_MOVE;
-                    } else if (sinTheta > sinPiPer8) {
-                        newState = NekoState.UR_MOVE;
-                    } else if (sinTheta > -sinPiPer8) {
-                        newState = NekoState.R_MOVE;
-                    } else if (sinTheta > -sinPiPer8Times3) {
-                        newState = NekoState.DR_MOVE;
-                    } else {
-                        newState = NekoState.D_MOVE;
-                    }
+                    if (sinTheta > sinPiPer8Times3) newState = NekoState.U_MOVE;
+                    else if (sinTheta > sinPiPer8) newState = NekoState.UR_MOVE;
+                    else if (sinTheta > -sinPiPer8) newState = NekoState.R_MOVE;
+                    else if (sinTheta > -sinPiPer8Times3) newState = NekoState.DR_MOVE;
+                    else newState = NekoState.D_MOVE;
                 } else {
-                    if (sinTheta > sinPiPer8Times3) {
-                        newState = NekoState.U_MOVE;
-                    } else if (sinTheta > sinPiPer8) {
-                        newState = NekoState.UL_MOVE;
-                    } else if (sinTheta > -sinPiPer8) {
-                        newState = NekoState.L_MOVE;
-                    } else if (sinTheta > -sinPiPer8Times3) {
-                        newState = NekoState.DL_MOVE;
-                    } else {
-                        newState = NekoState.D_MOVE;
-                    }
+                    if (sinTheta > sinPiPer8Times3) newState = NekoState.U_MOVE;
+                    else if (sinTheta > sinPiPer8) newState = NekoState.UL_MOVE;
+                    else if (sinTheta > -sinPiPer8) newState = NekoState.L_MOVE;
+                    else if (sinTheta > -sinPiPer8Times3) newState = NekoState.DL_MOVE;
+                    else newState = NekoState.D_MOVE;
                 }
             }
-
-            if (this.state !== newState) {
-                this.setState(newState);
-            }
-        }
-
-        isIdle() {
-            return (
-                this.state === NekoState.STOP ||
-                this.state === NekoState.WASH ||
-                this.state === NekoState.SCRATCH ||
-                this.state === NekoState.YAWN ||
-                this.state === NekoState.SLEEP ||
-                this.state === NekoState.AWAKE
-            );
+            if (this.state !== newState) this.setState(newState);
         }
 
         cycleBehavior() {
-            const behaviors = [
-                BehaviorMode.CHASE_MOUSE,
-                BehaviorMode.RUN_AWAY_FROM_MOUSE,
-                BehaviorMode.RUN_AROUND_RANDOMLY,
-                BehaviorMode.PACE_AROUND_SCREEN,
-                BehaviorMode.RUN_AROUND,
-            ];
-            const currentIndex = behaviors.indexOf(this.behaviorMode);
-            const nextIndex = (currentIndex + 1) % behaviors.length;
+            const behaviors = [BehaviorMode.CHASE_MOUSE, BehaviorMode.RUN_AWAY_FROM_MOUSE, BehaviorMode.RUN_AROUND_RANDOMLY, BehaviorMode.PACE_AROUND_SCREEN, BehaviorMode.RUN_AROUND];
+            const nextIndex = (behaviors.indexOf(this.behaviorMode) + 1) % behaviors.length;
             this.behaviorMode = behaviors[nextIndex];
-
-            if (this.state === NekoState.SLEEP) {
-                this.setState(NekoState.AWAKE);
-            }
-
-            const behaviorNames = [
-                "Chase Mouse",
-                "Run Away From Mouse",
-                "Run Around Randomly",
-                "Pace Around Screen",
-                "Run Around",
-            ];
-            console.log(`Neko behavior: ${behaviorNames[nextIndex]}`);
+            if (this.state === NekoState.SLEEP) this.setState(NekoState.AWAKE);
+            const behaviorNames = ["Chase Mouse", "Run Away From Mouse", "Run Around Randomly", "Pace Around Screen", "Run Around"];
+            console.log("Neko behavior: " + behaviorNames[nextIndex]);
         }
 
         destroy() {
             this.stop();
-            if (this._onPointerMove) {
-                document.removeEventListener("pointermove", this._onPointerMove);
-            }
-            if (this._onResize) {
-                window.removeEventListener("resize", this._onResize);
-            }
-            if (this._resizeTimeout) {
-                clearTimeout(this._resizeTimeout);
-            }
-            if (this._clickTimeout) {
-                clearTimeout(this._clickTimeout);
-            }
-            if (this.element && this.element.parentNode) {
-                this.element.parentNode.removeChild(this.element);
-            }
+            if (this._onPointerMove) document.removeEventListener("pointermove", this._onPointerMove);
+            if (this._onResize) window.removeEventListener("resize", this._onResize);
+            if (this._clickTimeout) clearTimeout(this._clickTimeout);
+            if (this.element && this.element.parentNode) this.element.parentNode.removeChild(this.element);
         }
     }
 
-    // Export to global scope
     window.Neko = Neko;
     window.NekoState = NekoState;
     window.BehaviorMode = BehaviorMode;
 
-    // Helper: set mascot mode (true = custom sprites, false = default neko)
-    window.nekoSetMascotMode = function(enabled) {
-        mascotMode = !!enabled;
-        updateSpriteSize();
-        if (window.neko) {
-            window.neko.setSprites(mascotMode ? MASCOT_SPRITES : NEKO_SPRITES);
-            // Briefly enter sleep for a cute transition
-            window.neko.setState(NekoState.SLEEP);
-        }
-        try { localStorage.setItem("neko-mascot", String(mascotMode)); } catch(e) {}
-    };
-
-    // Helper: check current mascot mode
-    window.nekoIsMascotMode = function() {
-        return mascotMode;
-    };
-
-    // Listen for sprite toggle events from React UI
-    window.addEventListener("neko-sprite-toggle", function() {
-        window.nekoSetMascotMode(!mascotMode);
-    });
-
-    // Auto-initialize function
     window.createNeko = function(options) {
         const neko = new Neko(options);
-        // Check localStorage for mascot preference
-        let useMascot = false;
-        try {
-            const stored = localStorage.getItem("neko-mascot");
-            useMascot = stored === "true";
-        } catch(e) {}
-        mascotMode = useMascot;
-        updateSpriteSize();
-        neko.setSprites(useMascot ? MASCOT_SPRITES : NEKO_SPRITES);
+        neko.setSprites(NEKO_SPRITES);
         neko.start();
         return neko;
     };
 
-    // Preload mascot images to prevent broken images
-    function preloadMascotImages() {
-        MASCOT_SPRITES.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-        });
-    }
-
-    // Auto-start if script has data-autostart attribute
     if (document.currentScript && document.currentScript.hasAttribute("data-autostart")) {
         if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", function() {
-                preloadMascotImages();
-                window.neko = createNeko();
-            });
-        } else {
-            preloadMascotImages();
-            window.neko = createNeko();
-        }
+            document.addEventListener("DOMContentLoaded", function() { window.neko = createNeko(); });
+        } else { window.neko = createNeko(); }
     }
 })();

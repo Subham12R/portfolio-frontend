@@ -8,10 +8,9 @@ export function Neko() {
 
   return (
     <Script
-      src="/neko.js"
+      src="https://louisabraham.github.io/nekojs/neko.js"
       strategy="afterInteractive"
       data-autostart=""
-      onLoad={() => setScriptLoaded(true)}
     />
   );
 }

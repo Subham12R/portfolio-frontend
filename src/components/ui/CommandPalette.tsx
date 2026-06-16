@@ -51,7 +51,6 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [recentCommands, setRecentCommands] = useState<string[]>([]);
-  const [nekoMascotMode, setNekoMascotMode] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -67,14 +66,7 @@ export function CommandPalette() {
     } catch {
       // ignore
     }
-    const storedMascot = localStorage.getItem("neko-mascot");
-    setNekoMascotMode(storedMascot === "true");
 
-    const onMascotToggle = () => setNekoMascotMode((prev) => !prev);
-    window.addEventListener("neko-sprite-toggle", onMascotToggle);
-    return () => {
-      window.removeEventListener("neko-sprite-toggle", onMascotToggle);
-    };
   }, []);
 
   const saveRecent = useCallback(
@@ -193,14 +185,7 @@ export function CommandPalette() {
       section: "actions",
     },
 
-    {
-      id: "neko-mascot",
-      label: nekoMascotMode ? "Switch to Neko" : "Switch to Mascot",
-      description: "Toggle between default neko and custom mascot sprites",
-      icon: <Cat size={16} className="text-text-secondary" />,
-      action: () => window.dispatchEvent(new Event("neko-sprite-toggle")),
-      section: "actions",
-    },
+
     {
       id: "home",
       label: "Go to Home",
@@ -320,9 +305,16 @@ export function CommandPalette() {
     ...navItems,
   ];
 
-  // Reset selected when query changes
+  // Reset selected when query changes + animate filtered items
   useEffect(() => {
     setSelectedIndex(0);
+    if (open && listRef.current) {
+      const items = listRef.current.querySelectorAll("button[data-index]");
+      gsap.fromTo(items,
+        { opacity: 0, y: -4 },
+        { opacity: 1, y: 0, duration: 0.15, stagger: 0.02, ease: "power2.out" }
+      );
+    }
   }, [query]);
 
   // Lock body scroll when opened — compensate scrollbar width to prevent layout shift
@@ -371,6 +363,14 @@ export function CommandPalette() {
             modalRef.current,
             { opacity: 0, scale: 0.95, y: -10 },
             { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: "power2.out", delay: 0.05 }
+          );
+        }
+        // Staggered list item animation
+        if (listRef.current) {
+          const items = listRef.current.querySelectorAll("button[data-index]");
+          gsap.fromTo(items,
+            { opacity: 0, x: -8 },
+            { opacity: 1, x: 0, duration: 0.2, stagger: 0.03, ease: "power2.out", delay: 0.15 }
           );
         }
         inputRef.current?.focus();
@@ -474,7 +474,13 @@ export function CommandPalette() {
         key={item.id}
         data-index={actualIndex}
         onClick={() => handleSelect(item)}
-        onMouseEnter={() => setSelectedIndex(actualIndex)}
+        onMouseEnter={(e) => {
+          setSelectedIndex(actualIndex);
+          gsap.to(e.currentTarget, { x: 4, duration: 0.15, ease: "power2.out" });
+        }}
+        onMouseLeave={(e) => {
+          gsap.to(e.currentTarget, { x: 0, duration: 0.15, ease: "power2.out" });
+        }}
         className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors cursor-pointer rounded-md hover:bg-hover-tint"
       >
         <div className="flex items-center justify-center w-8 h-8 rounded bg-bg-elevated border border-border-primary shrink-0">
@@ -536,11 +542,11 @@ export function CommandPalette() {
       {mounted &&
         typeof document !== "undefined" &&
         createPortal(
-          <div className="fixed inset-0 z-[9999]">
+          <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
             {/* Full-page backdrop blur + noise */}
             <div
               ref={backdropRef}
-              className="absolute inset-0 bg-bg-primary/40"
+              className="absolute inset-0 bg-bg-primary/40 pointer-events-none"
               style={{
                 backdropFilter: "blur(5px) saturate(180%)",
                 WebkitBackdropFilter: "blur(80px) saturate(180%)",
@@ -551,16 +557,15 @@ export function CommandPalette() {
 
             {/* Modal */}
             <div
-              className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4"
+              className="absolute inset-0 flex items-start justify-center pt-[20vh] px-4 pointer-events-none"
               onClick={() => setOpen(false)}
             >
               <div
                 ref={modalRef}
-                className="w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh]"
+                className="w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh] pointer-events-auto"
                 style={{ opacity: 0 }}
-                onWheel={(e) => e.stopPropagation()}
                 onClick={(e) => e.stopPropagation()}
-                data-lenis-prevent-touch
+                data-lenis-prevent
               >
                 {/* Search Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border-primary/30 bg-bg-elevated/40">
@@ -585,8 +590,8 @@ export function CommandPalette() {
                 {/* Results */}
                 <div
                   ref={listRef}
-                  className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-2 hide-scrollbar touch-pan-y"
-                  onWheel={(e) => e.stopPropagation()}
+                  className="min-h-0 flex-1 overflow-y-auto py-2 hide-scrollbar touch-pan-y"
+                  data-lenis-prevent
                 >
                   {orderedItems.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-8 text-text-muted">
