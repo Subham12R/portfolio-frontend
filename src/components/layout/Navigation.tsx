@@ -26,7 +26,7 @@ const Navigation = () => {
                 alt={siteConfig.name}
                 width={40}
                 height={40}
-                className="w-10 h-10 aspect-square object-cover rounded-lg transition-all duration-200"
+                className="w-10 h-10 aspect-square object-contain md:object-cover rounded-lg transition-all duration-200"
               />
               {/* Cloud tooltip */}
               <span className="absolute font-semibold top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-0.5 bg-white text-slate-800 text-xs rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-200">
