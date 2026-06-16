@@ -215,13 +215,13 @@ export const Hero = () => {
                 <HugeiconsIcon icon={YoutubeIcon} size={20} />
                 <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">YouTube</span>
               </a>
-              <a href="https://medium.com/@subham12r" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+              <a href="https://medium.com/@rikk4335" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
                 <HugeiconsIcon icon={MediumIcon} size={20} />
                 <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Medium</span>
               </a>
               <span className="group inline-flex items-center p-2.5 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default">
                 <HugeiconsIcon icon={DiscordIcon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Discord</span>
+                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">subham_c9</span>
               </span>
               <a href={`mailto:${email}`} className="group inline-flex items-center p-2.5 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md">
                 <HugeiconsIcon icon={Mail01Icon} size={20} />
