@@ -21,7 +21,7 @@ export default function ContactCTA() {
       id={section.id}
       className="w-full max-w-4xl mx-auto flex flex-col justify-center items-center   "
     >
-      <div className="flex flex-row items-center justify-center gap-6 flex-wrap">
+      <div className="flex flex-row items-center justify-center gap-6 flex-wrap px-4">
         <h1 className="text-3xl md:text-4xl font-semibold text-text-primary font-playfair text-center">
           Let's work together and create something amazing.
         </h1>
@@ -44,7 +44,7 @@ export default function ContactCTA() {
 
       <ScrollRevealText
         as="div"
-        className="max-w-2xl w-full mt-12 text-center text-sm text-text-muted pt-6"
+        className="max-w-2xl w-full mt-12 text-center text-sm text-text-muted pt-6 px-4"
         start="top 95%"
         end="top 75%"
       >
