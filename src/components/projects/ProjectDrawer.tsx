@@ -107,7 +107,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
       aria-label={project.title}
     >
       {/* Scrollable body */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain" data-lenis-prevent>
         <div className="max-w-2xl mx-auto px-4 md:px-0 py-10 pb-24">
 
           {/* Back — inline, no bar */}

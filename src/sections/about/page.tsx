@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { siteConfig } from "@/data";
 import profileImg from "../../../public/images/profile/pfp.jpeg";
-import Expericence from "@/components/cards/experience";
+import Experience from "@/components/cards/experience";
 import Hobbies from "@/components/cards/hobbies";
 import Achievements from "@/components/cards/achievements";
 import Activities from "@/components/cards/activities";
@@ -214,7 +214,7 @@ export const About = () => {
         {/**Stats Card **/}
         <div ref={statsRef} className="pt-10 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-            <Expericence />
+            <Experience />
             <Hobbies />
           </div>
           <div className="grid grid-cols-1 gap-4 pt-4 w-full">

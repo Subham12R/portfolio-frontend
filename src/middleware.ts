@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest) {
   if (!r) return res;
 
   const date = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  const ip   = (req.ip ?? req.headers.get("x-forwarded-for") ?? "anon")
+  const ip   = (req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip") ?? "anon")
     .split(",")[0]
     .trim();
   const uid  = await hashIp(ip, date);
