@@ -108,7 +108,7 @@ export function ExperienceCard({
 
         {/* Expandable: description + responsibilities + tech stack */}
         <div ref={contentRef} className="overflow-hidden">
-          <div className="pt-2 space-y-3">
+          <div className="pt-4 space-y-3">
             {(() => {
               const sentences = experience.description
                 .split(/\.\s+/)
@@ -116,7 +116,7 @@ export function ExperienceCard({
                 .filter(Boolean)
                 .map((s) => (s.endsWith(".") ? s : `${s}.`));
               return (
-                <ul className="text-sm text-text-secondary leading-relaxed space-y-1 list-disc list-inside">
+                <ul className="text-sm text-text-secondary leading-relaxed space-y-1 list-[square] list-outside pl-5">
                   {sentences.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
@@ -124,7 +124,7 @@ export function ExperienceCard({
               );
             })()}
             {experience.responsibilities && experience.responsibilities.length > 0 && (
-              <ul className="text-sm text-text-secondary leading-relaxed space-y-1 list-disc list-inside">
+              <ul className="text-sm text-text-secondary leading-relaxed space-y-1 list-[square] list-outside pl-5">
                 {experience.responsibilities.map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
