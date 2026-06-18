@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/data";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { GitHubStarButton } from "@/components/ui/GitHubStarButton";
 import { CommandPalette } from "@/components/ui/CommandPalette";
-
 // Navigation links (subset of main navigation for header)
 const navLinks = [
   { name: "Home", href: "/" },
@@ -53,7 +51,6 @@ const Navigation = () => {
 
         {/* Controls - Right side */}
         <div className="flex items-center gap-1 mr-2">
-          <GitHubStarButton repo="Subham12R/portfolio-frontend" />
           <CommandPalette />
           <ThemeToggle />
         </div>

@@ -14,55 +14,47 @@ const CertificatesPage = async () => {
     >
       <div className="max-w-4xl w-full flex flex-col  h-full">
         {/* HEADER */}
-        <div className="flex justify-start items-start pt-16 pb-5 border-b border-border-accent mb-8">
-          <span className="text-text-secondary text-xl font-mono leading-tight">
-            {section.number}
-          </span>
+        <div className="flex justify-start items-start pt-16 pb-5  mb-4">
+
           <h1 className="text-4xl font-medium text-text-primary">
             {section.title}.
           </h1>
         </div>
 
         {/* CERTIFICATE LIST */}
-        <div className="space-y-4">
+        <div className="divide-y divide-border-primary">
           {certificates.map((cert) => (
             <div
               key={cert.id}
-              className="flex items-center gap-4 px-2  rounded-md border-2 border-border-primary hover:border-border-secondary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] transition-colors duration-200"
+              className="flex items-center justify-between gap-3 py-5 first:pt-0"
             >
-              {/* Left: Logo */}
-              <div className="shrink-0 border-2 border-border-primary rounded-md overflow-hidden w-12 h-12 flex items-center justify-center">
+              {/* Title inline with logo: "Claude Code 101 by [logo] Anthropic" */}
+              <div className="flex items-center flex-wrap gap-x-1.5 gap-y-0.5 min-w-0">
+                <span className="text-base font-medium text-text-primary">
+                  {cert.title} by
+                </span>
                 <Image
                   src={cert.logo}
                   alt={cert.issuer}
-                  width={48}
-                  height={48}
-                  className="rounded-lg"
+                  width={20}
+                  height={20}
+                  className="w-5 h-5 rounded-sm object-cover shrink-0"
                 />
-              </div>
-
-              {/* Middle: Text */}
-              <div className="flex flex-col flex-1 min-w-0">
-                <h3 className="text-text-primary font-medium truncate">
-                  {cert.title}
-                </h3>
-                <span className="text-text-tertiary text-sm">
+                <span className="text-base font-medium text-text-primary">
                   {cert.issuer}
                 </span>
               </div>
 
               {/* Right: Credential Link */}
-              <div className="shrink-0 mr-2">
-                <a
-                  href={cert.credential}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 text-text-muted hover:text-text-primary transition-colors duration-200"
-                  aria-label={`View ${cert.title} credential`}
-                >
-                  <ExternalLink size={18} />
-                </a>
-              </div>
+              <a
+                href={cert.credential}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1.5 rounded-lg transition hover:bg-hover-tint shrink-0"
+                aria-label={`View ${cert.title} credential`}
+              >
+                <ExternalLink size={15} className="text-text-muted" />
+              </a>
             </div>
           ))}
         </div>

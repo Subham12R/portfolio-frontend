@@ -177,7 +177,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
   letter-spacing: -0.05em;
   line-height: 1.2;
 }

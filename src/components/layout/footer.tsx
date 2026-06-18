@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { siteConfig } from "@/data";
-
+import { VisitorBadge } from "@/components/ui/VisitorBadge";
+import { GitHubStarBadge } from "@/components/ui/GitHubStarBadge";
+import { GithubIcon } from "@/components/ui/github";
+import { XIcon } from "@/components/ui/x";
+import { HugeiconsIcon } from '@hugeicons/react'
+import { NewTwitterIcon, Linkedin01Icon } from '@hugeicons/core-free-icons'
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { socials } = siteConfig;
@@ -25,37 +30,29 @@ const Footer = () => {
           <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js">
             {" "}
           </script>
+
           {/* Links - Right */}
-          <div className="flex items-center gap-4 md:gap-6 text-sm text-text-secondary">
-            <Link
-              href="/llms.txt"
-              className="hover:text-text-primary transition-colors duration-200"
-            >
-              llms.txt
-            </Link>
-            <a
-              href={socials.github.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-text-primary transition-colors duration-200"
-            >
-              Github
-            </a>
+          <div className="flex items-center gap-3 md:gap-4">
+            <VisitorBadge />
+            <GitHubStarBadge repo="Subham12R/portfolio-frontend" />
+   
             <a
               href={socials.twitter.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-text-primary transition-colors duration-200"
+              className="text-text-secondary hover:text-text-primary transition-colors duration-200"
+              aria-label="X"
             >
-              x.com
+              <HugeiconsIcon icon={NewTwitterIcon}  size={25} />
             </a>
             <a
               href={socials.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-text-primary transition-colors duration-200"
+              className="text-text-secondary hover:text-text-primary transition-colors duration-200"
+              aria-label="LinkedIn"
             >
-              LinkedIn
+              <HugeiconsIcon icon={Linkedin01Icon}  size={25} />
             </a>
           </div>
         </div>
@@ -63,7 +60,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-1 md:gap-2 text-sm text-text-muted border-t border-border-primary pt-4">
           <span>
-            Designed & built by{" "}
+            Crafted with <span className="text-red-500">❤️</span> by{" "}
             <span className="text-text-secondary">{siteConfig.name}</span>
           </span>
           <span className="hidden md:inline text-border-primary">·</span>

@@ -43,8 +43,8 @@ export default function ProjectCard({ project }: { project: Project }) {
     setOpen(!open)
   }
 
-  return (
-    <div className="rounded-xl  backdrop-blur-3xl px-2 py-1 outline outline-1 outline-border-primary hover:outline-border-secondary transition-all duration-200">
+return (
+    <div className="rounded-md  backdrop-blur-3xl px-2 py-1 border border-primary  transition-all duration-200">
       
       {/* HEADER */}
       <div

@@ -153,7 +153,7 @@ export function GithubCalendar({
     const weeks = data?.contributions || []
 
     return (
-        <div className={cn("w-max max-w-full flex flex-col gap-4", className)}>
+        <div className={cn("w-full flex flex-col gap-4", className)}>
             {showTotal && (
                 <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-1">
                     <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export function GithubCalendar({
             )}
 
             <div
-                className="relative flex flex-nowrap gap-[4px] sm:gap-[3px] w-max max-w-full overflow-x-auto"
+                className="relative flex flex-nowrap gap-[4px] sm:gap-[3px] w-full overflow-x-auto"
                 onMouseLeave={() => {
                     setHoveredDate(null)
                     setHoveredCount(null)
@@ -183,7 +183,7 @@ export function GithubCalendar({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 5, scale: 0.9 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
+                            className="fixed z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
                             style={{
                                 left: mousePos.x,
                                 top: mousePos.y - 40,
@@ -214,14 +214,13 @@ export function GithubCalendar({
                                         stiffness: 260,
                                         damping: 20
                                     }}
-                                    onMouseEnter={(e) => {
+                                                    onMouseEnter={(e) => {
                                         setHoveredDate(day.date)
                                         setHoveredCount(day.contributionCount)
                                         const rect = e.currentTarget.getBoundingClientRect()
-                                        const parentRect = e.currentTarget.offsetParent!.getBoundingClientRect()
                                         setMousePos({
-                                            x: rect.left - parentRect.left + rect.width / 2,
-                                            y: rect.top - parentRect.top
+                                            x: rect.left + rect.width / 2,
+                                            y: rect.top
                                         })
                                     }}
                                     className={cn(

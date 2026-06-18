@@ -6,6 +6,7 @@ export interface Project {
   title: string;
   completedDate?: string | null;
   description: string;
+  caseStudy?: string;
   features: string[];
   tags: string[];
   bannerImage?: string;
@@ -28,6 +29,8 @@ export const projects: Project[] = [
     completedDate: null,
     description:
       "iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support. Backed by Vercel OSS Program.",
+    caseStudy:
+      "Most date/time pickers in React felt clunky on mobile — a mix of dropdowns and number inputs that didn't match the native iOS feel. I wanted to build something that felt right on touch devices while still working perfectly on desktop. The core challenge was getting inertia physics right: after a flick, the list should coast to a stop and snap to the nearest item, not abruptly halt. I also needed infinite loop scrolling to feel seamless — no visual jump when wrapping around. Being part of the Vercel OSS Program gave me the infrastructure to ship it properly as a registry-installable component.",
     features: [
       "Natural touch scrolling with smooth inertia effect",
       "Mouse drag and scroll support for desktop",
@@ -59,6 +62,8 @@ export const projects: Project[] = [
     completedDate: "2025-04",
     description:
       "A modern developer portfolio and blog platform built with Next.js 14, featuring MDX support, dark mode, and a custom CMS for managing content.",
+    caseStudy:
+      "I wanted a portfolio that was genuinely fast and easy to update without a CMS subscription or complex setup. DevFlow started as a personal experiment — what's the minimum stack to have a blog, project showcase, and good SEO all working together? MDX turned out to be the right answer for content: write in markdown, drop in components when needed. The full-text search with FlexSearch was a later addition after realizing how hard it is to find old posts without it. Dynamic OG images were added last, mostly because bare link previews look terrible when sharing on social.",
     features: [
       "MDX-powered blog with syntax highlighting",
       "Dynamic OG image generation",

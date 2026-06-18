@@ -12,6 +12,7 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop"
 import { JsonLd } from "@/components/ui/JsonLd"
 import { PageTransition } from "@/components/ui/PageTransition"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from "next/script"
 
 const helvetica = localFont({
   src: "../../public/fonts/Helvetica.ttf",
@@ -112,6 +113,12 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="a1621718-9590-4553-9bb6-ea78ab9970b0"
+          strategy="afterInteractive"
+        />
         <Neko />
         <ScrollToTop />
       </body>

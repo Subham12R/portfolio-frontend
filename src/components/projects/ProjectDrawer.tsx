@@ -1,11 +1,18 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Drawer } from "vaul";
-import { X, Play } from "lucide-react";
-import type { Project } from "@/data/project";
-import { getTechIcon } from "@/data/tech-icons";
+import { useEffect, useRef, useState } from "react";
+import { Play } from "lucide-react";
 import Image from "next/image";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  GithubIcon,
+  Globe02Icon,
+  NpmIcon,
+  BookOpen01Icon,
+  ArrowLeft01Icon,
+} from "@hugeicons/core-free-icons";
+import { useLenis } from "@/components/providers/SmoothScroll";
+import type { Project } from "@/data/project";
 
 interface ProjectDrawerProps {
   project: Project | null;
@@ -13,197 +20,242 @@ interface ProjectDrawerProps {
   onClose: () => void;
 }
 
-export default function ProjectDrawer({
-  project,
-  isOpen,
-  onClose,
-}: ProjectDrawerProps) {
+function formatDate(dateString: string): string {
+  const [year, month] = dateString.split("-");
+  return new Date(Number(year), Number(month) - 1).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+}
+
+const statusLabel: Record<string, string> = {
+  maintained: "Actively Maintained",
+  "in-progress": "In Progress",
+  completed: "Completed",
+};
+
+const TRANSITION_MS = 400;
+
+export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
   const [playing, setPlaying] = useState(false);
+  const [visible, setVisible] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { lenis } = useLenis();
 
-  const handleWheelCapture = (event: React.WheelEvent<HTMLDivElement>) => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    // Keep wheel scrolling bound to the drawer content instead of bubbling to drag handlers.
-    event.stopPropagation();
-    container.scrollTop += event.deltaY;
-  };
-
-  // Reset playing state when drawer closes
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      setPlaying(false);
-      onClose();
+  // Enter: paint first frame invisible, then transition in
+  useEffect(() => {
+    if (isOpen) {
+      const id = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(id);
     }
+  }, [isOpen]);
+
+  // Lock body scroll while open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    if (isOpen) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
+    return () => {
+      document.body.style.overflow = "";
+      lenis?.start();
+    };
+  }, [isOpen, lenis]);
+
+  // Smooth close: animate out, then fire onClose
+  const handleClose = () => {
+    setVisible(false);
+    setPlaying(false);
+    closeTimer.current = setTimeout(() => {
+      onClose();
+    }, TRANSITION_MS);
   };
 
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  // Escape key
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") handleClose(); };
+    if (isOpen) window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  if (!project && !isOpen) return null;
   if (!project) return null;
 
-  return (
-    <Drawer.Root open={isOpen} onOpenChange={handleOpenChange} modal>
-      <Drawer.Portal>
-        <Drawer.Overlay className="fixed inset-0 bg-black/60 z-50" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 flex max-h-[94vh] min-h-0 flex-col rounded-t-[20px] bg-bg-primary border-t border-border-primary">
-          {/* Handle + Close button */}
-          <div className="relative flex items-center justify-center mt-4">
-            <div className="h-1.5 w-12 shrink-0 rounded-full bg-border-secondary" />
-            <button
-              onClick={onClose}
-              className="absolute right-4 p-2 rounded-full hover:bg-bg-elevated transition-colors"
-              aria-label="Close drawer"
-            >
-              <X size={20} className="text-text-muted" />
-            </button>
-          </div>
+  const hasLinks =
+    project.links.github || project.links.live || project.links.npm || project.links.docs;
 
-          {/* Scrollable content */}
-          <div
-            ref={scrollRef}
-            className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-16 touch-pan-y"
-            data-vaul-no-drag
-            onWheelCapture={handleWheelCapture}
+  return (
+    <div
+      className={`fixed inset-0 z-50 bg-bg-primary flex flex-col transition-all ease-[cubic-bezier(0.32,0.72,0,1)] ${
+        visible
+          ? "translate-y-0 opacity-100 pointer-events-auto"
+          : "translate-y-4 opacity-0 pointer-events-none"
+      }`}
+      style={{ transitionDuration: `${TRANSITION_MS}ms` }}
+      aria-modal="true"
+      role="dialog"
+      aria-label={project.title}
+    >
+      {/* Scrollable body */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto">
+        <div className="max-w-2xl mx-auto px-4 md:px-0 py-10 pb-24">
+
+          {/* Back — inline, no bar */}
+          <button
+            onClick={handleClose}
+            className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary transition-colors mb-8"
           >
-            <div className="mx-auto max-w-4xl">
-              {/* Video/Image Section */}
-              <div className="mt-6 mb-10">
-                {project.youtubeId && playing ? (
-                  <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                    <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      title={project.title}
-                    />
-                  </div>
-                ) : project.bannerImage ? (
-                  <button
-                    onClick={() => project.youtubeId && setPlaying(true)}
-                    className={`relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-elevated shadow-2xl group/video ${project.youtubeId ? "cursor-pointer" : "cursor-default"}`}
-                  >
-                    <Image
-                      src={project.bannerImage}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover/video:scale-105"
-                    />
-                    {project.youtubeId && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
-                        <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center">
-                          <Play
-                            size={36}
-                            className="text-black ml-1"
-                            fill="black"
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </button>
-                ) : (
-                  <div className="w-full aspect-video rounded-2xl bg-bg-elevated flex items-center justify-center text-text-muted">
-                    No preview available
+            <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+            <span className="text-sm">Back</span>
+          </button>
+
+          {/* Banner */}
+          <div className="w-full aspect-video rounded-xl overflow-hidden bg-bg-elevated mb-8">
+            {project.youtubeId && playing ? (
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                title={project.title}
+              />
+            ) : project.bannerImage ? (
+              <button
+                onClick={() => project.youtubeId && setPlaying(true)}
+                className={`relative w-full h-full group/video ${project.youtubeId ? "cursor-pointer" : "cursor-default"}`}
+              >
+                <Image
+                  src={project.bannerImage}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover/video:scale-105"
+                />
+                {project.youtubeId && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
+                    <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                      <Play size={28} className="text-black ml-1" fill="black" />
+                    </div>
                   </div>
                 )}
+              </button>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-text-muted text-sm">
+                No preview
               </div>
-
-              {/* Details Section - Two Column Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-8">
-                {/* Left - Main Info Stack */}
-                <div className="flex flex-col">
-                  {/* Number + Status */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-sm font-mono text-text-muted">
-                      {project.numberId}
-                    </span>
-                    {project.status && (
-                      <span
-                        className={`text-xs px-3 py-1 rounded-md border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] ${
-                          project.status === "maintained"
-                            ? "border-green-500/30 text-green-400"
-                            : project.status === "in-progress"
-                              ? "border-amber-500/30 text-amber-400"
-                              : "border-border-secondary text-text-tertiary"
-                        }`}
-                      >
-                        {project.status === "maintained"
-                          ? "Actively Maintained"
-                          : project.status === "in-progress"
-                            ? "In Progress"
-                            : "Completed"}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <Drawer.Title className="text-4xl font-semibold text-text-primary mb-2">
-                    {project.title}
-                  </Drawer.Title>
-
-                  {/* Date */}
-                  <p className="text-sm text-text-muted mb-6">
-                    {project.completedDate
-                      ? project.completedDate.split("-").reverse().join(".")
-                      : "Present"}
-                  </p>
-
-                  {/* Description */}
-                  <Drawer.Description className="text-text-secondary leading-relaxed mb-8">
-                    {project.description}
-                  </Drawer.Description>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap items-center gap-4">
-                    {project.tags.map((tag) => {
-                      const iconPath = getTechIcon(tag);
-                      return (
-                        <div key={tag} className="group/icon relative">
-                          {iconPath ? (
-                            <Image
-                              src={iconPath}
-                              alt={tag}
-                              width={32}
-                              height={32}
-                              className="rounded-md cursor-pointer hover:scale-110 transition-transform"
-                            />
-                          ) : (
-                            <span className="text-sm text-text-tertiary cursor-pointer hover:text-text-secondary transition-colors">
-                              {tag}
-                            </span>
-                          )}
-                          {/* Tooltip */}
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap opacity-0 group-hover/icon:opacity-100 transition-opacity pointer-events-none z-10">
-                            {tag}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Right - Features */}
-                <div>
-                  <h3 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">
-                    Features
-                  </h3>
-                  <ul className="space-y-3">
-                    {project.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start gap-3 text-text-secondary leading-relaxed"
-                      >
-                        <span className="text-text-muted mt-1">•</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
-        </Drawer.Content>
-      </Drawer.Portal>
-    </Drawer.Root>
+
+          {/* Meta */}
+          <div className="flex items-center gap-2 text-xs text-text-muted mb-3 flex-wrap">
+            {project.completedDate && <span>{formatDate(project.completedDate)}</span>}
+            {project.completedDate && project.status && (
+              <span className="w-1 h-1 rounded-full bg-text-muted" />
+            )}
+            {project.status && <span>{statusLabel[project.status]}</span>}
+          </div>
+
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary leading-tight mb-4">
+            {project.title}
+          </h1>
+
+          {/* Description */}
+          <p className="text-text-secondary leading-relaxed mb-4 text-base">
+            {project.description}
+          </p>
+
+          {/* Links — below description */}
+          {hasLinks && (
+            <div className="flex flex-wrap gap-x-6 gap-y-3 mb-10">
+              {project.links.github && (
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                >
+                  <HugeiconsIcon icon={GithubIcon} size={15} />
+                  GitHub
+                </a>
+              )}
+              {project.links.live && (
+                <a
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                >
+                  <HugeiconsIcon icon={Globe02Icon} size={15} />
+                  Live Site
+                </a>
+              )}
+              {project.links.npm && (
+                <a
+                  href={project.links.npm}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                >
+                  <HugeiconsIcon icon={NpmIcon} size={15} />
+                  npm
+                </a>
+              )}
+              {project.links.docs && (
+                <a
+                  href={project.links.docs}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                >
+                  <HugeiconsIcon icon={BookOpen01Icon} size={15} />
+                  Docs
+                </a>
+              )}
+            </div>
+          )}
+
+          {/* Features */}
+          <section className="mb-10">
+            <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
+              Features
+            </h2>
+            <ul className="space-y-2.5">
+              {project.features.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3 text-text-secondary text-sm leading-relaxed">
+                  <span className="text-text-muted shrink-0 w-5 text-right">
+                    {String(i + 1).padStart(2, "0")}.
+                  </span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Case Study */}
+          {project.caseStudy && (
+            <section className="mb-10">
+              <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
+                Case Study
+              </h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                {project.caseStudy}
+              </p>
+            </section>
+          )}
+
+        </div>
+      </div>
+    </div>
   );
 }

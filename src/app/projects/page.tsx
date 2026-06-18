@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { siteConfig } from "@/data";
 import { fetchProjects } from "@/lib/api/server";
-import PlainProjectCard from "@/components/projects/PlainProjectCard";
+import ProjectsGrid from "@/components/projects/ProjectsGrid";
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
@@ -55,12 +55,7 @@ export default async function ProjectsPage() {
           </p>
         </header>
 
-        {/* Projects Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <PlainProjectCard key={project.id} project={project} />
-          ))}
-        </section>
+        <ProjectsGrid projects={projects} />
       </div>
     </main>
   );

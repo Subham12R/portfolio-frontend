@@ -83,10 +83,8 @@ export const About = () => {
     >
       <div className="max-w-4xl w-full">
         {/* HEADER */}
-        <div className="flex justify-start items-start pt-16 pb-5 border-b border-border-accent space-y-2 mb-8">
-          <span className="text-start text-text-secondary text-xl font-mono leading-tight">
-            {section.number}
-          </span>
+        <div className="flex justify-start items-start pt-16 pb-5  space-y-2 mb-4">
+
           <h1 className="text-4xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>

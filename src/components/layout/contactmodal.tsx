@@ -53,7 +53,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         </div>
 
         {/* Body */}
-        <div className="h-[70vh] w-full ">
+        <div className="h-[70vh] w-full bg-transparent ">
           <iframe
             src="https://cal.com/subham12r/15min"
             className="h-full w-full rounded-b-md p-4"

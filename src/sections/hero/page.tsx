@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { GithubCalendar } from "@/components/ui/github-calendar";
 import { TooltipGlass } from "@/components/ui/tooltip";
-import { Map, MapPin, XCircle } from "lucide-react";
+import { ArrowRight, Map, MapPin, Phone, PhoneIcon, XCircle } from "lucide-react";
 
 import { DownloadIcon } from "@/components/ui/download";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -126,7 +126,7 @@ export const Hero = () => {
     <section id="home" className="w-full flex justify-center items-center">
       <div className="max-w-4xl w-full flex flex-col h-full">
         {/* Banner */}
-        <div className="max-h-full  overflow-hidden flex justify-center flex-col items-center">
+        <div className="max-h-full overflow-hidden flex justify-center flex-col items-center">
           <Image
             src={profileBanner}
             alt="Banner"
@@ -138,10 +138,10 @@ export const Hero = () => {
           />
         </div>
 
-        <div className="w-full py-5 px-2 ">
+        <div className="w-full py-5 px-2 md:px-0 ">
           {/* Hero Content */}
           <div className="flex flex-col justify-center items-end text-start mt-8 ">
-            <div className="flex flex-col md:flex-row md:justify-between items-start w-full mb-8  px-2 lg:px-0 ">
+            <div className="flex flex-col md:flex-row md:justify-between items-start w-full mb-8">
               <div className="flex flex-row items-end justify-center gap-4">
                 <Image
                   src={profileIcon}
@@ -160,30 +160,84 @@ export const Hero = () => {
                       {titles[0]}
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-2  ">
-                    <h1 className="text-2xl md:text-4xl  font-medium tracking-tighter ">
+                  <div className="inline-flex items-center gap-2 group/badge">
+                    <span className="text-2xl md:text-4xl font-medium  tracking-tighter">
                       {name}
-                    </h1>
-                    <a
-                      href={resume.path}
-                      download={resume.filename}
-                      className="group bg-blue-600 p-1.5 rounded-lg inline-flex justify-center items-center border border-blue-400/20 hover:bg-blue-500 active:scale-95 transition-all duration-200"
-                      title="Download Resume"
-                      onClick={handlePlay}
+                    </span>
+                    <svg
+                      viewBox="0 0 22 22"
+                      className="w-5 h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 group-hover/badge:rotate-12 items-end mt-2"
+                      aria-label="Verified"
                     >
-                      <DownloadIcon className="text-white" size={16} />
-                      <span className="text-white text-sm font-medium overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 transition-all duration-200">
-                        Resume
-                      </span>
-                    </a>
+                      <path
+                        fill="#3b82f6"
+                        d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.198-.606.225-1.255.08-1.875-.146-.62-.46-1.185-.904-1.63-.445-.445-1.01-.76-1.63-.904-.62-.146-1.27-.119-1.875.08-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.603-.198-1.25-.225-1.868-.08-.617.144-1.18.457-1.625.9-.444.445-.758 1.008-.902 1.626-.144.617-.118 1.264.08 1.867-.588.274-1.089.705-1.444 1.246-.355.54-.553 1.17-.572 1.817.02.647.218 1.276.572 1.817.355.54.856.972 1.444 1.245-.198.604-.224 1.252-.08 1.87.144.618.458 1.182.902 1.626.445.443 1.008.758 1.625.902.618.144 1.265.118 1.868-.08.272.587.703 1.086 1.243 1.44.54.354 1.168.551 1.815.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.198 1.251.223 1.868.078.617-.144 1.18-.458 1.625-.902.444-.444.758-1.008.902-1.626.144-.617.118-1.265-.08-1.87.587-.272 1.087-.704 1.442-1.244.354-.54.553-1.17.571-1.817z"
+                      />
+                      <path
+                        fill="white"
+                        d="M9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
+              
             </div>
+            <div className="w-full flex items-start gap-2 mb-8 flex-wrap">
+                <a
+                  href={resume.path}
+                  download={resume.filename}
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 text-white px-4 py-1.5 text-sm font-medium hover:bg-blue-500 active:scale-95 transition-all duration-200 border-2 border-blue-400/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)]"
+                  onClick={handlePlay}
+                >
+                  <DownloadIcon size={16} />
+                  Resume
+                </a>
+                <button
+                  data-cal-namespace="15min"
+                  data-cal-link="subham12r/15min"
+                  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                  className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-md bg-text-primary text-text-inverse px-4 py-1.5 text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary hover:border-border-secondary"
+                >
+                  Book a Call
+                  <Phone size={16} className="group-hover:rotate-2 transition-transform duration-200" />
+                </button>
 
+                <div className="md:ml-auto inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
+                  <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
+                    <HugeiconsIcon icon={GithubIcon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">GitHub</span>
+                  </a>
+                  <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200">
+                    <HugeiconsIcon icon={Linkedin02Icon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">LinkedIn</span>
+                  </a>
+                  <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+                    <HugeiconsIcon icon={NewTwitterIcon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">X</span>
+                  </a>
+                  <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200">
+                    <HugeiconsIcon icon={YoutubeIcon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">YouTube</span>
+                  </a>
+                  <a href="https://medium.com/@rikk4335" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+                    <HugeiconsIcon icon={MediumIcon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Medium</span>
+                  </a>
+                  <span className="group inline-flex items-center p-2.5 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default">
+                    <HugeiconsIcon icon={DiscordIcon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">subham_c9</span>
+                  </span>
+                  <a href={`mailto:${email}`} className="group inline-flex items-center p-2.5 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md">
+                    <HugeiconsIcon icon={Mail01Icon} size={20} />
+                    <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Mail</span>
+                  </a>
+                </div>
+            </div>
+            {/* Social Links */}
             <ScrollRevealText
               as="p"
-              className="text-base md:text-lg mb-8 max-w-4xl leading-loose px-2 lg:px-0"
+              className="text-base md:text-lg mb-8 max-w-4xl leading-loose"
             >
               {bio.long.split("scalable")[0]}
               <strong>scalable</strong>
@@ -197,43 +251,7 @@ export const Hero = () => {
                 <span>{location}</span>
               </span>
             </ScrollRevealText>
-          {/* Social Links */}
-          <div className="flex flex-wrap items-center gap-3 mb-10 px-2 lg:px-0">
-            {/* Social icon bar */}
-            <div className="inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
-              <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
-                <HugeiconsIcon icon={GithubIcon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">GitHub</span>
-              </a>
-              <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200">
-                <HugeiconsIcon icon={Linkedin02Icon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">LinkedIn</span>
-              </a>
-              <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
-                <HugeiconsIcon icon={NewTwitterIcon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">X</span>
-              </a>
-              <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200">
-                <HugeiconsIcon icon={YoutubeIcon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">YouTube</span>
-              </a>
-              <a href="https://medium.com/@rikk4335" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
-                <HugeiconsIcon icon={MediumIcon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Medium</span>
-              </a>
-              <span className="group inline-flex items-center p-2.5 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default">
-                <HugeiconsIcon icon={DiscordIcon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">subham_c9</span>
-              </span>
-              <a href={`mailto:${email}`} className="group inline-flex items-center p-2.5 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md">
-                <HugeiconsIcon icon={Mail01Icon} size={20} />
-                <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Mail</span>
-              </a>
-            </div>
-
-          </div>
-
-            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2 px-2 lg:px-0">
+            <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
               <div className="min-w-0 flex rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 items-center shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] ">
                 <DevPresence />
               </div>
@@ -252,7 +270,7 @@ export const Hero = () => {
             ) : (
               <div className="py-4 space-y-3 animate-pulse">
                 {/* Month labels skeleton */}
-                <div className="flex gap-3 px-2 mb-2">
+                <div className="flex gap-3 px-2 md:px-0 mb-2">
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="h-3 w-8 bg-bg-elevated rounded" />
                   ))}

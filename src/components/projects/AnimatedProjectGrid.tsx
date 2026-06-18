@@ -67,7 +67,7 @@ export default function AnimatedProjectGrid({ projects }: AnimatedProjectGridPro
   }, [])
 
   return (
-    <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+    <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 p-4">
       {projects.map((project) => (
         <div key={project.id} data-project-item>
           <PlainProjectCard project={project} />
