@@ -109,9 +109,20 @@ export function ExperienceCard({
         {/* Expandable: description + responsibilities + tech stack */}
         <div ref={contentRef} className="overflow-hidden">
           <div className="pt-2 space-y-3">
-            <p className="text-sm text-text-secondary leading-relaxed">
-              {experience.description}
-            </p>
+            {(() => {
+              const sentences = experience.description
+                .split(/\.\s+/)
+                .map((s) => s.trim())
+                .filter(Boolean)
+                .map((s) => (s.endsWith(".") ? s : `${s}.`));
+              return (
+                <ul className="text-sm text-text-secondary leading-relaxed space-y-1 list-disc list-inside">
+                  {sentences.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              );
+            })()}
             {experience.responsibilities && experience.responsibilities.length > 0 && (
               <ul className="text-sm text-text-secondary leading-relaxed space-y-1 list-disc list-inside">
                 {experience.responsibilities.map((item, i) => (
