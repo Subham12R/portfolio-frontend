@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
-import Image from "next/image"
 import "./globals.css"
 import Navigation from "@/components/layout/Navigation"
 import Footer from "@/components/layout/footer"
@@ -105,8 +104,11 @@ export default function RootLayout({
           <PageTransition />
           <SmoothScroll>
             <Navigation />
-            <main>{children}</main>
-            <Footer />
+            <div className="relative isolate">
+              <main>{children}</main>
+              <Footer />
+              <WaveBackground />
+            </div>
             <div
               className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-bg-primary via-bg-primary/50 to-transparent"
               aria-hidden="true"
