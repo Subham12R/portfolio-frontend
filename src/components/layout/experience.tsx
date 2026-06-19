@@ -73,7 +73,11 @@ export function ExperienceCard({
       {/* Left: content */}
       <div className="flex-1 min-w-0">
         {/* Title row */}
-        <div className="group flex items-start justify-between gap-3">
+        <button
+          onClick={toggle}
+          className="group w-full flex items-start justify-between gap-3 text-left"
+          aria-label={open ? "Collapse" : "Expand"}
+        >
           <div className="flex items-center flex-wrap gap-x-1.5 gap-y-0.5">
             <span className="text-base font-medium text-text-primary">
               {experience.role} at
@@ -88,17 +92,14 @@ export function ExperienceCard({
             <span className="text-base font-medium text-text-primary">
               {experience.company}
             </span>
-            <button
-              onClick={toggle}
-              className="p-1 rounded-lg transition hover:bg-hover-tint opacity-0 group-hover:opacity-100"
-              aria-label={open ? "Collapse" : "Expand"}
-            >
-              <div ref={iconRef}>
-                <ChevronDown size={15} className="text-text-muted" />
-              </div>
-            </button>
           </div>
-        </div>
+          <div
+            ref={iconRef}
+            className="shrink-0 mt-0.5 p-1 rounded-lg transition hover:bg-hover-tint opacity-100 md:opacity-0 group-hover:opacity-100"
+          >
+            <ChevronDown size={15} className="text-text-muted" />
+          </div>
+        </button>
 
         {/* Period — mobile only */}
         <p className="text-xs text-text-muted mt-0.5 sm:hidden">

@@ -153,7 +153,7 @@ export function GithubCalendar({
     const weeks = data?.contributions || []
 
     return (
-        <div className={cn("w-full flex flex-col gap-4", className)}>
+        <div className={cn("w-full min-w-0 flex flex-col gap-4", className)}>
             {showTotal && (
                 <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-1">
                     <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export function GithubCalendar({
             )}
 
             <div
-                className="relative flex flex-nowrap gap-[4px] sm:gap-[3px] w-full overflow-x-auto"
+                className="relative flex flex-nowrap gap-[4px] sm:gap-[3px] w-full min-w-0 overflow-x-auto"
                 onMouseLeave={() => {
                     setHoveredDate(null)
                     setHoveredCount(null)

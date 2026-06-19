@@ -28,7 +28,7 @@ export default function Experience() {
           >
             <div className="flex justify-between items-center w-full">
               <h3 className="tracking-tighter">
-                {exp.role} at {exp.company}
+                {exp.role} at {exp.company} 
               </h3>
               <p className="text-sm text-text-muted">
                 {getYearRange(exp.startDate, exp.endDate)}

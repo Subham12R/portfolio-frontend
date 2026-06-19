@@ -138,7 +138,7 @@ export const Hero = () => {
           />
         </div>
 
-        <div className="w-full py-5 px-2 md:px-0 ">
+        <div className="w-full py-5 px-4 md:px-0 ">
           {/* Hero Content */}
           <div className="flex flex-col justify-center items-end text-start mt-8 ">
             <div className="flex flex-col md:flex-row md:justify-between items-start w-full mb-8">
@@ -203,7 +203,7 @@ export const Hero = () => {
                   <Phone size={16} className="group-hover:rotate-2 transition-transform duration-200" />
                 </button>
 
-                <div className="md:ml-auto inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
+                <div className="md:ml-auto mt-4 inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
                   <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
                     <HugeiconsIcon icon={GithubIcon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">GitHub</span>
@@ -259,7 +259,7 @@ export const Hero = () => {
             </div>
           </div>
 
-       <div className="px-2 lg:px-0">
+       <div className="">
 
           {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
           <div className="w-full p-4 rounded-md bg-accent border-2 border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">

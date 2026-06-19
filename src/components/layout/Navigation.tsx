@@ -35,7 +35,7 @@ const Navigation = () => {
             </Link>
           </div>
 
-          <ul className="flex items-center gap-1 md:gap-2">
+          <ul className="flex gap-1 md:gap-2">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
