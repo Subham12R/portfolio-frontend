@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import Image from "next/image";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { getTechIcon } from "@/data/tech-icons";
 import {
   GithubIcon,
   Globe02Icon,
@@ -241,6 +242,37 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
               ))}
             </ul>
           </section>
+
+          {/* Tech Stack */}
+          {project.tags && project.tags.length > 0 && (
+            <section className="mb-10">
+              <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
+                Tech Stack
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => {
+                  const iconPath = getTechIcon(tag)
+                  return iconPath ? (
+                    <div
+                      key={tag}
+                      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-bg-badge/10 border border-border-primary text-text-secondary text-xs font-medium"
+                      title={tag}
+                    >
+                      <Image src={iconPath} alt={tag} width={14} height={14} className="rounded-sm" />
+                      {tag}
+                    </div>
+                  ) : (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1.5 rounded-lg bg-bg-badge/10 border border-border-primary text-text-secondary text-xs font-medium"
+                    >
+                      {tag}
+                    </span>
+                  )
+                })}
+              </div>
+            </section>
+          )}
 
           {/* Case Study */}
           {project.caseStudy && (

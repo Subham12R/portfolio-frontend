@@ -32,7 +32,7 @@ export default function ContactCTA() {
           alt="Signature"
           className="w-48 h-auto dark:invert"
         />
-        <span className="text-center text-md font-medium text-text-secondary dark:text-text-muted">
+        <span className="text-center text-md font-medium text-text-primary">
           &ldquo;Hard times are not the enemy of a good life. They are part of it.&rdquo;
         </span>
       </div>

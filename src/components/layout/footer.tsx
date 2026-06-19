@@ -11,8 +11,8 @@ const Footer = () => {
   const { socials } = siteConfig;
 
   return (
-    <footer className="w-full flex justify-center items-center bg-bg-primary pb-12 pt-8 px-4 lg:px-0">
-      <div className="w-full max-w-4xl pt-8 pb-2 px-4">
+    <footer className="w-full flex justify-center items-center pb-12 pt-8 px-4 lg:px-0">
+      <div className="relative z-10 w-full max-w-4xl pt-8 pb-2 px-4">
         {/* Main Row - DMCA left, Links right */}
         <div className="flex justify-between items-center mb-2">
           {/* DMCA Badge - Left */}
@@ -58,7 +58,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-1 md:gap-2 text-sm text-text-muted border-t border-border-primary pt-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-1 md:gap-2 text-sm text-text-primary border-t border-border-primary pt-4">
           <span>
             Crafted with <span className="text-red-500">❤️</span> by{" "}
             <span className="text-text-secondary">{siteConfig.name}</span>

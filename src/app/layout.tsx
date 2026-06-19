@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import Image from "next/image"
 import "./globals.css"
 import Navigation from "@/components/layout/Navigation"
 import Footer from "@/components/layout/footer"
@@ -103,8 +104,25 @@ export default function RootLayout({
           <PageTransition />
           <SmoothScroll>
             <Navigation />
-            <main>{children}</main>
-            <Footer />
+            <div className="relative isolate">
+              <main>{children}</main>
+              <Footer />
+              {/* Wave background — constrained to page width, spans ContactCTA + footer */}
+              <div className="absolute bottom-0 inset-x-0 flex justify-center pointer-events-none overflow-hidden  opacity-50 dark:opacity-20 backdrop-blur-md mx-auto -z-10">
+                <div
+                  className="relative w-full max-w-4xl h-full"
+                  style={{ maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)' }}
+                >
+                  <Image
+                    src="/images/footer.png"
+                    width={896}
+                    height={500}
+                    alt=""
+                    className="object-cover object-bottom"
+                  />
+                </div>
+              </div>
+            </div>
             <div
               className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-bg-primary via-bg-primary/50 to-transparent"
               aria-hidden="true"

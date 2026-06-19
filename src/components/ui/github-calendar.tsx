@@ -197,7 +197,7 @@ export function GithubCalendar({
                 </AnimatePresence>
 
                 {weeks.map((week, weekIndex) => (
-                    <div key={weekIndex} className="flex flex-col gap-[4px] sm:gap-[2px] w-[12px] sm:w-[18px]">
+                    <div key={weekIndex} className="flex flex-col gap-[4px] sm:gap-[2px] w-[18px] sm:w-[18px]">
                         {week.map((day, dayIndex) => {
                             const isGlowing = variant === "city-lights" && day.contributionCount > 0;
                             const isMinimal = variant === "minimal";

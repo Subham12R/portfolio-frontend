@@ -183,11 +183,12 @@ export const Hero = () => {
               </div>
               
             </div>
-            <div className="w-full flex items-start gap-2 mb-8 flex-wrap">
+            <div className="w-full flex flex-col gap-3 mb-8 md:mb-0 md:flex-row md:items-center md:gap-2">
+                <div className="flex items-center gap-2">
                 <a
                   href={resume.path}
                   download={resume.filename}
-                  className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 text-white px-4 py-1.5 text-sm font-medium hover:bg-blue-500 active:scale-95 transition-all duration-200 border-2 border-blue-400/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)]"
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-500 active:scale-95 transition-all duration-200 border-2 border-blue-400/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)]"
                   onClick={handlePlay}
                 >
                   <DownloadIcon size={16} />
@@ -197,38 +198,39 @@ export const Hero = () => {
                   data-cal-namespace="15min"
                   data-cal-link="subham12r/15min"
                   data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                  className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-md bg-text-primary text-text-inverse px-4 py-1.5 text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary hover:border-border-secondary"
+                  className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-md bg-text-primary text-text-inverse px-4 py-2 text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary hover:border-border-secondary"
                 >
                   Book a Call
                   <Phone size={16} className="group-hover:rotate-2 transition-transform duration-200" />
                 </button>
+                </div>
 
-                <div className="md:ml-auto mt-4 inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
-                  <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
+                <div className="md:ml-auto w-full md:w-auto flex md:inline-flex items-center rounded-md border-2 border-border-primary bg-bg-elevated/30 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-400 divide-x divide-border-primary">
+                  <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded-l-md">
                     <HugeiconsIcon icon={GithubIcon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">GitHub</span>
                   </a>
-                  <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200">
+                  <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200">
                     <HugeiconsIcon icon={Linkedin02Icon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">LinkedIn</span>
                   </a>
-                  <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+                  <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
                     <HugeiconsIcon icon={NewTwitterIcon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">X</span>
                   </a>
-                  <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200">
+                  <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200">
                     <HugeiconsIcon icon={YoutubeIcon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">YouTube</span>
                   </a>
-                  <a href="https://medium.com/@rikk4335" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center p-2.5 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
+                  <a href="https://medium.com/@rikk4335" target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200">
                     <HugeiconsIcon icon={MediumIcon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Medium</span>
                   </a>
-                  <span className="group inline-flex items-center p-2.5 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default">
+                  <span className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default">
                     <HugeiconsIcon icon={DiscordIcon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">subham_c9</span>
                   </span>
-                  <a href={`mailto:${email}`} className="group inline-flex items-center p-2.5 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md">
+                  <a href={`mailto:${email}`} className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md">
                     <HugeiconsIcon icon={Mail01Icon} size={20} />
                     <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Mail</span>
                   </a>
