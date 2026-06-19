@@ -170,7 +170,7 @@ export const Hero = () => {
                     </span>
                     <svg
                       viewBox="0 0 22 22"
-                      className="w-5 h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 group-hover/badge:rotate-12 items-end mt-0 md:mt-2"
+                      className="w-5 h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 group-hover/badge:rotate-12 items-end mt-1 md:mt-2"
                       aria-label="Verified"
                     >
                       <path
