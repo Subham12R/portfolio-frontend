@@ -9,10 +9,11 @@ import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import { SmoothScroll } from "@/components/providers/SmoothScroll"
 import { Neko } from "@/components/ui/Neko"
-import { ScrollToTop } from "@/components/ui/ScrollToTop"
+import { WaveBackground } from "@/components/layout/WaveBackground"
 import { JsonLd } from "@/components/ui/JsonLd"
 import { PageTransition } from "@/components/ui/PageTransition"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { ScrollToTop } from "@/components/ui/ScrollToTop"
 import Script from "next/script"
 
 const helvetica = localFont({
@@ -104,25 +105,8 @@ export default function RootLayout({
           <PageTransition />
           <SmoothScroll>
             <Navigation />
-            <div className="relative isolate">
-              <main>{children}</main>
-              <Footer />
-              {/* Wave background — constrained to page width, spans ContactCTA + footer */}
-              <div className="absolute bottom-0 inset-x-0 flex justify-center pointer-events-none overflow-hidden  opacity-50 dark:opacity-20 backdrop-blur-md mx-auto -z-10">
-                <div
-                  className="relative w-full max-w-4xl h-full"
-                  style={{ maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)' }}
-                >
-                  <Image
-                    src="/images/footer.png"
-                    width={896}
-                    height={500}
-                    alt=""
-                    className="object-cover object-bottom"
-                  />
-                </div>
-              </div>
-            </div>
+            <main>{children}</main>
+            <Footer />
             <div
               className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-bg-primary via-bg-primary/50 to-transparent"
               aria-hidden="true"

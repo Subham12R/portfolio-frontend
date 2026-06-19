@@ -18,6 +18,10 @@ import {
   Mail01Icon,
   CallIcon,
   DiscordIcon,
+  AiBrain01Icon,
+  AiIdeaIcon,
+  Atom02Icon,
+  CircleGaugeIcon,
 } from "@hugeicons/core-free-icons";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { siteConfig } from "@/data";
@@ -241,11 +245,18 @@ export const Hero = () => {
               as="p"
               className="text-md md:text-xl mb-8 max-w-4xl leading-relaxed mt-0  md:mt-4 font-medium"
             >
-              {bio.short}
-             
+                <span className="inline-flex items-center gap-1.5 flex-wrap">
+                <span className="font-medium">Full Stack Developer,</span>
+                <span className="italic">architecting scalable modern web solutions</span>
+                <HugeiconsIcon icon={AiBrain01Icon} size={20} className="text-text-primary inline-block align-baseline" />
+                <span className="">while exploring databases,</span>
+                <HugeiconsIcon icon={AiIdeaIcon} size={20} className="text-text-primary inline-block align-baseline" />
+                <span className="italic">system design,</span>
+                <HugeiconsIcon icon={Atom02Icon} size={20} className="text-text-primary inline-block align-baseline" />
+                <span className="">and developer tooling.</span>
                
-             
-              
+              </span>
+
               <span className="inline-flex items-center gap-2 h-9 mt-4 w-full text-text-primary">
                 <Map size={20} className="text-base text-zinc-500" />
                 <span>{location}</span>
