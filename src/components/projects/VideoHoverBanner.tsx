@@ -127,12 +127,15 @@ export function VideoHoverBanner({
                   title={title}
                 />
               ) : loomId ? (
-                <iframe
-                  src={`https://www.loom.com/embed/${loomId}?autoplay=1&hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
-                  className="w-full h-full pointer-events-none"
-                  allowFullScreen
-                  title={title}
-                />
+                <div className="absolute inset-0 overflow-hidden">
+                  <iframe
+                    src={`https://www.loom.com/embed/${loomId}?autoplay=1&hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
+                    className="absolute top-0 left-0 w-full pointer-events-none"
+                    style={{ height: "calc(100% + 52px)" }}
+                    allowFullScreen
+                    title={title}
+                  />
+                </div>
               ) : null}
             </motion.div>
           )}

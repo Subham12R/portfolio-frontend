@@ -131,6 +131,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
             bannerImage={project.bannerImage}
             youtubeId={project.youtubeId}
             videoUrl={project.videoUrl}
+            loomId={project.loomId}
             title={project.title}
             className="aspect-video rounded-md mb-8"
             autoPlay

@@ -23,6 +23,7 @@ export default function PlainProjectCard({ project, onOpen }: PlainProjectCardPr
         bannerImage={thumbnailUrl}
         youtubeId={project.youtubeId}
         videoUrl={project.videoUrl}
+        loomId={project.loomId}
         title={project.title}
         className="aspect-4/3 rounded-md mb-4"
       />

@@ -25,7 +25,7 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
       "Content-Type": "application/json",
     },
     next: {
-      revalidate: 86400, // Cache for 60 seconds (ISR)
+      revalidate: 0, // No cache — always fetch fresh from backend
     },
   });
 
