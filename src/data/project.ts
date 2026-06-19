@@ -11,6 +11,7 @@ export interface Project {
   tags: string[];
   bannerImage?: string;
   youtubeId?: string;
+  videoUrl?: string;
   featured?: boolean;
   status?: "completed" | "in-progress" | "maintained";
   links: {

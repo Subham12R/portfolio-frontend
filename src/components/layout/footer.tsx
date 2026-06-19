@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
 import { siteConfig } from "@/data";
 import { VisitorBadge } from "@/components/ui/VisitorBadge";
 import { GitHubStarBadge } from "@/components/ui/GitHubStarBadge";
@@ -6,9 +9,20 @@ import { GithubIcon } from "@/components/ui/github";
 import { XIcon } from "@/components/ui/x";
 import { HugeiconsIcon } from '@hugeicons/react'
 import { NewTwitterIcon, Linkedin01Icon } from '@hugeicons/core-free-icons'
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { socials } = siteConfig;
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://images.dmca.com/Badges/DMCABadgeHelper.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <footer className="w-full flex justify-center items-center pb-12 pt-8 px-4 lg:px-0">
@@ -17,19 +31,15 @@ const Footer = () => {
         <div className="flex justify-between items-center mb-2">
           {/* DMCA Badge - Left */}
           <a
-            href="//www.dmca.com/Protection/Status.aspx?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
+            href="https://www.dmca.com/Protection/Status.aspx?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
             title="DMCA.com Protection Status"
             className="dmca-badge size-14 flex justify-center items-center"
           >
-            {" "}
             <img
               src="https://images.dmca.com/Badges/dmca_protected_13_120.png?ID=cc173fd3-4ecc-447a-8d25-cd5bc17402ca"
               alt="DMCA.com Protection Status"
             />
-          </a>{" "}
-          <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js">
-            {" "}
-          </script>
+          </a>
 
           {/* Links - Right */}
           <div className="flex items-center gap-3 md:gap-4">

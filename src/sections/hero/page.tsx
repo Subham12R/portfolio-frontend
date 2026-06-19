@@ -239,16 +239,14 @@ export const Hero = () => {
             {/* Social Links */}
             <ScrollRevealText
               as="p"
-              className="text-base md:text-lg mb-8 max-w-4xl leading-loose"
+              className="text-md md:text-xl mb-8 max-w-4xl leading-relaxed mt-0  md:mt-4 font-medium"
             >
-              {bio.long.split("scalable")[0]}
-              <strong>scalable</strong>
-              {bio.long.split("scalable")[1].split("architecture")[0]}
-              <strong>
-                architecture, thoughtful design, and real world impact
-              </strong>
-              .{bio.long.split("real world impact")[1]}
-              <span className="inline-flex items-center gap-2 h-9 w-full text-text-primary">
+              {bio.short}
+             
+               
+             
+              
+              <span className="inline-flex items-center gap-2 h-9 mt-4 w-full text-text-primary">
                 <Map size={20} className="text-base text-zinc-500" />
                 <span>{location}</span>
               </span>
@@ -271,21 +269,15 @@ export const Hero = () => {
               </>
             ) : (
               <div className="py-4 space-y-3 animate-pulse">
-                {/* Month labels skeleton */}
-                <div className="flex gap-3 px-2 md:px-0 mb-2">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-3 w-8 bg-bg-elevated rounded" />
-                  ))}
-                </div>
-
                 {/* Calendar grid skeleton */}
-                <div className="flex gap-[4px] sm:gap-[3px] overflow-x-auto">
+                <div className="flex gap-[5px] sm:gap-[3px] overflow-x-auto">
                   {Array.from({ length: 53 }).map((_, week) => (
-                    <div key={week} className="flex flex-col gap-[4px] sm:gap-[3px] flex-shrink-0">
+                    <div key={week} className="flex flex-col gap-[5px] sm:gap-[2px] flex-shrink-0 w-[22px] sm:w-[14px]">
+                      <div className="h-3 bg-bg-elevated rounded w-full" />
                       {Array.from({ length: 7 }).map((_, day) => (
                         <div
                           key={day}
-                          className="w-[18px] h-[18px] sm:w-[14px] sm:h-[14px] bg-bg-elevated rounded flex-shrink-0"
+                          className="w-full aspect-square bg-bg-elevated rounded flex-shrink-0"
                         />
                       ))}
                     </div>

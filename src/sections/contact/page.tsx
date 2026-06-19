@@ -26,7 +26,7 @@ export default function ContactCTA() {
         </div>
       </div>
      
-      <div className="max-w-2xl w-full mt-12 flex flex-col items-center justify-center gap-3 pt-6 px-4">
+      <div className="max-w-4xl w-full mt-12 flex flex-col items-center justify-center gap-3 pt-6 px-4">
         <img
           src="/sign.png"
           alt="Signature"

@@ -8,6 +8,7 @@ export interface ApiProject {
   repoUrl: string | null;
   liveUrl: string | null;
   youtubeUrl: string | null;
+  videoUrl: string | null;
   thumbnailUrl: string | null;
   images: string[];
   techStack: string[] | null;

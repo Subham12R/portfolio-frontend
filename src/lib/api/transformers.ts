@@ -75,6 +75,7 @@ export function transformProject(
     tags: apiProject.techStack || [],
     bannerImage: apiProject.thumbnailUrl || undefined,
     youtubeId: extractYoutubeId(apiProject.youtubeUrl),
+    videoUrl: apiProject.videoUrl || undefined,
     featured: apiProject.featured,
     status: "completed", // Backend doesn't have status field yet
     links: {

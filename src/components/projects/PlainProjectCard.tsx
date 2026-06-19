@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { ExternalLink, GitBranch, Play } from "lucide-react";
+import { ExternalLink, GitBranch } from "lucide-react";
 import type { Project } from "@/data/project";
+import { VideoHoverBanner } from "@/components/projects/VideoHoverBanner";
 
 interface PlainProjectCardProps {
   project: Project;
@@ -19,29 +19,13 @@ export default function PlainProjectCard({ project, onOpen }: PlainProjectCardPr
       onClick={onOpen}
     >
       {/* Thumbnail */}
-      <div className="relative aspect-[4/3] rounded-md  overflow-hidden bg-bg-elevated mb-4">
-        {thumbnailUrl ? (
-          <>
-            <Image
-              src={thumbnailUrl}
-              alt={project.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            {project.youtubeId && (
-              <div className="absolute inset-0 rounded-md flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                <div className="w-14 h-14 rounded-md bg-white/10 backdrop-blur-2xl flex items-center justify-center shadow-lg">
-                  <Play size={24} className="text-white" fill="white" />
-                </div>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-text-muted">
-            No preview
-          </div>
-        )}
-      </div>
+      <VideoHoverBanner
+        bannerImage={thumbnailUrl}
+        youtubeId={project.youtubeId}
+        videoUrl={project.videoUrl}
+        title={project.title}
+        className="aspect-4/3 rounded-md mb-4"
+      />
 
       {/* Content */}
       <div className="space-y-1">

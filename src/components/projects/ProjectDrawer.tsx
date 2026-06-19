@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Play } from "lucide-react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { VideoHoverBanner } from "@/components/projects/VideoHoverBanner";
 import { getTechIcon } from "@/data/tech-icons";
 import {
   GithubIcon,
@@ -38,11 +39,15 @@ const statusLabel: Record<string, string> = {
 const TRANSITION_MS = 400;
 
 export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
-  const [playing, setPlaying] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { lenis } = useLenis();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Enter: paint first frame invisible, then transition in
   useEffect(() => {
@@ -69,7 +74,6 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
   // Smooth close: animate out, then fire onClose
   const handleClose = () => {
     setVisible(false);
-    setPlaying(false);
     closeTimer.current = setTimeout(() => {
       onClose();
     }, TRANSITION_MS);
@@ -91,13 +95,14 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
 
   if (!project && !isOpen) return null;
   if (!project) return null;
+  if (!mounted) return null;
 
   const hasLinks =
     project.links.github || project.links.live || project.links.npm || project.links.docs;
 
-  return (
+  return createPortal(
     <div
-      className={`fixed inset-0 z-50 bg-bg-primary flex flex-col transition-all ease-[cubic-bezier(0.32,0.72,0,1)] ${
+      className={`fixed inset-0 z-[60] bg-bg-primary flex flex-col transition-all ease-[cubic-bezier(0.32,0.72,0,1)] ${
         visible
           ? "translate-y-0 opacity-100 pointer-events-auto"
           : "translate-y-4 opacity-0 pointer-events-none"
@@ -121,41 +126,15 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
           </button>
 
           {/* Banner */}
-          <div className="w-full aspect-video rounded-xl overflow-hidden bg-bg-elevated mb-8">
-            {project.youtubeId && playing ? (
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                title={project.title}
-              />
-            ) : project.bannerImage ? (
-              <button
-                onClick={() => project.youtubeId && setPlaying(true)}
-                className={`relative w-full h-full group/video ${project.youtubeId ? "cursor-pointer" : "cursor-default"}`}
-              >
-                <Image
-                  src={project.bannerImage}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover/video:scale-105"
-                />
-                {project.youtubeId && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/video:opacity-100 transition-opacity duration-200">
-                    <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                      <Play size={28} className="text-black ml-1" fill="black" />
-                    </div>
-                  </div>
-                )}
-              </button>
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-text-muted text-sm">
-                No preview
-              </div>
-            )}
-          </div>
+          <VideoHoverBanner
+            key={project.id}
+            bannerImage={project.bannerImage}
+            youtubeId={project.youtubeId}
+            videoUrl={project.videoUrl}
+            title={project.title}
+            className="aspect-video rounded-md mb-8"
+            autoPlay
+          />
 
           {/* Meta */}
           <div className="flex items-center gap-2 text-xs text-text-muted mb-3 flex-wrap">
@@ -288,6 +267,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
 
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
