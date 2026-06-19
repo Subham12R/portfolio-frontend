@@ -12,6 +12,7 @@ export interface Project {
   bannerImage?: string;
   youtubeId?: string;
   videoUrl?: string;
+  loomId?: string;
   featured?: boolean;
   status?: "completed" | "in-progress" | "maintained";
   links: {

@@ -10,11 +10,12 @@ function ExpandedProject({ project }: { project: Project }) {
     <div className="px-5 pb-6 space-y-6">
 
       {/* BANNER / VIDEO */}
-      {(project.bannerImage || project.youtubeId) && (
+      {(project.bannerImage || project.youtubeId || project.loomId) && (
         <VideoHoverBanner
           bannerImage={project.bannerImage}
           youtubeId={project.youtubeId}
           videoUrl={project.videoUrl}
+          loomId={project.loomId}
           title={project.title}
           className="aspect-video rounded-lg border border-border-primary"
           autoPlay

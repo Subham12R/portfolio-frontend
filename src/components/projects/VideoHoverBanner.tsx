@@ -20,6 +20,7 @@ interface VideoHoverBannerProps {
   bannerImage?: string;
   youtubeId?: string;
   videoUrl?: string;
+  loomId?: string;
   title: string;
   className?: string;
   /** Skip hover interaction — immediately mount and reveal the video */
@@ -30,13 +31,14 @@ export function VideoHoverBanner({
   bannerImage,
   youtubeId,
   videoUrl,
+  loomId,
   title,
   className,
   autoPlay = false,
 }: VideoHoverBannerProps) {
   const [hovered, setHovered] = useState(false);
 
-  const hasVideo = !!(youtubeId || videoUrl);
+  const hasVideo = !!(youtubeId || videoUrl || loomId);
   const isExpanded = autoPlay || hovered;
 
   const handleMouseEnter = () => {
@@ -121,6 +123,13 @@ export function VideoHoverBanner({
                   className="w-full h-full pointer-events-none"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  title={title}
+                />
+              ) : loomId ? (
+                <iframe
+                  src={`https://www.loom.com/embed/${loomId}?autoplay=1&hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
+                  className="w-full h-full pointer-events-none"
                   allowFullScreen
                   title={title}
                 />
