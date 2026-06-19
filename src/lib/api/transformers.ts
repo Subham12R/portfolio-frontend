@@ -33,8 +33,8 @@ function formatPeriod(startDate: string, endDate: string | null): string {
 // Extract YouTube video ID from URL
 function extractYoutubeId(url: string | null): string | undefined {
   if (!url) return undefined;
+  if (url.includes("loom.com")) return undefined;
 
-  // Handle various YouTube URL formats
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
     /^([a-zA-Z0-9_-]{11})$/, // Direct video ID
@@ -46,6 +46,13 @@ function extractYoutubeId(url: string | null): string | undefined {
   }
 
   return undefined;
+}
+
+// Extract Loom video ID from URL
+function extractLoomId(url: string | null): string | undefined {
+  if (!url) return undefined;
+  const match = url.match(/loom\.com\/(?:share|embed)\/([a-zA-Z0-9]+)/);
+  return match ? match[1] : undefined;
 }
 
 // Generate number ID from index (01, 02, 03, etc.)
@@ -75,6 +82,7 @@ export function transformProject(
     tags: apiProject.techStack || [],
     bannerImage: apiProject.thumbnailUrl || undefined,
     youtubeId: extractYoutubeId(apiProject.youtubeUrl),
+    loomId: extractLoomId(apiProject.youtubeUrl),
     videoUrl: apiProject.videoUrl || undefined,
     featured: apiProject.featured,
     status: "completed", // Backend doesn't have status field yet
