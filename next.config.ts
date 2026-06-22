@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: "api.microlink.io",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev",
+        pathname: "/**",
+      },
     ],
   },
 };
