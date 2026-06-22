@@ -10,7 +10,7 @@ function ExpandedProject({ project }: { project: Project }) {
     <div className="px-5 pb-6 space-y-6">
 
       {/* BANNER / VIDEO */}
-      {(project.bannerImage || project.youtubeId || project.loomId) && (
+      {(project.bannerImage || project.youtubeId || project.videoUrl || project.loomId) && (
         <VideoHoverBanner
           bannerImage={project.bannerImage}
           youtubeId={project.youtubeId}
