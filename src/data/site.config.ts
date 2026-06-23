@@ -75,6 +75,7 @@ export const siteConfig = {
     about: { id: "about", number: "04", title: "About Me" },
     blog: { id: "blog", number: "05", title: "Blog" },
     certificates: { id: "certificates", number: "06", title: "Certifications" },
+    gallery: { id: "gallery", number: "08", title: "Gallery" },
     contact: { id: "contact", number: "07", title: "Contact" },
   },
 

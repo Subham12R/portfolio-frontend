@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import type { AnalyticsStats } from "@/app/api/analytics/route";
+import { VisitorModal } from "./VisitorModal";
 
 function fmt(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}m`;
@@ -12,6 +14,7 @@ function fmt(n: number): string {
 export function VisitorBadge() {
   const [mounted, setMounted] = useState(false);
   const [stats, setStats] = useState<AnalyticsStats | null>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -26,10 +29,23 @@ export function VisitorBadge() {
   }
 
   return (
-    <div className="inline-flex items-center gap-1.5 h-9 px-2 rounded-md underline underline-offset-4 underline-color-text-muted">
-      <span className="text-sm font-medium text-text-secondary whitespace-nowrap">
-        {stats ? `You are the ${fmt(stats.totalVisitors)}th visitor` : "···"}
-      </span>
-    </div>
+    <>
+      <button
+        type="button"
+        onClick={() => stats && setOpen(true)}
+        className="inline-flex items-center gap-1.5 h-9 px-2 rounded-md underline underline-offset-4 underline-color-text-muted cursor-pointer hover:opacity-70 transition-opacity duration-150 disabled:cursor-default disabled:hover:opacity-100"
+        disabled={!stats}
+      >
+        <span className="text-sm font-medium text-text-secondary whitespace-nowrap">
+          {stats ? `You are the ${fmt(stats.totalVisitors)}th visitor` : "···"}
+        </span>
+      </button>
+
+      <AnimatePresence>
+        {open && stats && (
+          <VisitorModal stats={stats} onClose={() => setOpen(false)} />
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -40,13 +40,13 @@ export function GalleryCard({
         <div className="absolute top-0 right-30 pb-20">
           {images.slice(0, 4).map((img, index) => {
             const rotations = [-15, -5, 5, 15]
-            const xOffsets = [-50, -25, 0, 25]
-            const yOffsets = [0, -8, -12, -4]
+            const xOffsets = [-70, -35, 0, 35]
+            const yOffsets = [0, -10, -16, -6]
 
             return (
               <div
                 key={index}
-                className="absolute w-22 h-16 rounded-lg overflow-hidden shadow-md bg-bg-card transition-all duration-300 ease-out"
+                className="absolute w-56 aspect-4/3 rounded-xl overflow-hidden shadow-lg bg-bg-card transition-all duration-300 ease-out"
                 style={{
                   transform: isHovered
                     ? `rotate(${rotations[index]}deg) translateX(${xOffsets[index]}px) translateY(${yOffsets[index]}px)`

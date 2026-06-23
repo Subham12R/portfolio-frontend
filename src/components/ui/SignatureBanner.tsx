@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface LetterPath {
   d: string;
-  x2: number;
 }
 
 const TEXT = "Subham";
@@ -16,7 +18,8 @@ const CANVAS_H = 256;
 
 export function SignatureBanner() {
   const [letters, setLetters] = useState<LetterPath[]>([]);
-  const clipRectRef = useRef<SVGRectElement>(null);
+  const pathRefs = useRef<(SVGPathElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Extract per-letter SVG paths from the font
   useEffect(() => {
@@ -42,7 +45,6 @@ export function SignatureBanner() {
 
       const data: LetterPath[] = glyphs.map((g: any) => ({
         d: g.toPathData(2),
-        x2: g.getBoundingBox().x2,
       }));
 
       if (!cancelled) setLetters(data);
@@ -53,41 +55,70 @@ export function SignatureBanner() {
     };
   }, []);
 
-  // Per-letter clip-based handwriting animation
+  // GSAP stroke-draw (handwriting) animation per glyph — runs once on scroll-in
   useEffect(() => {
-    if (!letters.length || !clipRectRef.current) return;
+    if (!letters.length || !containerRef.current) return;
 
-    const rect = clipRectRef.current;
-    gsap.set(rect, { attr: { width: 0 } });
+    const paths = pathRefs.current.filter(Boolean) as SVGPathElement[];
+    if (!paths.length) return;
 
-    const tl = gsap.timeline({ delay: 0.3 });
-    let prevX2 = 0;
-
-    letters.forEach((letter, i) => {
-      const end = letter.x2 + 8; // small padding to include connecting strokes
-      const range = end - prevX2;
-      const duration = Math.max(0.18, range / 240); // ~240 px/s writing speed
-
-      tl.to(rect, {
-        attr: { width: end },
-        duration,
-        ease: "power1.inOut",
-        ...(i > 0 && { delay: 0.07 }), // brief pen-lift between letters
+    // Prime each path: dash the full outline, hide the fill (stays hidden until in view)
+    paths.forEach((path) => {
+      const len = path.getTotalLength();
+      gsap.set(path, {
+        strokeDasharray: len,
+        strokeDashoffset: len,
+        fillOpacity: 0,
       });
-
-      prevX2 = letter.x2;
     });
 
-    // Finish clip to full width
-    tl.to(rect, { attr: { width: CANVAS_W }, duration: 0.05, ease: "none" });
+    const tl = gsap.timeline({
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 85%",
+        once: true,
+      },
+    });
+
+    paths.forEach((path, i) => {
+      const len = path.getTotalLength();
+      const duration = Math.max(0.4, len / 900); // ~900 px/s pen speed
+
+      // Trace the glyph outline
+      tl.to(
+        path,
+        {
+          strokeDashoffset: 0,
+          duration,
+          ease: "power1.inOut",
+        },
+        i === 0 ? 0 : ">-0.15" // slight overlap between letters
+      );
+
+      // Flood the glyph with ink once it's drawn
+      tl.to(
+        path,
+        {
+          fillOpacity: 1,
+          duration: 0.25,
+          ease: "power1.out",
+        },
+        ">-0.1"
+      );
+    });
 
     return () => {
+      tl.scrollTrigger?.kill();
       tl.kill();
     };
   }, [letters]);
 
   return (
-    <div className="w-full h-64 overflow-hidden bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div
+      ref={containerRef}
+      className="w-full h-64 overflow-hidden bg-white dark:bg-black text-black dark:text-white transition-colors duration-300"
+    >
       <svg
         viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
         preserveAspectRatio="xMidYMid meet"
@@ -96,11 +127,6 @@ export function SignatureBanner() {
         aria-label="Subham Karmakar signature"
       >
         <defs>
-          {/* Expanding clip drives the handwriting reveal */}
-          <clipPath id="hw-clip">
-            <rect ref={clipRectRef} x="0" y="0" width="0" height={CANVAS_H} />
-          </clipPath>
-
           {/* Subtle pixel grid overlay */}
           <pattern
             id="px-grid"
@@ -123,47 +149,21 @@ export function SignatureBanner() {
               strokeOpacity="0.12"
             />
           </pattern>
-
-          {/* Pixel-art ink texture: hard alpha edges + micro-displacement */}
-          <filter
-            id="px-ink"
-            x="-5%"
-            y="-5%"
-            width="110%"
-            height="110%"
-            colorInterpolationFilters="sRGB"
-          >
-            <feComponentTransfer in="SourceGraphic" result="hard">
-              <feFuncA type="discrete" tableValues="0 0 1 1" />
-            </feComponentTransfer>
-            <feTurbulence
-              type="turbulence"
-              baseFrequency="0.06 0.06"
-              numOctaves="2"
-              seed="4"
-              result="noise"
-            />
-            <feDisplacementMap
-              in="hard"
-              in2="noise"
-              scale="1.2"
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
         </defs>
 
         {/* Full-canvas pixel grid */}
         <rect width={CANVAS_W} height={CANVAS_H} fill="url(#px-grid)" />
 
-        {/* Signature letters — revealed letter-by-letter by the animated clip */}
-        <g
-          clipPath="url(#hw-clip)"
-          filter="url(#px-ink)"
-          fill="currentColor"
-        >
+        {/* Signature letters — each outline is traced, then filled with ink */}
+        <g fill="currentColor" stroke="currentColor" strokeWidth="1.5">
           {letters.map((letter, i) => (
-            <path key={i} d={letter.d} />
+            <path
+              key={i}
+              ref={(el) => {
+                pathRefs.current[i] = el;
+              }}
+              d={letter.d}
+            />
           ))}
         </g>
       </svg>

@@ -56,6 +56,29 @@
 
   /* Hover tint */
   --color-hover-tint: rgba(0, 0, 0, 0.05);
+
+  /* Chart */
+  --chart-background: #ffffff;
+  --chart-foreground: #111111;
+  --chart-foreground-muted: #718096;
+  --chart-label: #718096;
+  --chart-line-primary: #111111;
+  --chart-line-secondary: #a0aec0;
+  --chart-crosshair: rgba(0, 0, 0, 0.2);
+  --chart-grid: rgba(0, 0, 0, 0.08);
+  --chart-indicator-color: rgba(0, 0, 0, 0.8);
+  --chart-indicator-secondary-color: rgba(0, 0, 0, 0.4);
+  --chart-marker-background: #ffffff;
+  --chart-marker-border: #e2e8f0;
+  --chart-marker-foreground: #111111;
+  --chart-marker-badge-background: #111111;
+  --chart-marker-badge-foreground: #ffffff;
+  --chart-segment-background: rgba(0, 0, 0, 0.05);
+  --chart-segment-line: rgba(0, 0, 0, 0.2);
+  --chart-tooltip-foreground: #111111;
+  --chart-tooltip-muted: #718096;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
 }
 
 /* Dark theme */
@@ -109,6 +132,29 @@
 
   /* Hover tint */
   --color-hover-tint: rgba(255, 255, 255, 0.05);
+
+  /* Chart */
+  --chart-background: #0e0e0e;
+  --chart-foreground: #ffffff;
+  --chart-foreground-muted: #a1a1aa;
+  --chart-label: #71717a;
+  --chart-line-primary: #ffffff;
+  --chart-line-secondary: #52525b;
+  --chart-crosshair: rgba(255, 255, 255, 0.2);
+  --chart-grid: rgba(255, 255, 255, 0.08);
+  --chart-indicator-color: rgba(255, 255, 255, 0.8);
+  --chart-indicator-secondary-color: rgba(255, 255, 255, 0.4);
+  --chart-marker-background: #1a1a1a;
+  --chart-marker-border: rgba(255, 255, 255, 0.1);
+  --chart-marker-foreground: #ffffff;
+  --chart-marker-badge-background: #ffffff;
+  --chart-marker-badge-foreground: #0e0e0e;
+  --chart-segment-background: rgba(255, 255, 255, 0.05);
+  --chart-segment-line: rgba(255, 255, 255, 0.2);
+  --chart-tooltip-foreground: #ffffff;
+  --chart-tooltip-muted: #a1a1aa;
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
 }
 
 /* Register theme tokens as Tailwind theme values */
@@ -153,6 +199,13 @@
   --color-shadow-strong: var(--color-shadow-strong);
 
   --color-hover-tint: var(--color-hover-tint);
+
+  /* Chart Tailwind utilities */
+  --color-chart-label: var(--chart-label);
+  --color-chart-tooltip-foreground: var(--chart-tooltip-foreground);
+  --color-chart-tooltip-muted: var(--chart-tooltip-muted);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
 }
 
 /* Smooth scroll behavior */

@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Cache optimized variants for 30 days before revalidating
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       {
         protocol: "https",
@@ -21,6 +23,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
         pathname: "/**",
       },
     ],
