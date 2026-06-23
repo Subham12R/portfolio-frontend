@@ -575,7 +575,7 @@ export function CommandPalette() {
             {/* Backdrop — clickable */}
             <div
               ref={backdropRef}
-              className="absolute inset-0 bg-bg-primary/40 pointer-events-auto"
+              className="absolute inset-0 bg-zinc-950/60 pointer-events-auto"
               style={{
                 backdropFilter: "blur(5px) saturate(180%)",
                 WebkitBackdropFilter: "blur(80px) saturate(180%)",
@@ -589,7 +589,7 @@ export function CommandPalette() {
             {/* Modal */}
             <div
               ref={modalRef}
-              className="relative w-full max-w-md bg-bg-card rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-border-primary/40 overflow-hidden flex flex-col max-h-[60vh] pointer-events-auto"
+              className="relative w-full max-w-md bg-zinc-950/80 backdrop-blur-xl rounded-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary overflow-hidden flex flex-col max-h-[65vh] pointer-events-auto"
               style={{ opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}

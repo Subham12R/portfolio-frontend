@@ -20,12 +20,12 @@ const Tech = () => {
   return (
     <section
       id={section.id}
-      className="w-full flex justify-center items-center pb-10 px-4 lg:px-0 overflow-hidden mt-8"
+      className="w-full flex justify-center items-center px-4 lg:px-0 overflow-hidden mb-12"
     >
       <div className="max-w-4xl w-full flex flex-col h-full">
         {/* Header */}
 
-        <h1 className="text-3xl  mb-6 tracking-tighter font-medium ">
+        <h1 className="text-4xl font-medium text-text-primary mb-6">
           Tech Stack - That helps me get the stuff done.
         </h1>
         {/* Tech Stack Dock */}

@@ -74,12 +74,11 @@ export function VisitorModal({ stats, onClose }: Props) {
       variants={backdrop} initial="hidden" animate="visible" exit="exit"
       onClick={onClose}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/10 backdrop-blur-sm" />
 
       <motion.div
         variants={card}
-        className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
-        style={{ background: modalBg }}
+        className="relative w-full max-w-xl rounded-2xl overflow-hidden  bg-zinc-950/60 border-2 border-border-primary backdrop-blur-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -98,7 +97,7 @@ export function VisitorModal({ stats, onClose }: Props) {
           </div>
 
           {/* Stats */}
-          <div className="flex items-stretch gap-6 mt-5 pt-5" style={{ borderTop: `1px solid ${divider}` }}>
+          <div className="flex items-stretch gap-6 mt-5 pt-5" >
             <div>
               <p className={`text-[11px] uppercase tracking-wider mb-1.5 ${labelCls}`}>Unique Visitors</p>
               <p className={`text-[22px] font-bold leading-none tracking-tight ${valueCls}`}>

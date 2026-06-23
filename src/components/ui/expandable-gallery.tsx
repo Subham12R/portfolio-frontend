@@ -186,7 +186,7 @@ function GalleryOverlay({ onClose }: { onClose: () => void }) {
             <span className="text-sm">Back</span>
           </button>
 
-          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary mb-8">
+          <h1 className="text-4xl font-medium text-text-primary mb-8">
             Gallery
           </h1>
 
@@ -252,7 +252,7 @@ export function ExpandableGallery() {
                 transition: { type: "spring", stiffness: 400, damping: 25 },
               }}
               onClick={() => setIsOpen(true)}
-              className="absolute w-36 h-36 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-3xl border-[5px] md:border-[6px] border-bg-primary cursor-pointer overflow-hidden bg-bg-elevated"
+              className="absolute w-36 h-36 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-2xl border-[5px] md:border-[6px] border-bg-primary cursor-pointer overflow-hidden bg-bg-elevated"
             >
               <Media photo={photo} sizes="(max-width: 768px) 144px, 240px" />
             </motion.div>

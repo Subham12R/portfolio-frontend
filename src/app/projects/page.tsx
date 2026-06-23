@@ -45,7 +45,7 @@ export default async function ProjectsPage() {
 
         {/* Header */}
         <header className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-medium text-text-primary mb-4">
+          <h1 className="text-4xl font-medium text-text-primary mb-4">
             Projects
           </h1>
           <p className="text-lg text-text-tertiary max-w-4xl leading-relaxed">

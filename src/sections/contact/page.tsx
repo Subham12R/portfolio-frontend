@@ -50,9 +50,9 @@ export default function ContactCTA() {
   return (
     <section
       id={section.id}
-      className="w-full max-w-4xl mx-auto flex flex-col justify-center items-center"
+      className="w-full max-w-4xl mx-auto flex flex-col justify-center items-center mb-12"
     >
-      <div className="max-w-4xl w-full mt-12 flex flex-col items-center justify-center gap-3 pt-6 px-4 pb-16">
+      <div className="max-w-4xl w-full flex flex-col items-center justify-center gap-3 pt-6 px-4 pb-12">
         <svg
           ref={svgRef}
           viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}

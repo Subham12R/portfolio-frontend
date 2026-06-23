@@ -147,7 +147,7 @@ export function ExperienceCard({
       </div>
 
       {/* Right: date range + location */}
-      <div className="w-44 shrink-0 pt-0.5 text-xs text-text-muted text-right hidden sm:block space-y-0.5">
+      <div className="shrink-0 pt-0.5 text-sm text-text-muted text-right hidden sm:block space-y-0.5 whitespace-nowrap">
         <div>{yearRange}</div>
         {experience.location && <div>{experience.location}</div>}
       </div>

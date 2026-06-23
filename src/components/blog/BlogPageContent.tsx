@@ -32,7 +32,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
         <header className="mb-12">
           <ScrollRevealText
             as="h1"
-            className="text-4xl md:text-5xl font-semibold text-text-primary mb-4"
+            className="text-4xl font-medium text-text-primary mb-4"
             start="top 90%"
             end="top 60%"
           >

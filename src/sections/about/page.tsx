@@ -79,12 +79,11 @@ export const About = () => {
   return (
     <section
       id={section.id}
-      className="w-full flex justify-center items-center py-24  text-text-primary px-4 lg:px-0"
+      className="w-full flex justify-center items-center text-text-primary px-4 lg:px-0 mb-12"
     >
       <div className="max-w-4xl w-full">
         {/* HEADER */}
-        <div className="flex justify-start items-start pt-16 pb-5  space-y-2 mb-4">
-
+        <div className="mb-6">
           <h1 className="text-4xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
