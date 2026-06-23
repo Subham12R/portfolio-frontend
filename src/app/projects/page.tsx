@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { siteConfig } from "@/data";
-import { fetchProjects } from "@/lib/api/server";
-import ProjectsGrid from "@/components/projects/ProjectsGrid";
+import ProjectsPageClient from "@/components/projects/ProjectsPageClient";
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
@@ -28,9 +27,7 @@ export const metadata = {
   },
 };
 
-export default async function ProjectsPage() {
-  const projects = await fetchProjects();
-
+export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
@@ -55,7 +52,7 @@ export default async function ProjectsPage() {
           </p>
         </header>
 
-        <ProjectsGrid projects={projects} />
+        <ProjectsPageClient />
       </div>
     </main>
   );
