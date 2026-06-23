@@ -1,21 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { ExperienceCard } from "@/components/layout/experience";
 import { siteConfig } from "@/data";
-import { getWorkExperiences } from "@/lib/api/client";
-import { transformWorkExperiences } from "@/lib/api/transformers";
-import { experiences as staticExperiences } from "@/data/experience";
+import { fetchWorkExperiences } from "@/lib/api/server";
 
-const Work = () => {
+const Work = async () => {
   const section = siteConfig.sections.experience;
-  const [experiences, setExperiences] = useState(staticExperiences);
-
-  useEffect(() => {
-    getWorkExperiences()
-      .then((data) => { if (data.length > 0) setExperiences(transformWorkExperiences(data)); })
-      .catch(() => {});
-  }, []);
+  const experiences = await fetchWorkExperiences();
 
   return (
     <section

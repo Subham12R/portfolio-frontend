@@ -1,25 +1,13 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import AnimatedProjectGrid from "@/components/projects/AnimatedProjectGrid";
 import Link from "next/link";
 import { siteConfig } from "@/data";
-import { getProjects } from "@/lib/api/client";
-import { transformProjects } from "@/lib/api/transformers";
-import { projects as staticProjects } from "@/data/project";
+import { fetchProjects } from "@/lib/api/server";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { NanoTechnologyIcon } from "@hugeicons/core-free-icons";
 
-const ProjectsPage = () => {
+const ProjectsPage = async () => {
   const section = siteConfig.sections.projects;
-  const [projects, setProjects] = useState(staticProjects);
-
-  useEffect(() => {
-    getProjects()
-      .then((data) => { if (data.length > 0) setProjects(transformProjects(data)); })
-      .catch(() => {});
-  }, []);
-
+  const projects = await fetchProjects();
   const displayProjects = projects.slice(0, 6);
 
   return (

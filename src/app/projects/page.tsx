@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { siteConfig } from "@/data";
-import ProjectsPageClient from "@/components/projects/ProjectsPageClient";
+import { fetchProjects } from "@/lib/api/server";
+import ProjectsGrid from "@/components/projects/ProjectsGrid";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
@@ -27,7 +30,9 @@ export const metadata = {
   },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await fetchProjects();
+
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
@@ -52,7 +57,7 @@ export default function ProjectsPage() {
           </p>
         </header>
 
-        <ProjectsPageClient />
+        <ProjectsGrid projects={projects} />
       </div>
     </main>
   );
