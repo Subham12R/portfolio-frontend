@@ -24,8 +24,9 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
     headers: {
       "Content-Type": "application/json",
     },
+    signal: AbortSignal.timeout(5000),
     next: {
-      revalidate: 3600, // Revalidate every hour via ISR
+      revalidate: 3600,
     },
   });
 
