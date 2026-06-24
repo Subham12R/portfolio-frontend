@@ -171,6 +171,7 @@ export function GithubCalendar({
     return (
         <div className={cn("w-full min-w-0 flex flex-col gap-4", className)}>
             <div
+                data-lenis-prevent
                 className="relative flex flex-nowrap gap-[3px] w-full min-w-0 overflow-x-auto md:overflow-visible pb-1 md:pb-0"
                 onMouseLeave={() => {
                     setHoveredDate(null)

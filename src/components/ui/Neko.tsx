@@ -4,7 +4,13 @@ import Script from "next/script";
 import { useState, useEffect } from "react";
 
 export function Neko() {
-  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setShow(window.matchMedia("(pointer: fine)").matches);
+  }, []);
+
+  if (!show) return null;
 
   return (
     <Script

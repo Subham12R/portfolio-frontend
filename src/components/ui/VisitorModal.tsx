@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useLenis } from "@/components/providers/SmoothScroll";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -38,18 +39,68 @@ const card = {
 
 export function VisitorModal({ stats, onClose }: Props) {
   const { resolvedTheme } = useTheme();
+  const { lenis } = useLenis();
   const isDark = resolvedTheme !== "light";
   const modalBg  = isDark ? "#111111" : "#ffffff";
   const titleCls = isDark ? "text-white"   : "text-zinc-900";
   const labelCls = "text-zinc-500";
   const valueCls = isDark ? "text-white"   : "text-zinc-900";
   const divider  = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
+  const scrollYRef = useRef(0);
 
   useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+    scrollYRef.current = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+
+    const origHtmlOverflow = html.style.overflow;
+    const origBodyOverflow = body.style.overflow;
+    const origBodyPosition = body.style.position;
+    const origBodyTop = body.style.top;
+    const origBodyWidth = body.style.width;
+    const origBodyTouchAction = body.style.touchAction;
+    const origBodyOverscroll = body.style.overscrollBehavior;
+    const origHtmlTouchAction = html.style.touchAction;
+    const origHtmlOverscroll = html.style.overscrollBehavior;
+    const origHtmlScrollBehavior = html.style.scrollBehavior;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollYRef.current}px`;
+    body.style.width = "100%";
+    body.style.touchAction = "none";
+    body.style.overscrollBehavior = "none";
+    html.style.touchAction = "none";
+    html.style.overscrollBehavior = "none";
+    html.style.scrollBehavior = "auto";
+
+    lenis?.stop();
+
+    const preventTouch = (e: TouchEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-modal-content]")) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("touchmove", preventTouch, { passive: false });
+
+    return () => {
+      html.style.overflow = origHtmlOverflow;
+      body.style.overflow = origBodyOverflow;
+      body.style.position = origBodyPosition;
+      body.style.top = origBodyTop;
+      body.style.width = origBodyWidth;
+      body.style.touchAction = origBodyTouchAction;
+      body.style.overscrollBehavior = origBodyOverscroll;
+      html.style.touchAction = origHtmlTouchAction;
+      html.style.overscrollBehavior = origHtmlOverscroll;
+      html.style.scrollBehavior = origHtmlScrollBehavior;
+      window.scrollTo(0, scrollYRef.current);
+      lenis?.start();
+      document.removeEventListener("touchmove", preventTouch);
+    };
+  }, [lenis]);
 
   useEffect(() => {
     const h = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -78,6 +129,7 @@ export function VisitorModal({ stats, onClose }: Props) {
 
       <motion.div
         variants={card}
+        data-modal-content
         className="relative w-full max-w-xl rounded-2xl overflow-hidden  bg-zinc-950/60 border-2 border-border-primary backdrop-blur-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
         onClick={(e) => e.stopPropagation()}
       >

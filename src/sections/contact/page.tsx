@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { siteConfig } from "@/data";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const VB_X = 345.075;
 const VB_Y = 199.329;
@@ -25,15 +28,27 @@ export default function ContactCTA() {
     })();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const rect = clipRectRef.current;
     const svg = svgRef.current;
     if (!rect || !svg) return;
 
     gsap.set(rect, { attr: { width: 0 } });
     gsap.set(svg, { opacity: 0, y: 12 });
+  }, []);
 
-    const tl = gsap.timeline({ delay: 0.4 });
+  useEffect(() => {
+    const rect = clipRectRef.current;
+    const svg = svgRef.current;
+    if (!rect || !svg) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: svg,
+        start: "top 85%",
+        once: true,
+      },
+    });
     tl
       .to(svg, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
       .to(
@@ -43,6 +58,7 @@ export default function ContactCTA() {
       );
 
     return () => {
+      tl.scrollTrigger?.kill();
       tl.kill();
     };
   }, []);

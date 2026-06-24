@@ -3,6 +3,7 @@
 import {
   useState,
   useEffect,
+  useLayoutEffect,
   useRef,
   useCallback,
   type ReactNode,
@@ -319,7 +320,7 @@ export function CommandPalette() {
 
   // Bulletproof scroll lock: works on Safari, Chrome, iOS
   const scrollYRef = useRef(0);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) return;
 
     scrollYRef.current = window.scrollY;
