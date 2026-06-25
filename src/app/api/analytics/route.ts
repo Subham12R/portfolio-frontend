@@ -136,7 +136,8 @@ export async function GET() {
     const totalVisitors  = timeseries.reduce((s, d) => s + d.visitors, 0);
     const weekVisitors   = timeseries.slice(-7).reduce((s, d) => s + d.visitors, 0);
     const todayVisitors  = timeseries[timeseries.length - 1]?.visitors ?? 0;
-
+ 
+    
     // Parse interleaved [member, score, member, score, ...] from zrange withScores
     const topPages: TopPage[] = [];
     for (let i = 0; i + 1 < topRaw.length; i += 2) {
