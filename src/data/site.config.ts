@@ -6,7 +6,7 @@ export const siteConfig = {
   title: "Subham12r",
   url: "https://subham12r.me",
   role: "Full Stack Developer",
-  description: "Subham Karmakar — Full Stack Developer & Frontend Engineer. Building scalable web apps with React, Next.js, and TypeScript.",
+  description: "Subham Karmakar — Full Stack Developer & Frontend Engineer. Building scalable web apps with Next.js, TypeScript and GoLang.",
   location: "Kolkata, West Bengal, India",
   timezone: "Asia/Kolkata",
   email: "dev@subham12r.me",

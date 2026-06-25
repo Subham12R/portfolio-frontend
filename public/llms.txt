@@ -2,111 +2,78 @@
 # This file helps AI assistants understand and reference this portfolio
 
 ## About
-Name: Subham Karmakar
-Role: Full Stack Developer
-Location: Kolkata, West Bengal, India
-Email: rikk4335@gmail.com
-Website: https://subham12r.me
+- Name: Subham Karmakar
+- Role: Full Stack Developer
+- Location: Kolkata, West Bengal, India
+- Email: dev@subham12r.me
+- Website: https://subham12r.me
+
+## Education
+- **Adamas University** (Aug 2024 – May 2028 (Expected))
+  - B.Tech in Computer Science and Engineering | Kolkata, West Bengal, India
+  - CGPA: 9.17 / 10
 
 ## Professional Summary
-Subham Karmakar is a Full Stack Developer and B.Tech student from Kolkata, India. He specializes in building scalable, performant web applications using modern technologies including React, Next.js, TypeScript, Node.js, and PostgreSQL. He focuses on clean architecture, thoughtful design, and real-world impact.
+Subham Karmakar is a Full Stack Developer and B.Tech student from Kolkata, India. He specializes in building scalable, performant web applications using modern technologies including React/Next.js, TypeScript, GoLang, Node.js, FastAPI, PostgreSQL, and Docker. He focuses on clean architecture, thoughtful design, system level implementations, and real-world impact.
 
 ## Work Experience
 
-### Frontend Developer Intern at Ryze AI (January 2026 - Present)
-- Location: San Francisco, California (Remote)
-- Website: https://www.get-ryze.ai/
-- Designing and developing responsive, high-performance user interfaces
-- Translating design requirements into reusable UI components
-- Optimizing layouts for multiple screen sizes
-- Collaborating with designers and backend developers to integrate APIs
-- Technologies: React, JavaScript, Node.js, TailwindCSS
+### Moodle LMS Cloud Maintainer (Part-time) at Adamas University (November 2025 - Present)
+- Location: Kolkata, India
+- Maintained 99%+ uptime for 1,000+ students and faculty by administering cloud-hosted Moodle LMS with proactive health monitoring and incident response workflows.
+- Reduced faculty support tickets by ~40% and per-course setup time by ~half by redesigning role-permission flows and standardizing plugin configuration for 100+ faculty members.
 
-### Moodle Dashboard Organizer at Adamas University (December 2025 - Present)
-- Location: Barasat, Kolkata
-- Website: https://www.aucse.in/
-- Spearheading innovation in educational technology
-- Maintaining intuitive and user-friendly Moodle dashboards
-- Revolutionizing learning experience for students and faculty
+### Frontend Developer Intern at Ryze AI (January 2026 - April 2026)
+- Location: Remote
+- Accelerated feature releases by shipping production UI components (React.js, TypeScript, Tailwind CSS) and participating in code reviews as author and reviewer — zero missed sprint commitments across the engagement.
+- Reduced average data-fetch latency by ~30% by integrating REST API endpoints with optimized request patterns and component-level caching strategies.
 
 ### Frontend Developer at Adamas University (August 2025 - January 2026)
 - Location: Barasat, Kolkata
-- Redesigned college website
-- Built event websites
-- Technologies: Next.js, TypeScript, GSAP, TailwindCSS, Zod
+- Redesigned college website and built event websites using Next.js, TypeScript, GSAP, TailwindCSS, and Zod.
 
 ## Technical Skills
-Frontend: React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Framer Motion, GSAP, Lenis, Three.js
-Backend: Node.js, Express.js, REST APIs, WebSockets, Socket.io
-Databases: PostgreSQL, MongoDB, Supabase
-Payments: Stripe, RazorPay
-DevOps: Docker, Vercel, Netlify, Git, GitHub
-Tools: VS Code, Cursor, Figma, Canva, Zod
+- **Languages**: JavaScript, TypeScript, Python, C, C++, SQL, GoLang
+- **Frontend**: React.js, Next.js, Tailwind CSS, Redux Toolkit, GSAP, Framer Motion, HTML5/CSS3, Electron 35
+- **Backend**: Node.js, Express.js, FastAPI, REST API, WebSockets, Socket.io, Stripe
+- **Auth & Security**: JWT, OAuth, RBAC, Session Management
+- **Databases**: PostgreSQL, pgvector, MongoDB, Redis, SQLite, Supabase, Neon
+- **Tools & DevOps**: Git, Docker, Docker Compose, GitHub Actions, Nginx, PM2, Vercel, Render, Sentry, Linux, CI/CD
+- **Testing**: Jest, Vitest, pytest
 
-## Certifications
-
-### Frontend Developer (React) - HackerRank
-- Issued: September 2025
-- Certificate: https://www.hackerrank.com/certificates/53e516d4c11d
-
-### Full Stack Developer - Udemy
-- Issued: December 2025
-- Certificate: https://www.udemy.com/certificate/UC-f427f3a7-351a-41fc-91e4-510256962222/
+## Achievements & Certifications
+- **Claude Code 101 & MCP Introduction** – Anthropic Education, Jun 2026 (ID: skilljar/y7qppxfzwffs | skilljar/s4t3vecwu84e)
+- **Smart India Hackathon 2025** – Internal Finalist, Top 10 in Software Category out of 150 teams
+- **Certified Full Stack Web Developer** – Udemy, 97 hours (ID: UC-f427f3a7-351a-41fc-91e4-510256962222)
+- **Frontend Developer (React)** – HackerRank, Sep 2025 (ID: 53e516d4c11d)
 
 ## Featured Projects
 
-### Zero UI
-- Cutting-edge web application revolutionizing user interaction with gesture recognition and predictive analytics
-- Features: Gesture recognition system, voice command integration, predictive analytics engine, seamless transitions
-- Technologies: React, JavaScript, NodeJS, TailwindCSS, CSS, Motion
-- Live: https://www.zeroui.vercel.app/
-- Completed: February 2026
+### CyCoder
+- Next.js, TypeScript, PostgreSQL, Docker, Nginx, PM2
+- Live/Code: https://cycoders.in (2025)
+- Features: Engineered JWT-based multi-role auth (Admin/Member) with RBAC access controls and QR-code check-in, scaling Adamas developer community to 100+ active users via gamified XP-progression and leaderboards.
+- Infrastructure: Achieved zero-downtime deployments by containerizing the full TypeScript stack with Docker Compose, VPS-hosted behind Nginx with PM2 and GitHub Actions CI/CD pipeline.
 
 ### Noted
-- Modern note-taking application with real-time synchronization and intuitive interface
-- Features: Real-time note sync via WebSockets, customizable categorization, robust search, smooth animations
-- Technologies: React, JavaScript, NodeJS, TailwindCSS, CSS, Motion, Socket.io
-- Live: https://noted-main.vercel.app
-- Completed: February 2026
+- Next.js, TypeScript, Node.js, WebSockets, PostgreSQL, Redis, Stripe, LLM APIs
+- Live: https://notezero.vercel.app (2025)
+- Features: Built a real-time collaboration engine with zero data loss under concurrent multi-user edits via WebSocket pub/sub over Redis with operational-transform-inspired conflict resolution; client state managed with Redux Toolkit.
+- AI Integration: Reduced note organization effort by ~95% with an agentic LLM pipeline (intent classification, tag generation, context-aware linking); integrated Stripe for subscription billing.
 
-### Apple 3D Experience
-- Apple-inspired 3D web experience with premium immersive interface
-- Features: Real-time 3D models, scroll-based animations, smooth camera transitions, cinematic feel
-- Technologies: React, JavaScript, NodeJS, TailwindCSS, Lenis, Three.js
-- GitHub: https://github.com/Subham12R/mac-land
-- Live: https://mac-land.vercel.app
-- YouTube Demo: https://youtu.be/h4OhFN14Cdw
-- Completed: July 2025
+### Web-Server
+- TypeScript, Node.js
+- GitHub: https://github.com/subham12r/web-server (2026)
+- Features: Built a production-grade HTTP/1.1 server from raw TCP sockets in TypeScript. Implements full request/response parsing, keep-alive connection reuse, streaming BodyReader, and explicit socket back-pressure. Demonstrates deep understanding of the networking layer underlying all RESTful API design.
 
-### Signifiya
-- College event platform fostering campus connections and community engagement
-- Features: Customizable dashboard, real-time messaging, file sharing, task management
-- Technologies: Next.js, TypeScript, Supabase, PostgreSQL, NodeJS, TailwindCSS, Lenis, GSAP, RazorPay, Zod
-- Live: https://www.signifiya.in/
-- Completed: February 2026
+### Panda
+- Electron 35, React 19, TypeScript, Python FastAPI, SQLite, fastembed (2026)
+- Features: Built a local-first AI desktop assistant with multi-model support (Anthropic/Ollama/Groq), session-scoped RAG data ingestion pipeline (sentence-transformer embeddings, top-5 chunk injection), agentic tool-orchestration research pipeline, and WebSocket streaming. 100% local.
 
-### Luxora
-- Full-featured e-commerce web application with seamless shopping experience
-- Features: Product browsing, cart management, secure payment integration via Stripe, checkout flow
-- Technologies: React, Stripe, TailwindCSS, Zod, React Router
-- GitHub: https://github.com/Subham12R/Luxora
-- YouTube Demo: https://youtu.be/bgSACOTWUj0
-- Completed: September 2025
-
-### DSA Visualizer
-- Interactive platform for visualizing data structures and algorithms
-- Features: Support for arrays, linked lists, trees, graphs, sorting, searching algorithms
-- Technologies: Next.js, TypeScript, TailwindCSS
-- Completed: November 2025
-
-### Gym Website
-- High-impact gym landing page designed to drive memberships
-- Features: Bold visuals, smooth animations, conversion-focused layout, fully responsive
-- Technologies: React, TailwindCSS, Vite
-- GitHub: https://github.com/Subham12R/Gym
-- Live: https://gym-iota-opal.vercel.app
-- YouTube Demo: https://youtu.be/rm9J-Wc26P8
-- Completed: February 2025
+### CrackCoded
+- Next.js, TypeScript, FastAPI, Python, PostgreSQL, pgvector
+- Live: https://crackcoded.vercel.app (2026)
+- Features: Delivered 340% faster learning and 67% lower time-per-problem via pgvector SM-2 spaced-repetition queues and an AI hint engine; 72% average topic completion rate. Python/FastAPI backend deployed on Render.
 
 ## Blog Posts
 
@@ -146,19 +113,18 @@ Tools: VS Code, Cursor, Figma, Canva, Zod
 
 ## Contact
 For collaboration, hiring, or project inquiries:
-- Email: rikk4335@gmail.com
+- Email: dev@subham12r.me
 - Schedule a call: https://cal.com/subham12r/30min
 
 ## Key Strengths
-- Full-stack development with modern web technologies
-- 3D web experiences with Three.js and React Three Fiber
-- Real-time applications with WebSockets
-- Payment integrations (Stripe, RazorPay)
-- Performance optimization and clean architecture
-- Strong UI/UX and animation skills (GSAP, Framer Motion, Lenis)
+- Full-stack development with modern web technologies (React/Next.js, TypeScript, GoLang, Node.js, FastAPI)
+- System level programming (HTTP servers, TCP sockets)
+- Local AI applications & desktop apps (Electron, sentence-transformer embeddings, local models)
+- Real-time applications (WebSockets, Redis pub/sub)
+- Cloud maintenance and administration (Moodle LMS, Linux VPS, Docker Compose, Nginx, PM2)
 
 ## Keywords
-full stack developer, react developer, next.js developer, typescript, frontend engineer, web developer, software engineer, portfolio, kolkata developer, india developer, three.js, 3d web, e-commerce, real-time applications, websockets, stripe integration, debugging best practices, production deployment, backend to production, developer internship, coding career advice, deliberate practice, tech blog
+full stack developer, react developer, next.js developer, typescript, golang, fastapi, electron, local rag, vector database, pgvector, websocket collaboration, custom http server, tcp sockets, moodle lms, cloud maintainer, devops, docker, nginx, pm2, vercel, render, CI/CD, system design, software engineer, portfolio, kolkata developer, india developer
 
 ## Last Updated
-2026-02-08
+2026-06-25
