@@ -37,13 +37,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       url: `${siteConfig.url}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
-      images: [post.coverImage || "/icon.png"],
+      images: [post.coverImage || "/banner.png"],
     },
     twitter: {
       card: "summary_large_image",
       title: `${post.title} | ${siteConfig.name}`,
       description: post.excerpt,
-      images: [post.coverImage || "/icon.png"],
+      images: [post.coverImage || "/banner.png"],
     },
   };
 }

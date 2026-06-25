@@ -19,14 +19,14 @@ export const metadata = {
       "A collection of projects showcasing my work in web development.",
     url: `${siteConfig.url}/projects`,
     type: "website",
-    images: ["/icon.png"],
+    images: ["/banner.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: `Projects | ${siteConfig.name}`,
     description:
       "A collection of projects showcasing my work in web development.",
-    images: ["/icon.png"],
+    images: ["/banner.png"],
   },
 };
 

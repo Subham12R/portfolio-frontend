@@ -12,13 +12,13 @@ export const metadata = {
     description: 'Thoughts on software development, design, and building things.',
     url: `${siteConfig.url}/blog`,
     type: 'website',
-    images: ['/icon.png'],
+    images: ['/banner.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: `Blog | ${siteConfig.name}`,
     description: 'Thoughts on software development, design, and building things.',
-    images: ['/icon.png'],
+    images: ['/banner.png'],
   },
 }
 

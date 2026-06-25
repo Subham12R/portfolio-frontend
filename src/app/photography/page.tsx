@@ -15,7 +15,7 @@ export const metadata = {
     description: "Personal photography collection",
     url: `${siteConfig.url}/photography`,
     type: "website",
-    images: ["/icon.png"],
+    images: ["/banner.png"],
   },
 };
 

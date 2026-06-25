@@ -62,10 +62,10 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/icon.png",
-        width: 512,
-        height: 512,
-        alt: `${siteConfig.name} portfolio`,
+        url: "/banner.png",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} portfolio banner`,
       },
     ],
   },
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} | ${siteConfig.role}`,
     description: siteConfig.description,
     creator: `@${siteConfig.socials.twitter.username}`,
-    images: ["/icon.png"],
+    images: ["/banner.png"],
   },
   robots: {
     index: true,

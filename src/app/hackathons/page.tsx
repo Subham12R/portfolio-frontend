@@ -15,7 +15,7 @@ export const metadata = {
     description: "Photos from hackathons and coding events",
     url: `${siteConfig.url}/hackathons`,
     type: "website",
-    images: ["/icon.png"],
+    images: ["/banner.png"],
   },
 };
 
