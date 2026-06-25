@@ -20,9 +20,9 @@ function fmtDate(iso: string): string {
 
 function getYearRange(startDate: string, endDate?: string): string {
   if (!endDate) return `${fmtDate(startDate)} — NOW`;
-  const start = new Date(startDate + "T00:00:00").getFullYear();
-  const end = new Date(endDate + "T00:00:00").getFullYear();
-  return start === end ? fmtDate(startDate) : `${fmtDate(startDate)} — ${fmtDate(endDate)}`;
+  const formattedStart = fmtDate(startDate);
+  const formattedEnd = fmtDate(endDate);
+  return formattedStart === formattedEnd ? formattedStart : `${formattedStart} — ${formattedEnd}`;
 }
 
 export function ExperienceCard({
