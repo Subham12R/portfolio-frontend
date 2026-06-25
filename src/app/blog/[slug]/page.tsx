@@ -31,6 +31,14 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
+    keywords: [
+      ...(post.tags || []),
+      post.title,
+      "Subham Karmakar Blog",
+      "Subham12r Blog",
+      "Software Development Blog",
+      "Web Development",
+    ],
     openGraph: {
       title: `${post.title} | ${siteConfig.name}`,
       description: post.excerpt,

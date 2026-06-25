@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
 import Navigation from "@/components/layout/Navigation"
@@ -27,6 +27,15 @@ const playfair = localFont({
   display: "swap",
 })
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0e0e" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -45,6 +54,18 @@ export const metadata: Metadata = {
     "React Developer",
     "Next.js Developer",
     "TypeScript",
+    "GoLang",
+    "Golang Developer",
+    "FastAPI",
+    "Python Developer",
+    "Backend Developer",
+    "System Design",
+    "Docker",
+    "Nginx",
+    "Moodle LMS",
+    "WebSockets",
+    "Local AI",
+    "RAG",
     "Portfolio",
     "Kolkata Developer",
     "Web Developer",
@@ -86,6 +107,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 }
 

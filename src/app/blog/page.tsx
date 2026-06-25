@@ -7,6 +7,16 @@ export const metadata = {
   alternates: {
     canonical: '/blog',
   },
+  keywords: [
+    "Subham Karmakar Blog",
+    "Subham12r Blog",
+    "Software Development Blog",
+    "Web Development Articles",
+    "Programming Blog",
+    "Next.js tutorials",
+    "GoLang articles",
+    "Tech Insights",
+  ],
   openGraph: {
     title: `Blog | ${siteConfig.name}`,
     description: 'Thoughts on software development, design, and building things.',

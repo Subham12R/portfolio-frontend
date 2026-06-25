@@ -13,6 +13,16 @@ export const metadata = {
   alternates: {
     canonical: "/projects",
   },
+  keywords: [
+    "Subham Karmakar Projects",
+    "Subham12r Projects",
+    "Full Stack projects",
+    "Next.js projects",
+    "GoLang projects",
+    "FastAPI projects",
+    "Web Development Portfolio",
+    "Open Source projects",
+  ],
   openGraph: {
     title: `Projects | ${siteConfig.name}`,
     description:
