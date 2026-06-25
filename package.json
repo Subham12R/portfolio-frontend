@@ -46,6 +46,7 @@
     "react-use-measure": "^2.1.7",
     "socket.io-client": "^4.8.3",
     "tailwind-merge": "^3.4.0",
+    "tech-stack-icons": "^3.7.1",
     "three": "^0.182.0",
     "vaul": "^1.1.2"
   },

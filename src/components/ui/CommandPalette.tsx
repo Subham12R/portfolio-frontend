@@ -35,6 +35,7 @@ import { useTheme } from "next-themes";
 import gsap from "gsap";
 import { siteConfig } from "@/data/site.config";
 import { useLenis } from "@/components/providers/SmoothScroll";
+import { useRouter } from "next/navigation";
 
 interface CommandItem {
   id: string;
@@ -58,6 +59,7 @@ export function CommandPalette() {
   const modalRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme, setTheme } = useTheme();
   const { lenis } = useLenis();
+  const router = useRouter();
 
   // Load recent + neko state from localStorage
   useEffect(() => {
@@ -194,7 +196,12 @@ export function CommandPalette() {
       icon: <Home size={16} className="text-text-secondary" />,
       shortcut: "H",
       action: () => {
-        window.location.href = "/";
+        if (window.location.pathname === "/") {
+          lenis?.scrollTo("#home", { offset: -80 });
+          window.history.pushState(null, "", "#home");
+        } else {
+          router.push("/");
+        }
       },
       section: "navigation",
     },
@@ -205,7 +212,12 @@ export function CommandPalette() {
       icon: <Briefcase size={16} className="text-text-secondary" />,
       shortcut: "W",
       action: () => {
-        window.location.href = "/#experience";
+        if (window.location.pathname === "/") {
+          lenis?.scrollTo("#experience", { offset: -80 });
+          window.history.pushState(null, "", "#experience");
+        } else {
+          router.push("/#experience");
+        }
       },
       section: "navigation",
     },
@@ -216,7 +228,12 @@ export function CommandPalette() {
       icon: <FolderKanban size={16} className="text-text-secondary" />,
       shortcut: "P",
       action: () => {
-        window.location.href = "/#projects";
+        if (window.location.pathname === "/") {
+          lenis?.scrollTo("#projects", { offset: -80 });
+          window.history.pushState(null, "", "#projects");
+        } else {
+          router.push("/#projects");
+        }
       },
       section: "navigation",
     },
@@ -227,7 +244,12 @@ export function CommandPalette() {
       icon: <Wrench size={16} className="text-text-secondary" />,
       shortcut: "S",
       action: () => {
-        window.location.href = "/#skills";
+        if (window.location.pathname === "/") {
+          lenis?.scrollTo("#skills", { offset: -80 });
+          window.history.pushState(null, "", "#skills");
+        } else {
+          router.push("/#skills");
+        }
       },
       section: "navigation",
     },
@@ -238,7 +260,7 @@ export function CommandPalette() {
       icon: <FileText size={16} className="text-text-secondary" />,
       shortcut: "B",
       action: () => {
-        window.location.href = "/blog";
+        router.push("/blog");
       },
       section: "navigation",
     },
@@ -249,7 +271,7 @@ export function CommandPalette() {
       icon: <Camera size={16} className="text-text-secondary" />,
       shortcut: "G",
       action: () => {
-        window.location.href = "/photography";
+        router.push("/photography");
       },
       section: "navigation",
     },
@@ -260,7 +282,7 @@ export function CommandPalette() {
       icon: <Trophy size={16} className="text-text-secondary" />,
       shortcut: "K",
       action: () => {
-        window.location.href = "/hackathons";
+        router.push("/hackathons");
       },
       section: "navigation",
     },
@@ -271,7 +293,12 @@ export function CommandPalette() {
       icon: <Mail size={16} className="text-text-secondary" />,
       shortcut: "C",
       action: () => {
-        window.location.href = "/#contact";
+        if (window.location.pathname === "/") {
+          lenis?.scrollTo("#contact", { offset: -80 });
+          window.history.pushState(null, "", "#contact");
+        } else {
+          router.push("/#contact");
+        }
       },
       section: "navigation",
     },

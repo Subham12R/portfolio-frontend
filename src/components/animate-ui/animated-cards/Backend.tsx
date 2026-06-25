@@ -5,12 +5,12 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { AnimatedBeam } from "@/components/ui/animated-beam"
 
-const databaseIcon = "/icons/database.png"
-const nodejsIcon = "/icons/nodejs.png"
-const mongodbIcon = "/icons/mongodb.png"
-const postgresqlIcon = "/icons/postgresql.png"
-const supabaseIcon = "/icons/supabase.jpeg"
-const neonIcon = "/icons/neon.jpeg"
+import databaseIcon from "@/assets/icons/database.png"
+import nodejsIcon from "@/assets/icons/nodejs.png"
+import mongodbIcon from "@/assets/icons/mongodb.png"
+import postgresqlIcon from "@/assets/icons/postgresql.svg"
+import supabaseIcon from "@/assets/icons/supabase.jpeg"
+import neonIcon from "@/assets/icons/neon.jpeg"
 
 
 const Circle = forwardRef<

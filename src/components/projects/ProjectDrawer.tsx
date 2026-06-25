@@ -15,6 +15,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import type { Project } from "@/data/project";
+import { TooltipGlass } from "@/components/ui/tooltip";
 
 interface ProjectDrawerProps {
   project: Project | null;
@@ -229,28 +230,36 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
               <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
                 Tech Stack
               </h2>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2.5 items-center">
                 {project.tags.map((tag) => {
                   const iconPath = getTechIcon(tag)
+                  const tooltipId = `tech-drawer-tooltip-${project.id}`
                   return iconPath ? (
                     <div
                       key={tag}
-                      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-bg-badge/10 border border-border-primary text-text-secondary text-xs font-medium"
-                      title={tag}
+                      data-tooltip-id={tooltipId}
+                      data-tooltip-content={tag}
+                      className="relative z-10 w-9 h-9 rounded-[8px] border border-border-primary bg-bg-card cursor-help transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 hover:border-border-secondary shrink-0"
                     >
-                      <Image src={iconPath} alt={tag} width={14} height={14} className="rounded-sm" />
-                      {tag}
+                      <Image
+                        src={iconPath}
+                        alt={tag}
+                        fill
+                        sizes="26px"
+                        className="object-cover rounded-[7px]"
+                      />
                     </div>
                   ) : (
                     <span
                       key={tag}
-                      className="px-2.5 py-1.5 rounded-lg bg-bg-badge/10 border border-border-primary text-text-secondary text-xs font-medium"
+                      className="h-9 px-3.5 inline-flex items-center rounded-[8px] border border-border-primary bg-bg-badge/10 text-text-secondary text-xs font-semibold"
                     >
                       {tag}
                     </span>
                   )
                 })}
               </div>
+              <TooltipGlass id={`tech-drawer-tooltip-${project.id}`} place="top" offset={8} />
             </section>
           )}
 

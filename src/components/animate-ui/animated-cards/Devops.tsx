@@ -2,10 +2,10 @@
 
 import Image from "next/image"
 
-const dockerIcon = "/icons/docker.jpeg"
-const githubIcon = "/icons/github.png"
-const vercelIcon = "/icons/vercel.png"
-const netlifyIcon = "/icons/netlify.png"
+import dockerIcon from "@/assets/icons/docker.jpeg"
+import githubIcon from "@/assets/icons/github.png"
+import vercelIcon from "@/assets/icons/vercel.png"
+import netlifyIcon from "@/assets/icons/netlify.png"
 
 export function DevOpsCard() {
   return (

@@ -18,9 +18,9 @@ const Navigation = () => {
         {/* Logo + Navigation Links - Left side */}
         <div className="flex items-center gap-4 md:gap-6 ml-0.2">
           <div className=" px-2 py-2 inline-flex items-center">
-            <Link href="#home" className="group relative">
+            <Link href="/#home" className="group relative">
               <img
-                src="/images/profile/icon.png"
+                src="/images/profile/profile.png"
                 alt={siteConfig.name}
                 width={40}
                 height={40}

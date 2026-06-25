@@ -1,4 +1,5 @@
 import Image from "next/image";
+import mediumIcon from "@/assets/icons/medium.jpeg";
 
 interface MediumIconProps {
   size?: number;
@@ -8,7 +9,7 @@ interface MediumIconProps {
 export function MediumIcon({ size = 24, className = "" }: MediumIconProps) {
   return (
     <Image
-      src="/icons/medium.jpeg"
+      src={mediumIcon}
       alt="Medium"
       width={size}
       height={size}

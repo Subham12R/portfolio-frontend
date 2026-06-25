@@ -7,6 +7,10 @@ import { TooltipGlass } from "@/components/ui/tooltip";
 import { Coffee, Dumbbell, Moon, Tv } from "lucide-react";
 import { siteConfig } from "@/data/site.config";
 
+import cursorIcon from "@/assets/icons/cursor.webp";
+import zedIcon from "@/assets/icons/zed.png";
+import vscodeIcon from "@/assets/icons/vscode.jpeg";
+
 const IDLE_TOOLTIP_ID = "devpresence-idle-tooltip";
 const RECENT_LIVE_SIGNAL_MS = 75_000;
 
@@ -264,7 +268,7 @@ function parseLocalAgentStatus(text: string): PresenceStatus | null {
             : undefined,
         project:
           typeof parsed.project === "string" ||
-          (typeof parsed.project === "object" && parsed.project !== null)
+            (typeof parsed.project === "object" && parsed.project !== null)
             ? (parsed.project as PresenceStatus["project"])
             : undefined,
         projectName:
@@ -291,7 +295,7 @@ function parseLocalAgentStatus(text: string): PresenceStatus | null {
         durationMs: parsedDurationMs || undefined,
         totalActiveMs:
           typeof parsed.totalActiveMs === "number" ||
-          typeof parsed.totalActiveMs === "string"
+            typeof parsed.totalActiveMs === "string"
             ? (parsed.totalActiveMs as number | string)
             : undefined,
         startedAt: parsedStartedAt || undefined,
@@ -305,7 +309,7 @@ function parseLocalAgentStatus(text: string): PresenceStatus | null {
           typeof parsed.sessionId === "string" ? parsed.sessionId : undefined,
         timestamp:
           typeof parsed.timestamp === "number" ||
-          typeof parsed.timestamp === "string"
+            typeof parsed.timestamp === "string"
             ? (parsed.timestamp as number | string)
             : undefined,
         stale: false,
@@ -466,17 +470,17 @@ function getEditorName(status: PresenceStatus | null): string | null {
 }
 
 function getEditorIcon(editorName: string | null): {
-  src: string;
+  src: any;
   alt: string;
 } {
   const normalized = editorName?.toLowerCase() || "";
 
   if (normalized.includes("cursor")) {
-    return { src: "/icons/cursor.webp", alt: "Cursor" };
+    return { src: cursorIcon, alt: "Cursor" };
   }
 
   if (normalized.includes("zed")) {
-    return { src: "/icons/zed.png", alt: "Zed" };
+    return { src: zedIcon, alt: "Zed" };
   }
 
   if (
@@ -485,10 +489,10 @@ function getEditorIcon(editorName: string | null): {
     normalized.includes("visual studio code") ||
     normalized === "code"
   ) {
-    return { src: "/icons/vscode.jpeg", alt: "VS Code" };
+    return { src: vscodeIcon, alt: "VS Code" };
   }
 
-  return { src: "/icons/vscode.jpeg", alt: editorName || "Editor" };
+  return { src: vscodeIcon, alt: editorName || "Editor" };
 }
 
 function formatEditorName(editorName: string | null): string | null {

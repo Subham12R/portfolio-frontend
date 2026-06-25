@@ -3,6 +3,7 @@
 import { ExternalLink, GitBranch } from "lucide-react";
 import type { Project } from "@/data/project";
 import { VideoHoverBanner } from "@/components/projects/VideoHoverBanner";
+import TechAccordion from "./TechAccordion";
 
 interface PlainProjectCardProps {
   project: Project;
@@ -10,12 +11,11 @@ interface PlainProjectCardProps {
 }
 
 export default function PlainProjectCard({ project, onOpen }: PlainProjectCardProps) {
-  const category = project.tags[0] || "PROJECT";
   const thumbnailUrl = project.bannerImage;
 
   return (
     <div
-      className="group cursor-pointer p-2 -m-4 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary rounded-md hover:bg-bg-elevated/50 transition-colors duration-200"
+      className="group cursor-pointer p-2 pb-3 -m-4 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary rounded-md hover:bg-bg-elevated/50 transition-colors duration-200"
       onClick={onOpen}
     >
       {/* Thumbnail */}
@@ -65,9 +65,7 @@ export default function PlainProjectCard({ project, onOpen }: PlainProjectCardPr
               ? project.completedDate.split("-").reverse().join(".")
               : "Present"}
           </p>
-          <span className="text-xs text-text-tertiary uppercase tracking-wider whitespace-nowrap">
-            {category}
-          </span>
+          <TechAccordion tags={project.tags} projectId={project.id} />
         </div>
       </div>
     </div>
