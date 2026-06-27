@@ -6,11 +6,7 @@ import Footer from "@/components/layout/footer"
 import { siteConfig } from "@/data"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
-import dynamic from "next/dynamic"
-const SmoothScroll = dynamic(
-  () => import("@/components/providers/SmoothScroll").then(m => m.SmoothScroll),
-  { ssr: false }
-)
+import { SmoothScroll } from "@/components/providers/SmoothScrollWrapper"
 import { Neko } from "@/components/ui/Neko"
 import { WaveBackground } from "@/components/layout/WaveBackground"
 import { JsonLd } from "@/components/ui/JsonLd"
