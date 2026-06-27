@@ -103,7 +103,7 @@ export function VisitorModal({ stats, onClose }: Props) {
       <motion.div
         variants={card}
         data-modal-content
-        className="relative w-full max-w-xl rounded-2xl overflow-hidden  bg-zinc-950/60 border-2 border-border-primary backdrop-blur-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
+        className="relative w-full max-w-xl rounded-2xl overflow-hidden bg-white/80 dark:bg-zinc-950/60 border-2 border-border-primary backdrop-blur-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
