@@ -16,7 +16,7 @@ const RECENT_LIVE_SIGNAL_MS = 75_000;
 
 const DEVSTATS_API =
   process.env.NEXT_PUBLIC_DEVSTATS_API_URL ||
-  "https://devstats-zruar.ondigitalocean.app";
+  "https://devpresence.monostack.in";
 const DEVSTATS_STATUS_API = `${DEVSTATS_API}/status`;
 const LOCAL_AGENT_API = process.env.NEXT_PUBLIC_DEVSTATS_LOCAL_AGENT_URL;
 const socket = io(DEVSTATS_API, { autoConnect: false });
