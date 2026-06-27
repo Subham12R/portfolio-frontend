@@ -4,7 +4,7 @@ import { Clock3 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const DEVSTATS_API =
-  process.env.NEXT_PUBLIC_DEVSTATS_API_URL || "https://devstats-zruar.ondigitalocean.app";
+  process.env.NEXT_PUBLIC_DEVSTATS_API_URL || "https://devpresence.monostack.in";
 const STATUS_SOURCES = [
   `${DEVSTATS_API}/status`,
   process.env.NEXT_PUBLIC_DEVSTATS_LOCAL_AGENT_URL,
