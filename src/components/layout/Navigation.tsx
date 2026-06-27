@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { CommandPalette } from "@/components/ui/CommandPalette";
@@ -19,12 +20,13 @@ const Navigation = () => {
         <div className="flex items-center gap-4 md:gap-6 ml-0.2">
           <div className=" px-2 py-2 inline-flex items-center">
             <Link href="/#home" className="group relative">
-              <img
+              <Image
                 src="/images/profile/profile.png"
                 alt={siteConfig.name}
                 width={40}
                 height={40}
                 className="w-10 h-10 aspect-square object-contain md:object-cover rounded-lg transition-all duration-200"
+                sizes="40px"
               />
               {/* Cloud tooltip */}
               <span className="absolute font-semibold top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-0.5 bg-white text-slate-800 text-xs rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-200">

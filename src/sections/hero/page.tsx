@@ -31,7 +31,6 @@ import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { siteConfig } from "@/data";
 import { useTheme } from "next-themes";
 
-import profileBanner from "../../../public/images/profile/banner.gif";
 import profileIcon from "../../../public/images/profile/profile.png";
 import DevPresence from "@/components/ui/DevPresence";
 import SpotifyNowPlaying from "@/components/ui/SpotifyNowPlaying";
@@ -139,15 +138,16 @@ export const Hero = () => {
 
         >
 
-          <Image
-            src={profileBanner}
-            alt="Banner"
-            width={1920}
-            height={1080}
-            className="w-full h-64 items-center object-cover border-2 border-border-primary rounded-xl "
-            priority
-            unoptimized
-          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-64 items-center object-cover border-2 border-border-primary rounded-xl"
+          >
+            <source src="/images/profile/banner.webm" type="video/webm" />
+            <source src="/images/profile/banner.mp4" type="video/mp4" />
+          </video>
         </div>
 
         <div className="w-full py-5 px-0 md:px-0 ">
@@ -163,6 +163,7 @@ export const Hero = () => {
                     height={100}
                     className="relative z-20  h-20 w-20 aspect-square overflow-hidden object-cover rounded-xl border-2 border-border-primary "
                     priority
+                    sizes="(max-width: 768px) 80px, 100px"
                   />
                 </div>
 
@@ -333,17 +334,17 @@ export const Hero = () => {
               .
             </ScrollRevealText>
             <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="min-w-0 flex rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 items-center shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] ">
+              <div className="min-w-0 flex rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 items-center shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] min-h-[40px]">
                 <DevPresence />
               </div>
-              <SpotifyNowPlaying className="min-w-0 w-full rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:w-auto md:max-w-[520px]  shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]" />
+              <SpotifyNowPlaying className="min-w-0 w-full rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 flex items-center md:w-auto md:max-w-[520px] shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] min-h-[40px]" />
             </div>
           </div>
 
           <div className="">
 
             {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
-            <div className="w-full p-4 rounded-md bg-accent border-2 border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
+            <div className="w-full p-4 rounded-md bg-accent border-2 border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] min-h-[160px]">
               {mounted && resolvedTheme ? (
                 <>
                   <GithubCalendar username="Subham12R" colorSchema="gray" />

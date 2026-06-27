@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { About } from "@/sections/about/page";
 import BlogSection from "@/sections/blog/page";
 import CertificatesPage from "@/sections/certificates/page";

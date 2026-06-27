@@ -25,7 +25,7 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
       "Content-Type": "application/json",
     },
     next: {
-      revalidate: 0,
+      revalidate: 3600,
     },
   });
 

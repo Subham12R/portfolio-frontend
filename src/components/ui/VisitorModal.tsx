@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import { motion } from "framer-motion";
@@ -46,35 +46,17 @@ export function VisitorModal({ stats, onClose }: Props) {
   const labelCls = "text-zinc-500";
   const valueCls = isDark ? "text-white"   : "text-zinc-900";
   const divider  = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
-  const scrollYRef = useRef(0);
-
   useEffect(() => {
-    scrollYRef.current = window.scrollY;
     const html = document.documentElement;
     const body = document.body;
 
     const origHtmlOverflow = html.style.overflow;
     const origBodyOverflow = body.style.overflow;
-    const origBodyPosition = body.style.position;
-    const origBodyTop = body.style.top;
-    const origBodyWidth = body.style.width;
-    const origBodyTouchAction = body.style.touchAction;
-    const origBodyOverscroll = body.style.overscrollBehavior;
-    const origHtmlTouchAction = html.style.touchAction;
-    const origHtmlOverscroll = html.style.overscrollBehavior;
-    const origHtmlScrollBehavior = html.style.scrollBehavior;
 
+    // Prevent native scroll without position:fixed — Lenis holds its own scroll
+    // position internally, so stop()/start() is enough to preserve position.
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollYRef.current}px`;
-    body.style.width = "100%";
-    body.style.touchAction = "none";
-    body.style.overscrollBehavior = "none";
-    html.style.touchAction = "none";
-    html.style.overscrollBehavior = "none";
-    html.style.scrollBehavior = "auto";
-
     lenis?.stop();
 
     const preventTouch = (e: TouchEvent) => {
@@ -88,15 +70,6 @@ export function VisitorModal({ stats, onClose }: Props) {
     return () => {
       html.style.overflow = origHtmlOverflow;
       body.style.overflow = origBodyOverflow;
-      body.style.position = origBodyPosition;
-      body.style.top = origBodyTop;
-      body.style.width = origBodyWidth;
-      body.style.touchAction = origBodyTouchAction;
-      body.style.overscrollBehavior = origBodyOverscroll;
-      html.style.touchAction = origHtmlTouchAction;
-      html.style.overscrollBehavior = origHtmlOverscroll;
-      html.style.scrollBehavior = origHtmlScrollBehavior;
-      window.scrollTo(0, scrollYRef.current);
       lenis?.start();
       document.removeEventListener("touchmove", preventTouch);
     };
