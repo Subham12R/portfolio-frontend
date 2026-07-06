@@ -6,7 +6,14 @@
       "Bash(gltf-transform draco:*)",
       "Bash(findstr:*)",
       "Bash(dir:*)",
-      "Bash(ffmpeg -version)"
+      "Bash(ffmpeg -version)",
+      "Bash(npx tsc *)",
+      "mcp__playwright__browser_navigate",
+      "Bash(tasklist)",
+      "Bash(netstat -ano)",
+      "mcp__playwright__browser_run_code_unsafe",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_console_messages"
     ]
   }
 }

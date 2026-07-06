@@ -96,7 +96,7 @@
   --color-bg-badge: #262626;
 
   /* Text */
-  --color-text-primary: #ffffff;
+  --color-text-primary: #cfcfcf;
   --color-text-secondary: #d4d4d8;
   --color-text-tertiary: #a1a1aa;
   --color-text-muted: #71717a;
@@ -161,6 +161,10 @@
 @theme {
   --default-font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
 
+  /* Font family utilities: font-playfair, font-helvetica */
+  --font-playfair: "Playfair Display", serif;
+  --font-helvetica: Helvetica, Arial, sans-serif;
+
   /* Slightly rounded corners */
   --radius-none: 0px;
   --radius-sm: 6px;
@@ -224,20 +228,10 @@ body {
     color 0.3s ease;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
-  letter-spacing: -0.05em;
-  line-height: 1.2;
-}
 
 /* Paragraphs use medium weight (not bold) */
 p {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Better scroll margin for section anchors */

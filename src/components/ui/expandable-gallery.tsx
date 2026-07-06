@@ -264,9 +264,9 @@ export function ExpandableGallery() {
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full md:w-[42%] md:order-1 flex flex-col gap-5 md:justify-center"
+          className="w-full md:w-[42%] md:order-1 flex flex-col gap-8 md:justify-start"
         >
-          <p className="text-xl md:text-2xl font-normal tracking-tight text-text-secondary leading-snug">
+          <p className="text-lg md:text-lg font-normal tracking-tight text-text-secondary leading-snug">
             A glimpse of the moments behind the tech world. Click to explore the
             full gallery and dive into the stories each photo holds.
           </p>

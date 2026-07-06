@@ -34,7 +34,7 @@ const GallerySection = () => {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
       });
     }, rootRef);
@@ -51,11 +51,8 @@ const GallerySection = () => {
     >
       <div ref={rootRef} className="max-w-4xl w-full flex flex-col h-full">
         {/* HEADER */}
-        <div
-          data-gallery-reveal
-          className="mb-6"
-        >
-          <h1 className="text-4xl font-medium text-text-primary text-start">
+        <div data-gallery-reveal className="mb-2">
+          <h1 className="text-3xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
         </div>

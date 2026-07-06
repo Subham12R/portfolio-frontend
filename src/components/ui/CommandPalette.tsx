@@ -572,18 +572,10 @@ export function CommandPalette() {
       {/* Trigger Button */}
       <button
         onClick={() => setOpen(true)}
-        className="hidden md:flex items-center gap-2 h-9 px-2.5 rounded-md bg-bg-badge/10 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
+        className="hidden md:flex items-center justify-center w-9 h-9 rounded-md bg-bg-badge/10 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary hover:border-border-secondary transition-colors duration-200 cursor-pointer"
         aria-label="Open command palette"
       >
         <Search size={14} className="text-text-muted" />
-        <div className="flex items-center gap-0.5">
-          <span className="px-1 py-0.5 text-[10px] font-medium text-text-muted bg-bg-elevated border border-border-primary rounded">
-            Ctrl
-          </span>
-          <span className="px-1 py-0.5 text-[10px] font-medium text-text-muted bg-bg-elevated border border-border-primary rounded">
-            K
-          </span>
-        </div>
       </button>
 
       {/* Mobile trigger */}
@@ -603,7 +595,7 @@ export function CommandPalette() {
             {/* Backdrop — clickable */}
             <div
               ref={backdropRef}
-              className="absolute inset-0 bg-zinc-950/60 pointer-events-auto"
+              className="absolute inset-0 bg-black/10 dark:bg-zinc-950/60 pointer-events-auto"
               style={{
                 backdropFilter: "blur(5px) saturate(180%)",
                 WebkitBackdropFilter: "blur(80px) saturate(180%)",
@@ -617,7 +609,7 @@ export function CommandPalette() {
             {/* Modal */}
             <div
               ref={modalRef}
-              className="relative w-full max-w-md bg-zinc-950/80 backdrop-blur-xl rounded-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary overflow-hidden flex flex-col max-h-[65vh] pointer-events-auto"
+              className="relative w-full max-w-md bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl rounded-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-2 border-border-primary overflow-hidden flex flex-col max-h-[65vh] pointer-events-auto"
               style={{ opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}

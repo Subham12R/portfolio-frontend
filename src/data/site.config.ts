@@ -21,7 +21,7 @@ export const siteConfig = {
   // Rotating titles for hero animation
   titles: [
     "Full Stack Developer",
-    "Frontend Engineer",
+    "App Developer",
     "Freelance Developer",
     "Open Source Contributor",
     "Tech Enthusiast",

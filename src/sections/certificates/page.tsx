@@ -15,7 +15,7 @@ const CertificatesPage = async () => {
       <div className="max-w-4xl w-full flex flex-col  h-full">
         {/* HEADER */}
         <div className="mb-6">
-          <h1 className="text-4xl font-medium text-text-primary text-start">
+          <h1 className="text-3xl font-medium text-text-primary text-start">
             {section.title}.
           </h1>
         </div>

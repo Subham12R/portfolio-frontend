@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/data";
 import { VisitorBadge } from "@/components/ui/VisitorBadge";
 import { GitHubStarBadge } from "@/components/ui/GitHubStarBadge";
@@ -12,7 +12,24 @@ import { NewTwitterIcon, Linkedin01Icon } from '@hugeicons/core-free-icons'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const { socials } = siteConfig;
+  const { socials, timezone } = siteConfig;
+  const [localTime, setLocalTime] = useState("");
+
+  useEffect(() => {
+    function updateTime() {
+      setLocalTime(
+        new Date().toLocaleTimeString("en-US", {
+          timeZone: timezone,
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
+    }
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, [timezone]);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -73,6 +90,8 @@ const Footer = () => {
             Crafted with <span className="text-red-500">❤️</span> by{" "}
             <span className="text-text-secondary">{siteConfig.name}</span>
           </span>
+          <span className="hidden md:inline text-border-primary">·</span>
+          <span className="text-text-secondary">{localTime} IST</span>
           <span className="hidden md:inline text-border-primary">·</span>
           <span>&copy; {currentYear} All rights reserved</span>
         </div>

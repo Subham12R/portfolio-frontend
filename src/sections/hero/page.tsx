@@ -5,7 +5,20 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { GithubCalendar } from "@/components/ui/github-calendar";
 import { TooltipGlass } from "@/components/ui/tooltip";
-import { ArrowRight, Map, MapPin, Phone, PhoneIcon, XCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Map,
+  MapPin,
+  Phone,
+  PhoneIcon,
+  XCircle,
+} from "lucide-react";
+
+import goIcon from "@/assets/icons/Go.png";
+import nextjsIcon from "@/assets/icons/nextjs.jpeg";
+import electronIcon from "@/assets/icons/Electron.png";
+import typescriptIcon from "@/assets/icons/typescript.png";
+import reactnativeIcon from "@/assets/icons/react.png";
 
 import { DownloadIcon } from "@/components/ui/download";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -35,6 +48,7 @@ import profileIcon from "../../../public/images/profile/profile.png";
 import DevPresence from "@/components/ui/DevPresence";
 import SpotifyNowPlaying from "@/components/ui/SpotifyNowPlaying";
 import TotalCodingTime from "@/components/ui/TotalCodingTime";
+import { g } from "framer-motion/client";
 
 function formatDate(date: string) {
   const d = new Date(date);
@@ -130,14 +144,13 @@ export const Hero = () => {
   }, [titles]);
 
   return (
-    <section id="home" className="w-full flex justify-center items-center px-4 pt-4 mb-12">
+    <section
+      id="home"
+      className="w-full flex justify-center items-center px-4 pt-4 mb-12"
+    >
       <div className="max-w-4xl w-full flex flex-col h-full">
         {/* Banner */}
-        <div
-          className="relative max-h-full overflow-hidden flex justify-center flex-col items-center p-2 border-2 border-border-primary rounded-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]"
-
-        >
-
+        <div className="relative max-h-full overflow-hidden flex justify-center flex-col items-center p-2 border-2 border-border-primary rounded-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
           <video
             autoPlay
             loop
@@ -171,13 +184,13 @@ export const Hero = () => {
                   <div className="h-6 overflow-hidden ">
                     <span
                       ref={textRef}
-                      className="block text-text-secondary font-medium"
+                      className="block text-text-secondary font-light font-helvetica "
                     >
                       {titles[0]}
                     </span>
                   </div>
                   <div className="inline-flex items-center gap-2 group/badge">
-                    <span className="text-2xl md:text-4xl font-medium  tracking-tighter">
+                    <span className="text-2xl md:text-3xl font-light  tracking-tighter ">
                       {name}
                     </span>
                     <svg
@@ -197,7 +210,6 @@ export const Hero = () => {
                   </div>
                 </div>
               </div>
-
             </div>
             <div className="w-full flex flex-col gap-3 mb-8 md:mb-0 md:flex-row md:items-center md:gap-2">
               <div className="flex items-center gap-2">
@@ -225,7 +237,10 @@ export const Hero = () => {
                   {/* Default Content (Step 1: exits immediately on hover) */}
                   <div className="flex items-center gap-2 transition-all duration-300 group-hover:-translate-y-10 group-hover:opacity-0">
                     <span>Book a Call</span>
-                    <Phone size={16} className="group-hover:rotate-2 transition-transform duration-200" />
+                    <Phone
+                      size={16}
+                      className="group-hover:rotate-2 transition-transform duration-200"
+                    />
                   </div>
 
                   {/* Hover Content (Container fades in softly, allowing children to animate sequentially) */}
@@ -242,7 +257,7 @@ export const Hero = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      
+
                       {/* Plus Sign (+): Step 2b (scales up in the middle) */}
                       <span className="absolute left-[29px] z-20 text-[10px] font-bold text-text-secondary select-none transition-transform duration-300 delay-[300ms] scale-0 group-hover:scale-100">
                         +
@@ -253,7 +268,7 @@ export const Hero = () => {
                         YOU
                       </div>
                     </div>
-                    
+
                     {/* Let's Talk Text (Step 3: slides and fades in last) */}
                     <span className="ml-2 font-semibold text-text-primary transition-all duration-400 delay-[650ms] opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0">
                       Let&apos;s Talk
@@ -263,75 +278,135 @@ export const Hero = () => {
               </div>
 
               <div className="md:ml-auto w-full md:w-auto flex md:inline-flex items-center rounded-md border-2 border-border-primary bg-bg-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] text-zinc-800  p-0.5">
-                <a href={socials.github.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded">
+                <a
+                  href={socials.github.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded"
+                >
                   <HugeiconsIcon icon={GithubIcon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">GitHub</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">
+                    GitHub
+                  </span>
                 </a>
-                <a href={socials.linkedin.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200 rounded">
+                <a
+                  href={socials.linkedin.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-blue-500 hover:bg-hover-tint transition-colors duration-200 rounded"
+                >
                   <HugeiconsIcon icon={Linkedin02Icon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">LinkedIn</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">
+                    LinkedIn
+                  </span>
                 </a>
-                <a href={socials.twitter.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded">
+                <a
+                  href={socials.twitter.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded"
+                >
                   <HugeiconsIcon icon={NewTwitterIcon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">X</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">
+                    X
+                  </span>
                 </a>
-                <a href={socials.youtube.url} target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200 rounded">
+                <a
+                  href={socials.youtube.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-red-500 hover:bg-hover-tint transition-colors duration-200 rounded"
+                >
                   <HugeiconsIcon icon={YoutubeIcon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">YouTube</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">
+                    YouTube
+                  </span>
                 </a>
-                <a href="https://medium.com/@rikk4335" target="_blank" rel="noopener noreferrer" className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded">
+                <a
+                  href="https://medium.com/@rikk4335"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-text-primary hover:bg-hover-tint transition-colors duration-200 rounded"
+                >
                   <HugeiconsIcon icon={MediumIcon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">Medium</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">
+                    Medium
+                  </span>
                 </a>
                 <span className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-indigo-400 hover:bg-hover-tint transition-colors duration-200 cursor-default rounded">
                   <HugeiconsIcon icon={DiscordIcon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">subham_c9</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out">
+                    subham_c9
+                  </span>
                 </span>
-                <a href={`mailto:${email}`} className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md rounded">
+                <a
+                  href={`mailto:${email}`}
+                  className="group flex-1 md:flex-none flex justify-center items-center p-2 hover:text-red-400 hover:bg-hover-tint transition-colors duration-200 rounded-r-md rounded"
+                >
                   <HugeiconsIcon icon={Mail01Icon} size={20} />
-                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out rounded">Mail</span>
+                  <span className="overflow-hidden max-w-0 group-hover:max-w-24 group-hover:ml-1.5 text-xs font-medium whitespace-nowrap [font-family:var(--font-helvetica)] transition-all duration-500 ease-in-out rounded">
+                    Mail
+                  </span>
                 </a>
               </div>
             </div>
+
+            <h1 className=" text-2xl tracking-tighter text-text-primary flex items-start self-start py-4 mt-4">
+              Welcome, let me introduce myself
+            </h1>
             {/* Social Links */}
             <ScrollRevealText
-              as="p"
-              className="text-base md:text-lg mb-8 max-w-4xl leading-relaxed mt-0 md:mt-4 font-medium text-text-secondary"
+              as="span"
+              className="font-helvetica text-md md:text-md mb-8 max-w-4xl leading-relaxed  text-text-primary/80 mt-2 flex flex-col gap-2"
             >
-              A{" "}
-              <span className="inline-flex items-baseline gap-1 text-text-primary font-medium">
-                <HugeiconsIcon icon={CodeIcon} size={16} className="self-center align-middle" />
-                full-stack developer
-              </span>{" "}
-              living in{" "}
-              <span className="inline-flex items-baseline gap-1 text-text-primary font-medium">
-                <HugeiconsIcon icon={Globe02Icon} size={16} className="self-center align-middle" />
-                Kolkata, India
+         
+              <span className="tracking-tighter ">
+                Hi, I'm Subham, a{" "}
+                <span className="px-1  underline">
+                  Full-Stack Developer{" "}
+                </span>{" "}
+                focused on building AI products, developer tools, and scalable
+                backend systems.
+                  </span>
+                  
+   
+                  
+    
+                <span className="mt-2 tracking-tighter">
+                I love designing software that feels simple on the surface while
+                solving complex engineering problems underneath, with a strong
+                focus on clean architecture and user experience.
               </span>
-              . Open to{" "}
-              <span className="text-text-primary font-medium">
-                full-time opportunities
-              </span>{" "}
-              and{" "}
-              <span className="text-text-primary font-medium">
-                freelance projects
-              </span>
-              . This website serves as a collection of my work across{" "}
-              <span className="inline-flex items-baseline gap-1 text-text-primary font-medium">
-                full-stack development
-                <HugeiconsIcon icon={DatabaseIcon} size={16} className="self-center align-middle" />
-              </span>
-              ,{" "}
-              <span className="inline-flex items-baseline gap-1 text-text-primary font-medium">
-                systems programming
-                <HugeiconsIcon icon={CpuIcon} size={16} className="self-center align-middle" />
-              </span>{" "}
-              and{" "}
-              <span className="inline-flex items-baseline gap-1 text-text-primary font-medium">
-                local AI tools
-                <HugeiconsIcon icon={AiIdeaIcon} size={16} className="self-center align-middle" />
-              </span>
-              .
+      
+
+   
+              <span className="mt-2 tracking-tighter">
+                Currently building projects with
+                <span className="px-1  underline  dark:hover:text-white inline-flex items-center gap-1.5">
+                  <Image src={goIcon} alt="goIcon" width={16} height={16} className="w-4 h-4 object-contain rounded-sm" />
+                  Go,
+                </span>
+                <span className="px-1  underline dark:hover:text-white  inline-flex items-center gap-1.5">
+                  <Image src={nextjsIcon} alt="nextjsIcon" width={16} height={16} className="w-4 h-4 object-contain rounded-sm" />
+                  Next.js,
+                </span>
+                <span className="px-1  underline dark:hover:text-white inline-flex items-center gap-1.5">
+                  <Image src={typescriptIcon} alt="TypeScriptIcon" width={16} height={16} className="w-4 h-4 object-contain rounded-sm" />
+                  TypeScript,
+                </span>
+                <span className="px-1  underline dark:hover:text-white inline-flex items-center gap-1.5">
+                  <Image src={reactnativeIcon} alt="electronIcon" width={16} height={16} className="w-4 h-4 object-contain rounded-sm" />
+                  React Native,
+                </span>
+                <span className="px-1  underline dark:hover:text-white inline-flex items-center gap-1.5">
+                  <Image src={electronIcon} alt="electronIcon" width={16} height={16} className="w-4 h-4 object-contain rounded-sm" />
+                  Electron,
+                </span>{" "}
+                and AI
+                while contributing to open source and documenting
+                everything I learn.
+                </span>
+ 
             </ScrollRevealText>
             <div className="mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
               <div className="min-w-0 flex rounded-md border-2 border-border-primary bg-bg-elevated/30 px-3 py-2 items-center shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] min-h-[40px]">
@@ -342,7 +417,6 @@ export const Hero = () => {
           </div>
 
           <div className="">
-
             {/* GitHub Calendar - Only render after mount and theme is resolved to prevent hydration mismatch */}
             <div className="w-full p-4 rounded-md bg-accent border-2 border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] min-h-[160px]">
               {mounted && resolvedTheme ? (
@@ -354,7 +428,10 @@ export const Hero = () => {
                   {/* Calendar grid skeleton */}
                   <div className="flex gap-[5px] sm:gap-[3px] overflow-x-auto">
                     {Array.from({ length: 53 }).map((_, week) => (
-                      <div key={week} className="flex flex-col gap-[5px] sm:gap-[2px] flex-shrink-0 w-[22px] sm:w-[14px]">
+                      <div
+                        key={week}
+                        className="flex flex-col gap-[5px] sm:gap-[2px] flex-shrink-0 w-[22px] sm:w-[14px]"
+                      >
                         <div className="h-3 bg-bg-elevated rounded w-full" />
                         {Array.from({ length: 7 }).map((_, day) => (
                           <div

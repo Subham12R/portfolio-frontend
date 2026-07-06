@@ -25,7 +25,7 @@ const Tech = () => {
       <div className="max-w-4xl w-full flex flex-col h-full">
         {/* Header */}
 
-        <h1 className="text-4xl font-medium text-text-primary mb-6">
+        <h1 className="text-3xl font-medium text-text-primary mb-6">
           Tech Stack - That helps me get the stuff done.
         </h1>
         {/* Tech Stack Dock */}
