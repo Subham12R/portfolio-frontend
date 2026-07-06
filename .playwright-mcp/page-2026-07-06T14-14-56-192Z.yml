@@ -1,0 +1,8 @@
+- generic [active] [ref=f1e1]:
+  - button "Scroll to top":
+    - img
+  - button "Open Next.js Dev Tools" [ref=f1e7] [cursor=pointer]:
+    - img [ref=f1e8]
+  - alert [ref=f1e11]
+  - generic [ref=f1e12] [cursor=pointer]:
+    - img

@@ -109,16 +109,22 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     if (!lenisInstance) return;
 
     const hash = window.location.hash;
-    if (hash && hash !== '#') {
-      const timer = setTimeout(() => {
-        const targetElement = document.querySelector(hash);
-        if (targetElement) {
-          lenisInstance.scrollTo(targetElement as HTMLElement, { offset: -80, immediate: true });
-        }
-      }, 150);
+    if (!hash || hash === '#') return;
 
-      return () => clearTimeout(timer);
-    }
+    // Retry the scroll for a bit: async content (data fetches, images) can
+    // still shift the target element's position after the first attempt.
+    let attempts = 0;
+    const maxAttempts = 10;
+    const interval = setInterval(() => {
+      const targetElement = document.querySelector(hash);
+      if (targetElement) {
+        lenisInstance.scrollTo(targetElement as HTMLElement, { offset: -80, immediate: true });
+      }
+      attempts += 1;
+      if (attempts >= maxAttempts) clearInterval(interval);
+    }, 150);
+
+    return () => clearInterval(interval);
   }, [pathname, lenisInstance]);
 
   return (

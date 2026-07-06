@@ -1,0 +1,4 @@
+- generic [active] [ref=f7e1]:
+  - button "Scroll to top":
+    - img
+  - alert [ref=f7e2]

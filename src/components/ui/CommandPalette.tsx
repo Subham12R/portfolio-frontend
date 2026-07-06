@@ -265,28 +265,6 @@ export function CommandPalette() {
       section: "navigation",
     },
     {
-      id: "photography",
-      label: "Go to Photography",
-      description: "View photography gallery",
-      icon: <Camera size={16} className="text-text-secondary" />,
-      shortcut: "G",
-      action: () => {
-        router.push("/photography");
-      },
-      section: "navigation",
-    },
-    {
-      id: "hackathons",
-      label: "Go to Hackathons",
-      description: "View hackathon achievements",
-      icon: <Trophy size={16} className="text-text-secondary" />,
-      shortcut: "K",
-      action: () => {
-        router.push("/hackathons");
-      },
-      section: "navigation",
-    },
-    {
       id: "contact",
       label: "Go to Contact",
       description: "Get in touch",
