@@ -376,10 +376,15 @@ export function CommandPalette() {
       html.style.overscrollBehavior = originalHtmlOverscroll;
       html.style.scrollBehavior = originalHtmlScrollBehavior;
       window.scrollTo(0, scrollYRef.current);
+      // Locking the body (position: fixed) collapses the document's
+      // measured height, so Lenis's cached scroll limit goes stale at 0.
+      // Force it to remeasure now that the real layout is restored,
+      // otherwise an immediate scrollTo() gets clamped to 0.
+      lenis?.resize();
       lenis?.start();
       document.removeEventListener("touchmove", preventTouch);
     };
-  }, [open]);
+  }, [open, lenis]);
 
   // GSAP open/close animation
   useEffect(() => {
@@ -442,7 +447,9 @@ export function CommandPalette() {
     // Wait for the modal's scroll-lock cleanup to release the page before
     // running the action — otherwise it restores the pre-open scroll
     // position right after a navigation action just scrolled away from it.
-    requestAnimationFrame(() => item.action());
+    requestAnimationFrame(() => {
+      item.action();
+    });
   };
 
   // Keyboard shortcuts
