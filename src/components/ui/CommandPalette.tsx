@@ -436,6 +436,15 @@ export function CommandPalette() {
     }
   }, [open]);
 
+  const handleSelect = (item: CommandItem) => {
+    saveRecent(item.id);
+    setOpen(false);
+    // Wait for the modal's scroll-lock cleanup to release the page before
+    // running the action — otherwise it restores the pre-open scroll
+    // position right after a navigation action just scrolled away from it.
+    requestAnimationFrame(() => item.action());
+  };
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -474,15 +483,12 @@ export function CommandPalette() {
       }
       if (e.key === "Enter" && orderedItems[selectedIndex]) {
         e.preventDefault();
-        const item = orderedItems[selectedIndex];
-        item.action();
-        saveRecent(item.id);
-        setOpen(false);
+        handleSelect(orderedItems[selectedIndex]);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [open, orderedItems, selectedIndex, saveRecent, commands]);
+  }, [open, orderedItems, selectedIndex, saveRecent, commands, handleSelect]);
 
   // Scroll selected into view
   useEffect(() => {
@@ -495,12 +501,6 @@ export function CommandPalette() {
       }
     }
   }, [selectedIndex, open]);
-
-  const handleSelect = (item: CommandItem) => {
-    item.action();
-    saveRecent(item.id);
-    setOpen(false);
-  };
 
   const renderItem = (item: CommandItem) => {
     const actualIndex = orderedItems.findIndex((o) => o.id === item.id);

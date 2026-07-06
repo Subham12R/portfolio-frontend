@@ -42,3 +42,2076 @@
 [     886ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1783347413402} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
 [    1040ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
 [    6330ms] [LOG] %c[Vercel Speed Insights]%c [vitals] color: rgb(120, 120, 120) color: inherit {speed: 4g, metrics: Array(4), scriptVersion: 0.1.3, sdkName: @vercel/speed-insights/next, sdkVersion: 2.0.0} /_vercel/speed-insights/vitals @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   80309ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   80362ms] [LOG] [Fast Refresh] done in 127ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   93649ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   93703ms] [LOG] [Fast Refresh] done in 102ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  121376ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  121393ms] ReferenceError: Cannot access 'handleSelect' before initialization
+    at CommandPalette (http://localhost:3000/_next/static/chunks/src_b4c6e77e._.js?id=%255Bproject%255D%252Fsrc%252Fcomponents%252Fui%252FCommandPalette.tsx+%255Bapp-client%255D+%2528ecmascript%2529:632:9)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:14826:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:4651:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6112:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:6708:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:9562:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:9456:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:9440:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:9105:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:10238:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:10154:316)
+    at flushSyncWork$1 (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:9237:86)
+    at Object.scheduleRefresh (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:299:13)
+    at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_a0e4c7b4._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_a0e4c7b4._.js:384:38)
+    at applyUpdate (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_a0e4c7b4._.js:878:31)
+    at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_a0e4c7b4._.js:886:13
+[  121447ms] [LOG] [Fast Refresh] done in 104ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  144372ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  144378ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144438ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144500ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144562ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144625ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144685ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144747ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144809ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144871ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144932ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  144993ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145055ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145115ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145179ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145241ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145303ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145364ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145426ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145489ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145550ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145613ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145675ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145740ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145802ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145864ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145926ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  145985ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146049ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146112ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146172ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146235ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146298ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146359ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146422ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146483ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146546ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146611ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146673ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146736ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146798ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146859ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146923ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  146983ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147046ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147107ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147169ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147233ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147294ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147357ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147419ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147481ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147544ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147608ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147668ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147729ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147792ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147856ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147918ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  147981ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148041ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148103ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148164ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148228ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148290ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148351ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148414ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148476ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148539ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148601ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148663ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148724ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148786ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148848ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148911ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  148959ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149021ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149084ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149146ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149208ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149272ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149332ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149394ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149456ms] [ERROR] ./src/components/ui/CommandPalette.tsx:505:9
+Ecmascript file had an error
+  503 |   }, [selectedIndex, open]);
+  504 |
+> 505 |   const handleSelect = (item: CommandItem) => {
+      |         ^^^^^^^^^^^^
+  506 |     saveRecent(item.id);
+  507 |     setOpen(false);
+  508 |     // Wait for the modal's scroll-lock cleanup to release the page before
+
+the name `handleSelect` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/CommandPalette.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Client Component Browser]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/CommandPalette.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Client Component SSR]
+    ./src/components/layout/Navigation.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  149557ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149579ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149728ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149729ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149730ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149730ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149731ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149736ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149745ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/#skills color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/#skills, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1783347562260} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  149806ms] [LOG] [Fast Refresh] done in 121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150058ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150280ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150314ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150559ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150559ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150560ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150561ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150561ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150562ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150599ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150600ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150600ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150601ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150601ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150602ms] [WARNING] [react-tooltip] Do not set `style.border`. Use `border` prop instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150608ms] [WARNING] Image with src "/_next/static/media/js.70b52c32.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150608ms] [WARNING] Image with src "/_next/static/media/typescript.98e686f2.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150608ms] [WARNING] Image with src "/_next/static/media/react.94e476b9.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150608ms] [WARNING] Image with src "/_next/static/media/nextjs.f6f9c7b2.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/tailwindcss.3dd9d549.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/python.58a41c3f.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/nodejs.c2c5065d.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/neon.238e1ded.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/docker.ac28fd10.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/vercel.621c723c.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/github.c7b35360.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/n8n.33856778.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/stripe.ae0b4826.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150616ms] [WARNING] Image with src "/_next/static/media/cursor.953073c3.webp" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150617ms] [WARNING] Image with src "https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev/images/288_1x_shots_so.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150617ms] [WARNING] Image with src "https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev/images/main.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150617ms] [WARNING] Image with src "https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev/images/Trace.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150617ms] [WARNING] Image with src "https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev/images/crack.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150617ms] [WARNING] Image with src "https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev/images/apple.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150617ms] [WARNING] Image with src "https://ik.imagekit.io/ivyzquofk/Financio.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150641ms] [WARNING] Image with src "/images/blog/blog4.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150641ms] [WARNING] Image with src "/images/blog/blog3.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150644ms] [WARNING] Image with src "/images/blog/blog2.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150644ms] [WARNING] Image with src "/images/blog/blog1.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150644ms] [WARNING] Image with src "/images/footer.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150843ms] [LOG] %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150843ms] [LOG] %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {route: /, path: /} @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150843ms] [LOG] %c[Vercel Web Analytics]%c [view] http://localhost:3000/#skills color: rgb(120, 120, 120) color: inherit {o: http://localhost:3000/#skills, sv: 0.1.3, sdkn: @vercel/analytics/next, sdkv: 1.6.1, ts: 1783347563360} /_vercel/insights/view @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  150843ms] [LOG] %c[Vercel Speed Insights]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
