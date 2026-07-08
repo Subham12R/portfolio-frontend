@@ -190,24 +190,24 @@ export default function SpotifyNowPlaying({
   const hasTrack = Boolean(nowPlaying.track);
   const isOnline = Boolean(nowPlaying.isPlaying && nowPlaying.track);
   const content = isOnline ? (
-    <span className="min-w-0 whitespace-nowrap text-text-secondary">
+    <span className="text-text-secondary">
       Now Playing - {nowPlaying.track}
       {nowPlaying.artist ? `, By ${nowPlaying.artist}` : ""}
     </span>
   ) : hasTrack ? (
-    <span className="min-w-0 whitespace-nowrap text-text-secondary">
+    <span className="text-text-secondary">
       Last Played - {nowPlaying.track}
       {nowPlaying.artist ? `, By ${nowPlaying.artist}` : ""}
     </span>
   ) : (
-    <span className="min-w-0 whitespace-nowrap text-text-secondary">
+    <span className="text-text-secondary">
       Currently offline
     </span>
   );
 
   return (
     <div
-      className={`flex h-full max-w-full items-center gap-2 overflow-x-auto overflow-y-hidden text-sm leading-none ${className}`.trim()}
+      className={`flex h-full max-w-full items-center gap-2 overflow-hidden text-sm leading-none ${className}`.trim()}
     >
       {hasTrack && nowPlaying.imageUrl ? (
         <Image
@@ -234,21 +234,26 @@ export default function SpotifyNowPlaying({
           {isPreviewPlaying ? "||" : ">"}
         </button>
       ) : null}
-      {hasTrack && nowPlaying.url ? (
-        <a
-          href={nowPlaying.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="min-w-0 flex-1 whitespace-nowrap hover:underline"
-          title={nowPlaying.track || undefined}
-        >
-          {content}
-        </a>
-      ) : (
-        <div className="min-w-0 flex-1 whitespace-nowrap" title={nowPlaying.track || undefined}>
-          {content}
-        </div>
-      )}
+      <div className="min-w-0 flex-1 overflow-hidden">
+        {hasTrack && nowPlaying.url ? (
+          <a
+            href={nowPlaying.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block truncate hover:underline"
+            title={nowPlaying.track || undefined}
+          >
+            {content}
+          </a>
+        ) : (
+          <div
+            className="block truncate"
+            title={nowPlaying.track || undefined}
+          >
+            {content}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

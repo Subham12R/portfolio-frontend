@@ -172,7 +172,7 @@ export function GithubCalendar({
         <div className={cn("w-full min-w-0 flex flex-col gap-4", className)}>
             <div
                 data-lenis-prevent
-                className="relative flex flex-nowrap gap-[3px] w-full min-w-0 overflow-x-auto md:overflow-visible pb-1 md:pb-0"
+                className="relative flex flex-nowrap gap-[2px] w-full min-w-0 overflow-hidden"
                 onMouseLeave={() => {
                     setHoveredDate(null)
                     setHoveredCount(null)
@@ -209,7 +209,7 @@ export function GithubCalendar({
                     return (
                         <div
                             key={weekIndex}
-                            className="flex flex-col gap-[2px] sm:gap-[2px] w-[11px] sm:w-[13px] flex-shrink-0"
+                            className="flex flex-col gap-[2px] flex-1 min-w-0"
                         >
                             <div className="h-3 text-[10px] text-muted-foreground text-center leading-2 whitespace-nowrap overflow-visible">
                                 {monthLabel ? monthLabel.label : ""}

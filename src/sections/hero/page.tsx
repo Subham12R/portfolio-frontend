@@ -55,69 +55,64 @@ export const Hero = () => {
           </div>
 
         {/* Profile Info Wrapper */}
-        <div className="flex flex-row items-center gap-6 mt-8 mb-6 w-full">
+        <div className="flex flex-row items-center gap-5 mt-6 mb-3 w-full">
           {/* Avatar */}
           <div className="relative overflow-hidden rounded-xl shrink-0">
           <Image
             src={profileIcon}
             alt={name}
-            width={96}
-            height={96}
-            className="h-24 w-24 aspect-square object-cover"
+            width={88}
+            height={88}
+            className="h-[88px] w-[88px] aspect-square object-cover"
             priority
           />
           </div>
-          <div className="flex flex-col items-start gap-0 min-w-0">
+          <div className="flex flex-col items-start justify-baseline gap-0.5 min-w-0 w-full mt-auto">
           {/* Name */}
-          <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif">
+          <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full">
             {name}
           </h1>
-          <p className="text-[16px] text-text-secondary/80 font-light font-instrumentsans tracking-tighter ">
-            Software Engineer and Developer
+          <p className="text-[14px] text-text-secondary/70 font-light font-instrumentsans tracking-tight">
+            21,  Software Engineer,  IND
           </p>
-          <div className="">
-            <button
-              onClick={handleCopyEmail}
-              className="group relative inline-flex items-center gap-1.5 text-[15px] font-normal text-text-secondary hover:text-text-primary transition-colors duration-200 underline decoration-text-secondary/40 underline-offset-4 cursor-pointer"
-            >
-              <span>{email}</span>
-              {copied ? (
-                <span className="text-xs text-green-500 font-medium ml-1">done</span>
-              ) : (
-                <svg
-                  viewBox="0 0 24 24"
-                  width="14"
-                  height="14"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-text-secondary/60 group-hover:text-text-primary transition-colors"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-              )}
-              {/* Cloud tooltip */}
-              <span className="absolute font-semibold top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-0.5 bg-white text-slate-800 text-xs rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-200 z-50">
-                Copy Email
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-px border-4 border-transparent border-b-white" />
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-[1px] border-[5px] border-transparent border-b-slate-200 -z-10" />
-              </span>
-            </button>
-          </div>
         </div>
       </div>
 
-        {/* Title/Role */}
+        {/* Social Icons Row — email copy button first */}
+        <div className="flex flex-wrap items-center gap-2 mt-2 mb-6 text-text-secondary/40">        
+          {/* Email copy inline */}
+          <button
+            onClick={handleCopyEmail}
+            className="group relative inline-flex items-center gap-1 text-[14px] font-normal text-text-secondary/60 hover:text-text-primary transition-colors duration-200 cursor-pointer"
+          >
+            <span className="underline decoration-text-secondary/30 underline-offset-4">{email}</span>
+            {copied ? (
+              <span className="text-[10px] text-green-500 font-medium ml-1">done</span>
+            ) : (
+              <svg
+                viewBox="0 0 24 24"
+                width="12"
+                height="12"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-text-secondary/40 group-hover:text-text-primary transition-colors shrink-0"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            )}
+            <span className="absolute font-semibold top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-0.5 bg-white text-slate-800 text-xs rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-200 z-50">
+              Copy Email
+              <span className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-px border-4 border-transparent border-b-white" />
+              <span className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-[1px] border-[5px] border-transparent border-b-slate-200 -z-10" />
+            </span>
+          </button>
 
-
-        {/* Email & copy button */}
-
-
-        {/* Social Icons Row */}
-        <div className="flex flex-wrap items-center gap-2 mt-5 mb-8 text-text-secondary/40">
+          {/* divider */}
+          <span className="text-text-secondary/20 select-none">|</span>
           {/* GitHub */}
           <a
             href={socials.github.url}
@@ -366,8 +361,8 @@ export const Hero = () => {
           with me..
         </p>
 
-        {/* Spotify / Coding Presence Row */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 items-left gap-y-3 gap-x-8 mt-8 pt-4  justify-between">
+        {/* Spotify / Coding Presence Row — sticky bottom */}
+        <div className="sticky bottom-0 z-10 w-full grid grid-cols-1 sm:grid-cols-2 items-center gap-y-2 gap-x-6 mt-6 pt-3 pb-3 bg-bg-primary/80 backdrop-blur-sm border-t border-border-primary/30">
           <SpotifyNowPlaying className="min-w-0" />
           <DevPresence />
         </div>

@@ -25,7 +25,6 @@ const Tech = () => {
     >
       <ScrollReveal className="max-w-2xl w-full flex flex-col h-full">
         {/* Header */}
-
         <h1 className="text-4xl font-light text-text-primary mb-6 font-instrumentserif">
           Tech Stack - That helps me get the stuff done.
         </h1>
