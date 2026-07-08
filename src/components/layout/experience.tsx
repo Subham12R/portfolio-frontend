@@ -8,11 +8,12 @@ import type { Experience } from "@/data/experience";
 
 function formatCompact(iso: string): string {
   const d = new Date(iso + "T00:00:00");
-  return `${String(d.getMonth() + 1).padStart(2, "0")}.${d.getFullYear()}`;
+  const month = d.toLocaleDateString("en-US", { month: "long" });
+  return `${month} ${d.getFullYear()}`;
 }
 
 function formatCompactRange(startDate: string, endDate?: string): string {
-  return `${formatCompact(startDate)} — ${endDate ? formatCompact(endDate) : "∞"}`;
+  return `${formatCompact(startDate)} — ${endDate ? formatCompact(endDate) : "Present"}`;
 }
 
 function getRoleIcon(role: string) {
@@ -90,7 +91,7 @@ function RoleEntry({ experience, defaultExpanded = false }: RoleEntryProps) {
           </span>
         </span>
         <span className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-text-muted font-mono whitespace-nowrap">
+          <span className="text-xs text-text-muted font-instrumentsans font-light whitespace-nowrap">
             {formatCompactRange(experience.startDate, experience.endDate)}
           </span>
           <div
@@ -184,11 +185,15 @@ export function CompanyGroup({
 
         <div className="pt-2 flex flex-col border-b border-spacing-2 border-border-primary/50">
           {experiences.map((experience, i) => {
-      
+            const isLast = i === experiences.length - 1;
+            const lineTop = i === 0 ? "top-[-16px]" : "top-0";
+            const lineHeight = isLast ? (i === 0 ? "h-[28px]" : "h-[12px]") : "bottom-0";
             return (
-              <div key={experience.id} className="relative pb-6 last:pb-2 ">
+              <div key={experience.id} className="relative pl-6 pb-6 last:pb-2">
+                {/* Tree line connector */}
+                <div className={`absolute left-[11px] w-[1px] bg-border-primary/60 ${lineTop} ${lineHeight}`} />
+                <div className="absolute left-[11px] top-[4px] w-2.5 h-[8px] border-l border-b border-border-primary/60 rounded-bl-[4px]" />
               
-         
                 <RoleEntry
                   experience={experience}
                   defaultExpanded={defaultOpen && i === 0}

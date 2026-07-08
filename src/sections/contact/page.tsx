@@ -5,6 +5,7 @@ import { getCalApi } from "@calcom/embed-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { siteConfig } from "@/data";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,14 +67,14 @@ export default function ContactCTA() {
   return (
     <section
       id={section.id}
-      className="w-full max-w-4xl mx-auto flex flex-col justify-center items-center mb-12"
+      className="w-full max-w-2xl mx-auto flex flex-col justify-center items-center mb-12"
     >
-      <div className="max-w-4xl w-full flex flex-col items-center justify-center gap-3 pt-6 px-4 pb-12">
+      <div className="max-w-2xl w-full flex flex-col items-center justify-center gap-3 pt-6 px-4 pb-4">
         <svg
           ref={svgRef}
           viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
           preserveAspectRatio="xMidYMid meet"
-          className="w-56 md:w-72 h-auto text-text-primary"
+          className="w-36 md:w-42 h-auto text-text-primary"
           role="img"
           aria-label="Subham Karmakar signature"
         >
@@ -93,9 +94,11 @@ export default function ContactCTA() {
           </g>
         </svg>
 
-        <span className="text-center text-md font-medium text-text-secondary">
-          &ldquo;Hard times are not the enemy of a good life. They are part of it.&rdquo;
-        </span>
+        <ScrollReveal start="top 92%" className="flex justify-center w-full">
+          <span className="text-center text-md font-medium text-text-secondary">
+            &ldquo;Hard times are not the enemy of a good life. They are part of it.&rdquo;
+          </span>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -10,12 +10,12 @@ export function WaveBackground() {
   return (
     <div className="absolute bottom-0 inset-x-0 flex justify-center pointer-events-none overflow-hidden opacity-50 dark:opacity-20 backdrop-blur-md mx-auto -z-10">
       <div
-        className="relative w-full max-w-4xl h-full"
+        className="relative w-full max-w-2xl h-full"
         style={{ maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)' }}
       >
         <Image
           src="/images/footer.png"
-          width={896}
+          width={672}
           height={500}
           alt=""
           className="object-cover object-bottom"

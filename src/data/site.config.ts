@@ -53,6 +53,11 @@ export const siteConfig = {
       username: "subham_c9",
       display: "subham_c9",
     },
+    instagram: {
+      url: "https://instagram.com/subham12r",
+      username: "subham12r",
+      display: "subham12r",
+    },
   },
 
   // Navigation links

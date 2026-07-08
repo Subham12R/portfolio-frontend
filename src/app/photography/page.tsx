@@ -22,7 +22,7 @@ export const metadata = {
 export default function PhotographyPage() {
   return (
     <section className="w-full flex justify-center items-center py-20 px-4 lg:px-0">
-      <div className="max-w-4xl w-full">
+      <div className="max-w-2xl w-full">
         {/* Back link */}
         <Link
           href="/"
@@ -34,7 +34,7 @@ export default function PhotographyPage() {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-medium text-text-primary mb-2">
+          <h1 className="text-4xl font-light text-text-primary mb-2 font-instrumentserif">
             Photography
           </h1>
           <p className="text-text-secondary">

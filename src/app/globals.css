@@ -164,7 +164,9 @@
   /* Font family utilities: font-playfair, font-helvetica */
   --font-playfair: "Playfair Display", serif;
   --font-helvetica: Helvetica, Arial, sans-serif;
-
+  --font-instrumentsans: var(--font-instrumentsans);
+  --font-instrumentserif: var(--font-instrumentserif);
+  
   /* Slightly rounded corners */
   --radius-none: 0px;
   --radius-sm: 6px;
@@ -229,9 +231,9 @@ body {
 }
 
 
-/* Paragraphs use medium weight (not bold) */
+/* Paragraphs default to normal weight */
 p {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* Better scroll margin for section anchors */

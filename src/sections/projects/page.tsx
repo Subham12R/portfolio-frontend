@@ -4,6 +4,7 @@ import { siteConfig } from "@/data";
 import { fetchProjects } from "@/lib/api/server";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { NanoTechnologyIcon } from "@hugeicons/core-free-icons";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const ProjectsPage = async () => {
   const section = siteConfig.sections.projects;
@@ -15,10 +16,10 @@ const ProjectsPage = async () => {
       id={section.id}
       className="w-full flex justify-center items-center px-4 lg:px-0 mb-12"
     >
-      <div className="max-w-4xl w-full flex flex-col h-full">
+      <ScrollReveal className="max-w-2xl w-full flex flex-col h-full">
         {/* HEADER CONTENT */}
         <div className="mb-6">
-          <h1 className="text-3xl  tracking-tighter font-light text-text-primary text-start">
+          <h1 className="text-4xl font-light tracking-tight text-text-primary text-start font-instrumentserif">
             {section.title}.
           </h1>
         </div>
@@ -36,7 +37,7 @@ const ProjectsPage = async () => {
             View All Projects
           </Link>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

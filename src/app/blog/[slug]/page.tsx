@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      <article className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
+      <article className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
         {/* Back Link */}
         <Link
           href="/blog"
@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <span>{post.readingTime}</span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary mb-6 leading-tight">
+          <h1 className="text-4xl font-light text-text-primary mb-6 leading-tight font-instrumentserif">
             {post.title}
           </h1>
 

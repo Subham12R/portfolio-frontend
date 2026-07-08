@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { siteConfig, techRegistry } from "@/data";
 import { groupTech } from "@/lib/groupTech";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const Tech = () => {
   const tech = groupTech(techRegistry);
@@ -22,10 +23,10 @@ const Tech = () => {
       id={section.id}
       className="w-full flex justify-center items-center px-4 lg:px-0 overflow-hidden mb-12"
     >
-      <div className="max-w-4xl w-full flex flex-col h-full">
+      <ScrollReveal className="max-w-2xl w-full flex flex-col h-full">
         {/* Header */}
 
-        <h1 className="text-3xl font-medium text-text-primary mb-6">
+        <h1 className="text-4xl font-light text-text-primary mb-6 font-instrumentserif">
           Tech Stack - That helps me get the stuff done.
         </h1>
         {/* Tech Stack Dock */}
@@ -56,7 +57,7 @@ const Tech = () => {
 
                   {/* Icon */}
                   <div
-                    className={`relative w-10 h-10 md:w-12 md:h-12 z-20 rounded hover:shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-200 cursor-pointer shrink-0 ${
+                    className={`relative w-8 h-8 md:w-8 md:h-8 z-20 rounded hover:shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-200 cursor-pointer shrink-0 ${
                       isHovered
                         ? "-translate-y-4 scale-125"
                         : isNeighbor
@@ -76,7 +77,7 @@ const Tech = () => {
             })}
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

@@ -45,7 +45,7 @@ export default async function ProjectsPage() {
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
+      <div className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
         {/* Back Link */}
         <Link
           href="/"
@@ -57,10 +57,10 @@ export default async function ProjectsPage() {
 
         {/* Header */}
         <header className="mb-16">
-          <h1 className="text-4xl font-medium text-text-primary mb-4">
+          <h1 className="text-4xl font-light text-text-primary mb-4 font-instrumentserif">
             Projects
           </h1>
-          <p className="text-lg text-text-tertiary max-w-4xl leading-relaxed">
+          <p className="text-lg text-text-tertiary max-w-2xl leading-relaxed">
             A collection of projects I&apos;ve built, from open source libraries
             to full-stack applications. Each one represents a problem I wanted
             to solve or an idea I wanted to explore.

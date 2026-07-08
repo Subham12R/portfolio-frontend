@@ -881,17 +881,17 @@ export default function DevPresence() {
             </>
           ) : (
             <>
-              Coding on{" "}
+              Coding in{" "}
               {hasRealProject && projectName ? (
-                <strong className="font-semibold text-text-primary">
+                <span className="underline font-normal text-text-primary">
                   {projectName}
-                </strong>
+                </span>
               ) : (
-                <strong className="font-semibold text-text-primary">
+                <span className="underline font-normal text-text-primary">
                   current workspace
-                </strong>
+                </span>
               )}
-              {formattedEditorName ? ` in ${formattedEditorName}` : ""} for{" "}
+              {" "}for{" "}
               {formatDuration(codingDuration)}
             </>
           )}

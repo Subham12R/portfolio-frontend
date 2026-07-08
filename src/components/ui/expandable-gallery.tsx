@@ -176,7 +176,7 @@ function GalleryOverlay({ onClose }: { onClose: () => void }) {
         className="flex-1 overflow-y-auto overscroll-contain"
         data-lenis-prevent
       >
-        <div className="max-w-5xl mx-auto px-4 md:px-6 py-10 pb-24">
+        <div className="max-w-2xl mx-auto px-4 md:px-0 py-10 pb-24">
           {/* Back */}
           <button
             onClick={onClose}
@@ -186,7 +186,7 @@ function GalleryOverlay({ onClose }: { onClose: () => void }) {
             <span className="text-sm">Back</span>
           </button>
 
-          <h1 className="text-4xl font-medium text-text-primary mb-8">
+          <h1 className="text-4xl font-light text-text-primary mb-8 font-instrumentserif">
             Gallery
           </h1>
 
@@ -227,10 +227,10 @@ export function ExpandableGallery() {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-0">
+      <div className="flex flex-col items-center gap-6">
 
-        {/* Fan — top on mobile, right on desktop */}
-        <div className="relative h-56 md:h-100 w-full md:w-[58%] md:order-2 flex items-center justify-center">
+        {/* Fan at the top */}
+        <div className="relative h-56 md:h-80 w-full flex items-center justify-center">
           {PHOTOS.slice(0, 3).map((photo, index) => (
             <motion.div
               key={`card-${photo.id}`}
@@ -252,28 +252,28 @@ export function ExpandableGallery() {
                 transition: { type: "spring", stiffness: 400, damping: 25 },
               }}
               onClick={() => setIsOpen(true)}
-              className="absolute w-36 h-36 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-2xl border-[5px] md:border-[6px] border-bg-primary cursor-pointer overflow-hidden bg-bg-elevated"
+              className="absolute w-36 h-36 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-2xl border-[5px] md:border-[6px] border-bg-primary cursor-pointer overflow-hidden bg-bg-elevated"
             >
               <Media photo={photo} sizes="(max-width: 768px) 144px, 240px" />
             </motion.div>
           ))}
         </div>
 
-        {/* Text — bottom on mobile, left on desktop */}
+        {/* Text and Button below the fan */}
         <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full md:w-[42%] md:order-1 flex flex-col gap-8 md:justify-start"
+          className="w-full flex flex-col items-center gap-4 text-center"
         >
-          <p className="text-lg md:text-lg font-normal tracking-tight text-text-secondary leading-snug">
+          <p className="text-base md:text-lg font-light tracking-tight text-text-secondary leading-relaxed max-w-xl font-instrumentsans">
             A glimpse of the moments behind the tech world. Click to explore the
             full gallery and dive into the stories each photo holds.
           </p>
 
           <button
             onClick={() => setIsOpen(true)}
-            className="self-start inline-flex items-center gap-2 px-5 py-2 rounded-md border-2 border-border-primary bg-bg-elevated/30 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-hover-tint hover:border-border-accent shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] transition-all duration-200 group"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-md border-2 border-border-primary bg-bg-elevated/30 text-sm font-light text-text-secondary hover:text-text-primary hover:bg-hover-tint hover:border-border-accent shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] transition-all duration-200 group font-instrumentsans cursor-pointer"
           >
             View the gallery
             <ArrowRight

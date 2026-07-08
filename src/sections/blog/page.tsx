@@ -5,6 +5,7 @@ import { MediumBlogCard } from "@/components/blog/MediumBlogCard";
 import { getPostsSorted, getMediumPostsSorted } from "@/data/blog";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { LicenseDraftIcon } from "@hugeicons/core-free-icons";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const BlogSection = () => {
   const section = siteConfig.sections.blog;
@@ -18,10 +19,10 @@ const BlogSection = () => {
       id={section.id}
       className="w-full flex justify-center items-center px-4 lg:px-0 mb-12"
     >
-      <div className="max-w-4xl w-full flex flex-col h-full">
+      <ScrollReveal className="max-w-2xl w-full flex flex-col h-full">
         {/* HEADER */}
         <div className="mb-6">
-          <h1 className="text-3xl font-medium text-text-primary text-start">
+          <h1 className="text-4xl font-light text-text-primary text-start font-instrumentserif">
             {section.title}.
           </h1>
         </div>
@@ -53,7 +54,7 @@ const BlogSection = () => {
             View All Posts
           </Link>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

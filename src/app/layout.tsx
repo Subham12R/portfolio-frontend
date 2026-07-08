@@ -27,6 +27,18 @@ const playfair = localFont({
   display: "swap",
 })
 
+const sans = localFont({
+  src: "../../public/fonts/InstrumentSans.ttf",
+  variable: "--font-instrumentsans",
+  display: "swap",
+})
+
+const serif = localFont({
+  src: "../../public/fonts/InstrumentSerif.ttf",
+  variable: "--font-instrumentserif",
+  display: "swap",
+})
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -121,7 +133,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${helvetica.variable} ${playfair.variable} antialiased min-h-screen bg-bg-primary text-text-primary transition-colors duration-300`}
+        className={`${helvetica.variable} ${playfair.variable} ${sans.variable} ${serif.variable} antialiased min-h-screen bg-bg-primary text-text-primary transition-colors duration-300`}
       >
         <JsonLd />
         <ThemeProvider>

@@ -42,15 +42,14 @@ export function AnimatedBlogGrid({ posts, className }: AnimatedBlogGridProps) {
       rows.forEach((rowItems) => {
         gsap.fromTo(
           rowItems,
-          { opacity: 0, y: 32, scale: 0.98, filter: "blur(8px)" },
+          { opacity: 0, scale: 0.95, y: -10 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            filter: "blur(0px)",
-            duration: 0.75,
+            duration: 0.5,
             ease: "power3.out",
-            stagger: 0.1,
+            stagger: 0.08,
             scrollTrigger: {
               trigger: rowItems[0],
               start: "top 88%",

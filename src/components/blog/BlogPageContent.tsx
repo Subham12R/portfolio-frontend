@@ -18,7 +18,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      <div className="max-w-4xl mx-auto px-4 lg:px-0 py-16">
+      <div className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
         {/* Back Link */}
         <Link
           href="/"
@@ -32,7 +32,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
         <header className="mb-12">
           <ScrollRevealText
             as="h1"
-            className="text-4xl font-medium text-text-primary mb-4"
+            className="text-4xl font-light text-text-primary mb-4 font-instrumentserif"
             start="top 90%"
             end="top 60%"
           >
@@ -40,7 +40,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
           </ScrollRevealText>
           <ScrollRevealText
             as="p"
-            className="text-lg text-text-tertiary max-w-4xl leading-relaxed"
+            className="text-lg text-text-tertiary max-w-2xl leading-relaxed"
             start="top 85%"
             end="top 55%"
           >

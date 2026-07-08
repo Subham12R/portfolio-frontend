@@ -5,16 +5,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const RHOMBUS_TINY =
-  "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)";
-
-// ~20% expanded — thinner tilted rectangle
-const RHOMBUS_PEEK =
-  "polygon(53% 42%, 72% 50%, 47% 58%, 28% 50%)";
-
-// Full — thin tilted rectangle that fully covers the container
-const RHOMBUS_FULL =
-  "polygon(65% -60%, 160% 50%, 35% 160%, -60% 50%)";
+// Clip-path ellipse keyframes for smooth tilted oval transition
+const OVAL_TINY = "ellipse(0% 0% at 50% 50%)";
+const OVAL_PEEK = "ellipse(22% 10% at 50% 50%)";
+const OVAL_FULL = "ellipse(150% 150% at 50% 50%)";
 
 interface VideoHoverBannerProps {
   bannerImage?: string;
@@ -64,7 +58,7 @@ export function VideoHoverBanner({
     );
   }
 
-  const expandKeyframes = [RHOMBUS_TINY, RHOMBUS_PEEK, RHOMBUS_PEEK, RHOMBUS_FULL];
+  const expandKeyframes = [OVAL_TINY, OVAL_PEEK, OVAL_PEEK, OVAL_FULL];
   const expandTimes = [0, 0.1, 0.7, 1];
 
   return (
@@ -86,60 +80,84 @@ export function VideoHoverBanner({
         />
       )}
 
-      {/* Black mask that expands from center on hover */}
+      {/* Black mask container */}
       {hasVideo && (
-        <motion.div
-          className="absolute inset-0 bg-black"
-          initial={autoPlay ? { clipPath: RHOMBUS_FULL } : { clipPath: RHOMBUS_TINY }}
-          animate={{
-            clipPath: isExpanded ? expandKeyframes : RHOMBUS_TINY,
-          }}
-          transition={
-            isExpanded
-              ? { duration: 1.4, times: expandTimes, ease: [0.2, 0, 0.1, 1] }
-              : { duration: 0.5, ease: [0.2, 0, 0.1, 1] }
-          }
-        >
-          {/* Video only renders while expanded — stops on leave */}
-          {isExpanded && (
+        <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
+          {/* Rotated mask div to achieve tilted oval shape */}
+          <motion.div
+            className="w-full h-full bg-black origin-center flex items-center justify-center"
+            initial={autoPlay ? { clipPath: OVAL_FULL, rotate: -25 } : { clipPath: OVAL_TINY, rotate: -35 }}
+            animate={{
+              clipPath: isExpanded ? expandKeyframes : OVAL_TINY,
+              rotate: isExpanded ? -25 : -35,
+            }}
+            transition={
+              isExpanded
+                ? {
+                    clipPath: { duration: 1.4, times: expandTimes, ease: [0.2, 0, 0.1, 1] },
+                    rotate: { duration: 1.4, times: expandTimes, ease: [0.2, 0, 0.1, 1] },
+                  }
+                : {
+                    clipPath: { duration: 0.5, ease: [0.2, 0, 0.1, 1] },
+                    rotate: { duration: 0.5, ease: [0.2, 0, 0.1, 1] },
+                  }
+            }
+          >
+            {/* Counter-rotated inner div so video contents remain perfectly straight */}
             <motion.div
-              className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.15 }}
+              className="absolute inset-0 origin-center"
+              initial={autoPlay ? { rotate: 25 } : { rotate: 35 }}
+              animate={{
+                rotate: isExpanded ? 25 : 35,
+              }}
+              transition={
+                isExpanded
+                  ? { duration: 1.4, times: expandTimes, ease: [0.2, 0, 0.1, 1] }
+                  : { duration: 0.5, ease: [0.2, 0, 0.1, 1] }
+              }
             >
-              {videoUrl ? (
-                <video
-                  src={videoUrl}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              ) : youtubeId ? (
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=0&disablekb=1&loop=1&playlist=${youtubeId}`}
-                  className="w-full h-full pointer-events-none"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  title={title}
-                />
-              ) : loomId ? (
-                <div className="absolute inset-0 overflow-hidden">
-                  <iframe
-                    src={`https://www.loom.com/embed/${loomId}?autoplay=1&hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
-                    className="absolute top-0 left-0 w-full pointer-events-none"
-                    style={{ height: "calc(100% + 52px)" }}
-                    allowFullScreen
-                    title={title}
-                  />
-                </div>
-              ) : null}
+              {/* Video only renders while expanded — stops on leave */}
+              {isExpanded && (
+                <motion.div
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.15 }}
+                >
+                  {videoUrl ? (
+                    <video
+                      src={videoUrl}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  ) : youtubeId ? (
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=0&disablekb=1&loop=1&playlist=${youtubeId}`}
+                      className="w-full h-full pointer-events-none"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      title={title}
+                    />
+                  ) : loomId ? (
+                    <div className="absolute inset-0 overflow-hidden">
+                      <iframe
+                        src={`https://www.loom.com/embed/${loomId}?autoplay=1&hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
+                        className="absolute top-0 left-0 w-full pointer-events-none"
+                        style={{ height: "calc(100% + 52px)" }}
+                        allowFullScreen
+                        title={title}
+                      />
+                    </div>
+                  ) : null}
+                </motion.div>
+              )}
             </motion.div>
-          )}
-        </motion.div>
+          </motion.div>
+        </div>
       )}
     </div>
   );

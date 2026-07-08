@@ -190,18 +190,18 @@ export default function SpotifyNowPlaying({
   const hasTrack = Boolean(nowPlaying.track);
   const isOnline = Boolean(nowPlaying.isPlaying && nowPlaying.track);
   const content = isOnline ? (
-    <span className="min-w-0 whitespace-nowrap">
-      <span className="text-text-tertiary">Now playing:</span>{" "}
-      <span className="text-text-secondary">{nowPlaying.track}</span>
+    <span className="min-w-0 whitespace-nowrap text-text-secondary">
+      Now Playing - {nowPlaying.track}
+      {nowPlaying.artist ? `, By ${nowPlaying.artist}` : ""}
     </span>
   ) : hasTrack ? (
-    <span className="min-w-0 whitespace-nowrap">
-      <span className="text-text-tertiary">Last played:</span>{" "}
-      <span className="text-text-secondary">{nowPlaying.track}</span>
+    <span className="min-w-0 whitespace-nowrap text-text-secondary">
+      Last Played - {nowPlaying.track}
+      {nowPlaying.artist ? `, By ${nowPlaying.artist}` : ""}
     </span>
   ) : (
-    <span className="min-w-0 whitespace-nowrap">
-      <span className="text-text-tertiary">Currently offline</span>
+    <span className="min-w-0 whitespace-nowrap text-text-secondary">
+      Currently offline
     </span>
   );
 

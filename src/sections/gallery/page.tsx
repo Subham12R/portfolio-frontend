@@ -21,17 +21,17 @@ const GallerySection = () => {
       targets.forEach((el, i) => {
         gsap.fromTo(
           el,
-          { opacity: 0, y: 40, filter: "blur(8px)" },
+          { opacity: 0, scale: 0.95, y: -10 },
           {
             opacity: 1,
+            scale: 1,
             y: 0,
-            filter: "blur(0px)",
-            duration: 0.85,
+            duration: 0.5,
             ease: "power3.out",
-            delay: i * 0.1,
+            delay: i * 0.08,
             scrollTrigger: {
               trigger: el,
-              start: "top 85%",
+              start: "top 88%",
               once: true,
             },
           },
@@ -47,12 +47,12 @@ const GallerySection = () => {
   return (
     <section
       id={section.id}
-      className="w-full flex justify-center items-center px-4 lg:px-0 mb-12"
+      className="w-full flex  justify-center items-center px-4 lg:px-0 mb-12"
     >
-      <div ref={rootRef} className="max-w-4xl w-full flex flex-col h-full">
+      <div ref={rootRef} className="max-w-2xl w-full flex flex-col h-full">
         {/* HEADER */}
         <div data-gallery-reveal className="mb-2">
-          <h1 className="text-3xl font-medium text-text-primary text-start">
+          <h1 className="text-4xl font-light text-text-primary text-start font-instrumentserif">
             {section.title}.
           </h1>
         </div>
