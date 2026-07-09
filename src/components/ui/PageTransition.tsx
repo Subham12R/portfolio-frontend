@@ -7,10 +7,6 @@ import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.sha
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 
-interface PageTransitionProps {
-  children: React.ReactNode;
-}
-
 // FrozenRoute intercepts and freezes the previous route's LayoutRouter context during exit animations
 function FrozenRoute({ children }: { children: React.ReactNode }) {
   const context = useContext(LayoutRouterContext);
@@ -23,12 +19,12 @@ function FrozenRoute({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function PageTransition({ children }: PageTransitionProps) {
+// 1. PageReveal: Rendered at the layout root (outside stacking contexts) to cover everything during reveal/refresh
+export function PageReveal() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const blurRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
-  const pathname = usePathname();
   const prevThemeRef = useRef<string | undefined>(undefined);
   const isInitialMount = useRef(true);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -118,42 +114,47 @@ export function PageTransition({ children }: PageTransitionProps) {
   }, [resolvedTheme]);
 
   return (
-    <>
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden"
+    >
+      {/* Blur overlay for theme changes - fades in/out */}
       <div
-        ref={containerRef}
-        className="fixed inset-0 z-100 pointer-events-none overflow-hidden"
+        ref={blurRef}
+        className="absolute inset-0 backdrop-blur-md bg-bg-primary/50"
+        style={{ opacity: 0 }}
+      />
+
+      {/* Slide overlay for initial load */}
+      <div
+        ref={overlayRef}
+        className="absolute left-0 right-0"
+        style={{ top: 0, height: '120vh' }}
       >
-        {/* Blur overlay for theme changes - fades in/out */}
-        <div
-          ref={blurRef}
-          className="absolute inset-0 backdrop-blur-md bg-bg-primary/50"
-          style={{ opacity: 0 }}
-        />
-
-        {/* Slide overlay for initial load */}
-        <div
-          ref={overlayRef}
-          className="absolute left-0 right-0"
-          style={{ top: 0, height: '120vh' }}
-        >
-          <div className="absolute inset-0 backdrop-blur-xl bg-bg-primary" />
-        </div>
+        <div className="absolute inset-0 backdrop-blur-xl bg-bg-primary" />
       </div>
+    </div>
+  );
+}
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 0, filter: "blur(12px)", y: 8 }}
-          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-          exit={{ opacity: 0, filter: "blur(12px)", y: -8 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="w-full h-full"
-        >
-          <FrozenRoute>
-            {children}
-          </FrozenRoute>
-        </motion.div>
-      </AnimatePresence>
-    </>
+// 2. RouteTransition: Wraps the page content to perform unblur/fade stagger transitions on route change
+export function RouteTransition({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0, filter: "blur(12px)", y: 8 }}
+        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        exit={{ opacity: 0, filter: "blur(12px)", y: -8 }}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="w-full h-full"
+      >
+        <FrozenRoute>
+          {children}
+        </FrozenRoute>
+      </motion.div>
+    </AnimatePresence>
   );
 }

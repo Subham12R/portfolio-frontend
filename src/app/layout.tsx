@@ -10,7 +10,7 @@ import { SmoothScroll } from "@/components/providers/SmoothScrollWrapper"
 import { Neko } from "@/components/ui/Neko"
 import { WaveBackground } from "@/components/layout/WaveBackground"
 import { JsonLd } from "@/components/ui/JsonLd"
-import { PageTransition } from "@/components/ui/PageTransition"
+import { PageReveal, RouteTransition } from "@/components/ui/PageTransition"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ScrollToTop } from "@/components/ui/ScrollToTop"
 import Script from "next/script"
@@ -137,12 +137,13 @@ export default function RootLayout({
       >
         <JsonLd />
         <ThemeProvider>
+          <PageReveal />
           <SmoothScroll>
             <Navigation />
             <div className="relative isolate">
-              <PageTransition>
+              <RouteTransition>
                 <main>{children}</main>
-              </PageTransition>
+              </RouteTransition>
               <Footer />
               <WaveBackground />
             </div>
