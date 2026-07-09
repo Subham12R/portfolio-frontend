@@ -7,7 +7,8 @@ import profileIcon from "../../../public/images/profile/profile.png";
 import DevPresence from "@/components/ui/DevPresence";
 import SpotifyNowPlaying from "@/components/ui/SpotifyNowPlaying";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-
+import bannerWhite from "../../../public/images/profile/banner_white.png"
+import bannerDark from "../../../public/images/profile/banner_dark.png"
 export const Hero = () => {
   const [copied, setCopied] = useState(false);
   const [copiedDiscord, setCopiedDiscord] = useState(false);
@@ -41,29 +42,33 @@ export const Hero = () => {
       className="w-full flex justify-center items-center px-4 pt-5 pb-6 mb-6"
     >
       <ScrollReveal stagger={0.08} start="top 100%" className="max-w-2xl w-full flex flex-col items-start text-start">
-      <div className="relative max-h-full overflow-hidden flex justify-center flex-col items-center   rounded-xl shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-64 items-center object-cover  rounded-md"
-            >
-              <source src="/images/profile/banner.webm" type="video/webm" />
-              <source src="/images/profile/banner.mp4" type="video/mp4" />
-            </video>
-          </div>
+      <div className="relative w-full h-48 sm:h-64 overflow-hidden rounded-md shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
+          <Image 
+            src={bannerWhite}
+            alt="banner white"
+            fill
+            className="object-cover dark:opacity-0 transition-opacity duration-300"
+            priority
+          />
+          <Image 
+            src={bannerDark}
+            alt="banner dark"
+            fill
+            className="object-cover opacity-0 dark:opacity-100 transition-opacity duration-300"
+            priority
+          />
+        </div>
 
         {/* Profile Info Wrapper */}
         <div className="flex flex-row items-center gap-5 mt-6 mb-3 w-full">
           {/* Avatar */}
-          <div className="relative overflow-hidden rounded-xl shrink-0">
+          <div className="relative overflow-hidden rounded-md shrink-0">
           <Image
             src={profileIcon}
             alt={name}
             width={88}
             height={88}
-            className="h-[88px] w-[88px] aspect-square object-cover"
+            className="h-[88px] w-[88px] aspect-square object-cover bg-amber-400 dark:bg-blue-600  "
             priority
           />
           </div>
@@ -79,7 +84,7 @@ export const Hero = () => {
       </div>
 
         {/* Social Icons Row — email copy button first */}
-        <div className="flex flex-wrap items-center gap-2 mt-2 mb-6 text-text-secondary/40">        
+        <div className="flex flex-wrap items-center gap-2 mt-2 mb-6 text-text-secondary/40">
           {/* Email copy inline */}
           <button
             onClick={handleCopyEmail}
@@ -356,15 +361,15 @@ export const Hero = () => {
             onClick={playClickSound}
             className="underline text-text-primary hover:text-blue-500 transition-colors font-light decoration-text-primary/30 underline-offset-4 cursor-pointer"
           >
-            book a quick coffee call
+            book a quick call
           </button>{" "}
           with me..
         </p>
 
         {/* Spotify / Coding Presence Row — sticky bottom */}
-        <div className="sticky bottom-0 z-10 w-full grid grid-cols-1 sm:grid-cols-2 items-center gap-y-2 gap-x-6 mt-6 pt-3 pb-3 bg-bg-primary/80 backdrop-blur-sm border-t border-border-primary/30">
-          <SpotifyNowPlaying className="min-w-0" />
-          <DevPresence />
+        <div className="z-10 w-full grid grid-cols-1 sm:grid-cols-2 items-center gap-4 mt-6 pt-3 pb-3 bg-bg-primary/80 backdrop-blur-sm">
+          <SpotifyNowPlaying className="" />
+          <DevPresence  />
         </div>
       </ScrollReveal>
     </section>

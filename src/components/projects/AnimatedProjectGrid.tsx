@@ -1,88 +1,95 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useEffect } from "react";
+import { motion, Variants } from "framer-motion";
 import type { Project } from "@/data/project";
 import PlainProjectCard from "@/components/projects/PlainProjectCard";
 import ProjectDrawer from "@/components/projects/ProjectDrawer";
 
-gsap.registerPlugin(ScrollTrigger);
-
 interface AnimatedProjectGridProps {
   projects: Project[];
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.96, y: 30, filter: "blur(8px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 14,
+      mass: 0.8,
+      delay: (i % 2) * 0.1, // Stagger left and right columns
+    },
+  }),
+};
+
+function ProjectCardSkeleton() {
+  return (
+    <div className="max-w-2xl p-2 pb-3 -m-4 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary rounded-md bg-bg-primary">
+      {/* Thumbnail Aspect Ratio skeleton */}
+      <div className="aspect-4/3 rounded-md mb-4 bg-bg-badge/10 animate-pulse relative overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-bg-badge/20 to-transparent bg-[length:200%_100%] animate-shimmer" />
+      </div>
+      {/* Title & Date & Tags skeletons */}
+      <div className="space-y-3 px-1">
+        <div className="flex items-center justify-between gap-4">
+          <div className="h-6 w-1/2 bg-bg-badge/15 rounded-md animate-pulse" />
+          <div className="flex gap-2">
+            <div className="h-5 w-5 bg-bg-badge/15 rounded-md animate-pulse" />
+            <div className="h-5 w-5 bg-bg-badge/15 rounded-md animate-pulse" />
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-4">
+          <div className="h-4 w-1/4 bg-bg-badge/10 rounded-md animate-pulse" />
+          <div className="h-5 w-1/3 bg-bg-badge/10 rounded-md animate-pulse" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function AnimatedProjectGrid({
   projects,
 }: AnimatedProjectGridProps) {
   const [selected, setSelected] = useState<Project | null>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!gridRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const projectItems = Array.from(
-        gridRef.current?.querySelectorAll<HTMLElement>("[data-project-item]") ??
-          [],
-      );
-      if (!projectItems.length) return;
-
-      const rowMap = new Map<number, HTMLElement[]>();
-
-      // Group grid cells by vertical row position so each row triggers independently.
-      projectItems.forEach((item) => {
-        const rowKey = Math.round(item.offsetTop);
-        const rowItems = rowMap.get(rowKey) ?? [];
-        rowItems.push(item);
-        rowMap.set(rowKey, rowItems);
-      });
-
-      const rows = Array.from(rowMap.entries())
-        .sort((a, b) => a[0] - b[0])
-        .map(([, rowItems]) => rowItems);
-
-      rows.forEach((rowItems) => {
-        gsap.fromTo(
-          rowItems,
-          { opacity: 0, scale: 0.95, y: -10 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: "power3.out",
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: rowItems[0],
-              start: "top 88%",
-              toggleActions: "play none none none",
-              once: true,
-            },
-          },
-        );
-      });
-    }, gridRef);
-
-    return () => {
-      ctx.revert();
-    };
+    setMounted(true);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 p-4">
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <ProjectCardSkeleton key={idx} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <>
-      <div
-        ref={gridRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 p-4"
-      >
-        {projects.map((project) => (
-          <div key={project.id} data-project-item>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 p-4">
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            custom={index}
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1, margin: "-40px" }}
+            className="h-full"
+          >
             <PlainProjectCard
               project={project}
               onOpen={() => setSelected(project)}
             />
-          </div>
+          </motion.div>
         ))}
       </div>
 

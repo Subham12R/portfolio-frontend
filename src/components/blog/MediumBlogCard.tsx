@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import { MediumIcon } from "@/components/icons/MediumIcon";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, Variants } from "framer-motion";
 import { encode } from "qss";
 import type { MediumPost } from "@/data/blog";
 
@@ -39,6 +39,22 @@ interface MediumBlogCardProps {
   isBlurred?: boolean;
   onHoverChange?: (hovered: boolean) => void;
 }
+
+// Animation variants for each line in the medium card
+const lineVariants: Variants = {
+  hidden: { opacity: 0, y: 10, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+      mass: 0.8,
+    },
+  },
+};
 
 export function MediumBlogCard({ post, isBlurred, onHoverChange }: MediumBlogCardProps) {
   const [hovered, setHovered] = useState(false);
@@ -90,28 +106,32 @@ export function MediumBlogCard({ post, isBlurred, onHoverChange }: MediumBlogCar
           size={18}
           className="shrink-0 mt-0.5 text-text-muted group-hover:text-text-secondary transition-colors duration-200"
         />
-        <div className="min-w-0">
-          <a href={post.url} target="_blank" rel="noopener noreferrer">
-            <h3 className="text-lg font-medium text-text-primary group-hover:text-text-secondary transition-colors duration-200 leading-snug mb-2">
-              {post.title}
-            </h3>
-          </a>
-          <div className="flex items-center gap-1.5 text-xs text-text-muted">
+        <div className="min-w-0 w-full">
+          <motion.div variants={lineVariants}>
+            <a href={post.url} target="_blank" rel="noopener noreferrer">
+              <h3 className="text-lg font-medium text-text-primary group-hover:text-text-secondary transition-colors duration-200 leading-snug mb-2 font-instrumentserif text-2xl font-light">
+                {post.title}
+              </h3>
+            </a>
+          </motion.div>
+          <motion.div variants={lineVariants} className="flex items-center gap-1.5 text-xs text-text-muted">
             <Calendar size={12} />
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      <a
-        href={post.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="shrink-0 inline-flex items-center gap-1.5 text-sm text-text-muted group-hover:text-text-primary transition-colors duration-200 pt-1"
-      >
-        Read more
-        <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-      </a>
+      <motion.div variants={lineVariants} className="shrink-0 pt-1">
+        <a
+          href={post.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-text-muted group-hover:text-text-primary transition-colors duration-200"
+        >
+          Read more
+          <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+        </a>
+      </motion.div>
     </article>
   );
 }

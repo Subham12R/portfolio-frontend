@@ -5,6 +5,7 @@ import Image from "next/image";
 import { siteConfig } from "@/data";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { CommandPalette } from "@/components/ui/CommandPalette";
+import profileIcon from "../../../public/images/profile/profile.png"
 // Navigation links (subset of main navigation for header)
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,19 +15,20 @@ const navLinks = [
 
 const Navigation = () => {
   return (
-    <header className="sticky top-0 flex justify-center z-50 items-center w-full ">
+    <header className="sticky top-0 flex justify-center z-10 items-center w-full ">
       <nav className="bg-bg-primary backdrop-blur-sm w-full max-w-2xl flex justify-between items-center px-2 md:px-0">
         {/* Logo - Left side */}
         <div className=" px-2 py-2 inline-flex items-center ml-0.2">
           <Link href="/#home" className="group relative">
             <Image
-              src="/images/profile/profile.png"
+              src={profileIcon}
               alt={siteConfig.name}
               width={40}
               height={40}
-              className="w-10 h-10 aspect-square object-contain md:object-cover rounded-lg transition-all duration-200"
+              className="w-10 h-10 aspect-square object-contain md:object-cover rounded transition-all duration-200 bg-amber-300 dark:bg-blue-600"
               sizes="40px"
             />
+
             {/* Cloud tooltip */}
             <span className="absolute font-semibold top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-0.5 bg-white text-slate-800 text-xs rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-200">
               Hi!

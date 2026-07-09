@@ -31,6 +31,7 @@ export function VideoHoverBanner({
   autoPlay = false,
 }: VideoHoverBannerProps) {
   const [hovered, setHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const hasVideo = !!(youtubeId || videoUrl || loomId);
   const isExpanded = autoPlay || hovered;
@@ -69,15 +70,24 @@ export function VideoHoverBanner({
     >
       {/* Thumbnail */}
       {bannerImage && (
-        <Image
-          src={bannerImage}
-          alt={title}
-          fill
-          className={cn(
-            "object-cover transition-all duration-500",
-            isExpanded && hasVideo ? "scale-105 blur-md" : "scale-100 blur-0"
+        <>
+          <Image
+            src={bannerImage}
+            alt={title}
+            fill
+            onLoad={() => setImageLoaded(true)}
+            className={cn(
+              "object-cover transition-all duration-500",
+              imageLoaded ? "opacity-100" : "opacity-0",
+              isExpanded && hasVideo ? "scale-105 blur-md" : "scale-100 blur-0"
+            )}
+          />
+          {!imageLoaded && (
+            <div className="absolute inset-0 bg-bg-badge/10 animate-pulse overflow-hidden">
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-bg-badge/20 to-transparent bg-[length:200%_100%] animate-shimmer" />
+            </div>
           )}
-        />
+        </>
       )}
 
       {/* Black mask container */}

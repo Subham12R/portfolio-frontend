@@ -22,7 +22,7 @@ export default function PlainProjectCard({ project, onOpen }: PlainProjectCardPr
 
   return (
     <div
-      className="group/card cursor-pointer p-2 pb-3 -m-4 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary rounded-md hover:bg-bg-elevated/50 transition-colors duration-200"
+      className="group/card cursor-pointer max-w-2xl p-2 pb-3 -m-4 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary rounded-md hover:bg-bg-elevated/50 transition-colors duration-200"
       onClick={onOpen}
     >
       {/* Thumbnail */}

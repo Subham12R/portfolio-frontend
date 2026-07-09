@@ -137,16 +137,21 @@ export default function RootLayout({
       >
         <JsonLd />
         <ThemeProvider>
-          <PageTransition />
           <SmoothScroll>
             <Navigation />
             <div className="relative isolate">
-              <main>{children}</main>
+              <PageTransition>
+                <main>{children}</main>
+              </PageTransition>
               <Footer />
               <WaveBackground />
             </div>
             <div
-              className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-bg-primary via-bg-primary/50 to-transparent"
+              className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-white via-white/50 to-transparent dark:opacity-0 transition-opacity duration-300"
+              aria-hidden="true"
+            />
+            <div
+              className="fixed bottom-0 inset-x-0 h-28 pointer-events-none z-40 bg-linear-to-t from-[#0e0e0e] via-[#0e0e0e]/50 to-transparent opacity-0 dark:opacity-100 transition-opacity duration-300"
               aria-hidden="true"
             />
           </SmoothScroll>

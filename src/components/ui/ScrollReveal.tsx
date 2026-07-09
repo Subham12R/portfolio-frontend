@@ -1,61 +1,62 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Ensure ScrollTrigger is registered
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { motion, Variants } from "framer-motion";
+import React from "react";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
   stagger?: number;
-  start?: string;
+  start?: string; // Kept for backwards compatibility
   className?: string;
 }
+
+const containerVariants = (stagger: number): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: stagger,
+      delayChildren: 0.05,
+    },
+  },
+});
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.97, y: 15, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+      mass: 0.8,
+    },
+  },
+};
 
 export function ScrollReveal({
   children,
   stagger = 0.08,
-  start = "top 88%",
   className = "w-full flex flex-col",
 }: ScrollRevealProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const ctx = gsap.context(() => {
-      const targets = containerRef.current!.children;
-      if (!targets.length) return;
-
-      gsap.fromTo(
-        targets,
-        { opacity: 0, scale: 0.95, y: -10 },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.5,
-          stagger,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start,
-            toggleActions: "play none none none",
-            once: true,
-          },
-          clearProps: "all",
-        }
-      );
-    }, containerRef);
-    return () => ctx.revert();
-  }, [stagger, start]);
+  const childrenArray = React.Children.toArray(children);
 
   return (
-    <div ref={containerRef} className={className}>
-      {children}
-    </div>
+    <motion.div
+      variants={containerVariants(stagger)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.05 }}
+      className={className}
+    >
+      {childrenArray.map((child, index) => (
+        <motion.div key={index} variants={itemVariants} className="w-full">
+          {child}
+        </motion.div>
+      ))}
+    </motion.div>
   );
 }

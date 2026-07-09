@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -16,6 +16,7 @@ import {
 import { useLenis } from "@/components/providers/SmoothScroll";
 import type { Project } from "@/data/project";
 import { TooltipGlass } from "@/components/ui/tooltip";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 interface ProjectDrawerProps {
   project: Project | null;
@@ -37,26 +38,64 @@ const statusLabel: Record<string, string> = {
   completed: "Completed",
 };
 
-const TRANSITION_MS = 400;
+const drawerVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    filter: "blur(12px)",
+    y: 12,
+  },
+  visible: {
+    opacity: 1,
+    filter: "blur(0px)",
+    y: 0,
+    transition: {
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1], // Custom premium ease-out
+    },
+  },
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 15, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+      mass: 0.8,
+    },
+  },
+};
 
 export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
-  const [visible, setVisible] = useState(false);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [mounted, setMounted] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { lenis } = useLenis();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Enter: paint first frame invisible, then transition in
+  // Sync active project state to preserve details during exit animation
   useEffect(() => {
-    if (isOpen) {
-      const id = requestAnimationFrame(() => setVisible(true));
-      return () => cancelAnimationFrame(id);
+    if (project) {
+      setActiveProject(project);
     }
-  }, [isOpen]);
+  }, [project]);
 
   // Lock body scroll while open
   useEffect(() => {
@@ -72,212 +111,204 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
     };
   }, [isOpen, lenis]);
 
-  // Smooth close: animate out, then fire onClose
-  const handleClose = () => {
-    setVisible(false);
-    closeTimer.current = setTimeout(() => {
-      onClose();
-    }, TRANSITION_MS);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
-  }, []);
-
   // Escape key
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") handleClose(); };
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     if (isOpen) window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
-  if (!project && !isOpen) return null;
-  if (!project) return null;
   if (!mounted) return null;
+  if (!activeProject) return null;
 
   const hasLinks =
-    project.links.github || project.links.live || project.links.npm || project.links.docs;
+    activeProject.links.github || activeProject.links.live || activeProject.links.npm || activeProject.links.docs;
 
   return createPortal(
-    <div
-      className={`fixed inset-0 z-[60] bg-bg-primary flex flex-col transition-all ease-[cubic-bezier(0.32,0.72,0,1)] ${
-        visible
-          ? "translate-y-0 opacity-100 pointer-events-auto"
-          : "translate-y-4 opacity-0 pointer-events-none"
-      }`}
-      style={{ transitionDuration: `${TRANSITION_MS}ms` }}
-      aria-modal="true"
-      role="dialog"
-      aria-label={project.title}
-    >
-      {/* Scrollable body */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain" data-lenis-prevent>
-        <div className="max-w-2xl mx-auto px-4 md:px-0 py-10 pb-24">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={drawerVariants}
+          className="fixed inset-0 z-[60] bg-bg-primary flex flex-col overflow-hidden"
+          aria-modal="true"
+          role="dialog"
+          aria-label={activeProject.title}
+        >
+          {/* Scrollable body */}
+          <div className="flex-1 overflow-y-auto overscroll-contain" data-lenis-prevent>
+            <motion.div
+              variants={containerVariants}
+              className="max-w-2xl mx-auto px-4 md:px-0 py-10 pb-24"
+            >
+              {/* Back — inline, no bar */}
+              <motion.div variants={itemVariants}>
+                <button
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary transition-colors mb-8 cursor-pointer"
+                >
+                  <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
+                  <span className="text-sm">Back</span>
+                </button>
+              </motion.div>
 
-          {/* Back — inline, no bar */}
-          <button
-            onClick={handleClose}
-            className="inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary transition-colors mb-8"
-          >
-            <HugeiconsIcon icon={ArrowLeft01Icon} size={14} />
-            <span className="text-sm">Back</span>
-          </button>
+              {/* Banner */}
+              <motion.div variants={itemVariants}>
+                <VideoHoverBanner
+                  key={activeProject.id}
+                  bannerImage={activeProject.bannerImage}
+                  youtubeId={activeProject.youtubeId}
+                  videoUrl={activeProject.videoUrl}
+                  loomId={activeProject.loomId}
+                  title={activeProject.title}
+                  className="aspect-video rounded-md mb-8"
+                  autoPlay
+                />
+              </motion.div>
 
-          {/* Banner */}
-          <VideoHoverBanner
-            key={project.id}
-            bannerImage={project.bannerImage}
-            youtubeId={project.youtubeId}
-            videoUrl={project.videoUrl}
-            loomId={project.loomId}
-            title={project.title}
-            className="aspect-video rounded-md mb-8"
-            autoPlay
-          />
+              {/* Meta */}
+              <motion.div variants={itemVariants} className="flex items-center gap-2 text-xs text-text-muted mb-3 flex-wrap">
+                {activeProject.completedDate && <span>{formatDate(activeProject.completedDate)}</span>}
+                {activeProject.completedDate && activeProject.status && (
+                  <span className="w-1 h-1 rounded-full bg-text-muted" />
+                )}
+                {activeProject.status && <span>{statusLabel[activeProject.status]}</span>}
+              </motion.div>
 
-          {/* Meta */}
-          <div className="flex items-center gap-2 text-xs text-text-muted mb-3 flex-wrap">
-            {project.completedDate && <span>{formatDate(project.completedDate)}</span>}
-            {project.completedDate && project.status && (
-              <span className="w-1 h-1 rounded-full bg-text-muted" />
-            )}
-            {project.status && <span>{statusLabel[project.status]}</span>}
+              {/* Title */}
+              <motion.h1 variants={itemVariants} className="text-3xl md:text-4xl font-semibold text-text-primary leading-tight mb-4 font-instrumentserif">
+                {activeProject.title}
+              </motion.h1>
+
+              {/* Description */}
+              <motion.p variants={itemVariants} className="text-text-secondary leading-relaxed mb-4 text-base font-light">
+                {activeProject.description}
+              </motion.p>
+
+              {/* Links — below description */}
+              {hasLinks && (
+                <motion.div variants={itemVariants} className="flex flex-wrap gap-x-6 gap-y-3 mb-10">
+                  {activeProject.links.github && (
+                    <a
+                      href={activeProject.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                    >
+                      <HugeiconsIcon icon={GithubIcon} size={15} />
+                      GitHub
+                    </a>
+                  )}
+                  {activeProject.links.live && (
+                    <a
+                      href={activeProject.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                    >
+                      <HugeiconsIcon icon={Globe02Icon} size={15} />
+                      Live Site
+                    </a>
+                  )}
+                  {activeProject.links.npm && (
+                    <a
+                      href={activeProject.links.npm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                    >
+                      <HugeiconsIcon icon={NpmIcon} size={15} />
+                      npm
+                    </a>
+                  )}
+                  {activeProject.links.docs && (
+                    <a
+                      href={activeProject.links.docs}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
+                    >
+                      <HugeiconsIcon icon={BookOpen01Icon} size={15} />
+                      Docs
+                    </a>
+                  )}
+                </motion.div>
+              )}
+
+              {/* Features */}
+              <motion.section variants={itemVariants} className="mb-10">
+                <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
+                  Features
+                </h2>
+                <ul className="space-y-2.5">
+                  {activeProject.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-text-secondary text-sm leading-relaxed font-light">
+                      <span className="text-text-muted shrink-0 w-5 text-right">
+                        {String(i + 1).padStart(2, "0")}.
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </motion.section>
+
+              {/* Tech Stack */}
+              {activeProject.tags && activeProject.tags.length > 0 && (
+                <motion.section variants={itemVariants} className="mb-10">
+                  <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
+                    Tech Stack
+                  </h2>
+                  <div className="flex flex-wrap gap-2.5 items-center">
+                    {activeProject.tags.map((tag) => {
+                      const iconPath = getTechIcon(tag);
+                      const tooltipId = `tech-drawer-tooltip-${activeProject.id}`;
+                      return iconPath ? (
+                        <div
+                          key={tag}
+                          data-tooltip-id={tooltipId}
+                          data-tooltip-content={tag}
+                          className="relative z-10 w-9 h-9 rounded-[8px] border border-border-primary bg-bg-card cursor-help transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 hover:border-border-secondary shrink-0"
+                        >
+                          <Image
+                            src={iconPath}
+                            alt={tag}
+                            fill
+                            sizes="26px"
+                            className="object-cover rounded-[7px]"
+                          />
+                        </div>
+                      ) : (
+                        <span
+                          key={tag}
+                          className="h-9 px-3.5 inline-flex items-center rounded-[8px] border border-border-primary bg-bg-badge/10 text-text-secondary text-xs font-semibold"
+                        >
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
+                  <TooltipGlass id={`tech-drawer-tooltip-${activeProject.id}`} place="top" offset={8} />
+                </motion.section>
+              )}
+
+              {/* Case Study */}
+              {activeProject.caseStudy && (
+                <motion.section variants={itemVariants} className="mb-10">
+                  <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
+                    Case Study
+                  </h2>
+                  <p className="text-text-secondary text-sm leading-relaxed font-light">
+                    {activeProject.caseStudy}
+                  </p>
+                </motion.section>
+              )}
+            </motion.div>
           </div>
-
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary leading-tight mb-4">
-            {project.title}
-          </h1>
-
-          {/* Description */}
-          <p className="text-text-secondary leading-relaxed mb-4 text-base">
-            {project.description}
-          </p>
-
-          {/* Links — below description */}
-          {hasLinks && (
-            <div className="flex flex-wrap gap-x-6 gap-y-3 mb-10">
-              {project.links.github && (
-                <a
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
-                >
-                  <HugeiconsIcon icon={GithubIcon} size={15} />
-                  GitHub
-                </a>
-              )}
-              {project.links.live && (
-                <a
-                  href={project.links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
-                >
-                  <HugeiconsIcon icon={Globe02Icon} size={15} />
-                  Live Site
-                </a>
-              )}
-              {project.links.npm && (
-                <a
-                  href={project.links.npm}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
-                >
-                  <HugeiconsIcon icon={NpmIcon} size={15} />
-                  npm
-                </a>
-              )}
-              {project.links.docs && (
-                <a
-                  href={project.links.docs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary underline underline-offset-4 decoration-border-secondary hover:text-text-primary hover:decoration-text-muted transition-colors"
-                >
-                  <HugeiconsIcon icon={BookOpen01Icon} size={15} />
-                  Docs
-                </a>
-              )}
-            </div>
-          )}
-
-          {/* Features */}
-          <section className="mb-10">
-            <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
-              Features
-            </h2>
-            <ul className="space-y-2.5">
-              {project.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-text-secondary text-sm leading-relaxed">
-                  <span className="text-text-muted shrink-0 w-5 text-right">
-                    {String(i + 1).padStart(2, "0")}.
-                  </span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Tech Stack */}
-          {project.tags && project.tags.length > 0 && (
-            <section className="mb-10">
-              <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
-                Tech Stack
-              </h2>
-              <div className="flex flex-wrap gap-2.5 items-center">
-                {project.tags.map((tag) => {
-                  const iconPath = getTechIcon(tag)
-                  const tooltipId = `tech-drawer-tooltip-${project.id}`
-                  return iconPath ? (
-                    <div
-                      key={tag}
-                      data-tooltip-id={tooltipId}
-                      data-tooltip-content={tag}
-                      className="relative z-10 w-9 h-9 rounded-[8px] border border-border-primary bg-bg-card cursor-help transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 hover:border-border-secondary shrink-0"
-                    >
-                      <Image
-                        src={iconPath}
-                        alt={tag}
-                        fill
-                        sizes="26px"
-                        className="object-cover rounded-[7px]"
-                      />
-                    </div>
-                  ) : (
-                    <span
-                      key={tag}
-                      className="h-9 px-3.5 inline-flex items-center rounded-[8px] border border-border-primary bg-bg-badge/10 text-text-secondary text-xs font-semibold"
-                    >
-                      {tag}
-                    </span>
-                  )
-                })}
-              </div>
-              <TooltipGlass id={`tech-drawer-tooltip-${project.id}`} place="top" offset={8} />
-            </section>
-          )}
-
-          {/* Case Study */}
-          {project.caseStudy && (
-            <section className="mb-10">
-              <h2 className="text-xs font-medium text-text-muted uppercase tracking-widest mb-4">
-                Case Study
-              </h2>
-              <p className="text-text-secondary text-sm leading-relaxed">
-                {project.caseStudy}
-              </p>
-            </section>
-          )}
-
-        </div>
-      </div>
-    </div>,
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.body
   );
 }

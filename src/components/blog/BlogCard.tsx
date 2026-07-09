@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, ArrowRight } from "lucide-react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, Variants } from "framer-motion";
 import type { BlogPost } from "@/data/blog";
 
 const IMG_W = 280;
@@ -24,6 +24,22 @@ interface BlogCardProps {
   isBlurred?: boolean;
   onHoverChange?: (hovered: boolean) => void;
 }
+
+// Animation variants for each line in the blog card
+const lineVariants: Variants = {
+  hidden: { opacity: 0, y: 10, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+      mass: 0.8,
+    },
+  },
+};
 
 export function BlogCard({ post, isBlurred, onHoverChange }: BlogCardProps) {
   const [hovered, setHovered] = useState(false);
@@ -72,37 +88,41 @@ export function BlogCard({ post, isBlurred, onHoverChange }: BlogCardProps) {
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <div className="flex flex-wrap gap-1.5 mb-2">
+        <motion.div variants={lineVariants} className="flex flex-wrap gap-1.5 mb-2">
           {post.tags.slice(0, 3).map((tag) => (
             <span key={tag} className="text-xs px-2 py-0.5 rounded border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary text-text-muted">
               {tag}
             </span>
           ))}
-        </div>
+        </motion.div>
 
-        <Link href={href}>
-          <h3 className="text-lg font-medium text-text-primary group-hover:text-text-secondary transition-colors duration-200 leading-snug mb-1.5">
-            {post.title}
-          </h3>
-        </Link>
+        <motion.div variants={lineVariants}>
+          <Link href={href}>
+            <h3 className="text-lg font-medium text-text-primary group-hover:text-text-secondary transition-colors duration-200 leading-snug mb-1.5 font-instrumentserif text-2xl font-light">
+              {post.title}
+            </h3>
+          </Link>
+        </motion.div>
 
-        <p className="text-sm text-text-muted leading-relaxed line-clamp-2 mb-3">
+        <motion.p variants={lineVariants} className="text-sm text-text-muted leading-relaxed line-clamp-2 mb-3 font-light">
           {post.excerpt}
-        </p>
+        </motion.p>
 
-        <div className="flex items-center gap-1.5 text-xs text-text-muted">
+        <motion.div variants={lineVariants} className="flex items-center gap-1.5 text-xs text-text-muted">
           <Calendar size={12} />
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-        </div>
+        </motion.div>
       </div>
 
-      <Link
-        href={href}
-        className="shrink-0 inline-flex items-center gap-1.5 text-sm text-text-muted group-hover:text-text-primary transition-colors duration-200 pt-1"
-      >
-        Read more
-        <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-      </Link>
+      <motion.div variants={lineVariants} className="shrink-0 pt-1">
+        <Link
+          href={href}
+          className="inline-flex items-center gap-1.5 text-sm text-text-muted group-hover:text-text-primary transition-colors duration-200"
+        >
+          Read more
+          <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+        </Link>
+      </motion.div>
     </article>
   );
 }

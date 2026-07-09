@@ -159,6 +159,17 @@
 
 /* Register theme tokens as Tailwind theme values */
 @theme {
+  --animate-shimmer: shimmer 1.5s infinite linear;
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
   --default-font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
 
   /* Font family utilities: font-playfair, font-helvetica */
@@ -219,15 +230,18 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Body transition for theme changes */
+/* Smoothly transition backgrounds, borders, and colors during theme changes */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
   font-family: var(--font-helvetica), Helvetica, Arial, sans-serif;
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   line-height: 1.75;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
 }
 
 
