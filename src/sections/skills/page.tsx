@@ -31,7 +31,7 @@ const Tech = () => {
         </h1>
         {/* Tech Stack Dock */}
         <div className="flex justify-center items-center pb-2 w-full overflow-visible ">
-          <div className="relative flex items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-md  border-2 border-border-primary backdrop-blur-md w-full shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
+          <div className="relative flex items-center justify-center flex-wrap px-2 py-2 rounded-md  border-2 border-border-primary backdrop-blur-md w-full shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
             {allTech.map((item, index) => {
               const isHovered = hoveredIndex === index;
               const isNeighbor =
@@ -40,7 +40,7 @@ const Tech = () => {
               return (
                 <div
                   key={item.name}
-                  className="relative flex flex-col items-center justify-end h-16 w-12"
+                  className="relative flex flex-col items-center justify-end h-10 w-10 z-20 "
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -52,7 +52,7 @@ const Tech = () => {
                         animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
                         exit={{ opacity: 0, y: 8, scale: 0.95, x: "-50%" }}
                         transition={{ duration: 0.15 }}
-                        className="absolute z-50 bottom-[calc(100%+8px)] left-1/2 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap shadow-md pointer-events-none"
+                        className="absolute z-50 bottom-[calc(100%+22px)] left-1/2 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap shadow-md pointer-events-none"
                       >
                         {item.name}
                       </motion.div>
@@ -71,7 +71,7 @@ const Tech = () => {
                       damping: 15,
                       mass: 0.5,
                     }}
-                    className="relative w-8 h-8 z-20 rounded hover:shadow-2xl flex items-center justify-center overflow-hidden cursor-pointer shrink-0"
+                    className="relative w-8 h-8 z-20 rounded hover:shadow-2xl flex items-center justify-center overflow-hidden cursor-pointer shrink-0 mb-1"
                   >
                     <Image
                       src={item.icon}
