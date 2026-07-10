@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig, techRegistry } from "@/data";
 import { groupTech } from "@/lib/groupTech";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -39,30 +40,38 @@ const Tech = () => {
               return (
                 <div
                   key={item.name}
-                  className="relative flex flex-col items-center"
+                  className="relative flex flex-col items-center justify-end h-16 w-12"
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
                   {/* Tooltip */}
-                  <div
-                    className={`absolute z-50 -top-15 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap transition-all duration-200 ${
-                      isHovered
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-2 pointer-events-none"
-                    }`}
-                  >
-                    {item.name}
-                  </div>
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.95, x: "-50%" }}
+                        animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
+                        exit={{ opacity: 0, y: 8, scale: 0.95, x: "-50%" }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute z-50 bottom-[calc(100%+8px)] left-1/2 px-3 py-1.5 rounded-lg bg-bg-card border border-border-primary text-text-primary text-xs font-medium whitespace-nowrap shadow-md pointer-events-none"
+                      >
+                        {item.name}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Icon */}
-                  <div
-                    className={`relative w-8 h-8 md:w-8 md:h-8 z-20 rounded hover:shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-200 cursor-pointer shrink-0 ${
-                      isHovered
-                        ? "-translate-y-4 scale-125"
-                        : isNeighbor
-                          ? "-translate-y-1 scale-110"
-                          : "scale-100"
-                    }`}
+                  <motion.div
+                    animate={{
+                      y: isHovered ? -16 : isNeighbor ? -4 : 0,
+                      scale: isHovered ? 1.25 : isNeighbor ? 1.1 : 1,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 150,
+                      damping: 15,
+                      mass: 0.5,
+                    }}
+                    className="relative w-8 h-8 z-20 rounded hover:shadow-2xl flex items-center justify-center overflow-hidden cursor-pointer shrink-0"
                   >
                     <Image
                       src={item.icon}
@@ -70,7 +79,7 @@ const Tech = () => {
                       fill
                       className="object-contain"
                     />
-                  </div>
+                  </motion.div>
                 </div>
               );
             })}
