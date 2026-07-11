@@ -41,16 +41,17 @@ export const Hero = () => {
       id="home"
       className="w-full flex justify-center items-center px-4 pt-5 pb-6 mb-6"
     >
-      <ScrollReveal stagger={0.08} start="top 100%" className="max-w-2xl w-full flex flex-col items-start text-start">
-      <div className="relative w-full h-48 sm:h-64 overflow-hidden rounded-md shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
-          <Image 
+      <div className="max-w-2xl w-full flex flex-col items-start text-start">
+        {/* Banner rendered outside ScrollReveal's stagger so it doesn't replay its entrance animation every time this section remounts (e.g. navigating back to Home) */}
+        <div className="relative w-full h-48 sm:h-64 overflow-hidden rounded-md shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
+          <Image
             src={bannerWhite}
             alt="banner white"
             fill
             className="object-cover dark:opacity-0 transition-opacity duration-300"
             priority
           />
-          <Image 
+          <Image
             src={bannerDark}
             alt="banner dark"
             fill
@@ -59,6 +60,7 @@ export const Hero = () => {
           />
         </div>
 
+        <ScrollReveal stagger={0.08} start="top 100%">
         {/* Profile Info Wrapper */}
         <div className="flex flex-row items-center gap-5 mt-6 mb-3 w-full">
           {/* Avatar */}
@@ -372,6 +374,7 @@ export const Hero = () => {
           <DevPresence  />
         </div>
       </ScrollReveal>
+      </div>
     </section>
   );
 };

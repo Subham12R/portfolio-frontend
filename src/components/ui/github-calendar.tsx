@@ -111,6 +111,7 @@ export function GithubCalendar({
     const [hoveredDate, setHoveredDate] = React.useState<string | null>(null)
     const [hoveredCount, setHoveredCount] = React.useState<number | null>(null)
     const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 })
+    const containerRef = React.useRef<HTMLDivElement>(null)
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -169,7 +170,29 @@ export function GithubCalendar({
     })
 
     return (
-        <div className={cn("w-full min-w-0 flex flex-col gap-4", className)}>
+        <div ref={containerRef} className={cn("relative w-full min-w-0 flex flex-col gap-4", className)}>
+            {/* Simple Tooltip */}
+            <AnimatePresence>
+                {hoveredDate && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, x: "-50%", y: "-80%" }}
+                        animate={{ opacity: 1, scale: 1, x: "-50%", y: "-100%" }}
+                        exit={{ opacity: 0, scale: 0.9, x: "-50%", y: "-80%" }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
+                        style={{
+                            left: mousePos.x,
+                            top: mousePos.y - 8,
+                        }}
+                    >
+                        <span className="font-bold mr-1">{hoveredCount}</span>
+                        <span className="text-zinc-400 dark:text-zinc-500">
+                            contributions on {hoveredDate}
+                        </span>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <div
                 data-lenis-prevent
                 className="relative flex flex-nowrap gap-[2px] w-full min-w-0 overflow-hidden"
@@ -178,29 +201,6 @@ export function GithubCalendar({
                     setHoveredCount(null)
                 }}
             >
-                {/* Simple Tooltip */}
-                <AnimatePresence>
-                    {hoveredDate && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 5, scale: 0.9 }}
-                            transition={{ duration: 0.2 }}
-                            className="fixed z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
-                            style={{
-                                left: mousePos.x,
-                                top: mousePos.y - 40,
-                                transform: "translateX(-50%)",
-                            }}
-                        >
-                            <span className="font-bold mr-1">{hoveredCount}</span>
-                            <span className="text-zinc-400 dark:text-zinc-500">
-                                contributions on {hoveredDate}
-                            </span>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
                 {weeks.map((week, weekIndex) => {
                     const monthLabel = monthLabels.find(
                         (m) => m.weekIndex === weekIndex
@@ -236,12 +236,14 @@ export function GithubCalendar({
                                         onMouseEnter={(e) => {
                                             setHoveredDate(day.date)
                                             setHoveredCount(day.contributionCount)
-                                            const rect =
-                                                e.currentTarget.getBoundingClientRect()
-                                            setMousePos({
-                                                x: rect.left + rect.width / 2,
-                                                y: rect.top,
-                                            })
+                                            if (containerRef.current) {
+                                                const rect = e.currentTarget.getBoundingClientRect()
+                                                const containerRect = containerRef.current.getBoundingClientRect()
+                                                setMousePos({
+                                                    x: rect.left - containerRect.left + rect.width / 2,
+                                                    y: rect.top - containerRect.top,
+                                                })
+                                            }
                                         }}
                                         className={cn(
                                             "w-full aspect-square transition-colors duration-200",

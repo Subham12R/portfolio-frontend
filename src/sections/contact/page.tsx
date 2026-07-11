@@ -67,8 +67,9 @@ export default function ContactCTA() {
   return (
     <section
       id={section.id}
-      className="w-full max-w-2xl mx-auto flex flex-col justify-center items-center mb-12"
+      className="w-full max-w-2xl mx-auto flex flex-col justify-center items-center  text-center"
     >
+
       <div className="max-w-2xl w-full flex flex-col items-center justify-center gap-3 pt-6 px-4 pb-4">
         <svg
           ref={svgRef}
@@ -94,9 +95,10 @@ export default function ContactCTA() {
           </g>
         </svg>
 
-        <ScrollReveal start="top 92%" className="flex justify-center w-full">
-          <span className="text-center text-md font-medium text-text-secondary">
-            &ldquo;Hard times are not the enemy of a good life. They are part of it.&rdquo;
+        
+        <ScrollReveal start="top 92%" className="flex justify-center w-full items-center mt-5  ">
+          <span className="text-center text-2xl font-instrumentserif font-medium text-text-secondary/80">
+            &ldquo;Never stop building&rdquo;
           </span>
         </ScrollReveal>
       </div>

@@ -131,7 +131,7 @@ export function PageReveal() {
         className="absolute left-0 right-0"
         style={{ top: 0, height: '120vh' }}
       >
-        <div className="absolute inset-0 backdrop-blur-xl bg-bg-primary" />
+        <div className="absolute inset-0 bg-bg-primary" />
       </div>
     </div>
   );
@@ -145,9 +145,9 @@ export function RouteTransition({ children }: { children: React.ReactNode }) {
     <AnimatePresence mode="wait">
       <motion.div
         key={pathname}
-        initial={{ opacity: 0, filter: "blur(12px)", y: 8 }}
-        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-        exit={{ opacity: 0, filter: "blur(12px)", y: -8 }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="w-full h-full"
       >
