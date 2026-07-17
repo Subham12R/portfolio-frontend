@@ -85,10 +85,13 @@ export function transformProject(
     loomId: extractLoomId(apiProject.youtubeUrl),
     videoUrl: apiProject.videoUrl || undefined,
     featured: apiProject.featured,
-    status: "completed", // Backend doesn't have status field yet
+    status: apiProject.status || "completed",
+    caseStudySections: apiProject.caseStudySections || undefined,
     links: {
       github: apiProject.repoUrl || undefined,
       live: apiProject.liveUrl || undefined,
+      npm: apiProject.npmUrl || undefined,
+      docs: apiProject.docsUrl || undefined,
     },
   };
 }

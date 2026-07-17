@@ -1,4 +1,5 @@
 // API Response Types matching backend database schemas
+import type { ProjectCaseStudySections } from "@/data/project";
 
 export interface ApiProject {
   id: string;
@@ -7,6 +8,8 @@ export interface ApiProject {
   longDescription: string | null;
   repoUrl: string | null;
   liveUrl: string | null;
+  npmUrl: string | null;
+  docsUrl: string | null;
   youtubeUrl: string | null;
   videoUrl: string | null;
   thumbnailUrl: string | null;
@@ -16,6 +19,8 @@ export interface ApiProject {
   isPublished: boolean;
   orderIndex: number;
   completedDate: string | null;
+  status: "completed" | "in-progress" | "maintained" | null;
+  caseStudySections: ProjectCaseStudySections | null;
   createdAt: string;
   updatedAt: string;
 }

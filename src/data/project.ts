@@ -1,5 +1,35 @@
 // Projects data
 
+export interface ProjectCaseStudyChallenge {
+  title: string;
+  description: string;
+}
+
+export interface ProjectCaseStudyMetric {
+  label: string;
+  value: string;
+}
+
+export interface ProjectCaseStudyImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface ProjectCaseStudySections {
+  overview?: string;
+  problem?: string;
+  architecture?: {
+    summary?: string;
+    mermaid?: string;
+  };
+  challenges?: ProjectCaseStudyChallenge[];
+  learnings?: string[];
+  nextSteps?: string[];
+  metrics?: ProjectCaseStudyMetric[];
+  images?: ProjectCaseStudyImage[];
+}
+
 export interface Project {
   id: string;
   numberId?: string;
@@ -7,6 +37,7 @@ export interface Project {
   completedDate?: string | null;
   description: string;
   caseStudy?: string;
+  caseStudySections?: ProjectCaseStudySections;
   features: string[];
   tags: string[];
   bannerImage?: string;

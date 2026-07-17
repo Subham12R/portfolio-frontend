@@ -29,7 +29,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
         </Link>
 
         {/* Header */}
-        <header className="mb-12">
+        <header id="blog-intro" className="mb-12 scroll-mt-24">
           <ScrollRevealText
             as="h1"
             className="text-4xl font-light text-text-primary mb-4 font-instrumentserif"
@@ -50,7 +50,11 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
         </header>
 
         {/* Posts Grid */}
-        {posts.length > 0 && <AnimatedBlogGrid posts={posts} />}
+        {posts.length > 0 && (
+          <div id="blog-posts" className="scroll-mt-24">
+            <AnimatedBlogGrid posts={posts} />
+          </div>
+        )}
 
         {posts.length === 0 && (
           <div className="text-center py-20">
@@ -60,7 +64,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
 
         {/* Featured on Medium */}
         {mediumPosts && mediumPosts.length > 0 && (
-          <div className="mt-16">
+          <div id="blog-medium" className="mt-16 scroll-mt-24">
             <h2 className="text-lg font-medium text-text-secondary mb-4">
               Featured on Medium
             </h2>

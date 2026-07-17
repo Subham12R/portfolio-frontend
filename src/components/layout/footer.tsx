@@ -42,8 +42,8 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="w-full flex justify-center items-center pb-12 pt-8 px-4 lg:px-0">
-      <div className="relative z-10 w-full max-w-2xl pt-8 pb-2 px-4">
+    <footer className="w-full flex justify-center items-center pb-12 pt-8 px-2 lg:px-0">
+      <div className="relative z-10 w-full max-w-2xl pt-8 pb-2 px-0">
         {/* Main Row - DMCA left, Links right */}
         <div className="flex justify-between items-center mb-2">
           {/* DMCA Badge - Left */}

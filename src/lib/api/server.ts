@@ -3,12 +3,14 @@
 
 import {
   getProjects,
+  getProjectById,
   getWorkExperiences,
   getCertificates,
   getSkills,
   getHighlights,
 } from "./client";
 import {
+  transformProject,
   transformProjects,
   transformWorkExperiences,
   transformCertificates,
@@ -37,6 +39,23 @@ export async function fetchProjects(): Promise<Project[]> {
   } catch (error) {
     console.error("Failed to fetch projects from API, using static data:", error);
     return staticProjects;
+  }
+}
+
+/**
+ * Fetch a single project from API by ID/slug with static fallback
+ */
+export async function fetchProjectById(id: string): Promise<Project | null> {
+  try {
+    const apiProject = await getProjectById(id);
+    if (apiProject) {
+      return transformProject(apiProject, 0);
+    }
+    return null;
+  } catch (error) {
+    console.error(`Failed to fetch project ${id} from API, using static data:`, error);
+    const project = staticProjects.find((p) => p.id === id);
+    return project || null;
   }
 }
 

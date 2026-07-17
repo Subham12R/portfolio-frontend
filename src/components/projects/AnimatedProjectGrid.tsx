@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import type { Project } from "@/data/project";
 import PlainProjectCard from "@/components/projects/PlainProjectCard";
-import ProjectDrawer from "@/components/projects/ProjectDrawer";
 
 interface AnimatedProjectGridProps {
   projects: Project[];
@@ -55,7 +54,6 @@ function ProjectCardSkeleton() {
 export default function AnimatedProjectGrid({
   projects,
 }: AnimatedProjectGridProps) {
-  const [selected, setSelected] = useState<Project | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -87,17 +85,10 @@ export default function AnimatedProjectGrid({
           >
             <PlainProjectCard
               project={project}
-              onOpen={() => setSelected(project)}
             />
           </motion.div>
         ))}
       </div>
-
-      <ProjectDrawer
-        project={selected}
-        isOpen={selected !== null}
-        onClose={() => setSelected(null)}
-      />
     </>
   );
 }

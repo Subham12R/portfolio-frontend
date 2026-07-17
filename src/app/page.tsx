@@ -9,6 +9,7 @@ import ProjectsPage from "@/sections/projects/page";
 import Tech from "@/sections/skills/page";
 import Work from "@/sections/works/page";
 
+
 export default function Home() {
   return (
     <>
@@ -18,6 +19,7 @@ export default function Home() {
       <Work />
       <ProjectsPage />
       {/* <About /> */}
+      
       <CertificatesPage />
       <GallerySection />
       <BlogSection />

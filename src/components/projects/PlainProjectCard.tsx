@@ -1,13 +1,13 @@
 "use client";
 
 import { ExternalLink, GitBranch } from "lucide-react";
+import { useRouter } from "next/navigation";
 import type { Project } from "@/data/project";
 import { VideoHoverBanner } from "@/components/projects/VideoHoverBanner";
 import TechAccordion from "./TechAccordion";
 
 interface PlainProjectCardProps {
   project: Project;
-  onOpen: () => void;
 }
 
 function formatProjectDate(dateStr?: string | null): string {
@@ -17,13 +17,25 @@ function formatProjectDate(dateStr?: string | null): string {
   return `${month} ${d.getFullYear()}`;
 }
 
-export default function PlainProjectCard({ project, onOpen }: PlainProjectCardProps) {
+export default function PlainProjectCard({ project }: PlainProjectCardProps) {
+  const router = useRouter();
   const thumbnailUrl = project.bannerImage;
+
+  const openCaseStudy = () => router.push(`/projects/${project.id}`);
 
   return (
     <div
       className="group/card cursor-pointer max-w-2xl p-2 pb-3 -m-4 border-2 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)] border-border-primary rounded-md hover:bg-bg-elevated/50 transition-colors duration-200"
-      onClick={onOpen}
+      onClick={openCaseStudy}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openCaseStudy();
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      aria-label={`View case study for ${project.title}`}
     >
       {/* Thumbnail */}
       <VideoHoverBanner

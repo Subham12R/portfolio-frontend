@@ -18,6 +18,26 @@ export {
   getAllTags,
 } from "./project";
 export type { Project } from "./project";
+export type {
+  ProjectCaseStudyChallenge,
+  ProjectCaseStudyImage,
+  ProjectCaseStudyMetric,
+  ProjectCaseStudySections,
+} from "./project";
+
+// Case studies (mock until backend/admin)
+export {
+  caseStudies,
+  getCaseStudyBySlug,
+  getCaseStudyById,
+  getDefaultCaseStudy,
+} from "./case-study";
+export type {
+  CaseStudy,
+  CaseStudyLink,
+  CaseStudyImage,
+  CaseStudyMetric,
+} from "./case-study";
 
 // Certificates data
 export { certificates, getCertificatesSorted } from "./certificates";

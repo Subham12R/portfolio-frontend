@@ -44,6 +44,10 @@ export async function getProjects(): Promise<ApiProject[]> {
   return fetchApi<ApiProject[]>("/api/projects");
 }
 
+export async function getProjectById(id: string): Promise<ApiProject> {
+  return fetchApi<ApiProject>(`/api/projects/${id}`);
+}
+
 export async function getWorkExperiences(): Promise<ApiWorkExperience[]> {
   return fetchApi<ApiWorkExperience[]>("/api/work-experiences");
 }

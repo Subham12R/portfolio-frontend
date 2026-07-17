@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getPostBySlug, blogPosts, siteConfig } from "@/data";
+import { CaseStudyScrollNav } from "@/components/casestudy/CaseStudyScrollNav";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -64,6 +65,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const contentSections = (post.content ?? "")
+    .split("\n\n")
+    .map((block, index) => ({ block, index }))
+    .filter(({ block }) => block.startsWith("## "))
+    .map(({ block, index }) => ({
+      id: `blog-post-section-${index}`,
+      label: block.replace("## ", ""),
+    }));
+
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
       <article className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
@@ -77,7 +87,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Link>
 
         {/* Header */}
-        <header className="mb-12">
+        <header id="blog-post-intro" className="mb-12 scroll-mt-24">
           <div className="flex items-center gap-4 text-sm text-text-muted mb-4">
             <time dateTime={post.publishedAt}>
               {formatDate(post.publishedAt)}
@@ -113,7 +123,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.content.split("\n\n").map((block, index) => {
               if (block.startsWith("## ")) {
                 return (
-                  <h2 key={index} className="text-2xl font-semibold mt-10 mb-4">
+                  <h2
+                    key={index}
+                    id={`blog-post-section-${index}`}
+                    className="text-2xl font-semibold mt-10 mb-4 scroll-mt-24"
+                  >
                     {block.replace("## ", "")}
                   </h2>
                 );
@@ -178,6 +192,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </footer>
       </article>
+      <CaseStudyScrollNav
+        sections={[
+          { id: "blog-post-intro", label: "Introduction" },
+          ...contentSections,
+        ]}
+      />
     </main>
   );
 }

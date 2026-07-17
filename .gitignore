@@ -9,12 +9,13 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-
+.opencode
+.claude
 # testing
 /coverage
 .playwright-mcp
 
-
+superpowers
 # next.js
 /.next/
 /out/
