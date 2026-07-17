@@ -6,7 +6,6 @@ import { getPostsSorted, getMediumPostsSorted } from "@/data/blog";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { LicenseDraftIcon } from "@hugeicons/core-free-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { CaseStudyScrollNav } from "@/components/casestudy/CaseStudyScrollNav";
 
 const BlogSection = () => {
   const section = siteConfig.sections.blog;
@@ -58,7 +57,6 @@ const BlogSection = () => {
         </div>
         </ScrollReveal>
       </section>
-      <CaseStudyScrollNav sections={[{ id: section.id, label: section.title }]} />
     </>
   );
 };
