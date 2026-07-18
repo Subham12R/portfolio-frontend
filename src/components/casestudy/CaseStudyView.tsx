@@ -68,7 +68,7 @@ export function CaseStudyView({ caseStudy }: { caseStudy: CaseStudy }) {
   });
 
   return (
-    <div className="min-h-screen max-w-2xl mx-auto pb-36 font-instrumentsans">
+    <div className="min-h-screen max-w-2xl mx-auto pb-8 font-instrumentsans">
       {/* Sticky breadcrumbs — outside ScrollReveal so transform doesn't break sticky */}
       <nav
         aria-label="Breadcrumb"
@@ -349,8 +349,8 @@ export function CaseStudyView({ caseStudy }: { caseStudy: CaseStudy }) {
         </ScrollReveal>
 
         {/* Closing */}
-        <ScrollReveal className="w-full flex flex-col mt-10">
-          <div className="w-full items-center justify-center flex h-50 bg-bg-elevated rounded-md">
+        <ScrollReveal className="w-full flex flex-col mt-8">
+          <div className="w-full items-center justify-center flex h-28 sm:h-32 bg-bg-elevated rounded-md">
             <h1 className="text-2xl sm:text-3xl font-light tracking-tight text-text-primary font-instrumentserif">
               &quot;Keep Building&quot;
             </h1>
