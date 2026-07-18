@@ -12,11 +12,21 @@ import {
 } from "@hugeicons/core-free-icons";
 import { VideoHoverBanner } from "@/components/projects/VideoHoverBanner";
 import { MermaidDiagram } from "@/components/casestudy/MermaidDiagram";
+import { CaseStudyText } from "@/components/casestudy/CaseStudyText";
 import {
   CaseStudyScrollNav,
   type CaseStudySection,
 } from "@/components/casestudy/CaseStudyScrollNav";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import type { CaseStudy, CaseStudyLink } from "@/data/case-study";
+
+/** Matches main page body: Instrument Sans + token colors */
+const bulletItemClass =
+  "relative pl-5 text-[15px] sm:text-[16px] font-instrumentsans font-light tracking-tight text-text-secondary/80 leading-relaxed before:absolute before:left-0 before:top-[0.7em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-text-muted";
+
+/** Matches main page section titles */
+const sectionHeadingClass =
+  "text-2xl sm:text-3xl font-light tracking-tight text-text-primary font-instrumentserif";
 
 const CASE_STUDY_SECTIONS: CaseStudySection[] = [
   { id: "cs-technologies", label: "Tech" },
@@ -33,7 +43,7 @@ const CASE_STUDY_SECTIONS: CaseStudySection[] = [
 ];
 
 const pillClass =
-  "inline-flex items-center gap-2 bg-zinc-200 text-black dark:bg-zinc-700 dark:text-white rounded-md px-4 py-1 text-sm border border-bg-primary/50 shadow-[inset_0_0_4px_4px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_4px_4px_rgba(0,0,0,0.1)]";
+  "inline-flex items-center gap-2 bg-bg-elevated text-text-secondary rounded-md px-4 py-1 text-sm font-instrumentsans font-medium border border-border-primary shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]";
 
 function LinkIcon({ type }: { type: CaseStudyLink["type"] }) {
   const icon =
@@ -58,238 +68,294 @@ export function CaseStudyView({ caseStudy }: { caseStudy: CaseStudy }) {
   });
 
   return (
-    <div className="min-h-screen h-full max-w-2xl mx-auto flex flex-col items-start justify-start py-10 px-4 lg:px-0 pb-36">
-      {/* Breadcrumbs */}
-      <nav className="w-full mb-10 sticky top-0 z-10 bg-bg-primary/80 backdrop-blur-sm py-2">
-        <ol className="flex items-center gap-1 flex-wrap">
+    <div className="min-h-screen max-w-2xl mx-auto pb-36 font-instrumentsans">
+      {/* Sticky breadcrumbs — outside ScrollReveal so transform doesn't break sticky */}
+      <nav
+        aria-label="Breadcrumb"
+        className="sticky top-14 z-30 w-full bg-bg-primary/95 backdrop-blur-md border-b border-border-primary px-4 lg:px-0 py-2.5"
+      >
+        <ol className="flex items-center gap-1 flex-wrap text-sm font-instrumentsans text-text-muted">
           <li>
-            <Link href="/" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200">
+            <Link
+              href="/"
+              className="hover:text-text-primary transition-colors"
+            >
               Home
             </Link>
           </li>
-          <li className="text-gray-600 dark:text-gray-400">/</li>
-          <li className="text-gray-600 dark:text-gray-400">Projects</li>
-          <li className="text-gray-600 dark:text-gray-400">/</li>
-          <li className="text-gray-600 dark:text-gray-400">{caseStudy.title}</li>
+          <li aria-hidden="true">/</li>
+          <li>
+            <Link
+              href="/projects"
+              className="hover:text-text-primary transition-colors"
+            >
+              Projects
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li className="text-text-secondary truncate max-w-[12rem] sm:max-w-none">
+            {caseStudy.title}
+          </li>
         </ol>
       </nav>
 
-      {/* Header */}
-      <div className="w-full mb-6 flex flex-col items-start justify-start">
-        <h1 className="text-4xl font-bold">{caseStudy.title}</h1>
-        <span className="text-gray-600 dark:text-gray-400 leading-tight pt-4">
-          {caseStudy.tagline}
-        </span>
-      </div>
-
-      <div className="w-full mb-10 border-b border-gray-500/60" />
-
-      {/* Banner */}
-      <div className="w-full">
-        <VideoHoverBanner
-          bannerImage={caseStudy.bannerImage}
-          youtubeId={caseStudy.youtubeId}
-          videoUrl={caseStudy.videoUrl}
-          loomId={caseStudy.loomId}
-          title={caseStudy.title}
-          className="h-[320px] w-full bg-zinc-700 rounded-md"
-          autoPlay={false}
-        />
-      </div>
-
-      {/* Technologies */}
-      <div id="cs-technologies" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Technologies Used</h2>
-        <div className="w-full mt-4">
-          <ul className="flex flex-wrap gap-2">
-            {caseStudy.technologies.map((tech) => (
-              <li key={tech} className={pillClass}>
-                {tech}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Overview */}
-      <div id="cs-overview" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Project Overview</h2>
-        <div className="w-full mt-4">
-          <p className="text-gray-600 dark:text-gray-400">{caseStudy.overview}</p>
-        </div>
-      </div>
-
-      {/* Links */}
-      <div id="cs-links" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Project Links</h2>
-        <div className="w-full mt-4 flex flex-wrap gap-4">
-          {caseStudy.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={pillClass}
-            >
-              <LinkIcon type={link.type} />
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* Details / Features */}
-      <div id="cs-details" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Project Details</h2>
-        <div className="w-full mt-4 text-gray-600 dark:text-gray-400 space-y-1.5">
-          <p className="text-black dark:text-white font-medium mb-2">What it does</p>
-          {caseStudy.features.map((feature, i) => (
-            <p key={i}># {feature}</p>
-          ))}
-        </div>
-      </div>
-
-      {/* Metrics */}
-      {caseStudy.metrics.length > 0 && (
-        <div id="cs-metrics" className="w-full mt-10 scroll-mt-24">
-          <h2 className="text-2xl font-bold">At a Glance</h2>
-          <div className="w-full mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {caseStudy.metrics.map((metric) => (
-              <div key={metric.label} className={`${pillClass} flex-col items-start !py-3`}>
-                <span className="text-xs text-gray-600 dark:text-gray-400">
-                  {metric.label}
-                </span>
-                <span className="font-medium mt-0.5">{metric.value}</span>
-              </div>
-            ))}
+      <div className="px-4 lg:px-0 pt-8">
+        {/* Header + banner */}
+        <ScrollReveal stagger={0.08} className="w-full flex flex-col">
+          <div className="w-full mb-6 flex flex-col items-start justify-start">
+            <h1 className="text-4xl font-light tracking-tight text-text-primary font-instrumentserif leading-tight">
+              {caseStudy.title}
+            </h1>
+            <span className="text-text-tertiary leading-relaxed pt-4 font-instrumentsans font-light tracking-tight text-[16px]">
+              {caseStudy.tagline}
+            </span>
           </div>
-        </div>
-      )}
 
-      {/* Architecture — Mermaid */}
-      <div id="cs-architecture" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Project Architecture</h2>
-        {caseStudy.architecture.summary && (
-          <p className="text-gray-600 dark:text-gray-400 mt-4">
-            {caseStudy.architecture.summary}
-          </p>
-        )}
-        <div className="w-full mt-4">
-          <MermaidDiagram chart={caseStudy.architecture.mermaid} />
-        </div>
-      </div>
+          <div className="w-full mb-10 border-b border-border-primary" />
 
-      {/* Gallery */}
-      {caseStudy.images.length > 0 && (
-        <div
-          id="cs-gallery"
-          className="grid grid-cols-1 md:grid-cols-2 w-full items-center gap-4 mt-10 scroll-mt-24"
-        >
-          {caseStudy.images.map((image) => (
+          <div className="w-full">
+            <VideoHoverBanner
+              bannerImage={caseStudy.bannerImage}
+              youtubeId={caseStudy.youtubeId}
+              videoUrl={caseStudy.videoUrl}
+              loomId={caseStudy.loomId}
+              title={caseStudy.title}
+              className="h-[320px] w-full bg-bg-elevated rounded-md"
+              autoPlay={false}
+            />
+          </div>
+        </ScrollReveal>
 
-            <figure key={image.src} className="w-full">
-              <div className="relative h-60 w-full bg-zinc-700 rounded-md overflow-hidden">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 320px"
-                  className="object-cover"
-                />
+        {/* Technologies */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div id="cs-technologies" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Technologies Used</h2>
+            <div className="w-full mt-4">
+              <ul className="flex flex-wrap gap-2">
+                {caseStudy.technologies.map((tech) => (
+                  <li key={tech} className={pillClass}>
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Overview */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div id="cs-overview" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Project Overview</h2>
+            <div className="w-full mt-4">
+              <CaseStudyText content={caseStudy.overview} size="base" />
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Links */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div id="cs-links" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Project Links</h2>
+            <div className="w-full mt-4 flex flex-wrap gap-4">
+              {caseStudy.links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={pillClass}
+                >
+                  <LinkIcon type={link.type} />
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Details / Features */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div id="cs-details" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Project Details</h2>
+            <div className="w-full mt-4">
+              <p className="text-text-primary font-instrumentsans font-medium mb-3 tracking-tight">
+                What it does
+              </p>
+              <ul className="list-none space-y-2.5 pl-0">
+                {caseStudy.features.map((feature, i) => (
+                  <li key={i} className={bulletItemClass}>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Metrics */}
+        {caseStudy.metrics.length > 0 && (
+          <ScrollReveal className="w-full flex flex-col mt-10">
+            <div id="cs-metrics" className="w-full scroll-mt-24">
+              <h2 className={sectionHeadingClass}>At a Glance</h2>
+              <div className="w-full mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {caseStudy.metrics.map((metric) => (
+                  <div
+                    key={metric.label}
+                    className={`${pillClass} flex-col items-start !py-3`}
+                  >
+                    <span className="text-xs text-text-muted font-instrumentsans">
+                      {metric.label}
+                    </span>
+                    <span className="font-medium mt-0.5 text-text-primary font-instrumentsans">
+                      {metric.value}
+                    </span>
+                  </div>
+                ))}
               </div>
-              {image.caption && (
-                <figcaption className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  {image.caption}
-                </figcaption>
-              )}
-            </figure>
-          ))}
-        </div>
-      )}
+            </div>
+          </ScrollReveal>
+        )}
 
-      {/* Problem */}
-      <div id="cs-problem" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Problem Statement</h2>
-        <div className="w-full mt-4">
-          <p className="text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
-            {caseStudy.problem}
-          </p>
-        </div>
-      </div>
+        {/* Architecture — Mermaid */}
+        <ScrollReveal stagger={0.1} className="w-full flex flex-col mt-10">
+          <div id="cs-architecture" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Project Architecture</h2>
+          </div>
+          {caseStudy.architecture.summary && (
+            <div className="mt-4">
+              <CaseStudyText
+                content={caseStudy.architecture.summary}
+                size="base"
+              />
+            </div>
+          )}
+          <div className="w-full mt-4">
+            <MermaidDiagram chart={caseStudy.architecture.mermaid} />
+          </div>
+        </ScrollReveal>
 
-      {/* Challenges */}
-      <div id="cs-challenges" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Challenges</h2>
-        <div className="w-full mt-4 space-y-4">
+        {/* Gallery — stagger each image */}
+        {caseStudy.images.length > 0 && (
+          <ScrollReveal
+            stagger={0.1}
+            className="w-full flex flex-col gap-6 mt-10"
+          >
+            {caseStudy.images.map((image, index) => (
+              <figure
+                key={image.src}
+                id={index === 0 ? "cs-gallery" : undefined}
+                className={`w-full${index === 0 ? " scroll-mt-24" : ""}`}
+              >
+                <div className="w-full overflow-hidden rounded-md bg-bg-elevated">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={1600}
+                    height={900}
+                    sizes="(max-width: 768px) 100vw, 672px"
+                    className="h-auto w-full object-contain"
+                  />
+                </div>
+                {image.caption && (
+                  <figcaption className="mt-2 text-sm font-instrumentsans font-light text-text-muted tracking-tight">
+                    {image.caption}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </ScrollReveal>
+        )}
+
+        {/* Problem */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div id="cs-problem" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Problem Statement</h2>
+            <div className="w-full mt-4">
+              <CaseStudyText content={caseStudy.problem} />
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Challenges — stagger each challenge */}
+        <ScrollReveal stagger={0.1} className="w-full flex flex-col mt-10 gap-6">
+          <div id="cs-challenges" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Challenges</h2>
+          </div>
           {caseStudy.challenges.map((challenge) => (
             <div key={challenge.title}>
-              <p className="text-sm font-medium text-black dark:text-white mb-1">
+              <p className="text-[15px] sm:text-[16px] font-instrumentsans font-medium text-text-primary mb-2 tracking-tight">
                 {challenge.title}
               </p>
-              <p className="text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
-                {challenge.description}
-              </p>
+              <CaseStudyText content={challenge.description} />
             </div>
           ))}
-        </div>
-      </div>
+        </ScrollReveal>
 
-      {/* Learnings */}
-      <div id="cs-learnings" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Learnings</h2>
-        <div className="w-full mt-4 space-y-2">
-          {caseStudy.learnings.map((learning, i) => (
-            <p key={i} className="text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
-              # {learning}
-            </p>
-          ))}
-        </div>
-      </div>
+        {/* Learnings */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div id="cs-learnings" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Learnings</h2>
+            <ul className="w-full mt-4 list-none space-y-2.5 pl-0">
+              {caseStudy.learnings.map((learning, i) => (
+                <li key={i} className={bulletItemClass}>
+                  {learning}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </ScrollReveal>
 
-      {/* Next steps */}
-      <div id="cs-next" className="w-full mt-10 scroll-mt-24">
-        <h2 className="text-2xl font-bold">Next Steps</h2>
-        <div className="w-full mt-4 space-y-2">
-          {caseStudy.nextSteps.map((step, i) => (
-            <p key={i} className="text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
-              # {step}
-            </p>
-          ))}
-        </div>
-        <p className="text-md text-gray-600 dark:text-zinc-300 my-8 text-center ">
-          Thanks for taking the time to read my project.
-        </p>
-        <div className="w-full mt-4 flex justify-between items-center">
-          <Link
-            href="/#home"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors"
-          >
-            <ArrowLeft size={16} />
-            Go back home
-          </Link>
-          {caseStudy.nextProject ? (
+        {/* Next steps */}
+        <ScrollReveal stagger={0.08} className="w-full flex flex-col mt-10">
+          <div id="cs-next" className="w-full scroll-mt-24">
+            <h2 className={sectionHeadingClass}>Next Steps</h2>
+            <ul className="w-full mt-4 list-none space-y-2.5 pl-0">
+              {caseStudy.nextSteps.map((step, i) => (
+                <li key={i} className={bulletItemClass}>
+                  {step}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-[16px] font-instrumentsans font-light text-text-tertiary my-8 text-center tracking-tight">
+            Thanks for taking the time to read my project.
+          </p>
+          <div className="w-full mt-4 flex justify-between items-center">
             <Link
-              href={caseStudy.nextProject.href}
-              className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors"
+              href="/#home"
+              className="inline-flex items-center gap-2 text-sm font-instrumentsans font-medium text-text-muted hover:text-text-primary transition-colors"
             >
-              Next Project
-              <ArrowRight size={16} />
+              <ArrowLeft size={16} />
+              Go back home
             </Link>
-          ) : (
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors"
-            >
-              Next Project
-              <ArrowRight size={16} />
-            </Link>
-          )}
-        </div>
-      </div>
+            {caseStudy.nextProject ? (
+              <Link
+                href={caseStudy.nextProject.href}
+                className="inline-flex items-center gap-2 text-sm font-instrumentsans font-medium text-text-muted hover:text-text-primary transition-colors"
+              >
+                Next Project
+                <ArrowRight size={16} />
+              </Link>
+            ) : (
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 text-sm font-instrumentsans font-medium text-text-muted hover:text-text-primary transition-colors"
+              >
+                Next Project
+                <ArrowRight size={16} />
+              </Link>
+            )}
+          </div>
+        </ScrollReveal>
 
-      {/* Closing */}
-      <div className="w-full mt-10 items-center justify-center flex h-50 bg-zinc-400/20 rounded-md">
-        <h1 className="text-2xl font-bold">&quot;Keep Building&quot;</h1>
+        {/* Closing */}
+        <ScrollReveal className="w-full flex flex-col mt-10">
+          <div className="w-full items-center justify-center flex h-50 bg-bg-elevated rounded-md">
+            <h1 className="text-2xl sm:text-3xl font-light tracking-tight text-text-primary font-instrumentserif">
+              &quot;Keep Building&quot;
+            </h1>
+          </div>
+        </ScrollReveal>
       </div>
 
       {/* Floating scroll progress pill */}
@@ -297,4 +363,3 @@ export function CaseStudyView({ caseStudy }: { caseStudy: CaseStudy }) {
     </div>
   );
 }
-

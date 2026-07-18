@@ -116,7 +116,9 @@ export function CaseStudyScrollNav({
       <div className="flex flex-col gap-2">
         <div className="absolute inset-x-0 bottom-full mb-2 max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">
           <div className="w-full rounded-2xl border border-black/10 bg-bg-elevated px-4 py-3.5 shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.16)] dark:border-white/10 dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">
-            <h2 className="text-2xl font-bold text-left text-text-primary">{activeLabel}</h2>
+            <h2 className="text-2xl font-light tracking-tight text-left text-text-primary font-instrumentserif">
+              {activeLabel}
+            </h2>
           </div>
         </div>
 

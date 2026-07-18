@@ -20,13 +20,18 @@ class ApiError extends Error {
 }
 
 async function fetchApi<T>(endpoint: string): Promise<T> {
+  // Dev: no-store so admin panel changes show immediately locally.
+  // Prod: ISR revalidate every hour (Next data cache).
+  const cacheOptions =
+    process.env.NODE_ENV === "development"
+      ? { cache: "no-store" as const }
+      : { next: { revalidate: 3600 } };
+
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     headers: {
       "Content-Type": "application/json",
     },
-    next: {
-      revalidate: 3600,
-    },
+    ...cacheOptions,
   });
 
   if (!response.ok) {

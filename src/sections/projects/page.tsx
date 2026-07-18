@@ -9,7 +9,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 const ProjectsPage = async () => {
   const section = siteConfig.sections.projects;
   const projects = await fetchProjects();
-  const displayProjects = projects.slice(0, 6);
+  const displayProjects = projects.slice(0, 4);
 
   return (
     <section

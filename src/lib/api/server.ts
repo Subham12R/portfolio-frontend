@@ -26,16 +26,14 @@ import { experiences as staticExperiences } from "@/data/experience";
 import { certificates as staticCertificates } from "@/data/certificates";
 
 /**
- * Fetch projects from API with static fallback
- * Use in Server Components for optimal performance
+ * Fetch projects from API.
+ * Empty API responses are trusted (no static fill-in).
+ * Static data is only used when the request fails (API down).
  */
 export async function fetchProjects(): Promise<Project[]> {
   try {
     const apiProjects = await getProjects();
-    if (apiProjects.length > 0) {
-      return transformProjects(apiProjects);
-    }
-    return staticProjects;
+    return transformProjects(apiProjects);
   } catch (error) {
     console.error("Failed to fetch projects from API, using static data:", error);
     return staticProjects;
@@ -43,7 +41,9 @@ export async function fetchProjects(): Promise<Project[]> {
 }
 
 /**
- * Fetch a single project from API by ID/slug with static fallback
+ * Fetch a single project from API by ID/slug.
+ * Missing projects return null (no static fill-in on 404).
+ * Static data is only used when the request fails (API down).
  */
 export async function fetchProjectById(id: string): Promise<Project | null> {
   try {
@@ -60,15 +60,13 @@ export async function fetchProjectById(id: string): Promise<Project | null> {
 }
 
 /**
- * Fetch work experiences from API with static fallback
+ * Fetch work experiences from API.
+ * Empty API responses are trusted; static data only on request failure.
  */
 export async function fetchWorkExperiences(): Promise<Experience[]> {
   try {
     const apiExperiences = await getWorkExperiences();
-    if (apiExperiences.length > 0) {
-      return transformWorkExperiences(apiExperiences);
-    }
-    return staticExperiences;
+    return transformWorkExperiences(apiExperiences);
   } catch (error) {
     console.error("Failed to fetch experiences from API, using static data:", error);
     return staticExperiences;
@@ -76,15 +74,13 @@ export async function fetchWorkExperiences(): Promise<Experience[]> {
 }
 
 /**
- * Fetch certificates from API with static fallback
+ * Fetch certificates from API.
+ * Empty API responses are trusted; static data only on request failure.
  */
 export async function fetchCertificates(): Promise<Certificate[]> {
   try {
     const apiCertificates = await getCertificates();
-    if (apiCertificates.length > 0) {
-      return transformCertificates(apiCertificates);
-    }
-    return staticCertificates;
+    return transformCertificates(apiCertificates);
   } catch (error) {
     console.error("Failed to fetch certificates from API, using static data:", error);
     return staticCertificates;
