@@ -40,7 +40,10 @@ export interface Project {
   caseStudySections?: ProjectCaseStudySections;
   features: string[];
   tags: string[];
+  /** Flat thumbnail — case study hero / OG style image (API `thumbnailUrl`). */
   bannerImage?: string;
+  /** Device mockup — home & projects cards (API `images[]`, prefer type `desktop`). */
+  mockupImage?: string;
   youtubeId?: string;
   videoUrl?: string;
   loomId?: string;

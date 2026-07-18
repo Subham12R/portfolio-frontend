@@ -21,7 +21,8 @@ function formatProjectDate(dateStr?: string | null): string {
 export default function PlainProjectCard({ project }: PlainProjectCardProps) {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const thumbnailUrl = project.bannerImage;
+  // Cards show mockup (API images[].type desktop); fall back to thumbnail
+  const cardImage = project.mockupImage || project.bannerImage;
 
   const hasCaseStudy = !!(
     project.caseStudy ||
@@ -59,7 +60,7 @@ export default function PlainProjectCard({ project }: PlainProjectCardProps) {
       >
         {/* Thumbnail */}
         <VideoHoverBanner
-          bannerImage={thumbnailUrl}
+          bannerImage={cardImage}
           youtubeId={project.youtubeId}
           videoUrl={project.videoUrl}
           loomId={project.loomId}

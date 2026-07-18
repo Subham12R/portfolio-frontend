@@ -1,6 +1,12 @@
 // API Response Types matching backend database schemas
 import type { ProjectCaseStudySections } from "@/data/project";
 
+/** Mockup / device frame images on a project (not the flat thumbnail). */
+export interface ApiProjectImage {
+  url: string;
+  type: string; // e.g. "desktop" | "mobile"
+}
+
 export interface ApiProject {
   id: string;
   title: string;
@@ -12,8 +18,10 @@ export interface ApiProject {
   docsUrl: string | null;
   youtubeUrl: string | null;
   videoUrl: string | null;
+  /** Flat card/hero thumbnail (used on case study banner). */
   thumbnailUrl: string | null;
-  images: string[];
+  /** Device mockups (used on home/projects cards). Prefer type "desktop". */
+  images: ApiProjectImage[] | string[] | null;
   techStack: string[] | null;
   featured: boolean;
   isPublished: boolean;

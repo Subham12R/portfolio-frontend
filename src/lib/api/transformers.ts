@@ -1,6 +1,7 @@
 // Transform API responses to frontend data types
 import type {
   ApiProject,
+  ApiProjectImage,
   ApiWorkExperience,
   ApiCertificate,
   ApiSkill,
@@ -8,6 +9,27 @@ import type {
 import type { Project } from "@/data/project";
 import type { Experience } from "@/data/experience";
 import type { Certificate } from "@/data/certificates";
+
+/**
+ * Prefer desktop mockup from API `images[]`.
+ * Supports both `{ url, type }[]` and legacy `string[]`.
+ */
+function pickMockupImage(
+  images: ApiProject["images"]
+): string | undefined {
+  if (!images || images.length === 0) return undefined;
+
+  const normalized: ApiProjectImage[] = images.map((item) =>
+    typeof item === "string"
+      ? { url: item, type: "desktop" }
+      : { url: item.url, type: item.type || "desktop" }
+  );
+
+  const desktop = normalized.find(
+    (img) => img.type.toLowerCase() === "desktop"
+  );
+  return (desktop ?? normalized[0])?.url || undefined;
+}
 
 // Format date to display period (e.g., "Jan 2025 – Present")
 function formatPeriod(startDate: string, endDate: string | null): string {
@@ -72,6 +94,9 @@ export function transformProject(
         .slice(0, 5) // Limit to 5 features
     : [apiProject.shortDescription];
 
+  const mockupImage = pickMockupImage(apiProject.images);
+  const thumbnail = apiProject.thumbnailUrl || undefined;
+
   return {
     id: apiProject.id,
     numberId: generateNumberId(index),
@@ -80,7 +105,10 @@ export function transformProject(
     description: apiProject.shortDescription,
     features,
     tags: apiProject.techStack || [],
-    bannerImage: apiProject.thumbnailUrl || undefined,
+    // Case study hero uses flat thumbnail
+    bannerImage: thumbnail,
+    // Project cards use device mockup (fallback to thumbnail if none)
+    mockupImage: mockupImage || thumbnail,
     youtubeId: extractYoutubeId(apiProject.youtubeUrl),
     loomId: extractLoomId(apiProject.youtubeUrl),
     videoUrl: apiProject.videoUrl || undefined,
