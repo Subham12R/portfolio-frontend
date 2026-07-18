@@ -8,7 +8,7 @@ import { CommandPalette } from "@/components/ui/CommandPalette";
 import profileIcon from "../../../public/images/profile/profile.png"
 // Navigation links (subset of main navigation for header)
 const navLinks = [
-  { name: "Home", href: "/" },
+  { name: "Home", href: "/#home" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
 ];

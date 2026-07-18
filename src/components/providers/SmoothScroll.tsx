@@ -24,6 +24,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
   // Initialize Lenis
   useEffect(() => {
+    // Prevent browser restoring mid-page scroll (fights Lenis; lands at bottom)
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
@@ -41,7 +46,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     gsap.ticker.add(update)
     gsap.ticker.lagSmoothing(0)
 
-    // Handle smooth scrolling for hash links
+    // Handle smooth scrolling for hash links + Home nav
     const handleHashClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -50,11 +55,24 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       const href = anchor.getAttribute('href');
       if (!href) return;
 
+      const onHome = window.location.pathname === '/';
+
+      // Home link — always go to top when already on home
+      if (href === '/' || href === '/#home' || href === '#home') {
+        if (onHome) {
+          e.preventDefault();
+          lenis.scrollTo(0, { immediate: false });
+          window.history.pushState(null, '', '/');
+        }
+        // Cross-route navigation: pathname effect scrolls to top
+        return;
+      }
+
       // Same-page anchor click
       if (href.startsWith('#')) {
         e.preventDefault();
         if (href === '#') {
-          lenis.scrollTo(0, { offset: -80 });
+          lenis.scrollTo(0);
           window.history.pushState(null, '', '/');
         } else {
           const targetElement = document.querySelector(href);
@@ -63,20 +81,18 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
             window.history.pushState(null, '', href);
           }
         }
-      } else if (href.startsWith('/#')) {
-        // Relative anchor on home page
-        const hash = href.substring(1);
-        if (window.location.pathname === '/') {
-          e.preventDefault();
-          if (hash === '#') {
-            lenis.scrollTo(0, { offset: -80 });
-            window.history.pushState(null, '', '/');
-          } else {
-            const targetElement = document.querySelector(hash);
-            if (targetElement) {
-              lenis.scrollTo(targetElement as HTMLElement, { offset: -80 });
-              window.history.pushState(null, '', hash);
-            }
+      } else if (href.startsWith('/#') && onHome) {
+        // In-page section link while already on home
+        e.preventDefault();
+        const hash = href.substring(1); // e.g. "#projects"
+        if (hash === '#' || hash === '#home') {
+          lenis.scrollTo(0);
+          window.history.pushState(null, '', '/');
+        } else {
+          const targetElement = document.querySelector(hash);
+          if (targetElement) {
+            lenis.scrollTo(targetElement as HTMLElement, { offset: -80 });
+            window.history.pushState(null, '', hash);
           }
         }
       }
@@ -84,11 +100,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     // Handle back/forward and script hash changes
     const handleHashChange = () => {
-      if (window.location.hash && window.location.hash !== '#') {
+      if (window.location.hash && window.location.hash !== '#' && window.location.hash !== '#home') {
         const targetElement = document.querySelector(window.location.hash);
         if (targetElement) {
           lenis.scrollTo(targetElement as HTMLElement, { offset: -80 });
         }
+      } else {
+        lenis.scrollTo(0, { immediate: true });
       }
     };
 
@@ -104,21 +122,32 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Handle route transition hash jumps
+  // On route change: scroll to top (or to a real section hash)
   useEffect(() => {
     if (!lenisInstance) return;
 
     const hash = window.location.hash;
-    if (!hash || hash === '#') return;
 
-    // Retry the scroll for a bit: async content (data fetches, images) can
-    // still shift the target element's position after the first attempt.
+    // Plain path or home hash → always top (fixes landing at bottom after nav)
+    if (!hash || hash === '#' || hash === '#home') {
+      lenisInstance.scrollTo(0, { immediate: true });
+      // Retry once after layout settles (route transition / async content)
+      const t = window.setTimeout(() => {
+        lenisInstance.scrollTo(0, { immediate: true });
+      }, 50);
+      return () => clearTimeout(t);
+    }
+
+    // Retry the scroll for a bit: async content can shift the target.
     let attempts = 0;
     const maxAttempts = 10;
     const interval = setInterval(() => {
       const targetElement = document.querySelector(hash);
       if (targetElement) {
-        lenisInstance.scrollTo(targetElement as HTMLElement, { offset: -80, immediate: true });
+        lenisInstance.scrollTo(targetElement as HTMLElement, {
+          offset: -80,
+          immediate: true,
+        });
       }
       attempts += 1;
       if (attempts >= maxAttempts) clearInterval(interval);
