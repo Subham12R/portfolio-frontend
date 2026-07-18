@@ -163,7 +163,8 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                   videoUrl={activeProject.videoUrl}
                   loomId={activeProject.loomId}
                   title={activeProject.title}
-                  className="aspect-video rounded-md mb-8"
+                  fit="cover"
+                  className="aspect-video w-full rounded-md mb-8"
                   autoPlay
                 />
               </motion.div>

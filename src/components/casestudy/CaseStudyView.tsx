@@ -120,7 +120,8 @@ export function CaseStudyView({ caseStudy }: { caseStudy: CaseStudy }) {
               videoUrl={caseStudy.videoUrl}
               loomId={caseStudy.loomId}
               title={caseStudy.title}
-              className="h-[320px] w-full bg-bg-elevated rounded-md"
+              fit="natural"
+              className="w-full bg-bg-elevated rounded-md"
               autoPlay={false}
             />
           </div>

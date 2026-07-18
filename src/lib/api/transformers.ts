@@ -56,6 +56,8 @@ function formatPeriod(startDate: string, endDate: string | null): string {
 function extractYoutubeId(url: string | null): string | undefined {
   if (!url) return undefined;
   if (url.includes("loom.com")) return undefined;
+  // Direct file / R2 links are not YouTube
+  if (isDirectVideoUrl(url)) return undefined;
 
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
@@ -73,8 +75,34 @@ function extractYoutubeId(url: string | null): string | undefined {
 // Extract Loom video ID from URL
 function extractLoomId(url: string | null): string | undefined {
   if (!url) return undefined;
+  if (isDirectVideoUrl(url)) return undefined;
   const match = url.match(/loom\.com\/(?:share|embed)\/([a-zA-Z0-9]+)/);
   return match ? match[1] : undefined;
+}
+
+/**
+ * Detect direct video files / Cloudflare R2 public URLs.
+ * Admin often pastes these into the youtubeUrl field.
+ */
+function isDirectVideoUrl(url: string): boolean {
+  const u = url.trim();
+  if (!/^https?:\/\//i.test(u)) return false;
+  // Common video extensions
+  if (/\.(mp4|webm|ogg|mov|m4v)(\?|#|$)/i.test(u)) return true;
+  // Cloudflare R2 public buckets (pub-*.r2.dev / *.r2.dev)
+  if (/\.r2\.dev\//i.test(u)) return true;
+  if (/cloudflarestorage\.com\//i.test(u)) return true;
+  return false;
+}
+
+/** Prefer dedicated videoUrl; fall back to youtubeUrl when it holds a direct/R2 link. */
+function resolveVideoUrl(
+  videoUrl: string | null,
+  youtubeUrl: string | null
+): string | undefined {
+  if (videoUrl) return videoUrl;
+  if (youtubeUrl && isDirectVideoUrl(youtubeUrl)) return youtubeUrl.trim();
+  return undefined;
 }
 
 // Generate number ID from index (01, 02, 03, etc.)
@@ -111,7 +139,7 @@ export function transformProject(
     mockupImage: mockupImage || thumbnail,
     youtubeId: extractYoutubeId(apiProject.youtubeUrl),
     loomId: extractLoomId(apiProject.youtubeUrl),
-    videoUrl: apiProject.videoUrl || undefined,
+    videoUrl: resolveVideoUrl(apiProject.videoUrl, apiProject.youtubeUrl),
     featured: apiProject.featured,
     status: apiProject.status || "completed",
     caseStudySections: apiProject.caseStudySections || undefined,

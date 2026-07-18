@@ -65,7 +65,8 @@ export default function PlainProjectCard({ project }: PlainProjectCardProps) {
           videoUrl={project.videoUrl}
           loomId={project.loomId}
           title={project.title}
-          className="aspect-4/3 rounded-md mb-4"
+          fit="cover"
+          className="aspect-4/3 w-full rounded-md mb-4"
         />
 
         {/* Content */}

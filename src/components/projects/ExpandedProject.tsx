@@ -18,7 +18,8 @@ function ExpandedProject({ project }: { project: Project }) {
           videoUrl={project.videoUrl}
           loomId={project.loomId}
           title={project.title}
-          className="aspect-video rounded-lg border border-border-primary"
+          fit="cover"
+          className="aspect-video w-full rounded-lg border border-border-primary"
           autoPlay
         />
       )}
