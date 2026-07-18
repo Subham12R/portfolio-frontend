@@ -4,7 +4,8 @@ import { siteConfig } from "@/data";
 import { fetchProjects } from "@/lib/api/server";
 import ProjectsGrid from "@/components/projects/ProjectsGrid";
 
-export const dynamic = "force-dynamic";
+/** ISR — HTML + data revalidate hourly (CDN-friendly). */
+export const revalidate = 3600;
 
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,

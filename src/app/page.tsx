@@ -9,6 +9,8 @@ import ProjectsPage from "@/sections/projects/page";
 import Tech from "@/sections/skills/page";
 import Work from "@/sections/works/page";
 
+/** ISR — home page data (projects, etc.) revalidate hourly at the CDN edge. */
+export const revalidate = 3600;
 
 export default function Home() {
   return (

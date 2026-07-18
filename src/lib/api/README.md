@@ -7,12 +7,29 @@ This module provides utilities for fetching data from the Portfolio Backend API.
 1. Create `.env.local` with your backend URL:
    ```env
    NEXT_PUBLIC_API_URL=http://localhost:5000
+   # Optional: for on-demand CDN cache bust after admin publishes
+   REVALIDATE_SECRET=your-long-random-string
    ```
 
 2. For production, use the deployed backend URL:
    ```env
-   NEXT_PUBLIC_API_URL=https://portfolio-backend-zg4a.onrender.com
+   NEXT_PUBLIC_API_URL=https://api.subham12r.me
+   REVALIDATE_SECRET=your-long-random-string
    ```
+
+### CDN / ISR cache
+
+- Production API fetches use `revalidate: 3600` and tag `portfolio-api`.
+- Pages export `revalidate = 3600` (home, projects list, case studies).
+- Static assets get long-lived `Cache-Control` headers via `next.config.ts`.
+- After publishing content in admin, bust cache:
+
+```bash
+curl -X POST https://your-site.com/api/revalidate \
+  -H "x-revalidate-secret: $REVALIDATE_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"paths":["/","/projects","/projects/atlas-desktop"]}'
+```
 
 ## Usage
 

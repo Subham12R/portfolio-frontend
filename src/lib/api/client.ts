@@ -19,13 +19,24 @@ class ApiError extends Error {
   }
 }
 
+/** Shared tag for on-demand revalidation (POST /api/revalidate). */
+export const PORTFOLIO_API_CACHE_TAG = "portfolio-api";
+
+/** Production data-cache TTL in seconds. Dev always bypasses. */
+export const PORTFOLIO_API_REVALIDATE = 3600;
+
 async function fetchApi<T>(endpoint: string): Promise<T> {
   // Dev: no-store so admin panel changes show immediately locally.
-  // Prod: ISR revalidate every hour (Next data cache).
+  // Prod: Next data cache + CDN ISR (1h); bust with revalidateTag.
   const cacheOptions =
     process.env.NODE_ENV === "development"
       ? { cache: "no-store" as const }
-      : { next: { revalidate: 60 } };
+      : {
+          next: {
+            revalidate: PORTFOLIO_API_REVALIDATE,
+            tags: [PORTFOLIO_API_CACHE_TAG],
+          },
+        };
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     headers: {

@@ -4,6 +4,9 @@ import { fetchProjects, fetchProjectById } from "@/lib/api/server";
 import { getProjectCaseStudy } from "@/data/project-case-study";
 import { CaseStudyView } from "@/components/casestudy/CaseStudyView";
 
+/** ISR — case study pages revalidate hourly for CDN caching. */
+export const revalidate = 3600;
+
 interface ProjectCaseStudyPageProps {
   params: Promise<{ id: string }>;
 }
