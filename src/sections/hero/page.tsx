@@ -338,9 +338,9 @@ export const Hero = () => {
             href="/projects"
             className="underline text-text-primary hover:text-blue-500 transition-colors font-normal decoration-text-primary/30 underline-offset-4 font-instrumentsans"
           >
-            Product engineer / Full Stack Developer
+            Full Stack AI Developer
           </a>{" "}
-          across applied AI, scalable backend services, and polished frontend experiences.
+         - developing products using applied AI, scalable backend services, and polished frontend experiences.
         </p>
 
         {/* Paragraph 2 */}
