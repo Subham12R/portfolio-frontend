@@ -53,6 +53,16 @@ const PHOTOS: Photo[] = [
     y: 5,
     zIndex: 30,
   },
+  {
+    id: "smart-ind-2025",
+    src: `${R2}/WhatsApp%20Image%202026-07-29%20at%2023.29.11.jpeg`,
+    alt: "Top 10 - SIH Internals 2025",
+    type: "image",
+    rotation: 12,
+    x: 75,
+    y: 5,
+    zIndex: 30,
+  },
 ];
 const transition = {
   type: "spring",
