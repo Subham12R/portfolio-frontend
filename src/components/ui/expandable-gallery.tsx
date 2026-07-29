@@ -24,9 +24,9 @@ interface Photo {
 
 const PHOTOS: Photo[] = [
   {
-    id: "photo-1",
-    src: `${R2}/553841756_17926981056107384_4696958097329136361_n.jpg`,
-    alt: "Moment",
+    id: "dotslash-2026",
+    src: `${R2}/DSC_0149.JPEG`,
+    alt: "DotSlash 2026",
     type: "image",
     rotation: -15,
     x: -90,
@@ -34,9 +34,9 @@ const PHOTOS: Photo[] = [
     zIndex: 10,
   },
   {
-    id: "photo-2",
-    src: `${R2}/553449419_17926981047107384_4026841337837683397_n.jpg`,
-    alt: "Moment",
+    id: "ctrls-datacenter-visit",
+    src: `${R2}/IMG_0600.JPG`,
+    alt: "CTRLS Datacenter Visit",
     type: "image",
     rotation: -3,
     x: -10,
@@ -44,65 +44,16 @@ const PHOTOS: Photo[] = [
     zIndex: 20,
   },
   {
-    id: "photo-3",
-    src: `${R2}/606166022_17937287223107384_8106454114593472401_n.jpg`,
-    alt: "Moment",
+    id: "gdg-devfest-2025",
+    src: `${R2}/IMG_2167.JPG`,
+    alt: "GDG Devfest 2025",
     type: "image",
     rotation: 12,
     x: 75,
     y: 5,
     zIndex: 30,
   },
-  {
-    id: "photo-4",
-    src: `${R2}/654987733_18092027365888533_8312294801061277537_n.jpg`,
-    alt: "Moment",
-    type: "image",
-  },
-  {
-    id: "photo-5",
-    src: `${R2}/656112818_18151500763407835_4942104670317066957_n.webp`,
-    alt: "Moment",
-    type: "image",
-  },
-  {
-    id: "photo-6",
-    src: `${R2}/658854407_17957566773107384_1124031656866991804_n.jpg`,
-    alt: "Moment",
-    type: "image",
-  },
-  {
-    id: "photo-7",
-    src: `${R2}/707838589_17969782845107384_1551221773180582630_n.jpg`,
-    alt: "Moment",
-    type: "image",
-  },
-  {
-    id: "photo-8",
-    src: `${R2}/661224902_17957566782107384_4970160689367484436_n.jpg`,
-    alt: "Moment",
-    type: "image",
-  },
-  {
-    id: "photo-9",
-    src: `${R2}/AQMeRXG46pwPfV7MVxdWyUJwvrvep01efkNaladNQE8g5RSAe6iBEESdTdKNFS75hqv_rDIgaWxXksk8zb_5yw522o-72lpk6zUDwvw.mp4`,
-    alt: "Clip",
-    type: "video",
-  },
-  {
-    id: "photo-10",
-    src: `${R2}/AQMfG3hTwFAg_HWzjemsmAJn4WSmfeY_w6GfC8pv3d20SmjTnrln425dKg9IyOVWxf2MyzOrIoBz1ymHxZezMiVR3pPURVzmiOh8v8A.mp4`,
-    alt: "Clip",
-    type: "video",
-  },
-  {
-    id: "photo-11",
-    src: `${R2}/AQPFLrsLtfiaI6tqddpeUgRaPpIRYZG9JZ_qvBHz37J3u-p6VBZNiKWoWcYCMbanpr7e6h2w1Lptf64rPNLjZ-1-OBoWyl7VoasskzE.mp4`,
-    alt: "Clip",
-    type: "video",
-  },
 ];
-
 const transition = {
   type: "spring",
   stiffness: 160,
@@ -202,9 +153,12 @@ function GalleryOverlay({ onClose }: { onClose: () => void }) {
                   ease: "easeOut",
                   delay: 0.05 + i * 0.04,
                 }}
-                className="relative aspect-square overflow-hidden rounded-2xl bg-bg-elevated border border-border-primary"
+                className="flex flex-col gap-2"
               >
-                <Media photo={photo} sizes="(max-width: 768px) 50vw, 33vw" />
+                <div className="relative aspect-square overflow-hidden rounded-2xl bg-bg-elevated border border-border-primary">
+                  <Media photo={photo} sizes="(max-width: 768px) 50vw, 33vw" />
+                </div>
+                <p className="text-sm font-medium text-text-primary">{photo.alt}</p>
               </motion.div>
             ))}
           </div>
@@ -267,8 +221,8 @@ export function ExpandableGallery() {
           className="w-full flex flex-col items-center gap-4 text-center"
         >
           <p className="text-base md:text-lg font-light tracking-tight text-text-secondary leading-relaxed max-w-xl font-instrumentsans">
-            A glimpse of the moments behind the tech world. Click to explore the
-            full gallery and dive into the stories each photo holds.
+            Moments where the tech community comes together—from meetups and
+            hackathons to ideas, conversations, and the people behind them.
           </p>
 
           <button

@@ -80,7 +80,7 @@ export const Hero = () => {
             {name}
           </h1>
           <p className="text-[14px] text-text-secondary/70 font-light font-instrumentsans tracking-tight">
-            21,  Software Engineer,  IND
+            21, Full-Stack Developer,  IND
           </p>
         </div>
       </div>
@@ -333,15 +333,14 @@ export const Hero = () => {
         </div>
 
         {/* Paragraph 1 */}
-        <p className="text-text-secondary/60 leading-relaxed text-[16px] font-instrumentsans tracking-tighter max-w-2xl font-light">
+        <p className="text-md sm:text-md text-text-secondary/70 leading-snug font-instrumentsans tracking-tight max-w-3xl font-light">
           <a
             href="/projects"
-            className="underline text-text-primary hover:text-blue-500 transition-colors font-light tracking-tight decoration-text-primary/30 underline-offset-4 font-instrumentsans  "
+            className="underline text-text-primary hover:text-blue-500 transition-colors font-normal decoration-text-primary/30 underline-offset-4 font-instrumentsans"
           >
-            Full Stack Dev
+            Product engineer / Full Stack Developer
           </a>{" "}
-          - loves to create, break and fix and ship high quality products.
-          Everyday is a new learning experience, I embrace it with passion..
+          across applied AI, scalable backend services, and polished frontend experiences.
         </p>
 
         {/* Paragraph 2 */}
