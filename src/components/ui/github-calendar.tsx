@@ -118,13 +118,50 @@ export function GithubCalendar({
             try {
                 setLoading(true)
                 const response = await fetch(
-                    `https://github-contributions-api.deno.dev/${username}.json`
+                    `https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(username)}`
                 )
                 if (!response.ok) {
-                    throw new Error("Failed to fetch GitHub data")
+                    throw new Error("Failed to fetch GitHub contribution data")
                 }
-                const jsonData = await response.json()
-                setData(jsonData)
+
+                const apiData: {
+                    contributions: Array<{
+                        date: string
+                        count: number
+                        level: number
+                    }>
+                } = await response.json()
+                const contributionLevels = [
+                    "NONE",
+                    "FIRST_QUARTILE",
+                    "SECOND_QUARTILE",
+                    "THIRD_QUARTILE",
+                    "FOURTH_QUARTILE",
+                ] as const
+                const today = new Date().toISOString().slice(0, 10)
+                const days = apiData.contributions
+                    .filter((day) => day.date <= today)
+                    .sort((a, b) => a.date.localeCompare(b.date))
+                    .slice(-365)
+                const contributions = Array.from(
+                    { length: Math.ceil(days.length / 7) },
+                    (_, weekIndex) =>
+                        days.slice(weekIndex * 7, weekIndex * 7 + 7).map((day) => ({
+                            date: day.date,
+                            contributionCount: day.count,
+                            contributionLevel:
+                                contributionLevels[day.level] ?? "NONE",
+                            color: "",
+                        }))
+                )
+
+                setData({
+                    contributions,
+                    totalContributions: days.reduce(
+                        (total, day) => total + day.count,
+                        0
+                    ),
+                })
             } catch (err) {
                 setError(err instanceof Error ? err.message : "An error occurred")
             } finally {
