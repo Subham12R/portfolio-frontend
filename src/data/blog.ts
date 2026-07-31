@@ -38,9 +38,9 @@ export const mediumPosts: MediumPost[] = [
 
 export const blogPosts: BlogPost[] = [
   {
-    id: "hermes-developer-operating-system",
-    slug: "how-i-use-hermes-as-my-developer-operating-system",
-    title: "How I Use Hermes as My Developer Operating System",
+    id: "hermes-the-second-brain",
+    slug: "hermes-the-second-brain",
+    title: "Hermes - The Second Brain",
     excerpt:
       "My practical setup for using Hermes across a cloud-hosted VPS gateway and a local gateway: scheduled checks, Telegram, Obsidian, browser automation, memory, and developer workflows.",
     coverImage: "/images/blog/hermes-developer-operating-system.png",

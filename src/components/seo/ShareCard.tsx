@@ -6,11 +6,16 @@ type ShareCardProps = {
   description: string;
 };
 
+const DOTS = Array.from({ length: 252 }, (_, index) => ({
+  left: 42 + (index % 28) * 42,
+  top: 42 + Math.floor(index / 28) * 62,
+}));
+
 export function ShareCard({ eyebrow, title, description }: ShareCardProps): ReactElement {
   return (
     <div
       style={{
-        background: "#0e0e0e",
+        backgroundColor: "#0c0c0c",
         color: "#f8fafc",
         display: "flex",
         flexDirection: "column",
@@ -20,6 +25,20 @@ export function ShareCard({ eyebrow, title, description }: ShareCardProps): Reac
         position: "relative",
       }}
     >
+      {DOTS.map((dot, index) => (
+        <div
+          key={index}
+          style={{
+            backgroundColor: "#292929",
+            borderRadius: "999px",
+            height: "3px",
+            left: `${dot.left}px`,
+            position: "absolute",
+            top: `${dot.top}px`,
+            width: "3px",
+          }}
+        />
+      ))}
       <div
         style={{
           border: "1px solid rgba(255,255,255,0.14)",
@@ -31,9 +50,10 @@ export function ShareCard({ eyebrow, title, description }: ShareCardProps): Reac
           overflow: "hidden",
           padding: "48px",
           position: "relative",
+          zIndex: 1,
         }}
       >
-        <div style={{ color: "#a1a1aa", display: "flex", fontSize: "24px", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+        <div style={{ color: "#b4b4ba", display: "flex", fontSize: "24px", fontWeight: 500, letterSpacing: "-0.01em" }}>
           {eyebrow}
         </div>
         <div style={{ display: "flex", flexDirection: "column", maxWidth: "940px" }}>
@@ -49,7 +69,7 @@ export function ShareCard({ eyebrow, title, description }: ShareCardProps): Reac
           <span>© {new Date().getFullYear()} Subham Karmakar</span>
         </div>
       </div>
-      <div style={{ background: "#60a5fa", borderRadius: "999px", height: "12px", left: "112px", position: "absolute", top: "64px", width: "140px" }} />
+
     </div>
   );
 }

@@ -65,11 +65,11 @@ This file is the comprehensive, canonical LLM-readable index for Subham Karmakar
 - npm: https://npmjs.com/package/react-wheel-picker
 
 ## Writing
-### How I Use Hermes as My Developer Operating System
+### Hermes - The Second Brain
 - Published: 2026-07-31
 - Topics: Hermes Agent, AI agents, developer tools, automation, VPS, Obsidian
 - Summary: a practical cloud-and-local Hermes workflow covering scheduled checks, Telegram, memory, browser automation, Obsidian, and development work.
-- URL: https://www.subham12r.me/blog/how-i-use-hermes-as-my-developer-operating-system
+- URL: https://www.subham12r.me/blog/hermes-the-second-brain
 
 ### Important Concepts to Remember When Setting Up a Backend to Production
 - Published: 2026-02-03
