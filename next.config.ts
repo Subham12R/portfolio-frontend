@@ -44,6 +44,34 @@ const nextConfig: NextConfig = {
    * HTML is controlled by page `revalidate` / ISR, not fixed here.
    */
   async headers() {
+    const securityHeaders = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "X-Frame-Options", value: "DENY" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
+      {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+      },
+      {
+        key: "Content-Security-Policy",
+        value: [
+          "default-src 'self'",
+          "base-uri 'self'",
+          "object-src 'none'",
+          "frame-ancestors 'none'",
+          "form-action 'self'",
+          "script-src 'self' 'unsafe-inline' https://cloud.umami.is https://images.dmca.com https://louisabraham.github.io",
+          "style-src 'self' 'unsafe-inline'",
+          "img-src 'self' data: blob: https://img.youtube.com https://ik.imagekit.io https://api.microlink.io https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev https://images.unsplash.com https://images.dmca.com https://i.scdn.co",
+          "font-src 'self' data:",
+          "connect-src 'self' https://api.github.com https://github-contributions-api.jogruber.de https://devpresence.monostack.in https://cloud.umami.is",
+          "media-src 'self' https://pub-b5cc14cdfc9a459bbb6c1cc637db4ffa.r2.dev https://www.soundhelix.com",
+          "frame-src https://cal.com https://www.youtube-nocookie.com https://www.loom.com",
+          "upgrade-insecure-requests",
+        ].join("; "),
+      },
+    ];
     const immutable = [
       {
         key: "Cache-Control",
@@ -75,6 +103,9 @@ const nextConfig: NextConfig = {
     ];
 
     return [
+      // Baseline browser protections for every public and API route.
+      { source: "/:path*", headers: securityHeaders },
+
       // Next build output (content-hashed)
       { source: "/_next/static/:path*", headers: immutable },
 

@@ -2,6 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 
 const SKIP = /^(\/_next|\/api|\/favicon\.ico|\/images|\/fonts)/;
+const TRACKED_PATHS = new Set([
+  "/",
+  "/projects",
+  "/blog",
+  "/photography",
+  "/hackathons",
+  "/casestudy",
+]);
+
+function toAnalyticsPath(pathname: string): string | null {
+  if (TRACKED_PATHS.has(pathname)) return pathname;
+  if (/^\/projects\/[^/]+$/.test(pathname)) return "/projects/:id";
+  if (/^\/blog\/[^/]+$/.test(pathname)) return "/blog/:slug";
+  return null;
+}
 
 let _redis: Redis | null = null;
 
@@ -29,6 +44,8 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (SKIP.test(pathname)) return res;
+  const analyticsPath = toAnalyticsPath(pathname);
+  if (!analyticsPath) return res;
 
   const r = getRedis();
   if (!r) return res;
@@ -45,7 +62,7 @@ export async function middleware(req: NextRequest) {
   pipe.expire(`v:${date}`, ttl);
   pipe.pfadd(`uv:${date}`, uid);
   pipe.expire(`uv:${date}`, ttl);
-  pipe.zincrby("pg", 1, pathname);
+  pipe.zincrby("pg", 1, analyticsPath);
 
   await pipe.exec().catch(() => {});
 

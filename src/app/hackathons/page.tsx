@@ -15,7 +15,13 @@ export const metadata = {
     description: "Photos from hackathons and coding events",
     url: `${siteConfig.url}/hackathons`,
     type: "website",
-    images: ["/banner.png"],
+    images: [{ url: "/hackathons/opengraph-image", width: 1200, height: 630, alt: "Hackathon moments by Subham Karmakar" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Hackathons | ${siteConfig.name}`,
+    description: "Photos from hackathons and coding events",
+    images: ["/hackathons/opengraph-image"],
   },
 };
 

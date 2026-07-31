@@ -1,130 +1,80 @@
-# llms.txt - LLM/AI Readable Information
-# This file helps AI assistants understand and reference this portfolio
+# Subham Karmakar
 
-## About
+> Canonical, LLM-readable profile for https://www.subham12r.me
+
+## Identity
 - Name: Subham Karmakar
-- Role: Full Stack Developer
+- Also known as: Subham12R
+- Role: Full-Stack AI Developer
 - Location: Kolkata, West Bengal, India
+- Website: https://www.subham12r.me
 - Email: dev@subham12r.me
-- Website: https://subham12r.me
-
-## Education
-- **Adamas University** (Aug 2024 – May 2028 (Expected))
-  - B.Tech in Computer Science and Engineering | Kolkata, West Bengal, India
-  - CGPA: 9.17 / 10
-
-## Professional Summary
-Subham Karmakar is a Full Stack Developer and B.Tech student from Kolkata, India. He specializes in building scalable, performant web applications using modern technologies including React/Next.js, TypeScript, GoLang, Node.js, FastAPI, PostgreSQL, and Docker. He focuses on clean architecture, thoughtful design, system level implementations, and real-world impact.
-
-## Work Experience
-
-### Moodle LMS Cloud Maintainer (Part-time) at Adamas University (November 2025 - Present)
-- Location: Kolkata, India
-- Maintained 99%+ uptime for 1,000+ students and faculty by administering cloud-hosted Moodle LMS with proactive health monitoring and incident response workflows.
-- Reduced faculty support tickets by ~40% and per-course setup time by ~half by redesigning role-permission flows and standardizing plugin configuration for 100+ faculty members.
-
-### Frontend Developer Intern at Ryze AI (January 2026 - April 2026)
-- Location: Remote
-- Accelerated feature releases by shipping production UI components (React.js, TypeScript, Tailwind CSS) and participating in code reviews as author and reviewer — zero missed sprint commitments across the engagement.
-- Reduced average data-fetch latency by ~30% by integrating REST API endpoints with optimized request patterns and component-level caching strategies.
-
-### Frontend Developer at Adamas University (August 2025 - January 2026)
-- Location: Barasat, Kolkata
-- Redesigned college website and built event websites using Next.js, TypeScript, GSAP, TailwindCSS, and Zod.
-
-## Technical Skills
-- **Languages**: JavaScript, TypeScript, Python, C, C++, SQL, GoLang
-- **Frontend**: React.js, Next.js, Tailwind CSS, Redux Toolkit, GSAP, Framer Motion, HTML5/CSS3, Electron 35
-- **Backend**: Node.js, Express.js, FastAPI, REST API, WebSockets, Socket.io, Stripe
-- **Auth & Security**: JWT, OAuth, RBAC, Session Management
-- **Databases**: PostgreSQL, pgvector, MongoDB, Redis, SQLite, Supabase, Neon
-- **Tools & DevOps**: Git, Docker, Docker Compose, GitHub Actions, Nginx, PM2, Vercel, Render, Sentry, Linux, CI/CD
-- **Testing**: Jest, Vitest, pytest
-
-## Achievements & Certifications
-- **Claude Code 101 & MCP Introduction** – Anthropic Education, Jun 2026 (ID: skilljar/y7qppxfzwffs | skilljar/s4t3vecwu84e)
-- **Smart India Hackathon 2025** – Internal Finalist, Top 10 in Software Category out of 150 teams
-- **Certified Full Stack Web Developer** – Udemy, 97 hours (ID: UC-f427f3a7-351a-41fc-91e4-510256962222)
-- **Frontend Developer (React)** – HackerRank, Sep 2025 (ID: 53e516d4c11d)
-
-## Featured Projects
-
-### CyCoder
-- Next.js, TypeScript, PostgreSQL, Docker, Nginx, PM2
-- Live/Code: https://cycoders.in (2025)
-- Features: Engineered JWT-based multi-role auth (Admin/Member) with RBAC access controls and QR-code check-in, scaling Adamas developer community to 100+ active users via gamified XP-progression and leaderboards.
-- Infrastructure: Achieved zero-downtime deployments by containerizing the full TypeScript stack with Docker Compose, VPS-hosted behind Nginx with PM2 and GitHub Actions CI/CD pipeline.
-
-### Noted
-- Next.js, TypeScript, Node.js, WebSockets, PostgreSQL, Redis, Stripe, LLM APIs
-- Live: https://notezero.vercel.app (2025)
-- Features: Built a real-time collaboration engine with zero data loss under concurrent multi-user edits via WebSocket pub/sub over Redis with operational-transform-inspired conflict resolution; client state managed with Redux Toolkit.
-- AI Integration: Reduced note organization effort by ~95% with an agentic LLM pipeline (intent classification, tag generation, context-aware linking); integrated Stripe for subscription billing.
-
-### Web-Server
-- TypeScript, Node.js
-- GitHub: https://github.com/subham12r/web-server (2026)
-- Features: Built a production-grade HTTP/1.1 server from raw TCP sockets in TypeScript. Implements full request/response parsing, keep-alive connection reuse, streaming BodyReader, and explicit socket back-pressure. Demonstrates deep understanding of the networking layer underlying all RESTful API design.
-
-### Panda
-- Electron 35, React 19, TypeScript, Python FastAPI, SQLite, fastembed (2026)
-- Features: Built a local-first AI desktop assistant with multi-model support (Anthropic/Ollama/Groq), session-scoped RAG data ingestion pipeline (sentence-transformer embeddings, top-5 chunk injection), agentic tool-orchestration research pipeline, and WebSocket streaming. 100% local.
-
-### CrackCoded
-- Next.js, TypeScript, FastAPI, Python, PostgreSQL, pgvector
-- Live: https://crackcoded.vercel.app (2026)
-- Features: Delivered 340% faster learning and 67% lower time-per-problem via pgvector SM-2 spaced-repetition queues and an AI hint engine; 72% average topic completion rate. Python/FastAPI backend deployed on Render.
-
-## Blog Posts
-
-### Important Concepts to Remember When Setting Up a Backend to Production (Featured)
-- Published: February 3, 2026
-- Reading Time: 8 min
-- Topics: Environment variables, secrets management, logging, monitoring, error handling, database considerations, security basics, health checks, deployment strategies, scaling
-- Key Insights: Production checklist covering secrets management, structured logging, APM, security headers, database backups, connection pooling, and zero-downtime deployments
-- Tags: Backend, DevOps, Best Practices, Production
-
-### How to Grind Hard in a Specific Domain
-- Published: February 2, 2026
-- Reading Time: 7 min
-- Topics: Specialization, deliberate practice, avoiding shiny object syndrome, building expertise, learning roadmaps
-- Key Insights: Why specialists are irreplaceable, principles of deliberate practice, how to choose your domain, staying consistent
-- Tags: Learning, Career, Productivity, Growth
-
-### Are You Out of Ideas?
-- Published: February 1, 2026
-- Reading Time: 6 min
-- Topics: Creativity, consumption vs creation balance, idea generation techniques, building idea capture systems
-- Key Insights: Running out of ideas is a consumption problem, not a creativity problem. Techniques include changing input sources, solving your own problems, combining unrelated concepts
-- Tags: Creativity, Productivity, Mindset
-
-### What My Internship Taught Me About Understanding and Debugging a Codebase Before Touching It (Featured)
-- Published: January 30, 2026
-- Reading Time: 7 min
-- Topics: Debugging, code comprehension, refactoring best practices, real-world development, internship lessons
-- Key Insights: Read before you write, trace flows before changing logic, debug before refactoring, prioritize correctness over speed
-- Tags: Internship, Debugging, Career, Best Practices
-
-## Social Links
 - GitHub: https://github.com/Subham12R
 - LinkedIn: https://www.linkedin.com/in/subham12r/
-- Twitter/X: https://x.com/Subham12R
-- YouTube: https://www.youtube.com/@SubhamX8
+- X: https://x.com/Subham12R
 
-## Contact
-For collaboration, hiring, or project inquiries:
-- Email: dev@subham12r.me
-- Schedule a call: https://cal.com/subham12r/30min
+## Professional summary
+Subham Karmakar is a full-stack AI developer and B.Tech Computer Science student at Adamas University. He builds production-ready web, desktop, and AI products across the stack: Next.js and React interfaces, TypeScript and Python services, FastAPI, PostgreSQL, Redis, Docker, Nginx, and practical LLM/RAG workflows.
 
-## Key Strengths
-- Full-stack development with modern web technologies (React/Next.js, TypeScript, GoLang, Node.js, FastAPI)
-- System level programming (HTTP servers, TCP sockets)
-- Local AI applications & desktop apps (Electron, sentence-transformer embeddings, local models)
-- Real-time applications (WebSockets, Redis pub/sub)
-- Cloud maintenance and administration (Moodle LMS, Linux VPS, Docker Compose, Nginx, PM2)
+## Education
+- Adamas University — B.Tech in Computer Science and Engineering, Aug 2024 – May 2028 (expected)
+- Kolkata, West Bengal, India
+- CGPA: 9.0 / 10
 
-## Keywords
-full stack developer, react developer, next.js developer, typescript, golang, fastapi, electron, local rag, vector database, pgvector, websocket collaboration, custom http server, tcp sockets, moodle lms, cloud maintainer, devops, docker, nginx, pm2, vercel, render, CI/CD, system design, software engineer, portfolio, kolkata developer, india developer
+## Experience
+### Ryze AI (January 2026 – April 2026)
+- Frontend Developer Intern, remote
+- Shipped production React, TypeScript, and Tailwind CSS components; integrated REST APIs and participated in code reviews.
+- Improved average data-fetch latency by approximately 30% through optimized request patterns and component-level caching.
+
+### Adamas University (November 2025 – May 2026)
+- Moodle LMS Cloud Maintainer, part-time, Kolkata
+- Administered a cloud-hosted Moodle LMS for 1,000+ students and faculty with 99%+ uptime.
+- Reduced faculty support tickets by approximately 40% and per-course setup time by approximately 50% through role-permission and configuration improvements.
+
+## Selected work
+### Atlas
+- Provider-agnostic GenAI desktop assistant with React, Electron, TypeScript, Python/FastAPI, SQLite, sqlite-vec, RAG, persistent memory, streaming, vision, and voice.
+- GitHub: https://github.com/Subham12R/Atlas
+
+### CYCODERS
+- Community-management platform with Next.js, TypeScript, PostgreSQL, Docker, Nginx, and PM2.
+- Includes JWT multi-role RBAC, QR-code check-in, XP progression, and leaderboards for the Adamas developer community.
+- Live: https://cycoders.in
+
+### Noted
+- Real-time collaborative note-taking platform using Next.js, TypeScript, Node.js, WebSockets, PostgreSQL, Redis, Stripe, and LLM APIs.
+- GitHub: https://github.com/Subham12R/Noted
+- Live: https://noted-main.vercel.app
+
+### Trace
+- Local-first AI observability dashboard for cross-provider usage logs, model costs, monitoring trends, and per-session analysis.
+- GitHub: https://github.com/Subham12R/Trace
+- Live: https://traceanalytics.vercel.app
+
+### Ruse
+- Private watch-party platform built with Go.
+- GitHub: https://github.com/Subham12R/ruse
+
+## Expertise
+- Frontend: React, Next.js, TypeScript, Tailwind CSS, GSAP, Framer Motion, Electron
+- Backend: Node.js, Express, FastAPI, Go, REST APIs, WebSockets, Server-Sent Events
+- AI systems: OpenAI, Anthropic, Gemini, RAG, embeddings, vector search, persistent memory, agent workflows
+- Data: PostgreSQL, pgvector, Redis, MongoDB, SQLite, Supabase, Neon
+- DevOps: Docker, Docker Compose, Nginx, PM2, GitHub Actions, Vercel, Render, Linux, CI/CD
+- Security: JWT, OAuth, RBAC, session management
+
+## Recognition
+- Smart India Hackathon 2025 — Internal Finalist, Top 10 in Software Category out of 150 teams
+- Claude Code 101 and MCP Introduction — Anthropic Education, June 2026
+- Certified Full Stack Web Developer — Udemy, 97 hours
+
+## Canonical resources
+- Portfolio: https://www.subham12r.me
+- Projects: https://www.subham12r.me/projects
+- Blog: https://www.subham12r.me/blog
+- Resume: https://www.subham12r.me/Resume.pdf
+- Full profile and content index: https://www.subham12r.me/llms-full.txt
 
 ## Last Updated
-2026-06-25
+2026-07-31

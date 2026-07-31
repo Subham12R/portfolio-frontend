@@ -19,9 +19,9 @@ const ProjectsPage = async () => {
       <ScrollReveal className="max-w-2xl w-full flex flex-col h-full">
         {/* HEADER CONTENT */}
         <div className="mb-6">
-          <h1 className="text-4xl font-light tracking-tight text-text-primary text-start font-instrumentserif">
+          <h2 className="text-4xl font-light tracking-tight text-text-primary text-start font-instrumentserif">
             {section.title}.
-          </h1>
+          </h2>
         </div>
 
         {/* Project Cards Grid */}

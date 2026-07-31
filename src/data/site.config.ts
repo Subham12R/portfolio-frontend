@@ -4,27 +4,27 @@
 export const siteConfig = {
   name: "Subham Karmakar",
   title: "Subham12r",
-  url: "https://subham12r.me",
-  role: "Full Stack Developer",
-  description: "Subham Karmakar — Full Stack Developer & Frontend Engineer. Building scalable web apps with Next.js, TypeScript and GoLang.",
+  url: "https://www.subham12r.me",
+  role: "Full-Stack AI Developer",
+  description: "Subham Karmakar is a full-stack AI developer in Kolkata building production-ready products with Next.js, TypeScript, FastAPI, PostgreSQL, Redis, Docker, and LLM workflows.",
   location: "Kolkata, West Bengal, India",
   timezone: "Asia/Kolkata",
   email: "dev@subham12r.me",
 
   // Bio and introduction
   bio: {
-    short: "Full Stack Developer, Architecting scalable modern web solutions while exploring databases, system design, and developer tooling.",
-    long: `Full Stack Developer, Architecting scalable modern web solutions while exploring databases, system design, and developer tooling. I enjoy turning ideas into practical solutions—whether it's experimenting with visual tools, solving algorithmic problems, or contributing to larger technical projects.`,
-    about: `I'm Subham Karmakar, a B.Tech student and developer from Kolkata. I build full-stack applications with modern web technologies, while constantly exploring areas like databases, system design, and developer tooling. I enjoy turning ideas into practical solutions—whether it's experimenting with visual tools, solving algorithmic problems, or contributing to larger technical projects.`
+    short: "Full-stack AI developer building applied-AI products, scalable backend services, and polished frontend experiences.",
+    long: `Full-stack AI developer based in Kolkata. I build production-ready products across the stack: polished interfaces, reliable backend services, cloud infrastructure, and practical LLM workflows. My work spans Next.js, TypeScript, FastAPI, PostgreSQL, Redis, Docker, and developer tooling.`,
+    about: `I'm Subham Karmakar, a B.Tech Computer Science student at Adamas University and a full-stack AI developer from Kolkata. I build end-to-end products with modern web technologies, backend systems, cloud infrastructure, and practical AI workflows—from the interface and API to deployment, monitoring, and documentation.`
   },
 
   // Rotating titles for hero animation
   titles: [
-    "Full Stack Developer",
-    "App Developer",
-    "Freelance Developer",
+    "Full-Stack AI Developer",
+    "Applied AI Builder",
+    "Backend & DevOps Engineer",
     "Open Source Contributor",
-    "Tech Enthusiast",
+    "Developer Toolmaker",
   ],
 
   // Social media links

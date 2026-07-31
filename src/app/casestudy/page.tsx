@@ -22,20 +22,20 @@ export const metadata = {
     description: caseStudy.tagline,
     url: `${siteConfig.url}/casestudy`,
     type: "article",
-    images: [caseStudy.bannerImage || "/banner.png"],
+    images: [{ url: "/casestudy/opengraph-image", width: 1200, height: 630, alt: `${caseStudy.title} case study by Subham Karmakar` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${caseStudy.title} — Case Study | ${siteConfig.name}`,
     description: caseStudy.tagline,
-    images: [caseStudy.bannerImage || "/banner.png"],
+    images: ["/casestudy/opengraph-image"],
   },
 };
 
 export default function CaseStudyPage() {
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
+    <section className="min-h-screen bg-bg-primary text-text-primary">
       <CaseStudyView caseStudy={caseStudy} />
-    </main>
+    </section>
   );
 }

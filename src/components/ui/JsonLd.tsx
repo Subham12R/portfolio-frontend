@@ -4,6 +4,7 @@ export function JsonLd() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${siteConfig.url}/#person`,
     name: siteConfig.name,
     alternateName: siteConfig.title,
     url: siteConfig.url,
@@ -28,13 +29,11 @@ export function JsonLd() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
     name: `${siteConfig.name} | ${siteConfig.role}`,
     url: siteConfig.url,
     description: siteConfig.description,
-    author: {
-      "@type": "Person",
-      name: siteConfig.name,
-    },
+    author: { "@id": `${siteConfig.url}/#person` },
   }
 
   return (

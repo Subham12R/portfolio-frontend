@@ -16,7 +16,7 @@ export default function Experience() {
         className="w-full px-2 backdrop-blur-3xl rounded-md inline-flex items-center gap-2 mb-4"
       >
         <BriefcaseIcon size={20} className="mb-1" />
-        <h1 className="tracking-tighter text-lg font-medium">Experience</h1>
+        <h3 className="tracking-tighter text-lg font-medium">Experience</h3>
       </div>
 
       <div className="flex flex-1 flex-col gap-2">

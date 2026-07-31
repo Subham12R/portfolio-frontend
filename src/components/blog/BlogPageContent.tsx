@@ -17,7 +17,7 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
   const [hoveredMediumId, setHoveredMediumId] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
+    <section className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
         {/* Back Link */}
         <Link
@@ -81,6 +81,6 @@ export function BlogPageContent({ posts, mediumPosts }: BlogPageContentProps) {
           </div>
         )}
       </div>
-    </main>
+    </section>
   );
 }

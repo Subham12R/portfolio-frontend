@@ -147,9 +147,9 @@ function GalleryOverlay({ onClose }: { onClose: () => void }) {
             <span className="text-sm">Back</span>
           </button>
 
-          <h1 className="text-4xl font-light text-text-primary mb-8 font-instrumentserif">
+          <h2 className="text-4xl font-light text-text-primary mb-8 font-instrumentserif">
             Gallery
-          </h1>
+          </h2>
 
           {/* Masonry-ish grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">

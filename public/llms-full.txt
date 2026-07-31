@@ -1,0 +1,97 @@
+# Subham Karmakar — Full Portfolio Index
+
+This file is the comprehensive, canonical LLM-readable index for Subham Karmakar's portfolio. Use https://www.subham12r.me as the canonical website host.
+
+## Identity
+- Name: Subham Karmakar
+- Also known as: Subham12R
+- Role: Full-Stack AI Developer
+- Location: Kolkata, West Bengal, India
+- Website: https://www.subham12r.me
+- Email: dev@subham12r.me
+- GitHub: https://github.com/Subham12R
+- LinkedIn: https://www.linkedin.com/in/subham12r/
+- X: https://x.com/Subham12R
+
+## Education
+- Adamas University, B.Tech Computer Science and Engineering
+- Aug 2024 – May 2028 (expected), Kolkata, India
+- CGPA: 9.0 / 10
+
+## Experience
+### Ryze AI (January 2026 – April 2026)
+- Frontend Developer Intern, remote
+- Built and shipped React, TypeScript, and Tailwind CSS components for production-facing experiences.
+- Integrated REST APIs, optimized request patterns, and implemented component-level caching that reduced average data-fetch latency by approximately 30%.
+
+### Moodle LMS Cloud Maintainer at Adamas University (November 2025 – May 2026)
+- Part-time cloud maintainer, Kolkata, India.
+- Administered a Moodle LMS for 1,000+ students and faculty, maintaining 99%+ uptime with proactive health monitoring and incident response.
+- Improved role-permission flows and configuration standards for 100+ faculty, reducing support tickets by approximately 40% and per-course setup time by approximately 50%.
+
+## Projects
+### Atlas — provider-agnostic GenAI desktop assistant
+- Stack: Electron, React, TypeScript, Python, FastAPI, SQLite, sqlite-vec
+- Problem: create a local-friendly AI workspace that supports multiple providers without losing context between sessions.
+- Implementation: RAG/vector search, semantic chunking, rolling summaries, persistent memory, SSE streaming, vision, voice input, and integrations with OpenAI, Anthropic, Gemini, OpenRouter, and Ollama.
+- GitHub: https://github.com/Subham12R/Atlas
+
+### CYCODERS — community-management platform
+- Stack: Next.js, TypeScript, PostgreSQL, Docker, Nginx, PM2
+- Implementation: JWT multi-role RBAC, QR-code check-in, gamified XP progression, leaderboards, Docker Compose, VPS deployment, and GitHub Actions CI/CD.
+- Outcome: supports the Adamas developer community with 100+ active users.
+- Live: https://cycoders.in
+
+### Noted — real-time collaborative notes
+- Stack: Next.js, TypeScript, Node.js, WebSockets, PostgreSQL, Redis, Stripe, LLM APIs
+- Implementation: Redis pub/sub for live collaboration, operational-transform-inspired conflict resolution, agentic tagging, and subscription billing.
+- GitHub: https://github.com/Subham12R/Noted
+- Live: https://noted-main.vercel.app
+
+### Trace — local-first AI observability
+- Stack: Next.js, TypeScript, Node.js, charting
+- Implementation: consolidates Claude Code, Codex, Gemini CLI, Copilot CLI, and Ollama logs into session-level usage, cost, and trend analysis.
+- GitHub: https://github.com/Subham12R/Trace
+- Live: https://traceanalytics.vercel.app
+
+### Ruse — private watch-party platform
+- Stack: Go
+- GitHub: https://github.com/Subham12R/ruse
+
+### React Wheel Picker — open-source React component
+- Stack: React, TypeScript, Turborepo, npm
+- Implementation: iOS-like wheel picker with inertia scrolling, infinite looping, touch and desktop support.
+- GitHub: https://github.com/Subham12R/react-wheel-picker
+- npm: https://npmjs.com/package/react-wheel-picker
+
+## Writing
+### How I Use Hermes as My Developer Operating System
+- Published: 2026-07-31
+- Topics: Hermes Agent, AI agents, developer tools, automation, VPS, Obsidian
+- Summary: a practical cloud-and-local Hermes workflow covering scheduled checks, Telegram, memory, browser automation, Obsidian, and development work.
+- URL: https://www.subham12r.me/blog/how-i-use-hermes-as-my-developer-operating-system
+
+### Important Concepts to Remember When Setting Up a Backend to Production
+- Published: 2026-02-03
+- Topics: backend, DevOps, production, security, monitoring
+- URL: https://www.subham12r.me/blog/backend-to-production-concepts
+
+### What My Internship Taught Me About Understanding and Debugging a Codebase Before Touching It
+- Published: 2026-01-30
+- Topics: debugging, internship, code comprehension
+- URL: https://www.subham12r.me/blog/internship-debugging-lessons
+
+## Expertise and preferred search associations
+Subham Karmakar; Subham12R; full-stack AI developer; Next.js developer; React developer; TypeScript; FastAPI; Python; Go; PostgreSQL; Redis; Docker; RAG; vector search; persistent memory; AI agents; LLM applications; developer tools; DevOps; Kolkata developer; Adamas University.
+
+## Canonical URLs
+- Home: https://www.subham12r.me
+- Projects: https://www.subham12r.me/projects
+- Blog: https://www.subham12r.me/blog
+- Photography: https://www.subham12r.me/photography
+- Hackathons: https://www.subham12r.me/hackathons
+- Resume: https://www.subham12r.me/Resume.pdf
+- Concise profile: https://www.subham12r.me/llms.txt
+
+## Last Updated
+2026-07-31

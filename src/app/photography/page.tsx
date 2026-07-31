@@ -15,7 +15,13 @@ export const metadata = {
     description: "Personal photography collection",
     url: `${siteConfig.url}/photography`,
     type: "website",
-    images: ["/banner.png"],
+    images: [{ url: "/photography/opengraph-image", width: 1200, height: 630, alt: "Photography by Subham Karmakar" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Photography | ${siteConfig.name}`,
+    description: "Personal photography collection",
+    images: ["/photography/opengraph-image"],
   },
 };
 

@@ -26,9 +26,9 @@ const Tech = () => {
     >
       <ScrollReveal className="max-w-2xl w-full flex flex-col h-full">
         {/* Header */}
-        <h1 className="text-4xl font-light text-text-primary mb-6 font-instrumentserif">
+        <h2 className="text-4xl font-light text-text-primary mb-6 font-instrumentserif">
           Tech Stack - That helps me get the stuff done.
-        </h1>
+        </h2>
         {/* Tech Stack Dock */}
         <div className="flex justify-center items-center pb-2 w-full overflow-visible ">
           <div className="relative flex items-center justify-center flex-wrap px-2 py-2 rounded-md  border-2 border-border-primary backdrop-blur-md w-full shadow-[inset_0px_0px_2px_2px_rgba(0,0,0,0.08)] dark:shadow-[inset_0px_0px_4px_4px_rgba(255,255,255,0.04)]">

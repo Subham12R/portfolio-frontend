@@ -33,7 +33,13 @@ export async function generateMetadata({ params }: ProjectCaseStudyPageProps) {
       description: project.description,
       url: `${siteConfig.url}/projects/${project.id}`,
       type: "article",
-      images: [project.bannerImage || "/banner.png"],
+      images: [{ url: `/projects/${project.id}/opengraph-image`, width: 1200, height: 630, alt: `${project.title} — Subham12r project` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Case Study | ${siteConfig.name}`,
+      description: project.description,
+      images: [`/projects/${project.id}/opengraph-image`],
     },
   };
 }
@@ -48,9 +54,27 @@ export default async function ProjectCaseStudyPage({
     notFound();
   }
 
+  const projectUrl = `${siteConfig.url}/projects/${project.id}`;
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.description,
+    url: projectUrl,
+    image: project.bannerImage ? `${siteConfig.url}${project.bannerImage}` : `${siteConfig.url}/banner.png`,
+    keywords: project.tags,
+    author: { "@id": `${siteConfig.url}/#person` },
+    ...(project.completedDate ? { dateCreated: project.completedDate } : {}),
+    ...(project.links.github ? { codeRepository: project.links.github } : {}),
+  };
+
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
+    <section className="min-h-screen bg-bg-primary text-text-primary">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema).replace(/</g, "\\u003c") }}
+      />
       <CaseStudyView caseStudy={getProjectCaseStudy(project)} />
-    </main>
+    </section>
   );
 }

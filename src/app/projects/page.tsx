@@ -30,14 +30,14 @@ export const metadata = {
       "A collection of projects showcasing my work in web development.",
     url: `${siteConfig.url}/projects`,
     type: "website",
-    images: ["/banner.png"],
+    images: [{ url: "/projects/opengraph-image", width: 1200, height: 630, alt: "Projects by Subham Karmakar" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `Projects | ${siteConfig.name}`,
     description:
       "A collection of projects showcasing my work in web development.",
-    images: ["/banner.png"],
+    images: ["/projects/opengraph-image"],
   },
 };
 
@@ -45,7 +45,7 @@ export default async function ProjectsPage() {
   const projects = await fetchProjects();
 
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
+    <section className="min-h-screen bg-bg-primary text-text-primary">
       <div className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
         {/* Back Link */}
         <Link
@@ -70,6 +70,6 @@ export default async function ProjectsPage() {
 
         <ProjectsGrid projects={projects} />
       </div>
-    </main>
+    </section>
   );
 }

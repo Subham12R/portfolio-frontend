@@ -27,6 +27,11 @@ export interface AnalyticsStats {
   isDemo: boolean;
 }
 
+export interface PublicAnalyticsStats {
+  totalVisitors: number;
+  isDemo: boolean;
+}
+
 // ─── Redis client ─────────────────────────────────────────────────────────────
 
 let _redis: Redis | null = null;
@@ -105,12 +110,13 @@ function isoDate(key: string): string {
 
 // ─── GET handler ─────────────────────────────────────────────────────────────
 
-export async function GET() {
+export async function GET(): Promise<NextResponse<PublicAnalyticsStats>> {
   const r = getRedis();
 
   if (!r) {
-    return NextResponse.json(buildDemoData(), {
-      headers: { "Cache-Control": "s-maxage=120, stale-while-revalidate=300" },
+    const demo = buildDemoData();
+    return NextResponse.json({ totalVisitors: demo.totalVisitors, isDemo: true }, {
+      headers: { "Cache-Control": "no-store" },
     });
   }
 
@@ -155,17 +161,16 @@ export async function GET() {
 
     return NextResponse.json(
       {
-        totalVisitors:  totalVisitors  || demo?.totalVisitors  || 0,
-        uniqueVisitors: uniqueTotal    || demo?.uniqueVisitors || 0,
-        todayVisitors:  todayVisitors  || demo?.todayVisitors  || 0,
-        weekVisitors:   weekVisitors   || demo?.weekVisitors   || 0,
-        timeseries:     totalVisitors  ? timeseries : (demo?.timeseries ?? timeseries),
-        topPages:       topPages.length ? topPages : (demo?.topPages ?? []),
-        isDemo:         totalVisitors === 0,
-      } satisfies AnalyticsStats,
-      { headers: { "Cache-Control": "s-maxage=60, stale-while-revalidate=120" } }
+        totalVisitors: totalVisitors || demo?.totalVisitors || 0,
+        isDemo: totalVisitors === 0,
+      },
+      { headers: { "Cache-Control": "no-store" } }
     );
   } catch {
-    return NextResponse.json(buildDemoData());
+    const demo = buildDemoData();
+    return NextResponse.json(
+      { totalVisitors: demo.totalVisitors, isDemo: true },
+      { headers: { "Cache-Control": "no-store" } }
+    );
   }
 }

@@ -98,7 +98,7 @@ export const metadata: Metadata = {
         url: "/banner.png",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} portfolio banner`,
+        alt: `${siteConfig.name} — ${siteConfig.role}`,
       },
     ],
   },

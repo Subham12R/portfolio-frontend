@@ -52,9 +52,9 @@ const GallerySection = () => {
       <div ref={rootRef} className="max-w-2xl w-full flex flex-col h-full">
         {/* HEADER */}
         <div data-gallery-reveal className="mb-2">
-          <h1 className="text-4xl font-light text-text-primary text-start font-instrumentserif">
+          <h2 className="text-4xl font-light text-text-primary text-start font-instrumentserif">
             {section.title}.
-          </h1>
+          </h2>
         </div>
 
         <div data-gallery-reveal>

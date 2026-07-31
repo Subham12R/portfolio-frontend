@@ -30,13 +30,13 @@ export function MermaidDiagram({ chart, className }: MermaidDiagramProps) {
 
         mermaid.initialize({
           startOnLoad: false,
-          securityLevel: "loose",
+          securityLevel: "strict",
           theme: isDark ? "dark" : "neutral",
           fontFamily: "inherit",
           flowchart: {
             curve: "basis",
             padding: 16,
-            htmlLabels: true,
+            htmlLabels: false,
             useMaxWidth: true,
           },
           themeVariables: isDark

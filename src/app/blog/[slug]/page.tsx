@@ -28,19 +28,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     };
   }
 
-  const image = post.coverImage
-    ? {
-        url: post.coverImage,
-        width: post.coverImageWidth ?? 1200,
-        height: post.coverImageHeight ?? 630,
-        alt: post.coverImageAlt ?? `${post.title} cover image`,
-      }
-    : {
-        url: "/banner.png",
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name} portfolio banner`,
-      };
+  const shareImage = `/blog/${post.slug}/opengraph-image`;
 
   return {
     title: `${post.title} | ${siteConfig.title}`,
@@ -62,13 +50,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       url: `${siteConfig.url}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
-      images: [image],
+      images: [{ url: shareImage, width: 1200, height: 630, alt: `${post.title} — Subham12r` }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${post.title} | ${siteConfig.name}`,
       description: post.excerpt,
-      images: [image.url],
+      images: [shareImage],
     },
   };
 }
@@ -92,9 +80,29 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       };
     });
 
+  const articleUrl = `${siteConfig.url}/blog/${post.slug}`;
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url: articleUrl,
+    mainEntityOfPage: articleUrl,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
+    image: `${siteConfig.url}${post.coverImage ?? "/banner.png"}`,
+    keywords: post.tags,
+    author: { "@id": `${siteConfig.url}/#person` },
+    publisher: { "@id": `${siteConfig.url}/#website` },
+  };
+
   return (
-    <main className="min-h-screen bg-bg-primary text-text-primary">
+    <section className="min-h-screen bg-bg-primary text-text-primary">
       <article className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema).replace(/</g, "\\u003c") }}
+        />
         {/* Back Link */}
         <Link
           href="/blog"
@@ -181,7 +189,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           ...contentSections,
         ]}
       />
-    </main>
+    </section>
   );
 }
 

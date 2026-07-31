@@ -1,21 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import type { AnalyticsStats } from "@/app/api/analytics/route";
-import { VisitorModal } from "./VisitorModal";
+import type { PublicAnalyticsStats } from "@/app/api/analytics/route";
 
 
 export function VisitorBadge() {
   const [mounted, setMounted] = useState(false);
-  const [stats, setStats] = useState<AnalyticsStats | null>(null);
-  const [open, setOpen] = useState(false);
+  const [stats, setStats] = useState<PublicAnalyticsStats | null>(null);
 
   useEffect(() => {
     setMounted(true);
     fetch("/api/analytics", { cache: "no-store" })
       .then((r) => r.json())
-      .then((data: AnalyticsStats) => setStats(data))
+      .then((data: PublicAnalyticsStats) => setStats(data))
       .catch(() => {});
   }, []);
 
@@ -25,22 +22,11 @@ export function VisitorBadge() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => stats && setOpen(true)}
-        className="inline-flex items-center gap-1.5 h-9 px-2 rounded-md underline underline-offset-4 underline-color-text-muted cursor-pointer hover:opacity-70 transition-opacity duration-150 disabled:cursor-default disabled:hover:opacity-100"
-        disabled={!stats}
-      >
+      <span className="inline-flex items-center gap-1.5 h-9 px-2 rounded-md underline underline-offset-4 underline-color-text-muted">
         <span className="text-sm font-medium text-text-secondary whitespace-nowrap">
           {stats ? `${stats.totalVisitors.toLocaleString()} visits ` : "···"}
         </span>
-      </button>
-
-      <AnimatePresence>
-        {open && stats && (
-          <VisitorModal stats={stats} onClose={() => setOpen(false)} />
-        )}
-      </AnimatePresence>
+      </span>
     </>
   );
 }

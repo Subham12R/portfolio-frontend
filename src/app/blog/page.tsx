@@ -22,13 +22,13 @@ export const metadata = {
     description: 'Thoughts on software development, design, and building things.',
     url: `${siteConfig.url}/blog`,
     type: 'website',
-    images: ['/banner.png'],
+    images: [{ url: '/blog/opengraph-image', width: 1200, height: 630, alt: 'Writing by Subham Karmakar' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `Blog | ${siteConfig.name}`,
     description: 'Thoughts on software development, design, and building things.',
-    images: ['/banner.png'],
+    images: ['/blog/opengraph-image'],
   },
 }
 
