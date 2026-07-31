@@ -12,6 +12,8 @@ const DOTS = Array.from({ length: 252 }, (_, index) => ({
 }));
 
 export function ShareCard({ eyebrow, title, description }: ShareCardProps): ReactElement {
+  const titleSize = title.length > 70 ? "56px" : title.length > 54 ? "64px" : "78px";
+
   return (
     <div
       style={{
@@ -41,7 +43,6 @@ export function ShareCard({ eyebrow, title, description }: ShareCardProps): Reac
       ))}
       <div
         style={{
-          border: "1px solid rgba(255,255,255,0.14)",
           borderRadius: "28px",
           display: "flex",
           flexDirection: "column",
@@ -57,7 +58,19 @@ export function ShareCard({ eyebrow, title, description }: ShareCardProps): Reac
           {eyebrow}
         </div>
         <div style={{ display: "flex", flexDirection: "column", maxWidth: "940px" }}>
-          <div style={{ fontSize: title.length > 54 ? "64px" : "78px", fontWeight: 700, letterSpacing: "-0.045em", lineHeight: 1.02 }}>
+          <div
+            style={{
+              fontSize: titleSize,
+              fontWeight: 700,
+              letterSpacing: "-0.045em",
+              lineHeight: 1.02,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+            }}
+          >
             {title}
           </div>
           <div style={{ color: "#c4c4c8", display: "flex", fontSize: "28px", lineHeight: 1.35, marginTop: "28px", maxWidth: "820px" }}>
@@ -69,7 +82,6 @@ export function ShareCard({ eyebrow, title, description }: ShareCardProps): Reac
           <span>© {new Date().getFullYear()} Subham Karmakar</span>
         </div>
       </div>
-
     </div>
   );
 }
