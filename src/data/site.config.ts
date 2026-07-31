@@ -68,11 +68,29 @@ export const siteConfig = {
       { name: "Projects", href: "#projects" },
       { name: "Skills", href: "#skills" },
       { name: "About", href: "#about" },
+      { name: "Blog", href: "/blog" },
+      { name: "Gallery", href: "/gallery" },
       { name: "Contact", href: "#contact" },
     ],
   },
 
-  // Section configuration
+   // Cycoder Tech Hub (Adamas University Coding Club)
+   cycoders: {
+     name: "Cycoder Tech Hub",
+     tagline: "Code · Compete · Create",
+     description: "The official coding club of Adamas University — a student-led community for competitive programming, open-source contribution, hackathons, and peer learning.",
+     url: "https://www.subham12r.me/cycoders",
+     ogImage: "/cycoders-og.png",
+     founded: "2024",
+     university: "Adamas University",
+     location: "Kolkata, West Bengal, India",
+     socials: {
+       github: "https://github.com/CycoderTechHub",
+       linkedin: "https://www.linkedin.com/company/cycoder-tech-hub",
+       twitter: "https://x.com/CycoderTechHub",
+       discord: "https://discord.gg/cycoders",
+     },
+   },
   sections: {
     experience: { id: "experience", number: "01", title: "Experience" },
     projects: { id: "projects", number: "02", title: "Projects" },

@@ -46,21 +46,21 @@ export default async function ProjectsPage() {
 
   return (
     <section className="w-full flex justify-center items-center py-20 px-4 lg:px-0">
-      <div className="max-w-7xl w-full">
+      <div className="max-w-2xl w-full">
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors mb-8"
+          className="inline-flex items-center gap-2 font-instrumentsans text-text-muted hover:text-text-primary transition-colors mb-8 text-md "
         >
           <ArrowLeft size={16} />
-          Back
+          Back to home
         </Link>
 
-        <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-6">
+        <div className="text-left mb-16">
+          <h1 className="text-4xl lg:text-5xl font-medium font-instrumentserif tracking-tight text-text-primary mb-6">
             Projects
           </h1>
-          <p className="text-lg lg:text-xl text-text-secondary max-w-3xl mx-auto">
+          <p className="text-md lg:text-lg text-text-secondary max-w-2xl mx-auto">
             Production-grade full-stack products, applied AI systems, and open-source developer tools.
           </p>
         </div>
