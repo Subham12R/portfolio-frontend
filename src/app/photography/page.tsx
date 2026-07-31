@@ -6,13 +6,15 @@ import { ArrowLeft } from "lucide-react";
 
 export const metadata = {
   title: "Photography",
-  description: "Personal photography collection",
+  description:
+    "Curated photography portfolio by Subham Karmakar — street, landscape, and documentary moments captured on film and digital.",
   alternates: {
     canonical: "/photography",
   },
   openGraph: {
     title: `Photography | ${siteConfig.name}`,
-    description: "Personal photography collection",
+    description:
+      "Curated photography portfolio by Subham Karmakar — street, landscape, and documentary moments captured on film and digital.",
     url: `${siteConfig.url}/photography`,
     type: "website",
     images: [{ url: "/photography/opengraph-image", width: 1200, height: 630, alt: "Photography by Subham Karmakar" }],
@@ -20,7 +22,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: `Photography | ${siteConfig.name}`,
-    description: "Personal photography collection",
+    description:
+      "Curated photography portfolio by Subham Karmakar — street, landscape, and documentary moments captured on film and digital.",
     images: ["/photography/opengraph-image"],
   },
 };
@@ -38,17 +41,15 @@ export default function PhotographyPage() {
           Back
         </Link>
 
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-light text-text-primary mb-2 font-instrumentserif">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-4">
             Photography
           </h1>
-          <p className="text-text-secondary">
-            Capturing moments through the lens
+          <p className="text-lg text-text-secondary">
+            Curated photography portfolio — street, landscape, and documentary moments on film and digital.
           </p>
         </div>
 
-        {/* Gallery */}
         <GalleryGrid images={photographyImages} />
       </div>
     </section>

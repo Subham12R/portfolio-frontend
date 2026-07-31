@@ -6,7 +6,8 @@ const caseStudy = getDefaultCaseStudy();
 
 export const metadata = {
   title: `${caseStudy.title} — Case Study`,
-  description: caseStudy.tagline,
+  description:
+    caseStudy.tagline,
   alternates: {
     canonical: "/casestudy",
   },
@@ -19,7 +20,8 @@ export const metadata = {
   ],
   openGraph: {
     title: `${caseStudy.title} — Case Study | ${siteConfig.name}`,
-    description: caseStudy.tagline,
+    description:
+      caseStudy.tagline,
     url: `${siteConfig.url}/casestudy`,
     type: "article",
     images: [{ url: "/casestudy/opengraph-image", width: 1200, height: 630, alt: `${caseStudy.title} case study by Subham Karmakar` }],
@@ -27,7 +29,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${caseStudy.title} — Case Study | ${siteConfig.name}`,
-    description: caseStudy.tagline,
+    description:
+      caseStudy.tagline,
     images: ["/casestudy/opengraph-image"],
   },
 };

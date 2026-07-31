@@ -3,7 +3,7 @@ import { BlogPageContent } from '@/components/blog/BlogPageContent'
 
 export const metadata = {
   title: `Blog | ${siteConfig.title}`,
-  description: 'Thoughts on software development, design, and building things.',
+  description: 'Deep dives on full-stack development, AI systems, developer tooling, and building production software — written by Subham Karmakar.',
   alternates: {
     canonical: '/blog',
   },
@@ -19,7 +19,7 @@ export const metadata = {
   ],
   openGraph: {
     title: `Blog | ${siteConfig.name}`,
-    description: 'Thoughts on software development, design, and building things.',
+    description: 'Deep dives on full-stack development, AI systems, developer tooling, and building production software — written by Subham Karmakar.',
     url: `${siteConfig.url}/blog`,
     type: 'website',
     images: [{ url: '/blog/opengraph-image', width: 1200, height: 630, alt: 'Writing by Subham Karmakar' }],
@@ -27,7 +27,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Blog | ${siteConfig.name}`,
-    description: 'Thoughts on software development, design, and building things.',
+    description: 'Deep dives on full-stack development, AI systems, developer tooling, and building production software — written by Subham Karmakar.',
     images: ['/blog/opengraph-image'],
   },
 }

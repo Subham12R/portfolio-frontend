@@ -10,7 +10,7 @@ export const revalidate = 3600;
 export const metadata = {
   title: `Projects | ${siteConfig.title}`,
   description:
-    "A collection of projects showcasing my work in web development.",
+    "Production-grade full-stack products, applied AI systems, and open-source developer tools — built by Subham Karmakar.",
   alternates: {
     canonical: "/projects",
   },
@@ -27,7 +27,7 @@ export const metadata = {
   openGraph: {
     title: `Projects | ${siteConfig.name}`,
     description:
-      "A collection of projects showcasing my work in web development.",
+      "Production-grade full-stack products, applied AI systems, and open-source developer tools — built by Subham Karmakar.",
     url: `${siteConfig.url}/projects`,
     type: "website",
     images: [{ url: "/projects/opengraph-image", width: 1200, height: 630, alt: "Projects by Subham Karmakar" }],
@@ -36,7 +36,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `Projects | ${siteConfig.name}`,
     description:
-      "A collection of projects showcasing my work in web development.",
+      "Production-grade full-stack products, applied AI systems, and open-source developer tools — built by Subham Karmakar.",
     images: ["/projects/opengraph-image"],
   },
 };
@@ -45,28 +45,25 @@ export default async function ProjectsPage() {
   const projects = await fetchProjects();
 
   return (
-    <section className="min-h-screen bg-bg-primary text-text-primary">
-      <div className="max-w-2xl mx-auto px-4 lg:px-0 py-16">
-        {/* Back Link */}
+    <section className="w-full flex justify-center items-center py-20 px-4 lg:px-0">
+      <div className="max-w-7xl w-full">
+        {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors duration-200 mb-12"
+          className="inline-flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors mb-8"
         >
           <ArrowLeft size={16} />
-          <span className="text-sm font-medium">Back to home</span>
+          Back
         </Link>
 
-        {/* Header */}
-        <header className="mb-16">
-          <h1 className="text-4xl font-light text-text-primary mb-4 font-instrumentserif">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-6">
             Projects
           </h1>
-          <p className="text-lg text-text-tertiary max-w-2xl leading-relaxed">
-            A collection of projects I&apos;ve built, from open source libraries
-            to full-stack applications. Each one represents a problem I wanted
-            to solve or an idea I wanted to explore.
+          <p className="text-lg lg:text-xl text-text-secondary max-w-3xl mx-auto">
+            Production-grade full-stack products, applied AI systems, and open-source developer tools.
           </p>
-        </header>
+        </div>
 
         <ProjectsGrid projects={projects} />
       </div>

@@ -6,13 +6,15 @@ import { ArrowLeft } from "lucide-react";
 
 export const metadata = {
   title: "Hackathons",
-  description: "Photos from hackathons and coding events",
+  description:
+    "Behind-the-scenes moments from hackathons, coding competitions, and developer events — by Subham Karmakar.",
   alternates: {
     canonical: "/hackathons",
   },
   openGraph: {
     title: `Hackathons | ${siteConfig.name}`,
-    description: "Photos from hackathons and coding events",
+    description:
+      "Behind-the-scenes moments from hackathons, coding competitions, and developer events — by Subham Karmakar.",
     url: `${siteConfig.url}/hackathons`,
     type: "website",
     images: [{ url: "/hackathons/opengraph-image", width: 1200, height: 630, alt: "Hackathon moments by Subham Karmakar" }],
@@ -20,7 +22,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: `Hackathons | ${siteConfig.name}`,
-    description: "Photos from hackathons and coding events",
+    description:
+      "Behind-the-scenes moments from hackathons, coding competitions, and developer events — by Subham Karmakar.",
     images: ["/hackathons/opengraph-image"],
   },
 };
@@ -38,17 +41,15 @@ export default function HackathonsPage() {
           Back
         </Link>
 
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-light text-text-primary mb-2 font-instrumentserif">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-4">
             Hackathons
           </h1>
-          <p className="text-text-secondary">
-            Moments from coding competitions and tech events
+          <p className="text-lg text-text-secondary">
+            Behind-the-scenes moments from hackathons, coding competitions, and developer events.
           </p>
         </div>
 
-        {/* Gallery */}
         <GalleryGrid images={hackathonImages} />
       </div>
     </section>
