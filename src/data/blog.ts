@@ -1,11 +1,16 @@
 // Blog posts data
 
+import { hermesDailyDriverContent } from "./hermes-daily-driver-content";
+
 export interface BlogPost {
   id: string;
   slug: string;
   title: string;
   excerpt: string;
   coverImage?: string;
+  coverImageAlt?: string;
+  coverImageWidth?: number;
+  coverImageHeight?: number;
   content?: string;
   publishedAt: string;
   updatedAt?: string;
@@ -32,6 +37,24 @@ export const mediumPosts: MediumPost[] = [
 ];
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "hermes-developer-operating-system",
+    slug: "how-i-use-hermes-as-my-developer-operating-system",
+    title: "How I Use Hermes as My Developer Operating System",
+    excerpt:
+      "My practical setup for using Hermes across a cloud-hosted VPS gateway and a local gateway: scheduled checks, Telegram, Obsidian, browser automation, memory, and developer workflows.",
+    coverImage: "/images/blog/hermes-developer-operating-system.png",
+    coverImageAlt:
+      "Hermes Agent developer operating system illustration in the official cobalt blue and white visual style",
+    coverImageWidth: 1672,
+    coverImageHeight: 941,
+    publishedAt: "2026-07-31",
+    updatedAt: "2026-07-31",
+    readingTime: "21 min read",
+    tags: ["Hermes Agent", "AI Agents", "Developer Tools", "Automation", "VPS"],
+    featured: true,
+    content: hermesDailyDriverContent,
+  },
   {
     id: "internship-debugging-lessons",
     slug: "internship-debugging-lessons",

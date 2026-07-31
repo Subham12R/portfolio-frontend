@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { getPostBySlug, blogPosts, siteConfig } from "@/data";
-import { CaseStudyScrollNav } from "@/components/casestudy/CaseStudyScrollNav";
+import { BlogContentRenderer } from "@/components/blog/BlogContentRenderer";
+import { BlogScrollNav } from "@/components/blog/BlogScrollNav";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -26,6 +28,20 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     };
   }
 
+  const image = post.coverImage
+    ? {
+        url: post.coverImage,
+        width: post.coverImageWidth ?? 1200,
+        height: post.coverImageHeight ?? 630,
+        alt: post.coverImageAlt ?? `${post.title} cover image`,
+      }
+    : {
+        url: "/banner.png",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} portfolio banner`,
+      };
+
   return {
     title: `${post.title} | ${siteConfig.title}`,
     description: post.excerpt,
@@ -46,13 +62,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       url: `${siteConfig.url}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
-      images: [post.coverImage || "/banner.png"],
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: `${post.title} | ${siteConfig.name}`,
       description: post.excerpt,
-      images: [post.coverImage || "/banner.png"],
+      images: [image.url],
     },
   };
 }
@@ -66,13 +82,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const contentSections = (post.content ?? "")
-    .split("\n\n")
-    .map((block, index) => ({ block, index }))
-    .filter(({ block }) => block.startsWith("## "))
-    .map(({ block, index }) => ({
-      id: `blog-post-section-${index}`,
-      label: block.replace("## ", ""),
-    }));
+    .split("\n")
+    .filter((line) => line.startsWith("## "))
+    .map((line) => {
+      const label = line.replace("## ", "");
+      return {
+        id: `blog-heading-${toHeadingId(label)}`,
+        label,
+      };
+    });
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
@@ -96,13 +114,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <span>{post.readingTime}</span>
           </div>
 
-          <h1 className="text-4xl font-light text-text-primary mb-6 leading-tight font-instrumentserif">
+          <h1 className="mb-6 font-instrumentserif text-4xl font-normal leading-tight tracking-tight text-text-primary">
             {post.title}
           </h1>
 
           <p className="text-xl text-text-tertiary leading-relaxed">
             {post.excerpt}
           </p>
+
+          {post.coverImage && (
+            <div className="mt-10">
+              <Image
+                src={post.coverImage}
+                alt={post.coverImageAlt ?? `${post.title} cover image`}
+                width={post.coverImageWidth ?? 1200}
+                height={post.coverImageHeight ?? 630}
+                priority
+                sizes="(max-width: 768px) 100vw, 672px"
+                className="block h-auto w-full rounded-2xl object-contain"
+              />
+            </div>
+          )}
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mt-6">
@@ -119,56 +151,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Content */}
         {post.content ? (
-          <div className="prose prose-invert prose-zinc max-w-none prose-headings:text-text-primary prose-p:text-text-secondary prose-strong:text-text-primary prose-li:text-text-secondary prose-em:text-text-tertiary">
-            {post.content.split("\n\n").map((block, index) => {
-              if (block.startsWith("## ")) {
-                return (
-                  <h2
-                    key={index}
-                    id={`blog-post-section-${index}`}
-                    className="text-2xl font-semibold mt-10 mb-4 scroll-mt-24"
-                  >
-                    {block.replace("## ", "")}
-                  </h2>
-                );
-              }
-              if (block.startsWith("**") && block.endsWith("**")) {
-                return (
-                  <p key={index} className="font-semibold text-text-primary">
-                    {block.replace(/\*\*/g, "")}
-                  </p>
-                );
-              }
-              if (block.startsWith("- ")) {
-                const items = block
-                  .split("\n")
-                  .filter((line) => line.startsWith("- "));
-                return (
-                  <ul key={index} className="list-disc pl-6 space-y-1 my-4">
-                    {items.map((item, i) => (
-                      <li key={i}>{item.replace("- ", "")}</li>
-                    ))}
-                  </ul>
-                );
-              }
-              if (
-                block.startsWith("*") &&
-                block.endsWith("*") &&
-                !block.startsWith("**")
-              ) {
-                return (
-                  <p key={index} className="italic text-text-tertiary">
-                    {block.replace(/^\*|\*$/g, "")}
-                  </p>
-                );
-              }
-              return (
-                <p key={index} className="my-4 leading-relaxed">
-                  {block}
-                </p>
-              );
-            })}
-          </div>
+          <BlogContentRenderer content={post.content} />
         ) : (
           <div className="py-20 text-center border border-dashed border-border-secondary rounded-2xl">
             <p className="text-text-muted">Content coming soon.</p>
@@ -192,7 +175,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </footer>
       </article>
-      <CaseStudyScrollNav
+      <BlogScrollNav
         sections={[
           { id: "blog-post-intro", label: "Introduction" },
           ...contentSections,
@@ -200,6 +183,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
     </main>
   );
+}
+
+function toHeadingId(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 function formatDate(dateString: string): string {
