@@ -41,11 +41,9 @@ export function VisitorModal({ stats, onClose }: Props) {
   const { resolvedTheme } = useTheme();
   const { lenis } = useLenis();
   const isDark = resolvedTheme !== "light";
-  const modalBg  = isDark ? "#111111" : "#ffffff";
   const titleCls = isDark ? "text-white"   : "text-zinc-900";
   const labelCls = "text-zinc-500";
   const valueCls = isDark ? "text-white"   : "text-zinc-900";
-  const divider  = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;

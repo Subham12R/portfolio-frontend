@@ -110,12 +110,12 @@ function isoDate(key: string): string {
 
 // ─── GET handler ─────────────────────────────────────────────────────────────
 
-export async function GET(): Promise<NextResponse<PublicAnalyticsStats>> {
+export async function GET(): Promise<NextResponse<AnalyticsStats>> {
   const r = getRedis();
 
   if (!r) {
     const demo = buildDemoData();
-    return NextResponse.json({ totalVisitors: demo.totalVisitors, isDemo: true }, {
+    return NextResponse.json(demo, {
       headers: { "Cache-Control": "no-store" },
     });
   }
@@ -162,6 +162,11 @@ export async function GET(): Promise<NextResponse<PublicAnalyticsStats>> {
     return NextResponse.json(
       {
         totalVisitors: totalVisitors || demo?.totalVisitors || 0,
+        uniqueVisitors: uniqueTotal || demo?.uniqueVisitors || 0,
+        todayVisitors: todayVisitors || demo?.todayVisitors || 0,
+        weekVisitors: weekVisitors || demo?.weekVisitors || 0,
+        timeseries: totalVisitors === 0 ? demo!.timeseries : timeseries,
+        topPages: topPages.length > 0 ? topPages : demo?.topPages || [],
         isDemo: totalVisitors === 0,
       },
       { headers: { "Cache-Control": "no-store" } }
@@ -169,7 +174,7 @@ export async function GET(): Promise<NextResponse<PublicAnalyticsStats>> {
   } catch {
     const demo = buildDemoData();
     return NextResponse.json(
-      { totalVisitors: demo.totalVisitors, isDemo: true },
+      demo,
       { headers: { "Cache-Control": "no-store" } }
     );
   }
