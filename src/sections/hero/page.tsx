@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
+import { Mascot } from "page-mascot";
 import { siteConfig } from "@/data";
-import profileIcon from "../../../public/images/profile/profile.png";
 import DevPresence from "@/components/ui/DevPresence";
 import SpotifyNowPlaying from "@/components/ui/SpotifyNowPlaying";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -64,26 +64,24 @@ export const Hero = () => {
         {/* Profile Info Wrapper */}
         <div className="flex flex-row items-center gap-5 mt-6 mb-3 w-full">
           {/* Avatar */}
-          <div className="relative overflow-hidden rounded-md shrink-0">
-          <Image
-            src={profileIcon}
-            alt={name}
-            width={88}
-            height={88}
-            className="h-[88px] w-[88px] aspect-square object-cover bg-amber-400 dark:bg-blue-600  "
-            priority
-          />
+          <div className="relative flex h-[120px] w-[120px] shrink-0 items-center justify-center overflow-hidden rounded-md">
+            <Mascot
+              directions="/mascots/subham-directions.webp"
+              reactions="/mascots/subham-reactions.webp"
+              size={140}
+              label={name}
+            />
           </div>
-          <div className="flex flex-col items-start justify-baseline gap-0.5 min-w-0 w-full mt-auto">
-          {/* Name */}
-          <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full">
-            {name}
-          </h1>
-          <p className="text-[14px] text-text-secondary/70 font-light font-instrumentsans tracking-tight">
-            21, Full-Stack Developer,  IND
-          </p>
+          <div className="flex flex-col items-start justify-center gap-0.5 min-w-0 w-full">
+            {/* Name */}
+            <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full mt-10">
+              {name}
+            </h1>
+            <p className="text-[14px] text-text-secondary/70 font-light font-instrumentsans tracking-tight">
+              21, Full-Stack Developer,  IND
+            </p>
+          </div>
         </div>
-      </div>
 
         {/* Social Icons Row — email copy button first */}
         <div className="flex flex-wrap items-center gap-2 mt-2 mb-6 text-text-secondary/40">
