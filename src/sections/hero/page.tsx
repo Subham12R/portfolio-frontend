@@ -64,17 +64,21 @@ export const Hero = () => {
         {/* Profile Info Wrapper */}
         <div className="flex flex-row items-center gap-5 mt-6 mb-3 w-full">
           {/* Avatar */}
-          <div className="relative flex h-[140px] w-[140px] shrink-0 items-center justify-center overflow-hidden rounded-md">
+          <div
+            className="relative flex h-auto w-[120px] shrink-0 items-end justify-center overflow-hidden rounded-md"
+            onClick={playClickSound}
+          >
             <Mascot
               directions="/mascots/subham-directions.webp"
               reactions="/mascots/subham-reactions.webp"
-              size={140}
+              size={120}
               label={name}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2"
             />
           </div>
-          <div className="flex flex-col items-start justify-center gap-0.5 min-w-0 w-full">
+          <div className="flex flex-col items-start justify-center gap-0.5 min-w-0 w-full h-full">
             {/* Name */}
-            <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full mt-10">
+            <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full mt-6">
               {name}
             </h1>
             <p className="text-[14px] text-text-secondary/70 font-light font-instrumentsans tracking-tight">

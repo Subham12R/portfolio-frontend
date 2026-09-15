@@ -33,8 +33,25 @@ test("the mascot tile and profile copy share a centered alignment", () => {
     "utf8",
   );
 
-  assert.match(hero, /h-\[140px\].*w-\[140px\].*shrink-0/);
+  assert.match(hero, /items-end justify-center/);
   assert.match(hero, /items-start justify-center gap-0\.5 min-w-0 w-full/);
-  assert.doesNotMatch(hero, /min-w-0 w-full mt-auto/);
   assert.doesNotMatch(hero, /truncate w-full mt-10/);
+});
+
+test("mascot clicks play feedback while the character stays centered at the bottom", () => {
+  const hero = fs.readFileSync(
+    path.join(root, "src/sections/hero/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(
+    hero,
+    /className="relative flex h-\[\d+px\] w-\[\d+px\] shrink-0 items-end justify-center overflow-hidden rounded-md[^\"]*"/,
+  );
+  assert.match(hero, /onClick=\{playClickSound\}/);
+  assert.match(
+    hero,
+    /className="absolute bottom-0 left-1\/2 -translate-x-1\/2"/,
+  );
+  assert.doesNotMatch(hero, /right-\[-10px\]|-translate-y-1\/2/);
 });
