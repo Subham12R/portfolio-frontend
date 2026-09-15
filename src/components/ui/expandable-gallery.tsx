@@ -63,6 +63,16 @@ const PHOTOS: Photo[] = [
     y: 5,
     zIndex: 30,
   },
+  {
+    id: "smart-ind-2026",
+    src: `${R2}/sih26.JPG`,
+    alt: "SIH Internals 2026 - Selected as Top Teams",
+    type: "image",
+    rotation: 12,
+    x: 75,
+    y: 5,
+    zIndex: 30,
+  },
 ];
 const transition = {
   type: "spring",

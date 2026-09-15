@@ -64,7 +64,7 @@ export const Hero = () => {
         {/* Profile Info Wrapper */}
         <div className="flex flex-row items-center gap-5 mt-6 mb-3 w-full">
           {/* Avatar */}
-          <div className="relative flex h-[120px] w-[120px] shrink-0 items-center justify-center overflow-hidden rounded-md">
+          <div className="relative flex h-[140px] w-[140px] shrink-0 items-center justify-center overflow-hidden rounded-md">
             <Mascot
               directions="/mascots/subham-directions.webp"
               reactions="/mascots/subham-reactions.webp"
@@ -74,7 +74,7 @@ export const Hero = () => {
           </div>
           <div className="flex flex-col items-start justify-center gap-0.5 min-w-0 w-full">
             {/* Name */}
-            <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full mt-10">
+            <h1 className="text-3xl font-light tracking-tight text-text-primary font-instrumentserif truncate w-full">
               {name}
             </h1>
             <p className="text-[14px] text-text-secondary/70 font-light font-instrumentsans tracking-tight">

@@ -33,7 +33,8 @@ test("the mascot tile and profile copy share a centered alignment", () => {
     "utf8",
   );
 
-  assert.match(hero, /h-\[120px\].*w-\[120px\].*shrink-0/);
+  assert.match(hero, /h-\[140px\].*w-\[140px\].*shrink-0/);
   assert.match(hero, /items-start justify-center gap-0\.5 min-w-0 w-full/);
   assert.doesNotMatch(hero, /min-w-0 w-full mt-auto/);
+  assert.doesNotMatch(hero, /truncate w-full mt-10/);
 });
